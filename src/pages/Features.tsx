@@ -1,0 +1,105 @@
+// features page. lists what the product actually does, grouped by intent.
+
+import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  Sparkles,
+  ArrowLeftRight,
+  Workflow,
+  CornerDownRight,
+  FileText,
+  AlertTriangle,
+  RefreshCcw,
+  Layers,
+  Clock,
+  BookOpen,
+} from "lucide-react";
+import { SiteNav, SiteFooter } from "@/components/SiteNav";
+
+const sixLayers = [
+  { icon: Sparkles, label: "analogy", body: "starts with a vivid one-line hook in the system you chose. no jargon, no definition." },
+  { icon: ArrowLeftRight, label: "mapping", body: "explicit pairs translate every part of the analogy to the real concept." },
+  { icon: Workflow, label: "visual", body: "a small mermaid diagram with analogy-specific labels, not generic technical ones." },
+  { icon: CornerDownRight, label: "bridge", body: "one line that starts with 'in other words', connecting analogy to reality." },
+  { icon: FileText, label: "real explanation", body: "the actual concept in proper terms, now grounded in something familiar." },
+  { icon: AlertTriangle, label: "where it breaks", body: "the analogy's limits, so you never end up with a confident wrong model." },
+];
+
+const capabilities = [
+  { icon: Layers, label: "ten thinking systems", body: "relationships, gaming, cooking, building, story, company, traffic, plants, brains, storage. pick the one that matches how you naturally think." },
+  { icon: RefreshCcw, label: "explain again differently", body: "regenerate using a different system to look at the same concept from another angle. no two explanations repeat." },
+  { icon: Clock, label: "recent history", body: "your recent translations stay on this device for instant revisits, even offline." },
+  { icon: BookOpen, label: "curated library", body: "hand-crafted examples ship with the app so you can see the format at its best before generating your own." },
+];
+
+const Features = () => {
+  return (
+    <div className="min-h-screen">
+      <SiteNav />
+
+      <section className="container max-w-4xl py-16 sm:py-20">
+        <p className="mb-4 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+          features
+        </p>
+        <h1 className="font-serif-display text-5xl leading-[1.05] tracking-tight sm:text-6xl">
+          a strict format that quietly does the work.
+        </h1>
+        <p className="mt-6 max-w-2xl text-foreground/75">
+          analogize is opinionated on purpose. every explanation follows the same six layers, in the same order. the structure is the product.
+        </p>
+      </section>
+
+      <section className="container max-w-4xl pb-20">
+        <h2 className="mb-6 font-serif-display text-3xl tracking-tight">the six layers</h2>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {sixLayers.map((s) => {
+            const Icon = s.icon;
+            return (
+              <article key={s.label} className="surface-paper p-5">
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary">
+                    <Icon className="h-3.5 w-3.5 text-foreground/70" />
+                  </span>
+                  <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{s.label}</p>
+                </div>
+                <p className="text-sm leading-relaxed text-foreground/85">{s.body}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="container max-w-4xl pb-24">
+        <h2 className="mb-6 font-serif-display text-3xl tracking-tight">what you can do with it</h2>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {capabilities.map((c) => {
+            const Icon = c.icon;
+            return (
+              <article key={c.label} className="surface-paper p-5">
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary">
+                    <Icon className="h-3.5 w-3.5 text-foreground/70" />
+                  </span>
+                  <p className="text-sm font-semibold tracking-tight">{c.label}</p>
+                </div>
+                <p className="text-sm leading-relaxed text-foreground/80">{c.body}</p>
+              </article>
+            );
+          })}
+        </div>
+
+        <Link
+          to="/app"
+          className="mt-12 inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
+        >
+          open the app
+          <ArrowRight className="h-4 w-4" />
+        </Link>
+      </section>
+
+      <SiteFooter />
+    </div>
+  );
+};
+
+export default Features;
