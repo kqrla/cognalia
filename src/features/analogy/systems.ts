@@ -31,6 +31,21 @@ export type AnalogySystemId =
   | "brain_habit_loops"
   | "storage_organization";
 
+// thinking type controls the "explain again differently" logic.
+// switching between contrasting types is what makes a re-explanation feel
+// like a genuinely new mental model, not a paraphrase.
+export type ThinkingType =
+  | "social"
+  | "interactive"
+  | "process"
+  | "structural"
+  | "narrative"
+  | "organizational"
+  | "flow"
+  | "organic"
+  | "behavioral"
+  | "categorical";
+
 export type AnalogySystem = {
   id: AnalogySystemId;
   label: string;
@@ -39,6 +54,7 @@ export type AnalogySystem = {
   icon: LucideIcon;
   // tailwind class for the tinted background, defined in tailwind.config.ts
   tintClass: string;
+  thinkingType: ThinkingType;
 };
 
 export const analogySystems: AnalogySystem[] = [
