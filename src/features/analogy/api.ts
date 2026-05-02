@@ -25,12 +25,16 @@ export const requestExplanation = async ({
   concept,
   system,
   thinkingStyleLabel,
+  avoidSystems,
+  reframe,
 }: ExplainArgs): Promise<Explanation> => {
   const { data, error } = await supabase.functions.invoke("explain", {
     body: {
       concept,
       system,
       thinkingStyle: thinkingStyleLabel,
+      avoidSystems,
+      reframe,
     },
   });
 
