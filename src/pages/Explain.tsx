@@ -15,6 +15,7 @@ import { ExplanationView } from "@/features/analogy/components/ExplanationView";
 import { SystemSelector } from "@/features/analogy/components/SystemSelector";
 import { ExplainError, requestExplanation } from "@/features/analogy/api";
 import { usePreferences, useRecents } from "@/features/analogy/store";
+import { upsertNode } from "@/features/graph/store";
 import { curatedConcepts } from "@/features/analogy/curated";
 import {
   analogySystems,
@@ -115,6 +116,11 @@ const Explain = () => {
           system: forSystem,
           explanation: next,
           source: "ai",
+        });
+        upsertNode({
+          concept,
+          system: forSystem,
+          explanation: next,
         });
       } catch (e) {
         const err =
