@@ -58,9 +58,11 @@
     --system-story: 320 50% 90%;
     --system-company: 220 30% 88%;
     --system-traffic: 45 70% 86%;
-    --system-plant: 130 35% 86%;
-    --system-brain: 280 40% 90%;
     --system-storage: 180 25% 88%;
+    --system-sports: 145 45% 86%;
+    --system-film: 25 18% 82%;
+    --system-social: 210 75% 90%;
+    --system-music: 290 50% 90%;
 
     /* type */
     --font-sans: "Inter", system-ui, -apple-system, sans-serif;
@@ -122,9 +124,11 @@
     --system-story: 320 25% 30%;
     --system-company: 220 18% 28%;
     --system-traffic: 45 35% 28%;
-    --system-plant: 130 22% 26%;
-    --system-brain: 280 22% 30%;
     --system-storage: 180 18% 26%;
+    --system-sports: 145 25% 26%;
+    --system-film: 25 12% 22%;
+    --system-social: 210 35% 30%;
+    --system-music: 290 25% 30%;
 
     --grid-line: 38 30% 94%;
     --grid-alpha: 0.05;
