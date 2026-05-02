@@ -4,11 +4,12 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, Clock, BookOpen, Settings2 } from "lucide-react";
+import { ArrowRight, Clock, BookOpen, Settings2, Network } from "lucide-react";
 import { analogySystems, getSystem, type AnalogySystemId } from "@/features/analogy/systems";
 import { SystemChip } from "@/features/analogy/components/SystemChip";
 import { SystemSelector } from "@/features/analogy/components/SystemSelector";
 import { usePreferences, useRecents } from "@/features/analogy/store";
+import { useGraph } from "@/features/graph/store";
 import { curatedConcepts } from "@/features/analogy/curated";
 import { cn } from "@/lib/utils";
 
@@ -16,6 +17,7 @@ const Home = () => {
   const navigate = useNavigate();
   const { preferences } = usePreferences();
   const { recents } = useRecents();
+  const { nodes, edges } = useGraph();
 
   // if the user has not onboarded, send them there. cheap redirect.
   useEffect(() => {
@@ -144,6 +146,41 @@ const Home = () => {
             </p>
           </div>
         </section>
+
+        {/* understanding graph teaser. shows up after a few concepts. */}
+        {nodes.length >= 1 && (
+          <section className="mb-10">
+            <button
+              type="button"
+              onClick={() => navigate("/graph")}
+              className="surface-card group flex w-full items-center justify-between gap-4 p-5 text-left transition-all hover:-translate-y-0.5 hover:shadow-lift"
+            >
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-foreground/70">
+                  <Network className="h-4 w-4" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold tracking-tight">
+                    {nodes.length >= 3
+                      ? "want to see how what you've learned connects?"
+                      : "your understanding map"}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {nodes.length} concept{nodes.length === 1 ? "" : "s"} ·{" "}
+                    {edges.filter((e) => e.status === "active").length}{" "}
+                    connection
+                    {edges.filter((e) => e.status === "active").length === 1
+                      ? ""
+                      : "s"}
+                    {edges.some((e) => e.status === "pending") &&
+                      " · new suggestions waiting"}
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+            </button>
+          </section>
+        )}
 
         {/* recent concepts */}
         {recents.length > 0 && (

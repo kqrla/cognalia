@@ -9,12 +9,13 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowLeft, RefreshCcw, Sparkles, Loader2 } from "lucide-react";
+import { ArrowLeft, RefreshCcw, Sparkles, Loader2, Network } from "lucide-react";
 import { toast } from "sonner";
 import { ExplanationView } from "@/features/analogy/components/ExplanationView";
 import { SystemSelector } from "@/features/analogy/components/SystemSelector";
 import { ExplainError, requestExplanation } from "@/features/analogy/api";
 import { usePreferences, useRecents } from "@/features/analogy/store";
+import { upsertNode } from "@/features/graph/store";
 import { curatedConcepts } from "@/features/analogy/curated";
 import {
   analogySystems,
@@ -116,6 +117,11 @@ const Explain = () => {
           explanation: next,
           source: "ai",
         });
+        upsertNode({
+          concept,
+          system: forSystem,
+          explanation: next,
+        });
       } catch (e) {
         const err =
           e instanceof ExplainError
@@ -129,10 +135,17 @@ const Explain = () => {
     [concept, thinkingStyleLabel, addRecent],
   );
 
-  // on first mount, if we did not resolve from curated/recent, fetch fresh
+  // on first mount, if we did not resolve from curated/recent, fetch fresh.
+  // if we did resolve, still record the concept on the understanding graph.
   useEffect(() => {
     if (!initial && concept.trim() && !explanation) {
       fetchExplanation(system);
+    } else if (initial) {
+      upsertNode({
+        concept: initial.concept,
+        system: initial.system,
+        explanation: initial.explanation,
+      });
     }
     // run only once on mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -179,14 +192,24 @@ const Explain = () => {
   return (
     <main className="min-h-screen">
       <div className="container max-w-3xl py-8 sm:py-12">
-        <button
-          type="button"
-          onClick={() => navigate("/app")}
-          className="mb-6 inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          back to home
-        </button>
+        <div className="mb-6 flex items-center justify-between">
+          <button
+            type="button"
+            onClick={() => navigate("/app")}
+            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            back to home
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate("/graph")}
+            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Network className="h-3.5 w-3.5" />
+            see your map
+          </button>
+        </div>
 
         <header className="mb-8">
           <p className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
