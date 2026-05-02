@@ -3,48 +3,54 @@
 @tailwind utilities;
 
 /*
-  annealogy design system.
-  soft, minimal, slightly playful. warm paper background, deep ink text,
-  one accent (a calm rose) for the cognitive-tool feel without looking like
-  every other ai product.
-
+  analogize design system.
+  warm beige paper with a soft grid, deep ink text, serif display headings
+  (tiempos light) for landing + content pages, inter for ui.
   rules: all colors HSL. never write raw colors in components.
 */
 
+@font-face {
+  font-family: "Tiempos";
+  src: url("/fonts/tiempos-light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
-    /* surfaces */
-    --background: 36 33% 97%;        /* warm paper */
-    --foreground: 230 22% 14%;       /* ink */
-    --card: 0 0% 100%;
-    --card-foreground: 230 22% 14%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 230 22% 14%;
+    /* surfaces — soft beige paper */
+    --background: 38 34% 94%;
+    --foreground: 25 18% 14%;
+    --card: 38 40% 98%;
+    --card-foreground: 25 18% 14%;
+    --popover: 38 40% 98%;
+    --popover-foreground: 25 18% 14%;
 
     /* the single accent. a calm dusty rose. used sparingly. */
     --primary: 350 55% 56%;
     --primary-foreground: 36 40% 98%;
-    --primary-soft: 350 70% 94%;     /* tinted background for chips */
+    --primary-soft: 350 70% 94%;
 
-    --secondary: 36 25% 92%;
-    --secondary-foreground: 230 22% 14%;
+    --secondary: 38 28% 90%;
+    --secondary-foreground: 25 18% 14%;
 
-    --muted: 36 22% 93%;
-    --muted-foreground: 230 10% 42%;
+    --muted: 38 25% 91%;
+    --muted-foreground: 25 10% 38%;
 
-    --accent: 200 40% 90%;           /* secondary accent for visual sections */
+    --accent: 200 40% 90%;
     --accent-foreground: 220 30% 22%;
 
     --destructive: 0 70% 50%;
     --destructive-foreground: 36 40% 98%;
 
-    --border: 36 18% 86%;
-    --input: 36 18% 86%;
+    --border: 36 20% 82%;
+    --input: 36 20% 82%;
     --ring: 350 55% 56%;
 
     --radius: 1rem;
 
-    /* analogy system color tokens. each library entry has a personality. */
+    /* analogy system color tokens */
     --system-relationship: 350 60% 88%;
     --system-gaming: 260 55% 90%;
     --system-cooking: 25 75% 88%;
@@ -58,50 +64,55 @@
 
     /* type */
     --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-    --font-display: "Inter", system-ui, -apple-system, sans-serif;
+    --font-display: "Tiempos", "Iowan Old Style", "Apple Garamond", "Baskerville",
+      "Times New Roman", serif;
 
-    /* depth */
-    --shadow-soft: 0 1px 2px hsl(230 22% 14% / 0.04),
-                   0 8px 24px hsl(230 22% 14% / 0.06);
-    --shadow-lift: 0 2px 4px hsl(230 22% 14% / 0.06),
-                   0 16px 40px hsl(230 22% 14% / 0.10);
+    /* grid token (a single rgba derived from the ink tone) */
+    --grid-line: 25 18% 14%;
+    --grid-alpha: 0.055;
+    --grid-size: 28px;
 
-    --sidebar-background: 36 33% 97%;
-    --sidebar-foreground: 230 22% 14%;
+    --shadow-soft: 0 1px 2px hsl(25 18% 14% / 0.04),
+                   0 8px 24px hsl(25 18% 14% / 0.06);
+    --shadow-lift: 0 2px 4px hsl(25 18% 14% / 0.06),
+                   0 16px 40px hsl(25 18% 14% / 0.10);
+
+    --sidebar-background: 38 34% 94%;
+    --sidebar-foreground: 25 18% 14%;
     --sidebar-primary: 350 55% 56%;
     --sidebar-primary-foreground: 36 40% 98%;
-    --sidebar-accent: 36 22% 93%;
-    --sidebar-accent-foreground: 230 22% 14%;
-    --sidebar-border: 36 18% 86%;
+    --sidebar-accent: 38 25% 91%;
+    --sidebar-accent-foreground: 25 18% 14%;
+    --sidebar-border: 36 20% 82%;
     --sidebar-ring: 350 55% 56%;
   }
 
   .dark {
-    --background: 230 18% 9%;
-    --foreground: 36 30% 94%;
-    --card: 230 18% 12%;
-    --card-foreground: 36 30% 94%;
-    --popover: 230 18% 12%;
-    --popover-foreground: 36 30% 94%;
+    --background: 25 14% 9%;
+    --foreground: 38 30% 94%;
+    --card: 25 14% 12%;
+    --card-foreground: 38 30% 94%;
+    --popover: 25 14% 12%;
+    --popover-foreground: 38 30% 94%;
 
     --primary: 350 65% 68%;
-    --primary-foreground: 230 22% 10%;
+    --primary-foreground: 25 14% 10%;
     --primary-soft: 350 30% 22%;
 
-    --secondary: 230 14% 18%;
-    --secondary-foreground: 36 30% 94%;
+    --secondary: 25 12% 18%;
+    --secondary-foreground: 38 30% 94%;
 
-    --muted: 230 14% 16%;
-    --muted-foreground: 36 12% 65%;
+    --muted: 25 12% 16%;
+    --muted-foreground: 38 12% 65%;
 
     --accent: 200 30% 22%;
-    --accent-foreground: 36 30% 94%;
+    --accent-foreground: 38 30% 94%;
 
     --destructive: 0 70% 55%;
-    --destructive-foreground: 36 30% 94%;
+    --destructive-foreground: 38 30% 94%;
 
-    --border: 230 14% 20%;
-    --input: 230 14% 20%;
+    --border: 25 12% 20%;
+    --input: 25 12% 20%;
     --ring: 350 65% 68%;
 
     --system-relationship: 350 35% 30%;
@@ -115,18 +126,21 @@
     --system-brain: 280 22% 30%;
     --system-storage: 180 18% 26%;
 
+    --grid-line: 38 30% 94%;
+    --grid-alpha: 0.05;
+
     --shadow-soft: 0 1px 2px hsl(0 0% 0% / 0.4),
                    0 8px 24px hsl(0 0% 0% / 0.5);
     --shadow-lift: 0 2px 4px hsl(0 0% 0% / 0.45),
                    0 16px 40px hsl(0 0% 0% / 0.6);
 
-    --sidebar-background: 230 18% 9%;
-    --sidebar-foreground: 36 30% 94%;
+    --sidebar-background: 25 14% 9%;
+    --sidebar-foreground: 38 30% 94%;
     --sidebar-primary: 350 65% 68%;
-    --sidebar-primary-foreground: 230 22% 10%;
-    --sidebar-accent: 230 14% 18%;
-    --sidebar-accent-foreground: 36 30% 94%;
-    --sidebar-border: 230 14% 20%;
+    --sidebar-primary-foreground: 25 14% 10%;
+    --sidebar-accent: 25 12% 18%;
+    --sidebar-accent-foreground: 38 30% 94%;
+    --sidebar-border: 25 12% 20%;
     --sidebar-ring: 350 65% 68%;
   }
 }
@@ -143,16 +157,22 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "ss01", "cv11";
+    /* soft beige grid */
+    background-image:
+      linear-gradient(to right, hsl(var(--grid-line) / var(--grid-alpha)) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--grid-line) / var(--grid-alpha)) 1px, transparent 1px);
+    background-size: var(--grid-size) var(--grid-size);
+    background-position: -1px -1px;
   }
-  /* tighten headings. annealogy uses tracking-tight everywhere. */
   h1, h2, h3, h4 {
     @apply tracking-tight;
     font-family: var(--font-display);
+    font-weight: 300;
+    letter-spacing: -0.01em;
   }
 }
 
 @layer components {
-  /* the signature card surface used across the explanation screen. */
   .surface-card {
     @apply bg-card text-card-foreground rounded-2xl border;
     box-shadow: var(--shadow-soft);
@@ -160,5 +180,17 @@
   .surface-lift {
     @apply bg-card text-card-foreground rounded-2xl border;
     box-shadow: var(--shadow-lift);
+  }
+  .font-serif-display {
+    font-family: var(--font-display);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+  }
+  /* a softer card variant that sits on the grid without hiding it */
+  .surface-paper {
+    @apply rounded-2xl border;
+    background-color: hsl(var(--card) / 0.85);
+    backdrop-filter: blur(2px);
+    box-shadow: var(--shadow-soft);
   }
 }

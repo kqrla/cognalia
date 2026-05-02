@@ -10,6 +10,7 @@ import {
   Workflow,
   FileText,
   AlertTriangle,
+  CornerDownRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Explanation } from "../types";
