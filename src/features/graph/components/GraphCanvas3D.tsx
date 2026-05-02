@@ -118,7 +118,7 @@ export const GraphCanvas3D = ({
     const fg = fgRef.current;
     if (!fg) return;
     // weaker default charge so clusters don't blow apart
-    const charge = fg.d3Force("charge") as { strength: (n: number) => void } | undefined;
+    const charge = fg.d3Force("charge") as unknown as { strength: (n: number) => void } | undefined;
     charge?.strength(-90);
     const link = fg.d3Force("link") as unknown as
       | { distance: (fn: (l: GLink) => number) => void }
