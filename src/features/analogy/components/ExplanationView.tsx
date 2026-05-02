@@ -51,6 +51,7 @@ export const ExplanationView = ({
     analogy: true,
     mapping: true,
     visual: true,
+    bridge: true,
     explanation: true,
     limits: true,
   });
@@ -132,6 +133,13 @@ export const ExplanationView = ({
                       />
                     </div>
                   </div>
+                )}
+
+                {section.id === "bridge" && (
+                  <p className="text-sm leading-relaxed text-foreground/85">
+                    <span className="text-muted-foreground">in other words, </span>
+                    {explanation.bridge.replace(/^in other words,?\s*/i, "")}
+                  </p>
                 )}
 
                 {section.id === "explanation" && (
