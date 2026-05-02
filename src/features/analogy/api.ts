@@ -9,6 +9,10 @@ export type ExplainArgs = {
   concept: string;
   system: AnalogySystemId;
   thinkingStyleLabel?: string;
+  // when reframing, we tell the model which analogy worlds were already
+  // used so it produces a genuinely different lens, not a paraphrase.
+  avoidSystems?: string[];
+  reframe?: boolean;
 };
 
 export class ExplainError extends Error {
@@ -21,12 +25,16 @@ export const requestExplanation = async ({
   concept,
   system,
   thinkingStyleLabel,
+  avoidSystems,
+  reframe,
 }: ExplainArgs): Promise<Explanation> => {
   const { data, error } = await supabase.functions.invoke("explain", {
     body: {
       concept,
       system,
       thinkingStyle: thinkingStyleLabel,
+      avoidSystems,
+      reframe,
     },
   });
 

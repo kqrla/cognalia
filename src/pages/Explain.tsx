@@ -18,6 +18,7 @@ import { usePreferences, useRecents } from "@/features/analogy/store";
 import { curatedConcepts } from "@/features/analogy/curated";
 import {
   analogySystems,
+  pickContrastingSystem,
   thinkingStyles,
   type AnalogySystemId,
 } from "@/features/analogy/systems";
@@ -75,6 +76,12 @@ const Explain = () => {
   // monotonically increasing key so MermaidDiagram re-renders even when
   // the new mermaid source happens to equal the previous one
   const [renderKey, setRenderKey] = useState(0);
+  // history of analogy systems used for THIS concept in this session.
+  // drives "explain again differently" so we never reuse the same lens
+  // and prefer a contrasting thinking type each time.
+  const [usedSystems, setUsedSystems] = useState<AnalogySystemId[]>(
+    initial?.system ? [initial.system] : system ? [system] : [],
+  );
 
   const thinkingStyleLabel = useMemo(() => {
     const style = thinkingStyles.find(
@@ -84,7 +91,10 @@ const Explain = () => {
   }, [preferences.thinkingStyleId]);
 
   const fetchExplanation = useCallback(
-    async (forSystem: AnalogySystemId) => {
+    async (
+      forSystem: AnalogySystemId,
+      opts?: { reframe?: boolean; avoid?: AnalogySystemId[] },
+    ) => {
       if (!concept.trim()) return;
       setLoading(true);
       try {
@@ -92,9 +102,14 @@ const Explain = () => {
           concept,
           system: forSystem,
           thinkingStyleLabel,
+          reframe: opts?.reframe,
+          avoidSystems: opts?.avoid,
         });
         setExplanation(next);
         setRenderKey((k) => k + 1);
+        setUsedSystems((prev) =>
+          prev.includes(forSystem) ? prev : [...prev, forSystem],
+        );
         addRecent({
           concept,
           system: forSystem,
@@ -136,7 +151,24 @@ const Explain = () => {
     fetchExplanation(next);
   };
 
-  const onRegenerate = () => fetchExplanation(system);
+  // "explain again differently" is reframing, not regeneration.
+  // we deliberately switch to a system with a contrasting thinking type
+  // and tell the model which lenses were already used.
+  const onRegenerate = () => {
+    const nextSystem = pickContrastingSystem(system, usedSystems);
+    setSystem(nextSystem.id);
+    const nextParams = new URLSearchParams(params);
+    nextParams.delete("curated");
+    nextParams.delete("recent");
+    nextParams.set("q", concept);
+    nextParams.set("system", nextSystem.id);
+    setParams(nextParams, { replace: true });
+    toast(`reframing through ${nextSystem.label}`);
+    fetchExplanation(nextSystem.id, {
+      reframe: true,
+      avoid: usedSystems,
+    });
+  };
 
   if (!concept.trim()) {
     // someone landed here without a concept. send them to the app.
