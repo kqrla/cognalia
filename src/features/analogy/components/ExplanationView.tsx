@@ -10,6 +10,7 @@ import {
   Workflow,
   FileText,
   AlertTriangle,
+  CornerDownRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Explanation } from "../types";
@@ -18,7 +19,7 @@ import { getSystem } from "../systems";
 import { MermaidDiagram } from "./MermaidDiagram";
 
 type Section = {
-  id: "analogy" | "mapping" | "visual" | "explanation" | "limits";
+  id: "analogy" | "mapping" | "visual" | "bridge" | "explanation" | "limits";
   label: string;
   icon: typeof Sparkles;
 };
@@ -27,6 +28,7 @@ const sections: Section[] = [
   { id: "analogy", label: "analogy", icon: Sparkles },
   { id: "mapping", label: "mapping", icon: ArrowLeftRight },
   { id: "visual", label: "visual", icon: Workflow },
+  { id: "bridge", label: "bridge", icon: CornerDownRight },
   { id: "explanation", label: "real explanation", icon: FileText },
   { id: "limits", label: "where the analogy breaks", icon: AlertTriangle },
 ];
@@ -49,6 +51,7 @@ export const ExplanationView = ({
     analogy: true,
     mapping: true,
     visual: true,
+    bridge: true,
     explanation: true,
     limits: true,
   });
@@ -130,6 +133,13 @@ export const ExplanationView = ({
                       />
                     </div>
                   </div>
+                )}
+
+                {section.id === "bridge" && (
+                  <p className="text-sm leading-relaxed text-foreground/85">
+                    <span className="text-muted-foreground">in other words, </span>
+                    {explanation.bridge.replace(/^in other words,?\s*/i, "")}
+                  </p>
                 )}
 
                 {section.id === "explanation" && (

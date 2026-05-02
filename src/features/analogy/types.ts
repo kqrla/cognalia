@@ -15,6 +15,7 @@ export type Explanation = {
   mapping: AnalogyMappingPair[];
   visual_mermaid: string;
   visual_kind: VisualKind;
+  bridge: string;
   real_explanation: string;
   limits: string;
 };

@@ -1,7 +1,7 @@
 // edge function that asks the lovable ai gateway to produce an explanation
-// strictly shaped by the annealogy format. we use tool calling to guarantee
-// the response matches the [analogy / mapping / visual / explanation / limits] structure
-// instead of relying on the model to format text correctly.
+// strictly shaped by the analogize format. we use tool calling to guarantee
+// the response matches the [analogy / mapping / visual / bridge / real_explanation / limits]
+// structure instead of relying on the model to format text correctly.
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
@@ -11,7 +11,6 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
-// the only analogy systems we accept. matches the strict library on the client.
 const allowedSystems = [
   "relationship_dynamics",
   "gaming_progression",
@@ -25,20 +24,44 @@ const allowedSystems = [
   "storage_organization",
 ] as const;
 
-const systemPrompt = `you are annealogy, a cognitive translation tool.
+const systemPrompt = `you are analogize, a cognitive translation tool.
 
 you do not teach. you translate complex concepts into the analogy system the user already thinks in.
 
-absolute rules:
-- never write definitions first. always start with the analogy.
-- never invent new analogy systems. only use the one the user picked.
-- never overload with paragraphs. be tight, intentional, human.
-- always include the mapping. always include where the analogy breaks.
-- write everything in lowercase. no emojis. no em dashes.
-- the visual must be valid mermaid syntax (graph TD, mindmap, or flowchart).
-  keep it simple: 5 to 9 nodes max, clean labels, no styling.
-- the analogy section is 2 to 4 sentences max.
-- the limits section is 2 to 4 sentences explaining where the analogy stops working.
+write everything in lowercase. no emojis. no em dashes. no academic or corporate phrasing. write like a smart human, not a textbook. slightly conversational, never slang-heavy.
+
+ANALOGY (strict)
+- start with a one-line hook that makes the reader feel "oh, i get this".
+  example good: "git is like writing alternate versions of a story without touching the original".
+  example bad: "git is a system that manages versions of code".
+- use specific, relatable scenarios, not abstract phrasing.
+- stay INSIDE the analogy world. do not mix technical terms into the analogy section.
+- 2 to 4 sentences MAX. do not over-explain.
+
+MAPPING (strict)
+- direct translation, not explanation.
+- each pair is short. format: "analogy concept" = "real concept".
+- no long sentences, no filler words.
+- 4 to 7 pairs.
+
+VISUAL (strict)
+- valid mermaid syntax (graph TD, flowchart LR, or mindmap).
+- use ANALOGY-SPECIFIC wording for nodes, never generic ("canon timeline" not "main branch").
+- 5 to 8 nodes max. choose tree, flow, or map based on the concept's real shape.
+
+BRIDGE (mandatory)
+- exactly 1 to 2 sentences.
+- must start with "in other words,".
+- plainly connect the analogy to the real concept. this is the missing link before the real explanation.
+
+REAL EXPLANATION
+- the actual concept in proper terms. clear, grounded, not textbook.
+- 3 to 5 sentences.
+
+LIMITS (strict)
+- must start with "unlike [analogy world],".
+- explain what does NOT map cleanly.
+- 2 to 4 sentences.
 
 you are a thinking tool, not a learning platform.
 the user should feel "this finally makes sense in my head", not "this is dumbed down".`;
@@ -79,7 +102,7 @@ serve(async (req) => {
 analogy system to use: ${system.replace(/_/g, " ")}
 ${thinkingStyle ? `user thinks in: ${thinkingStyle}` : ""}
 
-produce a complete annealogy explanation. follow the structure exactly.`;
+produce a complete analogize explanation. follow the structure exactly, including the bridge sentence.`;
 
     const response = await fetch(
       "https://ai.gateway.lovable.dev/v1/chat/completions",
@@ -101,19 +124,19 @@ produce a complete annealogy explanation. follow the structure exactly.`;
               function: {
                 name: "render_explanation",
                 description:
-                  "return the structured annealogy explanation for the concept.",
+                  "return the structured analogize explanation for the concept.",
                 parameters: {
                   type: "object",
                   properties: {
                     analogy: {
                       type: "string",
                       description:
-                        "2 to 4 sentences in the chosen system. no jargon. no definition.",
+                        "2 to 4 sentences. starts with a vivid one-line hook. stays inside the analogy world. no jargon, no definitions.",
                     },
                     mapping: {
                       type: "array",
                       description:
-                        "explicit mapping between analogy elements and real concept components.",
+                        "4 to 7 short pairs. analogy_part is concrete; real_part is the corresponding real concept. no filler words.",
                       items: {
                         type: "object",
                         properties: {
@@ -127,21 +150,26 @@ produce a complete annealogy explanation. follow the structure exactly.`;
                     visual_mermaid: {
                       type: "string",
                       description:
-                        "valid mermaid syntax. prefer graph TD or mindmap. 5 to 9 nodes.",
+                        "valid mermaid syntax. node labels MUST use analogy-specific wording, not generic technical terms. 5 to 8 nodes.",
                     },
                     visual_kind: {
                       type: "string",
                       enum: ["mindmap", "tree", "flow", "stack"],
                     },
+                    bridge: {
+                      type: "string",
+                      description:
+                        "exactly 1 to 2 sentences. MUST start with 'in other words,'. plainly connects the analogy to the real concept.",
+                    },
                     real_explanation: {
                       type: "string",
                       description:
-                        "the actual concept in proper terms. clear, grounded, not textbook.",
+                        "3 to 5 sentences. the actual concept in proper terms. clear, grounded, not textbook.",
                     },
                     limits: {
                       type: "string",
                       description:
-                        "2 to 4 sentences on where the analogy breaks down.",
+                        "2 to 4 sentences. MUST start with 'unlike [analogy world],'. explains what does not map cleanly.",
                     },
                   },
                   required: [
@@ -149,6 +177,7 @@ produce a complete annealogy explanation. follow the structure exactly.`;
                     "mapping",
                     "visual_mermaid",
                     "visual_kind",
+                    "bridge",
                     "real_explanation",
                     "limits",
                   ],
@@ -166,7 +195,6 @@ produce a complete annealogy explanation. follow the structure exactly.`;
     );
 
     if (!response.ok) {
-      // surface the two rate-limit-shaped errors so the client can show a useful toast
       if (response.status === 429) {
         return new Response(
           JSON.stringify({
