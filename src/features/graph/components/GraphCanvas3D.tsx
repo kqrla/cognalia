@@ -118,8 +118,9 @@ export const GraphCanvas3D = ({
     const fg = fgRef.current;
     if (!fg) return;
     // weaker default charge so clusters don't blow apart
-    fg.d3Force("charge")?.strength(-90);
-    const link = fg.d3Force("link") as
+    const charge = fg.d3Force("charge") as { strength: (n: number) => void } | undefined;
+    charge?.strength(-90);
+    const link = fg.d3Force("link") as unknown as
       | { distance: (fn: (l: GLink) => number) => void }
       | undefined;
     link?.distance((l) => 38 + (l.dashed ? 18 : 0));
@@ -129,7 +130,7 @@ export const GraphCanvas3D = ({
   useEffect(() => {
     const fg = fgRef.current;
     if (!fg || !focusId) return;
-    const node = (fg.graphData().nodes as Array<GNode & { x?: number; y?: number; z?: number }>).find(
+    const node = (data.nodes as Array<GNode & { x?: number; y?: number; z?: number }>).find(
       (n) => n.id === focusId,
     );
     if (!node || node.x === undefined) return;
@@ -185,7 +186,7 @@ export const GraphCanvas3D = ({
       sprite.backgroundColor = "rgba(20, 16, 12, 0.55)";
       sprite.padding = 2;
       sprite.borderRadius = 3;
-      sprite.position.set(0, radius + 4, 0);
+      (sprite as unknown as THREE.Object3D).position.set(0, radius + 4, 0);
       group.add(sprite);
     }
 
