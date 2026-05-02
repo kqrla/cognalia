@@ -19,7 +19,7 @@ export const curatedConcepts: CuratedConcept[] = [
   {
     id: "recursion",
     concept: "recursion",
-    system: "story_fandom",
+    system: "story_narrative",
     teaser: "a story that keeps telling itself a smaller version of itself",
     explanation: {
       analogy:
@@ -124,7 +124,7 @@ export const curatedConcepts: CuratedConcept[] = [
   {
     id: "git_branches",
     concept: "git branches",
-    system: "story_fandom",
+    system: "story_narrative",
     teaser: "writing 'what if this happened instead' for your code",
     explanation: {
       analogy:

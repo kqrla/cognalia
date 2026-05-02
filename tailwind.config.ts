@@ -67,9 +67,11 @@ export default {
           story: "hsl(var(--system-story))",
           company: "hsl(var(--system-company))",
           traffic: "hsl(var(--system-traffic))",
-          plant: "hsl(var(--system-plant))",
-          brain: "hsl(var(--system-brain))",
           storage: "hsl(var(--system-storage))",
+          sports: "hsl(var(--system-sports))",
+          film: "hsl(var(--system-film))",
+          social: "hsl(var(--system-social))",
+          music: "hsl(var(--system-music))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

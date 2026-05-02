@@ -11,17 +11,23 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
+// must mirror src/features/analogy/systems.ts (v2 library).
 const allowedSystems = [
-  "relationship_dynamics",
-  "gaming_progression",
-  "cooking_recipe",
+  // core
   "building_lego",
-  "story_fandom",
-  "company_startup",
-  "traffic_flow",
-  "plant_growth",
-  "brain_habit_loops",
+  "cooking_recipe",
   "storage_organization",
+  "traffic_flow",
+  "relationship_dynamics",
+  // secondary
+  "gaming_progression",
+  "story_narrative",
+  "company_startup",
+  // extended
+  "sports_team_strategy",
+  "film_production",
+  "social_media",
+  "music_playlist",
 ] as const;
 
 const systemPrompt = `you are analogize, a cognitive translation tool.

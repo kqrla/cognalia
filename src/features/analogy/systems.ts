@@ -1,9 +1,15 @@
-// the strict analogy system library. these are the only systems annealogy
-// is allowed to use. defined once here so the ui chips, the system selector,
-// and the edge function payload all stay in lock-step.
+// the strict analogy system library (v2). these are the only systems
+// analogize is allowed to use. defined once here so the ui chips, the
+// system selector, the edge function payload, and the reframe picker
+// all stay in lock-step.
 //
-// adding a new system requires updating: this file, the system color tokens
-// in index.css, and the allowedSystems array in the edge function.
+// systems are tiered:
+//   core      → default pool, picked first
+//   secondary → used when a clearly better fit
+//   extended  → niche; only when nothing else matches well
+//
+// each system has a thinking type. "explain again differently" must
+// switch to a different system AND a different thinking type.
 
 import type { LucideIcon } from "lucide-react";
 import {
@@ -14,37 +20,45 @@ import {
   BookOpen,
   Building2,
   TrafficCone,
-  Sprout,
-  Brain,
   Archive,
+  Users,
+  Clapperboard,
+  Share2,
+  Music,
 } from "lucide-react";
 
 export type AnalogySystemId =
-  | "relationship_dynamics"
-  | "gaming_progression"
-  | "cooking_recipe"
+  // core
   | "building_lego"
-  | "story_fandom"
-  | "company_startup"
+  | "cooking_recipe"
+  | "storage_organization"
   | "traffic_flow"
-  | "plant_growth"
-  | "brain_habit_loops"
-  | "storage_organization";
+  | "relationship_dynamics"
+  // secondary
+  | "gaming_progression"
+  | "story_narrative"
+  | "company_startup"
+  // extended
+  | "sports_team_strategy"
+  | "film_production"
+  | "social_media"
+  | "music_playlist";
 
-// thinking type controls the "explain again differently" logic.
-// switching between contrasting types is what makes a re-explanation feel
-// like a genuinely new mental model, not a paraphrase.
 export type ThinkingType =
+  | "structural"
+  | "process"
+  | "categorical"
+  | "flow"
   | "social"
   | "interactive"
-  | "process"
-  | "structural"
   | "narrative"
   | "organizational"
-  | "flow"
-  | "organic"
-  | "behavioral"
-  | "categorical";
+  | "dynamic"
+  | "orchestration"
+  | "feedback"
+  | "sequencing";
+
+export type SystemTier = "core" | "secondary" | "extended";
 
 export type AnalogySystem = {
   id: AnalogySystemId;
@@ -55,33 +69,13 @@ export type AnalogySystem = {
   // tailwind class for the tinted background, defined in tailwind.config.ts
   tintClass: string;
   thinkingType: ThinkingType;
+  tier: SystemTier;
+  // a short "use for" tag shown in the selector to guide intentional choice
+  useFor: string;
 };
 
 export const analogySystems: AnalogySystem[] = [
-  {
-    id: "relationship_dynamics",
-    label: "relationship dynamics",
-    hint: "people, intentions, push and pull",
-    icon: Heart,
-    tintClass: "bg-system-relationship",
-    thinkingType: "social",
-  },
-  {
-    id: "gaming_progression",
-    label: "gaming and progression",
-    hint: "levels, stats, unlocks, bosses",
-    icon: Gamepad2,
-    tintClass: "bg-system-gaming",
-    thinkingType: "interactive",
-  },
-  {
-    id: "cooking_recipe",
-    label: "cooking and recipes",
-    hint: "ingredients, steps, taste",
-    icon: ChefHat,
-    tintClass: "bg-system-cooking",
-    thinkingType: "process",
-  },
+  // ---------- core ----------
   {
     id: "building_lego",
     label: "building and lego",
@@ -89,46 +83,18 @@ export const analogySystems: AnalogySystem[] = [
     icon: Blocks,
     tintClass: "bg-system-building",
     thinkingType: "structural",
+    tier: "core",
+    useFor: "architecture, systems, dependencies",
   },
   {
-    id: "story_fandom",
-    label: "story and fandom",
-    hint: "characters, arcs, lore",
-    icon: BookOpen,
-    tintClass: "bg-system-story",
-    thinkingType: "narrative",
-  },
-  {
-    id: "company_startup",
-    label: "company and startup",
-    hint: "roles, teams, decisions",
-    icon: Building2,
-    tintClass: "bg-system-company",
-    thinkingType: "organizational",
-  },
-  {
-    id: "traffic_flow",
-    label: "traffic and flow",
-    hint: "lanes, signals, congestion",
-    icon: TrafficCone,
-    tintClass: "bg-system-traffic",
-    thinkingType: "flow",
-  },
-  {
-    id: "plant_growth",
-    label: "plant and growth",
-    hint: "seeds, roots, conditions",
-    icon: Sprout,
-    tintClass: "bg-system-plant",
-    thinkingType: "organic",
-  },
-  {
-    id: "brain_habit_loops",
-    label: "brain and habit loops",
-    hint: "trigger, action, reward",
-    icon: Brain,
-    tintClass: "bg-system-brain",
-    thinkingType: "behavioral",
+    id: "cooking_recipe",
+    label: "cooking and recipes",
+    hint: "ingredients, steps, sequence",
+    icon: ChefHat,
+    tintClass: "bg-system-cooking",
+    thinkingType: "process",
+    tier: "core",
+    useFor: "algorithms, step-by-step flows",
   },
   {
     id: "storage_organization",
@@ -137,29 +103,129 @@ export const analogySystems: AnalogySystem[] = [
     icon: Archive,
     tintClass: "bg-system-storage",
     thinkingType: "categorical",
+    tier: "core",
+    useFor: "databases, memory, indexing",
+  },
+  {
+    id: "traffic_flow",
+    label: "traffic and flow",
+    hint: "lanes, signals, congestion",
+    icon: TrafficCone,
+    tintClass: "bg-system-traffic",
+    thinkingType: "flow",
+    tier: "core",
+    useFor: "networks, throughput, bottlenecks",
+  },
+  {
+    id: "relationship_dynamics",
+    label: "relationship dynamics",
+    hint: "people, intentions, push and pull",
+    icon: Heart,
+    tintClass: "bg-system-relationship",
+    thinkingType: "social",
+    tier: "core",
+    useFor: "economics, geopolitics, interactions",
+  },
+  // ---------- secondary ----------
+  {
+    id: "gaming_progression",
+    label: "gaming and progression",
+    hint: "levels, stats, unlocks, bosses",
+    icon: Gamepad2,
+    tintClass: "bg-system-gaming",
+    thinkingType: "interactive",
+    tier: "secondary",
+    useFor: "learning, optimization, feedback loops",
+  },
+  {
+    id: "story_narrative",
+    label: "story and narrative",
+    hint: "canon, arcs, alternate timelines",
+    icon: BookOpen,
+    tintClass: "bg-system-story",
+    thinkingType: "narrative",
+    tier: "secondary",
+    useFor: "versioning, timelines, iteration",
+  },
+  {
+    id: "company_startup",
+    label: "company and startup",
+    hint: "roles, teams, decisions",
+    icon: Building2,
+    tintClass: "bg-system-company",
+    thinkingType: "organizational",
+    tier: "secondary",
+    useFor: "roles, scaling, incentives",
+  },
+  // ---------- extended ----------
+  {
+    id: "sports_team_strategy",
+    label: "sports and team strategy",
+    hint: "players, plays, coordination",
+    icon: Users,
+    tintClass: "bg-system-sports",
+    thinkingType: "dynamic",
+    tier: "extended",
+    useFor: "coordination, distributed systems",
+  },
+  {
+    id: "film_production",
+    label: "film production",
+    hint: "crew, stages, final cut",
+    icon: Clapperboard,
+    tintClass: "bg-system-film",
+    thinkingType: "orchestration",
+    tier: "extended",
+    useFor: "pipelines, staged processes",
+  },
+  {
+    id: "social_media",
+    label: "social media",
+    hint: "posts, feed, signals",
+    icon: Share2,
+    tintClass: "bg-system-social",
+    thinkingType: "feedback",
+    tier: "extended",
+    useFor: "algorithms, virality, feedback loops",
+  },
+  {
+    id: "music_playlist",
+    label: "music and playlist",
+    hint: "tracks, order, remix",
+    icon: Music,
+    tintClass: "bg-system-music",
+    thinkingType: "sequencing",
+    tier: "extended",
+    useFor: "ordering, composition",
   },
 ];
+
+export const getSystem = (id: AnalogySystemId): AnalogySystem =>
+  analogySystems.find((s) => s.id === id) ?? analogySystems[0];
 
 // pairs of thinking types that feel similar. when reframing we avoid
 // jumping between adjacent types so the new analogy lands as a real shift.
 const adjacentTypes: Record<ThinkingType, ThinkingType[]> = {
-  narrative: ["social"],
-  social: ["narrative"],
-  process: ["flow"],
-  flow: ["process"],
+  narrative: ["social", "sequencing"],
+  social: ["narrative", "organizational"],
+  organizational: ["social"],
+  process: ["flow", "orchestration", "sequencing"],
+  flow: ["process", "feedback"],
+  orchestration: ["process"],
+  sequencing: ["process", "narrative"],
   structural: ["categorical"],
   categorical: ["structural"],
-  organizational: ["social"],
-  organic: ["behavioral"],
-  behavioral: ["organic"],
-  interactive: [],
+  feedback: ["flow", "interactive"],
+  interactive: ["feedback"],
+  dynamic: ["organizational"],
 };
 
 // pick the next analogy system for "explain again differently".
-// rules:
+// rules (in order):
 //  1. never reuse a system already used for this concept
-//  2. prefer a thinking type that contrasts with the current one
-//  3. if everything has been used, reset and exclude only the current
+//  2. switch to a different thinking type than the current one
+//  3. prefer core systems, then secondary, then extended
+//  4. if everything has been used, reset and exclude only the current
 export const pickContrastingSystem = (
   current: AnalogySystemId,
   used: AnalogySystemId[],
@@ -171,7 +237,6 @@ export const pickContrastingSystem = (
 
   const available = analogySystems.filter((s) => !blocklist.has(s.id));
   if (available.length === 0) {
-    // last resort: anything but the current
     return analogySystems.find((s) => s.id !== current) ?? analogySystems[0];
   }
 
@@ -179,14 +244,20 @@ export const pickContrastingSystem = (
   adjacent.add(currentSystem.thinkingType);
 
   const contrasting = available.filter((s) => !adjacent.has(s.thinkingType));
-  const pool = contrasting.length > 0 ? contrasting : available;
+  const typePool = contrasting.length > 0 ? contrasting : available;
 
-  // randomize so repeated clicks do not produce the same path every time
+  // tier preference: core > secondary > extended
+  const byTier = (tier: SystemTier) => typePool.filter((s) => s.tier === tier);
+  const pool =
+    byTier("core").length > 0
+      ? byTier("core")
+      : byTier("secondary").length > 0
+        ? byTier("secondary")
+        : byTier("extended");
+
+  // randomize within the chosen tier so repeated clicks vary
   return pool[Math.floor(Math.random() * pool.length)];
 };
-
-export const getSystem = (id: AnalogySystemId): AnalogySystem =>
-  analogySystems.find((s) => s.id === id) ?? analogySystems[0];
 
 // thinking-style options shown in onboarding. each maps to a default
 // analogy system, but the user can always override per explanation.
@@ -197,11 +268,11 @@ export type ThinkingStyle = {
 };
 
 export const thinkingStyles: ThinkingStyle[] = [
-  { id: "stories", label: "i think in stories", defaultSystem: "story_fandom" },
+  { id: "stories", label: "i think in stories", defaultSystem: "story_narrative" },
   {
     id: "systems",
     label: "i think in systems",
-    defaultSystem: "company_startup",
+    defaultSystem: "building_lego",
   },
   {
     id: "real_life",
@@ -216,7 +287,7 @@ export const thinkingStyles: ThinkingStyle[] = [
   {
     id: "internet_culture",
     label: "i think in internet culture",
-    defaultSystem: "gaming_progression",
+    defaultSystem: "social_media",
   },
   {
     id: "step_by_step",
