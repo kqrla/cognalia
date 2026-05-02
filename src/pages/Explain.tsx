@@ -192,14 +192,24 @@ const Explain = () => {
   return (
     <main className="min-h-screen">
       <div className="container max-w-3xl py-8 sm:py-12">
-        <button
-          type="button"
-          onClick={() => navigate("/app")}
-          className="mb-6 inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          back to home
-        </button>
+        <div className="mb-6 flex items-center justify-between">
+          <button
+            type="button"
+            onClick={() => navigate("/app")}
+            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            back to home
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate("/graph")}
+            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Network className="h-3.5 w-3.5" />
+            see your map
+          </button>
+        </div>
 
         <header className="mb-8">
           <p className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
