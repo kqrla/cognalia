@@ -135,10 +135,17 @@ const Explain = () => {
     [concept, thinkingStyleLabel, addRecent],
   );
 
-  // on first mount, if we did not resolve from curated/recent, fetch fresh
+  // on first mount, if we did not resolve from curated/recent, fetch fresh.
+  // if we did resolve, still record the concept on the understanding graph.
   useEffect(() => {
     if (!initial && concept.trim() && !explanation) {
       fetchExplanation(system);
+    } else if (initial) {
+      upsertNode({
+        concept: initial.concept,
+        system: initial.system,
+        explanation: initial.explanation,
+      });
     }
     // run only once on mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
