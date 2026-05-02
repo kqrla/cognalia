@@ -72,7 +72,8 @@ serve(async (req) => {
   }
 
   try {
-    const { concept, system, thinkingStyle } = await req.json();
+    const { concept, system, thinkingStyle, avoidSystems, reframe } =
+      await req.json();
 
     if (!concept || typeof concept !== "string") {
       return new Response(
@@ -97,10 +98,30 @@ serve(async (req) => {
     const apiKey = Deno.env.get("LOVABLE_API_KEY");
     if (!apiKey) throw new Error("LOVABLE_API_KEY missing");
 
+    const avoidList = Array.isArray(avoidSystems)
+      ? avoidSystems
+          .filter((s: unknown): s is string => typeof s === "string")
+          .map((s) => s.replace(/_/g, " "))
+      : [];
+
+    const reframeBlock = reframe
+      ? `
+
+REFRAME MODE (critical)
+this is a re-explanation of the same concept through a NEW mental model.
+${avoidList.length > 0 ? `the user already saw it through: ${avoidList.join(", ")}.` : ""}
+you MUST:
+- build the analogy entirely inside the new world (${system.replace(/_/g, " ")}). do not borrow scenes, characters, verbs, or metaphors from the previous worlds.
+- choose a fresh hook. do not echo any phrasing the previous explanation might have used.
+- pick different mapping pairs and a different visual shape than a typical previous lens would produce.
+- keep the real_explanation factually consistent with the concept, but reword it from scratch.
+the goal is a genuinely different way to think about the concept, not a paraphrase.`
+      : "";
+
     const userPrompt = `concept to translate: ${concept}
 
 analogy system to use: ${system.replace(/_/g, " ")}
-${thinkingStyle ? `user thinks in: ${thinkingStyle}` : ""}
+${thinkingStyle ? `user thinks in: ${thinkingStyle}` : ""}${reframeBlock}
 
 produce a complete analogize explanation. follow the structure exactly, including the bridge sentence.`;
 
