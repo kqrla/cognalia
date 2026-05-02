@@ -20,18 +20,18 @@ const Onboarding = () => {
       defaultSystem: style.defaultSystem,
       onboarded: true,
     });
-    navigate("/");
+    navigate("/app");
   };
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen">
       <div className="container max-w-2xl py-16 sm:py-24">
         <header className="mb-12 text-center">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary-soft px-3 py-1 text-xs font-medium text-foreground/70">
             <Sparkles className="h-3.5 w-3.5" />
-            <span>welcome to annealogy</span>
+            <span>welcome to analogize</span>
           </div>
-          <h1 className="mb-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h1 className="mb-3 font-serif-display text-4xl tracking-tight sm:text-5xl">
             how does your brain naturally understand things?
           </h1>
           <p className="text-muted-foreground">

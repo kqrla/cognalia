@@ -49,12 +49,12 @@ const Home = () => {
   }, [system]);
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen">
       <div className="container max-w-3xl py-10 sm:py-16">
         <header className="mb-10 flex items-center justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              annealogy
+            <p className="font-serif-display text-2xl text-foreground">
+              analogize
             </p>
             <p className="text-sm text-foreground/70">
               translate ideas into how you already think.

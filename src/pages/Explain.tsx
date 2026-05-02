@@ -139,17 +139,17 @@ const Explain = () => {
   const onRegenerate = () => fetchExplanation(system);
 
   if (!concept.trim()) {
-    // someone landed here without a concept. send them home.
-    navigate("/", { replace: true });
+    // someone landed here without a concept. send them to the app.
+    navigate("/app", { replace: true });
     return null;
   }
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen">
       <div className="container max-w-3xl py-8 sm:py-12">
         <button
           type="button"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/app")}
           className="mb-6 inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
@@ -160,7 +160,7 @@ const Explain = () => {
           <p className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
             translating
           </p>
-          <h1 className="mb-6 text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h1 className="mb-6 font-serif-display text-3xl tracking-tight text-foreground sm:text-4xl">
             {concept}
           </h1>
 
