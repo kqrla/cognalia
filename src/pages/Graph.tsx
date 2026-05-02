@@ -9,7 +9,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Network } from "lucide-react";
 import { useGraph } from "@/features/graph/store";
-import { GraphCanvas3D } from "@/features/graph/components/GraphCanvas3D";
+import { GraphCanvas } from "@/features/graph/components/GraphCanvas";
 import { NodeSidePanel } from "@/features/graph/components/NodeSidePanel";
 import { SuggestionsPanel } from "@/features/graph/components/SuggestionsPanel";
 import { edgeStyle, type GraphEdge } from "@/features/graph/types";
@@ -66,8 +66,8 @@ const Graph = () => {
               a map of how you think
             </h1>
             <p className="mt-2 max-w-prose text-sm text-foreground/70">
-              clusters drift apart when concepts aren't related. node size
-              reflects how broad, well-understood, or connected an idea is.
+              this is not a notes board. it grows as you learn, and only links
+              concepts when there's a real relationship.
             </p>
           </div>
           <div className="inline-flex items-center gap-2 rounded-full border bg-card px-3 py-1.5 text-xs text-muted-foreground">
@@ -98,13 +98,15 @@ const Graph = () => {
         ) : (
           <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
             <div className="space-y-4">
-              <GraphCanvas3D
-                nodes={nodes}
-                edges={edges}
-                focusId={focusId}
-                onFocusNode={setFocus}
-                onSelectEdge={setActiveEdge}
-              />
+              {focusId && (
+                <GraphCanvas
+                  nodes={nodes}
+                  edges={edges}
+                  focusId={focusId}
+                  onFocusNode={setFocus}
+                  onSelectEdge={setActiveEdge}
+                />
+              )}
 
               {activeEdge && (
                 <div className="surface-card animate-fade-up p-4">
