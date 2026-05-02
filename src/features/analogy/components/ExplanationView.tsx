@@ -61,6 +61,19 @@ export const ExplanationView = ({
 
   return (
     <div className="space-y-4">
+      <div
+        className={cn(
+          "surface-card flex items-center gap-3 px-5 py-3 animate-fade-up",
+          meta.tintClass,
+        )}
+        aria-label="active analogy system"
+      >
+        <meta.icon className="h-4 w-4 text-foreground/70" />
+        <p className="text-sm">
+          <span className="text-muted-foreground">thinking in: </span>
+          <span className="font-medium text-foreground">{meta.label}</span>
+        </p>
+      </div>
       {sections.map((section) => {
         const Icon = section.icon;
         const isOpen = open[section.id];
