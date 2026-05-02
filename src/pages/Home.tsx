@@ -4,11 +4,12 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, Clock, BookOpen, Settings2 } from "lucide-react";
+import { ArrowRight, Clock, BookOpen, Settings2, Network } from "lucide-react";
 import { analogySystems, getSystem, type AnalogySystemId } from "@/features/analogy/systems";
 import { SystemChip } from "@/features/analogy/components/SystemChip";
 import { SystemSelector } from "@/features/analogy/components/SystemSelector";
 import { usePreferences, useRecents } from "@/features/analogy/store";
+import { useGraph } from "@/features/graph/store";
 import { curatedConcepts } from "@/features/analogy/curated";
 import { cn } from "@/lib/utils";
 
@@ -16,6 +17,7 @@ const Home = () => {
   const navigate = useNavigate();
   const { preferences } = usePreferences();
   const { recents } = useRecents();
+  const { nodes, edges } = useGraph();
 
   // if the user has not onboarded, send them there. cheap redirect.
   useEffect(() => {
