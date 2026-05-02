@@ -9,7 +9,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowLeft, RefreshCcw, Sparkles, Loader2 } from "lucide-react";
+import { ArrowLeft, RefreshCcw, Sparkles, Loader2, Network } from "lucide-react";
 import { toast } from "sonner";
 import { ExplanationView } from "@/features/analogy/components/ExplanationView";
 import { SystemSelector } from "@/features/analogy/components/SystemSelector";
