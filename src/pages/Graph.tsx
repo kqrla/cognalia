@@ -9,7 +9,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Network } from "lucide-react";
 import { useGraph } from "@/features/graph/store";
-import { GraphCanvas } from "@/features/graph/components/GraphCanvas";
+import { GraphCanvas3D } from "@/features/graph/components/GraphCanvas3D";
 import { NodeSidePanel } from "@/features/graph/components/NodeSidePanel";
 import { SuggestionsPanel } from "@/features/graph/components/SuggestionsPanel";
 import { edgeStyle, type GraphEdge } from "@/features/graph/types";
@@ -98,15 +98,13 @@ const Graph = () => {
         ) : (
           <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
             <div className="space-y-4">
-              {focusId && (
-                <GraphCanvas
-                  nodes={nodes}
-                  edges={edges}
-                  focusId={focusId}
-                  onFocusNode={setFocus}
-                  onSelectEdge={setActiveEdge}
-                />
-              )}
+              <GraphCanvas3D
+                nodes={nodes}
+                edges={edges}
+                focusId={focusId}
+                onFocusNode={setFocus}
+                onSelectEdge={setActiveEdge}
+              />
 
               {activeEdge && (
                 <div className="surface-card animate-fade-up p-4">
