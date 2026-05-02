@@ -19,7 +19,7 @@ import { getSystem } from "../systems";
 import { MermaidDiagram } from "./MermaidDiagram";
 
 type Section = {
-  id: "analogy" | "mapping" | "visual" | "explanation" | "limits";
+  id: "analogy" | "mapping" | "visual" | "bridge" | "explanation" | "limits";
   label: string;
   icon: typeof Sparkles;
 };
@@ -28,6 +28,7 @@ const sections: Section[] = [
   { id: "analogy", label: "analogy", icon: Sparkles },
   { id: "mapping", label: "mapping", icon: ArrowLeftRight },
   { id: "visual", label: "visual", icon: Workflow },
+  { id: "bridge", label: "bridge", icon: CornerDownRight },
   { id: "explanation", label: "real explanation", icon: FileText },
   { id: "limits", label: "where the analogy breaks", icon: AlertTriangle },
 ];
