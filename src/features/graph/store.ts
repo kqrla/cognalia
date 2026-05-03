@@ -85,6 +85,15 @@ export const upsertNode = (input: {
         lastExplanation: input.explanation,
       };
 
+  // initialise / bump shown counter for the current system
+  const signals = { ...(existing?.systemSignals ?? {}) };
+  const sysKey = input.system;
+  signals[sysKey] = {
+    shown: (signals[sysKey]?.shown ?? 0) + 1,
+    regen: signals[sysKey]?.regen ?? 0,
+  };
+  node.systemSignals = signals;
+
   const nodes = existing
     ? state.nodes.map((n) => (n.id === id ? node : n))
     : [...state.nodes, node];
