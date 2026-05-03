@@ -20,6 +20,11 @@ export type GraphNode = {
   // optional cached explanation snapshot so revisiting from the
   // graph is instant. the full explain page can refetch if needed.
   lastExplanation?: Explanation;
+  // per-system "click signal". each entry tracks how many times the
+  // user *kept* an analogy (shown) vs how many times they immediately
+  // regenerated away from it (regen). low keep / high regen ⇒ this
+  // analogy didn't land for this user, so we deprioritise it next time.
+  systemSignals?: Record<string, { shown: number; regen: number }>;
 };
 
 // strict edge vocabulary. generic "related" is intentionally not allowed.
