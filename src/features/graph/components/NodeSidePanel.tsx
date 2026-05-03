@@ -27,6 +27,15 @@ const stateOptions: {
 export const NodeSidePanel = ({ node }: Props) => {
   const navigate = useNavigate();
   const sys = getSystem(node.system);
+  const [confirmDiscard, setConfirmDiscard] = useState(false);
+
+  const onDiscard = () => {
+    if (!confirmDiscard) {
+      setConfirmDiscard(true);
+      return;
+    }
+    removeNode(node.id);
+  };
 
   return (
     <aside className="surface-card animate-fade-up flex flex-col gap-4 p-5">
