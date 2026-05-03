@@ -112,6 +112,20 @@ export const NodeSidePanel = ({ node }: Props) => {
           re-explain in a different system
           <Sparkles className="h-4 w-4" />
         </button>
+        <button
+          type="button"
+          onClick={onDiscard}
+          onBlur={() => setConfirmDiscard(false)}
+          className={cn(
+            "inline-flex items-center justify-between rounded-xl border px-4 py-2 text-sm transition-colors",
+            confirmDiscard
+              ? "border-destructive/50 bg-destructive/10 text-destructive"
+              : "border-dashed text-muted-foreground hover:text-foreground",
+          )}
+        >
+          {confirmDiscard ? "tap again to confirm" : "discard from map"}
+          <Trash2 className="h-4 w-4" />
+        </button>
       </div>
 
       <p className="text-[10px] uppercase tracking-wider text-muted-foreground/70">
