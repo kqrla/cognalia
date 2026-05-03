@@ -2,12 +2,13 @@
 // understanding state controls, and quick actions to re-explain
 // or jump to the full explanation flow.
 
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Sparkles, ArrowRight, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getSystem } from "@/features/analogy/systems";
 import type { GraphNode, UnderstandingState } from "../types";
-import { setNodeState } from "../store";
+import { setNodeState, removeNode } from "../store";
 
 type Props = {
   node: GraphNode;
