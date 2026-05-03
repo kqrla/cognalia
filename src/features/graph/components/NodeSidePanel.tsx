@@ -2,12 +2,13 @@
 // understanding state controls, and quick actions to re-explain
 // or jump to the full explanation flow.
 
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Sparkles, ArrowRight, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getSystem } from "@/features/analogy/systems";
 import type { GraphNode, UnderstandingState } from "../types";
-import { setNodeState } from "../store";
+import { setNodeState, removeNode } from "../store";
 
 type Props = {
   node: GraphNode;
@@ -26,6 +27,15 @@ const stateOptions: {
 export const NodeSidePanel = ({ node }: Props) => {
   const navigate = useNavigate();
   const sys = getSystem(node.system);
+  const [confirmDiscard, setConfirmDiscard] = useState(false);
+
+  const onDiscard = () => {
+    if (!confirmDiscard) {
+      setConfirmDiscard(true);
+      return;
+    }
+    removeNode(node.id);
+  };
 
   return (
     <aside className="surface-card animate-fade-up flex flex-col gap-4 p-5">
@@ -101,6 +111,20 @@ export const NodeSidePanel = ({ node }: Props) => {
         >
           re-explain in a different system
           <Sparkles className="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          onClick={onDiscard}
+          onBlur={() => setConfirmDiscard(false)}
+          className={cn(
+            "inline-flex items-center justify-between rounded-xl border px-4 py-2 text-sm transition-colors",
+            confirmDiscard
+              ? "border-destructive/50 bg-destructive/10 text-destructive"
+              : "border-dashed text-muted-foreground hover:text-foreground",
+          )}
+        >
+          {confirmDiscard ? "tap again to confirm" : "discard from map"}
+          <Trash2 className="h-4 w-4" />
         </button>
       </div>
 

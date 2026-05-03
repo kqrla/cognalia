@@ -85,6 +85,15 @@ export const upsertNode = (input: {
         lastExplanation: input.explanation,
       };
 
+  // initialise / bump shown counter for the current system
+  const signals = { ...(existing?.systemSignals ?? {}) };
+  const sysKey = input.system;
+  signals[sysKey] = {
+    shown: (signals[sysKey]?.shown ?? 0) + 1,
+    regen: signals[sysKey]?.regen ?? 0,
+  };
+  node.systemSignals = signals;
+
   const nodes = existing
     ? state.nodes.map((n) => (n.id === id ? node : n))
     : [...state.nodes, node];
@@ -135,6 +144,40 @@ export const acceptEdge = (id: string) => {
 export const dismissEdge = (id: string) => {
   const state = read();
   write({ ...state, edges: state.edges.filter((e) => e.id !== id) });
+};
+
+// record that the user regenerated away from a system for this concept.
+// this is the strongest "didn't click" signal we have.
+export const recordRegen = (concept: string, system: AnalogySystemId) => {
+  const id = slugify(concept);
+  const state = read();
+  const node = state.nodes.find((n) => n.id === id);
+  if (!node) return;
+  const signals = { ...(node.systemSignals ?? {}) };
+  signals[system] = {
+    shown: signals[system]?.shown ?? 1,
+    regen: (signals[system]?.regen ?? 0) + 1,
+  };
+  write({
+    ...state,
+    nodes: state.nodes.map((n) =>
+      n.id === id ? { ...n, systemSignals: signals, updatedAt: Date.now() } : n,
+    ),
+  });
+};
+
+// systems where regen/shown ratio is high — used as `avoidSystems` hints
+// when reframing so we stop pushing analogies that don't land for the user.
+export const lowClickSystems = (
+  concept: string,
+  threshold = 0.5,
+): AnalogySystemId[] => {
+  const id = slugify(concept);
+  const node = read().nodes.find((n) => n.id === id);
+  if (!node?.systemSignals) return [];
+  return Object.entries(node.systemSignals)
+    .filter(([, s]) => s.shown > 0 && s.regen / s.shown >= threshold)
+    .map(([sys]) => sys as AnalogySystemId);
 };
 
 export const addManualEdge = (input: {

@@ -15,7 +15,7 @@ import { ExplanationView } from "@/features/analogy/components/ExplanationView";
 import { SystemSelector } from "@/features/analogy/components/SystemSelector";
 import { ExplainError, requestExplanation } from "@/features/analogy/api";
 import { usePreferences, useRecents } from "@/features/analogy/store";
-import { upsertNode } from "@/features/graph/store";
+import { upsertNode, recordRegen, lowClickSystems } from "@/features/graph/store";
 import { curatedConcepts } from "@/features/analogy/curated";
 import {
   analogySystems,
@@ -168,7 +168,13 @@ const Explain = () => {
   // we deliberately switch to a system with a contrasting thinking type
   // and tell the model which lenses were already used.
   const onRegenerate = () => {
-    const nextSystem = pickContrastingSystem(system, usedSystems);
+    // mark the current system as "didn't click" for this concept
+    recordRegen(concept, system);
+    // merge session-used systems with anything historically low-clicking
+    const avoid = Array.from(
+      new Set([...usedSystems, ...lowClickSystems(concept)]),
+    );
+    const nextSystem = pickContrastingSystem(system, avoid);
     setSystem(nextSystem.id);
     const nextParams = new URLSearchParams(params);
     nextParams.delete("curated");
@@ -179,7 +185,7 @@ const Explain = () => {
     toast(`reframing through ${nextSystem.label}`);
     fetchExplanation(nextSystem.id, {
       reframe: true,
-      avoid: usedSystems,
+      avoid,
     });
   };
 
