@@ -4,7 +4,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, Clock, BookOpen, Settings2, Network } from "lucide-react";
+import { ArrowRight, Clock, BookOpen, Settings2, Network, History } from "lucide-react";
 import { analogySystems, getSystem, type AnalogySystemId } from "@/features/analogy/systems";
 import { SystemChip } from "@/features/analogy/components/SystemChip";
 import { SystemSelector } from "@/features/analogy/components/SystemSelector";
