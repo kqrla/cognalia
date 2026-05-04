@@ -83,11 +83,18 @@ export const GraphCanvas2D = ({
   const [view, setView] = useState({ x: 0, y: 0, k: 1 });
   const draggingNode = useRef<string | null>(null);
   const draggingPan = useRef<{ x: number; y: number } | null>(null);
+  const clusterColors = useClusterColors();
 
   const activeEdges = useMemo(
     () => edges.filter((e) => e.status === "active"),
     [edges],
   );
+
+  const focusCluster = useMemo(() => {
+    if (!focusId) return null;
+    const n = nodes.find((x) => x.id === focusId);
+    return n ? getSystem(n.system).id : null;
+  }, [focusId, nodes]);
 
   // (re)build sim nodes when the graph changes, preserving previous positions
   useEffect(() => {
