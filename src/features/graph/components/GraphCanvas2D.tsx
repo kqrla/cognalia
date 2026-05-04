@@ -138,7 +138,7 @@ export const GraphCanvas2D = ({
 
     simRef.current = next;
     tick();
-  }, [nodes, activeEdges]);
+  }, [nodes, activeEdges, clusterColors]);
 
   // force simulation loop
   useEffect(() => {
