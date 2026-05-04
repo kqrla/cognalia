@@ -94,9 +94,15 @@ export const useRecents = () => {
       ...entry,
     };
     const current = readRecents();
-    // dedupe by concept + system. most recent wins.
+    // dedupe only when the analogy text is identical (same exact version).
+    // otherwise keep every variation so the user can browse version history.
     const filtered = current.filter(
-      (r) => !(r.concept.toLowerCase() === entry.concept.toLowerCase() && r.system === entry.system),
+      (r) =>
+        !(
+          r.concept.toLowerCase() === entry.concept.toLowerCase() &&
+          r.system === entry.system &&
+          r.explanation.analogy === entry.explanation.analogy
+        ),
     );
     const next = [item, ...filtered].slice(0, MAX_RECENTS);
     window.localStorage.setItem(RECENTS_KEY, JSON.stringify(next));
