@@ -439,6 +439,33 @@ export const GraphCanvas2D = ({
           no connections yet — clusters will form as you accept relationships
         </div>
       )}
+      {focusCluster && (
+        <div className="absolute right-4 top-4 flex flex-col gap-1.5 rounded-2xl border border-border bg-background/85 p-2 text-[10px] uppercase tracking-wider text-foreground/70 backdrop-blur">
+          <p className="px-1 pt-0.5">recolor cluster</p>
+          <div className="flex gap-1.5">
+            {palette.map((p) => {
+              const selected = (clusterColors[focusCluster] ?? "default") === p.id;
+              return (
+                <button
+                  key={p.id}
+                  type="button"
+                  onClick={() => setClusterColor(focusCluster, p.id)}
+                  title={p.label}
+                  className={`h-5 w-5 rounded-full border transition-transform hover:scale-110 ${
+                    selected ? "border-foreground ring-1 ring-foreground/40" : "border-border"
+                  }`}
+                  style={{
+                    background:
+                      p.id === "default"
+                        ? "repeating-linear-gradient(45deg,#888 0 3px,#444 3px 6px)"
+                        : p.hex,
+                  }}
+                />
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
