@@ -9,7 +9,7 @@ import type { Explanation, RecentConcept } from "./types";
 
 const PREF_KEY = "annealogy.preferences.v1";
 const RECENTS_KEY = "annealogy.recents.v1";
-const MAX_RECENTS = 12;
+const MAX_RECENTS = 40;
 
 export type Preferences = {
   thinkingStyleId: string | null;
