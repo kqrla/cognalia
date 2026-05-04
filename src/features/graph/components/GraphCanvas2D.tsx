@@ -13,6 +13,12 @@ import { getSystem } from "@/features/analogy/systems";
 import type { GraphEdge, GraphNode } from "../types";
 import { edgeStyle } from "../types";
 import { computeDegree, computeWeight } from "../weights";
+import {
+  colorForCluster,
+  palette,
+  setClusterColor,
+  useClusterColors,
+} from "../palette";
 
 type Props = {
   nodes: GraphNode[];
@@ -77,11 +83,18 @@ export const GraphCanvas2D = ({
   const [view, setView] = useState({ x: 0, y: 0, k: 1 });
   const draggingNode = useRef<string | null>(null);
   const draggingPan = useRef<{ x: number; y: number } | null>(null);
+  const clusterColors = useClusterColors();
 
   const activeEdges = useMemo(
     () => edges.filter((e) => e.status === "active"),
     [edges],
   );
+
+  const focusCluster = useMemo(() => {
+    if (!focusId) return null;
+    const n = nodes.find((x) => x.id === focusId);
+    return n ? getSystem(n.system).id : null;
+  }, [focusId, nodes]);
 
   // (re)build sim nodes when the graph changes, preserving previous positions
   useEffect(() => {
@@ -117,7 +130,7 @@ export const GraphCanvas2D = ({
         radius: Math.max(10, weight * 2.6),
         weight,
         degree,
-        color: systemColors[cluster] ?? "#a89b8c",
+        color: colorForCluster(cluster, clusterColors, systemColors[cluster] ?? "#a89b8c"),
         cluster,
         data: node,
       });
@@ -125,7 +138,7 @@ export const GraphCanvas2D = ({
 
     simRef.current = next;
     tick();
-  }, [nodes, activeEdges]);
+  }, [nodes, activeEdges, clusterColors]);
 
   // force simulation loop
   useEffect(() => {
@@ -424,6 +437,33 @@ export const GraphCanvas2D = ({
       {nodes.length > 0 && activeEdges.length === 0 && (
         <div className="pointer-events-none absolute inset-x-0 bottom-6 text-center text-xs text-foreground/55">
           no connections yet — clusters will form as you accept relationships
+        </div>
+      )}
+      {focusCluster && (
+        <div className="absolute right-4 top-4 flex flex-col gap-1.5 rounded-2xl border border-border bg-background/85 p-2 text-[10px] uppercase tracking-wider text-foreground/70 backdrop-blur">
+          <p className="px-1 pt-0.5">recolor cluster</p>
+          <div className="flex gap-1.5">
+            {palette.map((p) => {
+              const selected = (clusterColors[focusCluster] ?? "default") === p.id;
+              return (
+                <button
+                  key={p.id}
+                  type="button"
+                  onClick={() => setClusterColor(focusCluster, p.id)}
+                  title={p.label}
+                  className={`h-5 w-5 rounded-full border transition-transform hover:scale-110 ${
+                    selected ? "border-foreground ring-1 ring-foreground/40" : "border-border"
+                  }`}
+                  style={{
+                    background:
+                      p.id === "default"
+                        ? "repeating-linear-gradient(45deg,#888 0 3px,#444 3px 6px)"
+                        : p.hex,
+                  }}
+                />
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
