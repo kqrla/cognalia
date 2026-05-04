@@ -184,30 +184,10 @@ const Home = () => {
 
         {/* recent concepts */}
         {recents.length > 0 && (
-          <section className="mb-10">
-            <div className="mb-3 flex items-center gap-2">
-              <Clock className="h-4 w-4 text-muted-foreground" />
-              <h2 className="text-sm font-semibold tracking-tight">recent</h2>
-            </div>
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {recents.slice(0, 6).map((r) => (
-                <button
-                  key={r.id}
-                  type="button"
-                  onClick={() => navigate(`/explain?recent=${r.id}`)}
-                  className="surface-card flex items-center justify-between p-4 text-left transition-all hover:-translate-y-0.5 hover:shadow-lift"
-                >
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-medium">{r.concept}</p>
-                    <p className="truncate text-xs text-muted-foreground">
-                      via {getSystem(r.system).label}
-                    </p>
-                  </div>
-                  <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground" />
-                </button>
-              ))}
-            </div>
-          </section>
+          <RecentsSection
+            recents={recents}
+            onOpen={(id) => navigate(`/explain?recent=${id}`)}
+          />
         )}
 
         {/* curated library */}
