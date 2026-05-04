@@ -51,9 +51,26 @@ MAPPING (strict)
 - 4 to 7 pairs.
 
 VISUAL (strict)
-- valid mermaid syntax (graph TD, flowchart LR, or mindmap).
-- use ANALOGY-SPECIFIC wording for nodes, never generic ("canon timeline" not "main branch").
-- 5 to 8 nodes max. choose tree, flow, or map based on the concept's real shape.
+- valid mermaid syntax. choose the BEST shape for the concept:
+  * flowchart LR / TD for processes, requests, pipelines, feedback loops
+  * graph TD for hierarchies, dependencies, part-of relationships
+  * mindmap for branching categorical structures
+  * sequenceDiagram for back-and-forth interactions between actors
+  * stateDiagram-v2 for systems with discrete states and transitions
+- this is a SYSTEMS DIAGRAM, not a label cloud. it must explain HOW the
+  thing actually works, not just name its parts.
+- 8 to 14 nodes. include:
+  * a clear entry point and end state (or a loop back if cyclical)
+  * branching paths or decision points where the concept actually has them
+  * at least 2 labeled edges (e.g. -->|"sends order"|, -.->|"on failure"|)
+  * a feedback / return / error path when the concept has one
+- node labels MUST use ANALOGY-SPECIFIC wording, never generic technical
+  terms ("canon timeline" not "main branch", "front desk clerk" not "input layer").
+- group related nodes with subgraph blocks when it clarifies structure.
+- use dashed edges (-.->) for secondary, optional, or feedback flows;
+  solid edges (-->) for primary flow.
+- never produce a flat list of disconnected nodes. every node must
+  participate in at least one edge.
 
 BRIDGE (mandatory)
 - exactly 1 to 2 sentences.
@@ -177,7 +194,7 @@ produce a complete analogize explanation. follow the structure exactly, includin
                     visual_mermaid: {
                       type: "string",
                       description:
-                        "valid mermaid syntax. node labels MUST use analogy-specific wording, not generic technical terms. 5 to 8 nodes.",
+                        "valid mermaid syntax. a true systems diagram (8-14 nodes) using flowchart, graph, mindmap, sequenceDiagram, or stateDiagram-v2. node labels MUST use analogy-specific wording. include labeled edges, branching/decision points, and feedback or return paths where the concept has them. use subgraph blocks to group when helpful. dashed edges (-.->) for secondary/feedback flow, solid (-->) for primary flow. every node must connect to at least one other.",
                     },
                     visual_kind: {
                       type: "string",
