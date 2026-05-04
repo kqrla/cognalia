@@ -13,6 +13,12 @@ import { getSystem } from "@/features/analogy/systems";
 import type { GraphEdge, GraphNode } from "../types";
 import { edgeStyle } from "../types";
 import { computeDegree, computeWeight } from "../weights";
+import {
+  colorForCluster,
+  palette,
+  setClusterColor,
+  useClusterColors,
+} from "../palette";
 
 type Props = {
   nodes: GraphNode[];
