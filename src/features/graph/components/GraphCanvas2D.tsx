@@ -130,7 +130,7 @@ export const GraphCanvas2D = ({
         radius: Math.max(10, weight * 2.6),
         weight,
         degree,
-        color: systemColors[cluster] ?? "#a89b8c",
+        color: colorForCluster(cluster, clusterColors, systemColors[cluster] ?? "#a89b8c"),
         cluster,
         data: node,
       });
