@@ -240,4 +240,108 @@ const Home = () => {
   );
 };
 
+
+type RecentLike = {
+  id: string;
+  concept: string;
+  system: AnalogySystemId;
+  createdAt: number;
+};
+
+const RecentsSection = ({
+  recents,
+  onOpen,
+}: {
+  recents: RecentLike[];
+  onOpen: (id: string) => void;
+}) => {
+  const [openKey, setOpenKey] = useState<string | null>(null);
+
+  // group versions of the same concept (case-insensitive). preserve recency order
+  // by sorting groups by their newest entry's createdAt desc.
+  const groups = useMemo(() => {
+    const map = new Map<string, RecentLike[]>();
+    for (const r of recents) {
+      const k = r.concept.trim().toLowerCase();
+      const arr = map.get(k) ?? [];
+      arr.push(r);
+      map.set(k, arr);
+    }
+    return Array.from(map.values())
+      .map((arr) => arr.sort((a, b) => b.createdAt - a.createdAt))
+      .sort((a, b) => b[0].createdAt - a[0].createdAt)
+      .slice(0, 6);
+  }, [recents]);
+
+  return (
+    <section className="mb-10">
+      <div className="mb-3 flex items-center gap-2">
+        <Clock className="h-4 w-4 text-muted-foreground" />
+        <h2 className="text-sm font-semibold tracking-tight">recent</h2>
+      </div>
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        {groups.map((versions) => {
+          const head = versions[0];
+          const key = head.concept.toLowerCase();
+          const isOpen = openKey === key;
+          return (
+            <div key={key} className="surface-card p-4">
+              <div className="flex items-center justify-between gap-2">
+                <button
+                  type="button"
+                  onClick={() => onOpen(head.id)}
+                  className="min-w-0 flex-1 text-left"
+                >
+                  <p className="truncate text-sm font-medium">{head.concept}</p>
+                  <p className="truncate text-xs text-muted-foreground">
+                    via {getSystem(head.system).label}
+                    {versions.length > 1 && ` · ${versions.length} versions`}
+                  </p>
+                </button>
+                {versions.length > 1 ? (
+                  <button
+                    type="button"
+                    onClick={() => setOpenKey(isOpen ? null : key)}
+                    className="rounded-full border border-border p-1.5 text-muted-foreground transition-colors hover:text-foreground"
+                    title="version history"
+                    aria-label="version history"
+                  >
+                    <History className="h-3.5 w-3.5" />
+                  </button>
+                ) : (
+                  <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+                )}
+              </div>
+              {isOpen && versions.length > 1 && (
+                <ul className="mt-3 space-y-1 border-t border-border/60 pt-3">
+                  {versions.map((v, i) => (
+                    <li key={v.id}>
+                      <button
+                        type="button"
+                        onClick={() => onOpen(v.id)}
+                        className="flex w-full items-center justify-between gap-2 rounded-lg px-2 py-1.5 text-left text-xs text-muted-foreground transition-colors hover:bg-background/60 hover:text-foreground"
+                      >
+                        <span className="truncate">
+                          {i === 0 ? "latest · " : ""}
+                          via {getSystem(v.system).label}
+                        </span>
+                        <span className="shrink-0 text-[10px] uppercase tracking-wider">
+                          {new Date(v.createdAt).toLocaleDateString(undefined, {
+                            month: "short",
+                            day: "numeric",
+                          })}
+                        </span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
+
 export default Home;
