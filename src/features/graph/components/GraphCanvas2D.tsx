@@ -90,19 +90,48 @@ export const GraphCanvas2D = ({
     [edges],
   );
 
+  // compute connected components from active edges. each component is
+  // an independently recolorable cluster; isolated nodes get their own.
+  // the cluster id is derived from sorted member ids so it's stable across
+  // renders even though node ordering can change.
+  const componentOf = useMemo(() => {
+    const adj = new Map<string, Set<string>>();
+    nodes.forEach((n) => adj.set(n.id, new Set()));
+    activeEdges.forEach((e) => {
+      adj.get(e.from)?.add(e.to);
+      adj.get(e.to)?.add(e.from);
+    });
+    const visited = new Set<string>();
+    const result = new Map<string, string>();
+    nodes.forEach((n) => {
+      if (visited.has(n.id)) return;
+      const members: string[] = [];
+      const stack = [n.id];
+      while (stack.length) {
+        const x = stack.pop()!;
+        if (visited.has(x)) continue;
+        visited.add(x);
+        members.push(x);
+        adj.get(x)?.forEach((y) => stack.push(y));
+      }
+      const id = `c:${[...members].sort().join("|")}`;
+      members.forEach((m) => result.set(m, id));
+    });
+    return result;
+  }, [nodes, activeEdges]);
+
   const focusCluster = useMemo(() => {
     if (!focusId) return null;
-    const n = nodes.find((x) => x.id === focusId);
-    return n ? getSystem(n.system).id : null;
-  }, [focusId, nodes]);
+    return componentOf.get(focusId) ?? null;
+  }, [focusId, componentOf]);
 
   // (re)build sim nodes when the graph changes, preserving previous positions
   useEffect(() => {
     const previous = simRef.current;
     const next = new Map<string, SimNode>();
 
-    // cluster anchors: one per analogy system, distributed on a ring
-    const clusterKeys = Array.from(new Set(nodes.map((n) => getSystem(n.system).id)));
+    // anchors: one per connected component, distributed on a ring
+    const clusterKeys = Array.from(new Set(nodes.map((n) => componentOf.get(n.id) ?? n.id)));
     const anchors = new Map<string, { x: number; y: number }>();
     clusterKeys.forEach((key, i) => {
       const angle = (i / Math.max(clusterKeys.length, 1)) * Math.PI * 2;
@@ -114,8 +143,9 @@ export const GraphCanvas2D = ({
     });
 
     nodes.forEach((node) => {
-      const cluster = getSystem(node.system).id;
+      const cluster = componentOf.get(node.id) ?? node.id;
       const anchor = anchors.get(cluster) ?? { x: 0, y: 0 };
+      const sysFallback = systemColors[getSystem(node.system).id] ?? "#a89b8c";
       const prev = previous.get(node.id);
       const weight = computeWeight(node, activeEdges);
       const degree = computeDegree(node.id, activeEdges);
