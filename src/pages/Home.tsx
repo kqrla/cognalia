@@ -2,7 +2,7 @@
 // curated demo library. when the user submits, we navigate to /explain
 // with the concept + system in the url so explanations are shareable.
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Clock, BookOpen, Settings2, Network, History } from "lucide-react";
 import { analogySystems, getSystem, type AnalogySystemId } from "@/features/analogy/systems";
@@ -11,7 +11,10 @@ import { SystemSelector } from "@/features/analogy/components/SystemSelector";
 import { usePreferences, useRecents } from "@/features/analogy/store";
 import { useGraph } from "@/features/graph/store";
 import { curatedConcepts } from "@/features/analogy/curated";
+import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
+
+type Domain = { field: string; sense: string };
 
 const Home = () => {
   const navigate = useNavigate();
