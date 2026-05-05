@@ -37,6 +37,7 @@ const Explain = () => {
   const recentId = params.get("recent");
   const queryConcept = params.get("q") ?? "";
   const querySystem = (params.get("system") as AnalogySystemId | null) ?? null;
+  const queryDomain = params.get("domain") ?? undefined;
 
   // resolve the initial state from whichever entry mode was used
   const initial = useMemo(() => {
