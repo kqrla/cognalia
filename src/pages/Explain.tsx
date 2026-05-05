@@ -283,6 +283,14 @@ const Explain = () => {
           </div>
         )}
 
+        {explanation && !loading && (
+          <FollowUpCard
+            concept={concept}
+            system={system}
+            analogy={explanation.analogy}
+          />
+        )}
+
         <div className="mt-10 rounded-2xl border border-dashed border-border p-5 text-center">
           <Sparkles className="mx-auto mb-2 h-4 w-4 text-muted-foreground" />
           <p className="text-sm text-muted-foreground">
