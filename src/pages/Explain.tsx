@@ -135,7 +135,7 @@ const Explain = () => {
         setLoading(false);
       }
     },
-    [concept, thinkingStyleLabel, addRecent],
+    [concept, thinkingStyleLabel, addRecent, queryDomain],
   );
 
   // on first mount, if we did not resolve from curated/recent, fetch fresh.
