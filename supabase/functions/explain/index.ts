@@ -95,7 +95,7 @@ serve(async (req) => {
   }
 
   try {
-    const { concept, system, thinkingStyle, avoidSystems, reframe } =
+    const { concept, system, thinkingStyle, avoidSystems, reframe, domain } =
       await req.json();
 
     if (!concept || typeof concept !== "string") {
