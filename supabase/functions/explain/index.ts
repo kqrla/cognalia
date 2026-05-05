@@ -141,7 +141,7 @@ you MUST:
 the goal is a genuinely different way to think about the concept, not a paraphrase.`
       : "";
 
-    const userPrompt = `concept to translate: ${concept}
+    const userPrompt = `concept to translate: ${concept}${domain ? ` (interpreted in the field of: ${domain})` : ""}
 
 analogy system to use: ${system.replace(/_/g, " ")}
 ${thinkingStyle ? `user thinks in: ${thinkingStyle}` : ""}${reframeBlock}
