@@ -13,6 +13,9 @@ export type ExplainArgs = {
   // used so it produces a genuinely different lens, not a paraphrase.
   avoidSystems?: string[];
   reframe?: boolean;
+  // optional disambiguation: when a term spans multiple fields, this
+  // pins the explanation to the right one.
+  domain?: string;
 };
 
 export class ExplainError extends Error {
@@ -27,6 +30,7 @@ export const requestExplanation = async ({
   thinkingStyleLabel,
   avoidSystems,
   reframe,
+  domain,
 }: ExplainArgs): Promise<Explanation> => {
   const { data, error } = await supabase.functions.invoke("explain", {
     body: {
@@ -35,6 +39,7 @@ export const requestExplanation = async ({
       thinkingStyle: thinkingStyleLabel,
       avoidSystems,
       reframe,
+      domain,
     },
   });
 

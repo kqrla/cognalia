@@ -12,6 +12,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeft, RefreshCcw, Sparkles, Loader2, Network } from "lucide-react";
 import { toast } from "sonner";
 import { ExplanationView } from "@/features/analogy/components/ExplanationView";
+import { FollowUpCard } from "@/features/analogy/components/FollowUpCard";
 import { SystemSelector } from "@/features/analogy/components/SystemSelector";
 import { ExplainError, requestExplanation } from "@/features/analogy/api";
 import { usePreferences, useRecents } from "@/features/analogy/store";
@@ -36,6 +37,7 @@ const Explain = () => {
   const recentId = params.get("recent");
   const queryConcept = params.get("q") ?? "";
   const querySystem = (params.get("system") as AnalogySystemId | null) ?? null;
+  const queryDomain = params.get("domain") ?? undefined;
 
   // resolve the initial state from whichever entry mode was used
   const initial = useMemo(() => {
@@ -105,6 +107,7 @@ const Explain = () => {
           thinkingStyleLabel,
           reframe: opts?.reframe,
           avoidSystems: opts?.avoid,
+          domain: queryDomain,
         });
         setExplanation(next);
         setRenderKey((k) => k + 1);
@@ -132,7 +135,7 @@ const Explain = () => {
         setLoading(false);
       }
     },
-    [concept, thinkingStyleLabel, addRecent],
+    [concept, thinkingStyleLabel, addRecent, queryDomain],
   );
 
   // on first mount, if we did not resolve from curated/recent, fetch fresh.
@@ -278,6 +281,14 @@ const Explain = () => {
               diagramKey={`${system}-${renderKey}`}
             />
           </div>
+        )}
+
+        {explanation && !loading && (
+          <FollowUpCard
+            concept={concept}
+            system={system}
+            analogy={explanation.analogy}
+          />
         )}
 
         <div className="mt-10 rounded-2xl border border-dashed border-border p-5 text-center">

@@ -2,7 +2,7 @@
 // curated demo library. when the user submits, we navigate to /explain
 // with the concept + system in the url so explanations are shareable.
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Clock, BookOpen, Settings2, Network, History } from "lucide-react";
 import { analogySystems, getSystem, type AnalogySystemId } from "@/features/analogy/systems";
@@ -11,7 +11,10 @@ import { SystemSelector } from "@/features/analogy/components/SystemSelector";
 import { usePreferences, useRecents } from "@/features/analogy/store";
 import { useGraph } from "@/features/graph/store";
 import { curatedConcepts } from "@/features/analogy/curated";
+import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
+
+type Domain = { field: string; sense: string };
 
 const Home = () => {
   const navigate = useNavigate();
@@ -30,15 +33,48 @@ const Home = () => {
   );
   const [showAllSystems, setShowAllSystems] = useState(false);
 
+  // disambiguation: when the term has multiple meanings across fields,
+  // we show small pills so the user can pin the analogy to the right one.
+  const [domains, setDomains] = useState<Domain[]>([]);
+  const [domain, setDomain] = useState<string | null>(null);
+  const lastQueriedRef = useRef<string>("");
+
   // keep selector in sync if the default changes (e.g. after re-onboarding)
   useEffect(() => {
     if (preferences.defaultSystem) setSystem(preferences.defaultSystem);
   }, [preferences.defaultSystem]);
 
+  // debounced disambiguation lookup as the user types
+  useEffect(() => {
+    const trimmed = concept.trim();
+    if (trimmed.length < 2) {
+      setDomains([]);
+      setDomain(null);
+      return;
+    }
+    const handle = window.setTimeout(async () => {
+      if (lastQueriedRef.current === trimmed.toLowerCase()) return;
+      lastQueriedRef.current = trimmed.toLowerCase();
+      try {
+        const { data } = await supabase.functions.invoke("disambiguate", {
+          body: { concept: trimmed },
+        });
+        const list: Domain[] = Array.isArray(data?.domains) ? data.domains : [];
+        setDomains(list);
+        // reset selection if the new list doesn't include it
+        setDomain((d) => (d && list.some((x) => x.field === d) ? d : null));
+      } catch {
+        setDomains([]);
+      }
+    }, 450);
+    return () => window.clearTimeout(handle);
+  }, [concept]);
+
   const submit = () => {
     const trimmed = concept.trim();
     if (!trimmed) return;
     const params = new URLSearchParams({ q: trimmed, system });
+    if (domain) params.set("domain", domain);
     navigate(`/explain?${params.toString()}`);
   };
 
@@ -108,6 +144,42 @@ const Home = () => {
               <ArrowRight className="h-4 w-4" />
             </button>
           </div>
+
+          {domains.length > 0 && (
+            <div className="mt-3 flex flex-wrap items-center gap-1.5">
+              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                which one?
+              </span>
+              {domains.map((d) => {
+                const selected = domain === d.field;
+                return (
+                  <button
+                    key={d.field}
+                    type="button"
+                    onClick={() => setDomain(selected ? null : d.field)}
+                    title={d.sense}
+                    className={cn(
+                      "rounded-full border px-2.5 py-0.5 text-[11px] transition-colors",
+                      selected
+                        ? "border-foreground bg-foreground text-background"
+                        : "border-border bg-background text-muted-foreground hover:text-foreground",
+                    )}
+                  >
+                    {d.field}
+                  </button>
+                );
+              })}
+              {domain && (
+                <button
+                  type="button"
+                  onClick={() => setDomain(null)}
+                  className="text-[10px] text-muted-foreground hover:text-foreground"
+                >
+                  clear
+                </button>
+              )}
+            </div>
+          )}
 
           <div className="mt-6">
             <div className="mb-2 flex items-center justify-between">
