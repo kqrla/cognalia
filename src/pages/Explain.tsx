@@ -12,6 +12,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeft, RefreshCcw, Sparkles, Loader2, Network } from "lucide-react";
 import { toast } from "sonner";
 import { ExplanationView } from "@/features/analogy/components/ExplanationView";
+import { FollowUpCard } from "@/features/analogy/components/FollowUpCard";
 import { SystemSelector } from "@/features/analogy/components/SystemSelector";
 import { ExplainError, requestExplanation } from "@/features/analogy/api";
 import { usePreferences, useRecents } from "@/features/analogy/store";
