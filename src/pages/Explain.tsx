@@ -107,6 +107,7 @@ const Explain = () => {
           thinkingStyleLabel,
           reframe: opts?.reframe,
           avoidSystems: opts?.avoid,
+          domain: queryDomain,
         });
         setExplanation(next);
         setRenderKey((k) => k + 1);
