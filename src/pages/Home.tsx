@@ -33,15 +33,48 @@ const Home = () => {
   );
   const [showAllSystems, setShowAllSystems] = useState(false);
 
+  // disambiguation: when the term has multiple meanings across fields,
+  // we show small pills so the user can pin the analogy to the right one.
+  const [domains, setDomains] = useState<Domain[]>([]);
+  const [domain, setDomain] = useState<string | null>(null);
+  const lastQueriedRef = useRef<string>("");
+
   // keep selector in sync if the default changes (e.g. after re-onboarding)
   useEffect(() => {
     if (preferences.defaultSystem) setSystem(preferences.defaultSystem);
   }, [preferences.defaultSystem]);
 
+  // debounced disambiguation lookup as the user types
+  useEffect(() => {
+    const trimmed = concept.trim();
+    if (trimmed.length < 2) {
+      setDomains([]);
+      setDomain(null);
+      return;
+    }
+    const handle = window.setTimeout(async () => {
+      if (lastQueriedRef.current === trimmed.toLowerCase()) return;
+      lastQueriedRef.current = trimmed.toLowerCase();
+      try {
+        const { data } = await supabase.functions.invoke("disambiguate", {
+          body: { concept: trimmed },
+        });
+        const list: Domain[] = Array.isArray(data?.domains) ? data.domains : [];
+        setDomains(list);
+        // reset selection if the new list doesn't include it
+        setDomain((d) => (d && list.some((x) => x.field === d) ? d : null));
+      } catch {
+        setDomains([]);
+      }
+    }, 450);
+    return () => window.clearTimeout(handle);
+  }, [concept]);
+
   const submit = () => {
     const trimmed = concept.trim();
     if (!trimmed) return;
     const params = new URLSearchParams({ q: trimmed, system });
+    if (domain) params.set("domain", domain);
     navigate(`/explain?${params.toString()}`);
   };
 
