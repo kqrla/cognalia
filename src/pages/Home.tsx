@@ -145,6 +145,42 @@ const Home = () => {
             </button>
           </div>
 
+          {domains.length > 0 && (
+            <div className="mt-3 flex flex-wrap items-center gap-1.5">
+              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                which one?
+              </span>
+              {domains.map((d) => {
+                const selected = domain === d.field;
+                return (
+                  <button
+                    key={d.field}
+                    type="button"
+                    onClick={() => setDomain(selected ? null : d.field)}
+                    title={d.sense}
+                    className={cn(
+                      "rounded-full border px-2.5 py-0.5 text-[11px] transition-colors",
+                      selected
+                        ? "border-foreground bg-foreground text-background"
+                        : "border-border bg-background text-muted-foreground hover:text-foreground",
+                    )}
+                  >
+                    {d.field}
+                  </button>
+                );
+              })}
+              {domain && (
+                <button
+                  type="button"
+                  onClick={() => setDomain(null)}
+                  className="text-[10px] text-muted-foreground hover:text-foreground"
+                >
+                  clear
+                </button>
+              )}
+            </div>
+          )}
+
           <div className="mt-6">
             <div className="mb-2 flex items-center justify-between">
               <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
