@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Features from "./pages/Features";
 import Faq from "./pages/Faq";
 import Graph from "./pages/Graph";
+import History from "./pages/History";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
