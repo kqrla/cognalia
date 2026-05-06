@@ -40,6 +40,22 @@ const faqs = [
     q: "what does 'explain again differently' do?",
     a: "it regenerates the explanation, ideally through a different analogy system, with no reuse of the previous wording. switching systems is the whole point: a concept seen through both 'cooking' and 'company structure' becomes much harder to misunderstand.",
   },
+  {
+    q: "what happens if i type a term that means different things in different fields?",
+    a: "as you type, analogize quietly checks for ambiguity. if the term spans multiple fields (say 'transformer' in deep learning vs. electrical engineering), tiny pills appear under the input. tap one to pin the meaning. the analogy, the diagram, and any follow-ups you ask all stay inside that subdomain.",
+  },
+  {
+    q: "can i ask a follow-up if the analogy didn't fully click?",
+    a: "yes. at the bottom of every explanation there's a single follow-up box. ask one clarifying question and you get a short answer that stays inside the same analogy world and the same domain you pinned. it's deliberately not a chat — each question is single-shot, so the explanation stays the source of truth.",
+  },
+  {
+    q: "how do tags and the /history page work?",
+    a: "every translation you generate is saved locally and listed on /history. you can add your own semantic tags to any past translation (think 'work', 'thesis', 'quantum stuff') and filter the page by tag. tags are freeform, plural, and never sent anywhere — they live in your browser.",
+  },
+  {
+    q: "why is there a hint asking me to be more specific?",
+    a: "the more precisely you describe a topic, the better analogize can pick the right metaphor and the right subdomain. 'transformer architecture in deep learning' produces a far sharper analogy than just 'transformer'. think of the input as a question you'd ask an expert: detail helps.",
+  },
 ];
 
 const Faq = () => {
