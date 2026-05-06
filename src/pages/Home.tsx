@@ -144,6 +144,10 @@ const Home = () => {
               <ArrowRight className="h-4 w-4" />
             </button>
           </div>
+          <p className="mt-2 text-[11px] text-muted-foreground">
+            tip: the more specific the topic, the sharper the analogy. try
+            "transformer architecture in deep learning" instead of just "transformer".
+          </p>
 
           {domains.length > 0 && (
             <div className="mt-3 flex flex-wrap items-center gap-1.5">
@@ -347,9 +351,17 @@ const RecentsSection = ({
 
   return (
     <section className="mb-10">
-      <div className="mb-3 flex items-center gap-2">
-        <Clock className="h-4 w-4 text-muted-foreground" />
-        <h2 className="text-sm font-semibold tracking-tight">recent</h2>
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <Clock className="h-4 w-4 text-muted-foreground" />
+          <h2 className="text-sm font-semibold tracking-tight">recent</h2>
+        </div>
+        <a
+          href="/history"
+          className="text-xs text-muted-foreground hover:text-foreground"
+        >
+          see all & tag →
+        </a>
       </div>
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         {groups.map((versions) => {

@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Features from "./pages/Features";
 import Faq from "./pages/Faq";
 import Graph from "./pages/Graph";
+import History from "./pages/History";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/features" element={<Features />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/graph" element={<Graph />} />
+          <Route path="/history" element={<History />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -29,4 +29,9 @@ export type RecentConcept = {
   // and works offline. the edge function is only called for new concepts.
   explanation: Explanation;
   source: "ai" | "curated";
+  // disambiguation pin used at request time, if any. lets follow-ups
+  // and history stay scoped to the right meaning of an ambiguous term.
+  domain?: string | null;
+  // user-authored semantic tags for organizing past searches.
+  tags?: string[];
 };
