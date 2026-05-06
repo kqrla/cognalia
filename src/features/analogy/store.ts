@@ -87,10 +87,12 @@ export const useRecents = () => {
     system: AnalogySystemId;
     explanation: Explanation;
     source: "ai" | "curated";
+    domain?: string | null;
   }): RecentConcept => {
     const item: RecentConcept = {
       id: `${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
       createdAt: Date.now(),
+      tags: [],
       ...entry,
     };
     const current = readRecents();
@@ -113,10 +115,19 @@ export const useRecents = () => {
   const getRecent = (id: string): RecentConcept | undefined =>
     readRecents().find((r) => r.id === id);
 
+  const updateRecentTags = (id: string, tags: string[]) => {
+    const current = readRecents();
+    const next = current.map((r) =>
+      r.id === id ? { ...r, tags: Array.from(new Set(tags.map((t) => t.trim()).filter(Boolean))) } : r,
+    );
+    window.localStorage.setItem(RECENTS_KEY, JSON.stringify(next));
+    notify();
+  };
+
   const clearRecents = () => {
     window.localStorage.removeItem(RECENTS_KEY);
     notify();
   };
 
-  return { recents, addRecent, getRecent, clearRecents };
+  return { recents, addRecent, getRecent, updateRecentTags, clearRecents };
 };
