@@ -289,6 +289,7 @@ const Explain = () => {
             concept={concept}
             system={system}
             analogy={explanation.analogy}
+            domain={queryDomain ?? null}
           />
         )}
 
