@@ -14,9 +14,10 @@ type Props = {
   concept: string;
   system: AnalogySystemId;
   analogy: string;
+  domain?: string | null;
 };
 
-export const FollowUpCard = ({ concept, system, analogy }: Props) => {
+export const FollowUpCard = ({ concept, system, analogy, domain }: Props) => {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -27,7 +28,7 @@ export const FollowUpCard = ({ concept, system, analogy }: Props) => {
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke("clarify", {
-        body: { concept, system, analogy, question: q },
+        body: { concept, system, analogy, question: q, domain },
       });
       if (error) throw error;
       setAnswer(data?.answer ?? "no answer returned.");
