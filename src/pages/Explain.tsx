@@ -119,6 +119,7 @@ const Explain = () => {
           system: forSystem,
           explanation: next,
           source: "ai",
+          domain: queryDomain ?? null,
         });
         upsertNode({
           concept,
