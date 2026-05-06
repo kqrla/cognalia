@@ -144,6 +144,10 @@ const Home = () => {
               <ArrowRight className="h-4 w-4" />
             </button>
           </div>
+          <p className="mt-2 text-[11px] text-muted-foreground">
+            tip: the more specific the topic, the sharper the analogy. try
+            "transformer architecture in deep learning" instead of just "transformer".
+          </p>
 
           {domains.length > 0 && (
             <div className="mt-3 flex flex-wrap items-center gap-1.5">
