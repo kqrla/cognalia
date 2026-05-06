@@ -13,6 +13,9 @@ import {
   Layers,
   Clock,
   BookOpen,
+  Tag,
+  MessageCircleQuestion,
+  Filter,
 } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 
@@ -28,7 +31,10 @@ const sixLayers = [
 const capabilities = [
   { icon: Layers, label: "ten thinking systems", body: "relationships, gaming, cooking, building, story, company, traffic, plants, brains, storage. pick the one that matches how you naturally think." },
   { icon: RefreshCcw, label: "explain again differently", body: "regenerate using a different system to look at the same concept from another angle. no two explanations repeat." },
-  { icon: Clock, label: "recent history", body: "your recent translations stay on this device for instant revisits, even offline." },
+  { icon: Filter, label: "domain disambiguation", body: "as you type, tiny pills appear when a term spans fields. pin the one you mean so the analogy lands in the right subdomain." },
+  { icon: MessageCircleQuestion, label: "domain-aware follow-ups", body: "ask one quick clarifying question without leaving the explanation. the answer stays inside the same analogy and the same domain you pinned." },
+  { icon: Tag, label: "custom tags on history", body: "add your own semantic tags to past translations and filter by them on the /history page. tags live on this device." },
+  { icon: Clock, label: "version history per concept", body: "every reframe of the same concept is kept as its own version, so you can revisit how you understood it through different lenses." },
   { icon: BookOpen, label: "curated library", body: "hand-crafted examples ship with the app so you can see the format at its best before generating your own." },
 ];
 
