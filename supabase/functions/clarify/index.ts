@@ -16,7 +16,7 @@ serve(async (req) => {
   }
 
   try {
-    const { concept, system, analogy, question } = await req.json();
+    const { concept, system, analogy, question, domain } = await req.json();
     if (!concept || !analogy || !question) {
       return new Response(JSON.stringify({ error: "missing fields" }), {
         status: 400,
@@ -27,17 +27,21 @@ serve(async (req) => {
     const apiKey = Deno.env.get("LOVABLE_API_KEY");
     if (!apiKey) throw new Error("LOVABLE_API_KEY missing");
 
+    const domainLine = domain
+      ? `\n- the concept is pinned to this domain/field: "${domain}". stay strictly inside that meaning. do not drift into other senses of the term.`
+      : "";
+
     const sys = `you are analogize. the user already received an analogy and is
 asking a single clarifying follow-up. answer ONLY that follow-up.
 
 rules:
-- stay INSIDE the analogy world (${String(system).replace(/_/g, " ")}). do not switch metaphors.
+- stay INSIDE the analogy world (${String(system).replace(/_/g, " ")}). do not switch metaphors.${domainLine}
 - 2 to 4 short sentences. lowercase. no emojis, no em dashes, no headings, no lists.
 - if the question reveals a misunderstanding, gently correct it within the analogy.
 - end with one short bridge sentence in plain terms (no "in other words" preamble).
 - this is not a conversation. do not ask a question back. do not greet.`;
 
-    const user = `concept: ${concept}
+    const user = `concept: ${concept}${domain ? ` (domain: ${domain})` : ""}
 analogy system: ${String(system).replace(/_/g, " ")}
 
 original analogy:
