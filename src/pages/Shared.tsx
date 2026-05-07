@@ -6,10 +6,9 @@ import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, Loader2, Sparkles } from "lucide-react";
 import { ExplanationView } from "@/features/analogy/components/ExplanationView";
 import { getSystem, type AnalogySystemId } from "@/features/analogy/systems";
-import { supabase } from "@/integrations/supabase/client";
 import type { Explanation } from "@/features/analogy/types";
 
-type Shared = {
+type SharedPayload = {
   id: string;
   concept: string;
   system: AnalogySystemId;
@@ -18,25 +17,15 @@ type Shared = {
   created_at: string;
 };
 
-const Shared = () => {
+const SharedPage = () => {
   const { id } = useParams<{ id: string }>();
-  const [data, setData] = useState<Shared | null>(null);
+  const [data, setData] = useState<SharedPayload | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id) return;
     let cancelled = false;
     (async () => {
-      try {
-        const { data: res, error: err } = await supabase.functions.invoke(
-          "share-explanation",
-          { method: "GET" as never, body: undefined as never },
-        );
-        // invoke does not pass query params; do a direct fetch instead
-        if (err || !res) throw err ?? new Error("unavailable");
-      } catch {
-        // fallthrough handled below
-      }
       try {
         const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/share-explanation?id=${encodeURIComponent(id)}`;
         const res = await fetch(url, {
@@ -47,7 +36,7 @@ const Shared = () => {
         });
         const body = await res.json();
         if (!res.ok) throw new Error(body?.error ?? "not found");
-        if (!cancelled) setData(body as Shared);
+        if (!cancelled) setData(body as SharedPayload);
       } catch (e) {
         if (!cancelled) setError((e as Error).message ?? "not found");
       }
@@ -131,4 +120,4 @@ const Shared = () => {
   );
 };
 
-export default Shared;
+export default SharedPage;
