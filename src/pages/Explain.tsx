@@ -315,4 +315,14 @@ const Explain = () => {
   );
 };
 
-export default Explain;
+// wrapper that remounts Explain whenever the search params change.
+// without this, react-router reuses the same component instance and
+// our useState-initialized concept/explanation would be stale when the
+// user opens a different /history item.
+const ExplainRoute = () => {
+  const [params] = useSearchParams();
+  const key = `${params.get("recent") ?? ""}|${params.get("curated") ?? ""}|${params.get("q") ?? ""}|${params.get("domain") ?? ""}`;
+  return <Explain key={key} />;
+};
+
+export default ExplainRoute;
