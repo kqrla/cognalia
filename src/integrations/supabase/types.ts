@@ -14,7 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      shared_explanations: {
+        Row: {
+          concept: string
+          created_at: string
+          domain: string | null
+          explanation: Json
+          id: string
+          system: string
+        }
+        Insert: {
+          concept: string
+          created_at?: string
+          domain?: string | null
+          explanation: Json
+          id?: string
+          system: string
+        }
+        Update: {
+          concept?: string
+          created_at?: string
+          domain?: string | null
+          explanation?: Json
+          id?: string
+          system?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
