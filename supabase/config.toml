@@ -2,3 +2,6 @@ project_id = "qsbemzrdjxdksrgkqhfs"
 
 [functions.explain]
 verify_jwt = false
+
+[functions.share-explanation]
+verify_jwt = false
