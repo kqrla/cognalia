@@ -13,6 +13,7 @@ import { ArrowLeft, RefreshCcw, Sparkles, Loader2, Network } from "lucide-react"
 import { toast } from "sonner";
 import { ExplanationView } from "@/features/analogy/components/ExplanationView";
 import { FollowUpCard } from "@/features/analogy/components/FollowUpCard";
+import { ShareButton } from "@/features/analogy/components/ShareButton";
 import { SystemSelector } from "@/features/analogy/components/SystemSelector";
 import { ExplainError, requestExplanation } from "@/features/analogy/api";
 import { usePreferences, useRecents } from "@/features/analogy/store";
@@ -211,14 +212,24 @@ const Explain = () => {
             <ArrowLeft className="h-3.5 w-3.5" />
             back to home
           </button>
-          <button
-            type="button"
-            onClick={() => navigate("/graph")}
-            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <Network className="h-3.5 w-3.5" />
-            see your map
-          </button>
+          <div className="flex items-center gap-2">
+            {explanation && !loading && (
+              <ShareButton
+                concept={concept}
+                system={system}
+                explanation={explanation}
+                domain={queryDomain ?? null}
+              />
+            )}
+            <button
+              type="button"
+              onClick={() => navigate("/graph")}
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <Network className="h-3.5 w-3.5" />
+              see your map
+            </button>
+          </div>
         </div>
 
         <header className="mb-8">
