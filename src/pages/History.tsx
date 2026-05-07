@@ -148,7 +148,14 @@ const History = () => {
                         })}
                       </p>
                     </button>
-                    <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground" />
+                    <button
+                      type="button"
+                      onClick={() => navigate(`/explain?recent=${r.id}`)}
+                      className="inline-flex shrink-0 items-center gap-1 rounded-full border border-border bg-background px-2.5 py-1 text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      open
+                      <ArrowRight className="h-3 w-3" />
+                    </button>
                   </div>
 
                   <div className="mt-3 flex flex-wrap items-center gap-1.5">
