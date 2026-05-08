@@ -13,6 +13,7 @@ import { ArrowLeft, RefreshCcw, Sparkles, Loader2, Network } from "lucide-react"
 import { toast } from "sonner";
 import { ExplanationView } from "@/features/analogy/components/ExplanationView";
 import { FollowUpCard } from "@/features/analogy/components/FollowUpCard";
+import { PeripheralCard } from "@/features/analogy/components/PeripheralCard";
 import { ShareButton } from "@/features/analogy/components/ShareButton";
 import { SystemSelector } from "@/features/analogy/components/SystemSelector";
 import { ExplainError, requestExplanation } from "@/features/analogy/api";
@@ -296,12 +297,21 @@ const Explain = () => {
         )}
 
         {explanation && !loading && (
-          <FollowUpCard
-            concept={concept}
-            system={system}
-            analogy={explanation.analogy}
-            domain={queryDomain ?? null}
-          />
+          <>
+            <FollowUpCard
+              concept={concept}
+              system={system}
+              analogy={explanation.analogy}
+              domain={queryDomain ?? null}
+            />
+            <PeripheralCard
+              rootConcept={concept}
+              system={system}
+              rootAnalogy={explanation.analogy}
+              rootMapping={explanation.mapping}
+              domain={queryDomain ?? null}
+            />
+          </>
         )}
 
         <div className="mt-10 rounded-2xl border border-dashed border-border p-5 text-center">
