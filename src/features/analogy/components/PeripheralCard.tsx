@@ -1,34 +1,18 @@
-// peripheral analogy card. lets the user ask for related concepts to be
-// explained inside the SAME analogy ecosystem the root explanation
-// established. the root analogy is treated as canon; everything new is
-// positioned around it. when a peripheral concept does not fit the
-// world naturally, we refuse instead of forcing a bad metaphor.
+// peripheral analogy launcher. user types a related concept, we ask
+// the model whether it fits inside the existing analogy ecosystem,
+// and then route them to a dedicated peripheral screen that mirrors
+// the regular explanation layout. the card itself stays a launcher,
+// not a results panel — the results live on /peripheral.
 
 import { useState } from "react";
-import {
-  Loader2,
-  Orbit,
-  Send,
-  ArrowLeftRight,
-  CornerDownRight,
-  AlertTriangle,
-} from "lucide-react";
+import { Loader2, Orbit, Send } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import type { AnalogySystemId } from "../systems";
 import type { AnalogyMappingPair } from "../types";
+import type { PeripheralPayload } from "@/pages/Peripheral";
 import { cn } from "@/lib/utils";
-
-type PeripheralResult = {
-  fits: boolean;
-  reason: string;
-  analogy: string;
-  mapping: AnalogyMappingPair[];
-  bridge: string;
-  limits: string;
-  // local-only
-  question: string;
-};
 
 type Props = {
   rootConcept: string;
@@ -45,9 +29,9 @@ export const PeripheralCard = ({
   rootMapping,
   domain,
 }: Props) => {
+  const navigate = useNavigate();
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState<PeripheralResult[]>([]);
 
   const ask = async () => {
     const q = question.trim();
@@ -65,10 +49,16 @@ export const PeripheralCard = ({
         },
       });
       if (error) throw error;
-      const r = data?.result;
-      if (!r) throw new Error("no result");
-      setResults((prev) => [{ ...r, question: q }, ...prev]);
-      setQuestion("");
+      const result = data?.result;
+      if (!result) throw new Error("no result");
+      const payload: PeripheralPayload = {
+        rootConcept,
+        system,
+        domain: domain ?? null,
+        question: q,
+        result,
+      };
+      navigate("/peripheral", { state: payload });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "could not extend ecosystem");
     } finally {
@@ -85,7 +75,8 @@ export const PeripheralCard = ({
         </p>
       </div>
       <p className="mb-3 text-xs text-muted-foreground">
-        ask about a related concept and we'll place it inside the same world as{" "}
+        ask about a related concept and we'll open it on its own screen, placed
+        inside the same world as{" "}
         <span className="font-medium text-foreground/80">{rootConcept}</span>.
         if it doesn't land naturally, we'll say so instead of forcing it.
       </p>
@@ -119,67 +110,6 @@ export const PeripheralCard = ({
           extend
         </button>
       </div>
-
-      {results.length > 0 && (
-        <div className="mt-5 space-y-4">
-          {results.map((r, i) => (
-            <article
-              key={i}
-              className="rounded-xl border border-border/70 bg-background/60 p-4"
-            >
-              <p className="mb-2 text-xs uppercase tracking-wider text-muted-foreground">
-                peripheral · {r.question}
-              </p>
-
-              {!r.fits ? (
-                <div className="flex items-start gap-2 text-sm text-foreground/80">
-                  <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
-                  <p>
-                    doesn't fit this world cleanly.{" "}
-                    <span className="text-muted-foreground">{r.reason}</span>
-                  </p>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  <p className="text-sm leading-relaxed text-foreground/90">
-                    {r.analogy}
-                  </p>
-
-                  {r.mapping?.length > 0 && (
-                    <ul className="divide-y divide-border/60 rounded-lg bg-background/40 px-3">
-                      {r.mapping.map((p, j) => (
-                        <li
-                          key={j}
-                          className="grid grid-cols-1 gap-1 py-2 text-xs sm:grid-cols-[1fr_auto_1fr] sm:items-center sm:gap-3"
-                        >
-                          <span className="text-foreground/85">
-                            {p.analogy_part}
-                          </span>
-                          <ArrowLeftRight className="hidden h-3 w-3 text-muted-foreground sm:block" />
-                          <span className="text-foreground/70">{p.real_part}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {r.bridge && (
-                    <p className="flex gap-2 text-xs leading-relaxed text-foreground/75">
-                      <CornerDownRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-                      <span>{r.bridge}</span>
-                    </p>
-                  )}
-
-                  {r.limits && (
-                    <p className="text-xs italic text-muted-foreground">
-                      {r.limits}
-                    </p>
-                  )}
-                </div>
-              )}
-            </article>
-          ))}
-        </div>
-      )}
     </section>
   );
 };
