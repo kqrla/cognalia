@@ -88,6 +88,7 @@ const Explain = () => {
   const [usedSystems, setUsedSystems] = useState<AnalogySystemId[]>(
     initial?.system ? [initial.system] : system ? [system] : [],
   );
+  const peripherals = usePeripheralsFor(concept, system);
 
   const thinkingStyleLabel = useMemo(() => {
     const style = thinkingStyles.find(
