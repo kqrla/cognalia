@@ -1,6 +1,10 @@
-// publish or fetch a shared explanation snapshot.
-// POST { concept, system, explanation, domain? } -> { id }
-// GET  ?id=...                                   -> { concept, system, explanation, domain, created_at }
+// publish or fetch a shared snapshot. supports three kinds:
+//   single     — one root explanation
+//   peripheral — one peripheral result anchored to a root concept/system
+//   ecosystem  — a root explanation bundled with N peripheral results
+//
+// POST { kind, concept, system, explanation, domain?, question?, peripherals? } -> { id }
+// GET  ?id=...                                                                  -> full row
 // public: no auth required. unlisted by virtue of unguessable uuid.
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
@@ -33,7 +37,9 @@ Deno.serve(async (req) => {
       if (!id) return json({ error: "missing id" }, 400);
       const { data, error } = await supabase
         .from("shared_explanations")
-        .select("id, concept, system, explanation, domain, created_at")
+        .select(
+          "id, kind, concept, system, explanation, domain, question, peripherals, created_at",
+        )
         .eq("id", id)
         .maybeSingle();
       if (error) return json({ error: error.message }, 500);
@@ -45,10 +51,19 @@ Deno.serve(async (req) => {
       const body = await req.json().catch(() => null);
       if (!body || typeof body !== "object")
         return json({ error: "invalid body" }, 400);
-      const { concept, system, explanation, domain } = body as Record<
-        string,
-        unknown
-      >;
+      const {
+        kind = "single",
+        concept,
+        system,
+        explanation,
+        domain,
+        question,
+        peripherals,
+      } = body as Record<string, unknown>;
+
+      if (!["single", "peripheral", "ecosystem"].includes(kind as string)) {
+        return json({ error: "invalid kind" }, 400);
+      }
       if (
         typeof concept !== "string" ||
         !concept.trim() ||
@@ -61,13 +76,26 @@ Deno.serve(async (req) => {
       ) {
         return json({ error: "invalid payload" }, 400);
       }
+      if (kind === "peripheral" && (typeof question !== "string" || !question.trim())) {
+        return json({ error: "peripheral requires a question" }, 400);
+      }
+      if (kind === "ecosystem" && !Array.isArray(peripherals)) {
+        return json({ error: "ecosystem requires peripherals array" }, 400);
+      }
+
       const { data, error } = await supabase
         .from("shared_explanations")
         .insert({
+          kind: kind as string,
           concept: concept.trim(),
           system,
           explanation,
           domain: typeof domain === "string" && domain ? domain : null,
+          question:
+            typeof question === "string" && question.trim()
+              ? question.trim().slice(0, 500)
+              : null,
+          peripherals: Array.isArray(peripherals) ? peripherals : null,
         })
         .select("id")
         .single();
