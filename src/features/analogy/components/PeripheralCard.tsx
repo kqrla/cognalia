@@ -12,6 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import type { AnalogySystemId } from "../systems";
 import type { AnalogyMappingPair } from "../types";
 import type { PeripheralPayload } from "@/pages/Peripheral";
+import { addPeripheralToEcosystem } from "../ecosystems";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -51,6 +52,11 @@ export const PeripheralCard = ({
       if (error) throw error;
       const result = data?.result;
       if (!result) throw new Error("no result");
+      // only record peripherals that actually fit; refusals shouldn't pollute
+      // the ecosystem cluster.
+      if (result.fits) {
+        addPeripheralToEcosystem(rootConcept, system, { question: q, result });
+      }
       const payload: PeripheralPayload = {
         rootConcept,
         system,
