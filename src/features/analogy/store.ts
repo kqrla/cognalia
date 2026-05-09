@@ -124,10 +124,20 @@ export const useRecents = () => {
     notify();
   };
 
+  const updateRecentNote = (id: string, note: string) => {
+    const current = readRecents();
+    const trimmed = note.trim().slice(0, 140);
+    const next = current.map((r) =>
+      r.id === id ? { ...r, note: trimmed || undefined } : r,
+    );
+    window.localStorage.setItem(RECENTS_KEY, JSON.stringify(next));
+    notify();
+  };
+
   const clearRecents = () => {
     window.localStorage.removeItem(RECENTS_KEY);
     notify();
   };
 
-  return { recents, addRecent, getRecent, updateRecentTags, clearRecents };
+  return { recents, addRecent, getRecent, updateRecentTags, updateRecentNote, clearRecents };
 };

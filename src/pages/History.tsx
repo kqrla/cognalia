@@ -4,16 +4,17 @@
 
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Plus, Tag, X, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Plus, Tag, X, Clock, StickyNote, Eye } from "lucide-react";
 import { useRecents } from "@/features/analogy/store";
 import { getSystem } from "@/features/analogy/systems";
 import { cn } from "@/lib/utils";
 
 const History = () => {
   const navigate = useNavigate();
-  const { recents, updateRecentTags, clearRecents } = useRecents();
+  const { recents, updateRecentTags, updateRecentNote, clearRecents } = useRecents();
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [draft, setDraft] = useState<Record<string, string>>({});
+  const [noteDraft, setNoteDraft] = useState<Record<string, string>>({});
 
   const allTags = useMemo(() => {
     const set = new Set<string>();
@@ -195,6 +196,42 @@ const History = () => {
                         <Plus className="h-3 w-3" />
                       </button>
                     </div>
+                  </div>
+
+                  <div className="mt-2 flex items-center gap-2">
+                    <StickyNote className="h-3 w-3 shrink-0 text-muted-foreground" />
+                    <input
+                      value={
+                        noteDraft[r.id] !== undefined
+                          ? noteDraft[r.id]
+                          : (r.note ?? "")
+                      }
+                      onChange={(e) =>
+                        setNoteDraft((d) => ({ ...d, [r.id]: e.target.value }))
+                      }
+                      onBlur={() => {
+                        if (noteDraft[r.id] !== undefined) {
+                          updateRecentNote(r.id, noteDraft[r.id]);
+                          setNoteDraft((d) => {
+                            const { [r.id]: _, ...rest } = d;
+                            return rest;
+                          });
+                        }
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") (e.target as HTMLInputElement).blur();
+                      }}
+                      maxLength={140}
+                      placeholder="add a private note (only you can see this)"
+                      className="flex-1 rounded-md border border-dashed border-border bg-transparent px-2 py-1 text-[11px] text-foreground/85 placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary/40"
+                    />
+                    <span
+                      className="inline-flex items-center gap-1 text-[10px] text-muted-foreground"
+                      title="private — stays on this device"
+                    >
+                      <Eye className="h-3 w-3" />
+                      private
+                    </span>
                   </div>
                 </li>
               );
