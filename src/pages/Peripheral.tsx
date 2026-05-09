@@ -19,6 +19,7 @@ import {
 import { cn } from "@/lib/utils";
 import { getSystem, type AnalogySystemId } from "@/features/analogy/systems";
 import type { AnalogyMappingPair } from "@/features/analogy/types";
+import { ShareButton } from "@/features/analogy/components/ShareButton";
 
 export type PeripheralPayload = {
   rootConcept: string;
