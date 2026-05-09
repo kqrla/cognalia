@@ -34,4 +34,6 @@ export type RecentConcept = {
   domain?: string | null;
   // user-authored semantic tags for organizing past searches.
   tags?: string[];
+  // private one-line note, only visible to the owner on this device.
+  note?: string;
 };
