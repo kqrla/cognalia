@@ -18,6 +18,7 @@ import { ShareButton } from "@/features/analogy/components/ShareButton";
 import { SystemSelector } from "@/features/analogy/components/SystemSelector";
 import { ExplainError, requestExplanation } from "@/features/analogy/api";
 import { usePreferences, useRecents } from "@/features/analogy/store";
+import { usePeripheralsFor } from "@/features/analogy/ecosystems";
 import { upsertNode, recordRegen, lowClickSystems } from "@/features/graph/store";
 import { curatedConcepts } from "@/features/analogy/curated";
 import {
@@ -213,14 +214,26 @@ const Explain = () => {
             <ArrowLeft className="h-3.5 w-3.5" />
             back to home
           </button>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {explanation && !loading && (
-              <ShareButton
-                concept={concept}
-                system={system}
-                explanation={explanation}
-                domain={queryDomain ?? null}
-              />
+              <>
+                <ShareButton
+                  concept={concept}
+                  system={system}
+                  explanation={explanation}
+                  domain={queryDomain ?? null}
+                />
+                {peripherals.length > 0 && (
+                  <ShareButton
+                    kind="ecosystem"
+                    concept={concept}
+                    system={system}
+                    explanation={explanation}
+                    domain={queryDomain ?? null}
+                    peripherals={peripherals}
+                  />
+                )}
+              </>
             )}
             <button
               type="button"
