@@ -19,6 +19,7 @@ import {
 import { cn } from "@/lib/utils";
 import { getSystem, type AnalogySystemId } from "@/features/analogy/systems";
 import type { AnalogyMappingPair } from "@/features/analogy/types";
+import { ShareButton } from "@/features/analogy/components/ShareButton";
 
 export type PeripheralPayload = {
   rootConcept: string;
@@ -79,6 +80,16 @@ const Peripheral = () => {
             <ArrowLeft className="h-3.5 w-3.5" />
             back to root explanation
           </button>
+          {result.fits && (
+            <ShareButton
+              kind="peripheral"
+              concept={rootConcept}
+              system={payload.system}
+              domain={payload.domain ?? null}
+              question={question}
+              result={result}
+            />
+          )}
         </div>
 
         <header className="mb-8">

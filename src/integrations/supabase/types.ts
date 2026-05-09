@@ -21,6 +21,9 @@ export type Database = {
           domain: string | null
           explanation: Json
           id: string
+          kind: string
+          peripherals: Json | null
+          question: string | null
           system: string
         }
         Insert: {
@@ -29,6 +32,9 @@ export type Database = {
           domain?: string | null
           explanation: Json
           id?: string
+          kind?: string
+          peripherals?: Json | null
+          question?: string | null
           system: string
         }
         Update: {
@@ -37,6 +43,9 @@ export type Database = {
           domain?: string | null
           explanation?: Json
           id?: string
+          kind?: string
+          peripherals?: Json | null
+          question?: string | null
           system?: string
         }
         Relationships: []
