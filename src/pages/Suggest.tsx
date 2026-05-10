@@ -5,15 +5,28 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Plus, Trash2, Sparkles } from "lucide-react";
+import { ArrowLeft, Plus, Trash2, Sparkles, Share2, Copy, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { supabase } from "@/integrations/supabase/client";
 import {
   addPreset,
   removePreset,
+  setPresetPublishedSlug,
   usePresets,
+  type AnalogyPreset,
 } from "@/features/analogy/presets";
+
+const slugify = (label: string) =>
+  label
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 32) || "preset";
+
+const randomSuffix = () => Math.random().toString(36).slice(2, 8);
 
 const Suggest = () => {
   const presets = usePresets();
