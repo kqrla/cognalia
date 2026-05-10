@@ -14,6 +14,7 @@ import Graph from "./pages/Graph";
 import History from "./pages/History";
 import SharedPage from "./pages/Shared";
 import Peripheral from "./pages/Peripheral";
+import Suggest from "./pages/Suggest";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/history" element={<History />} />
           <Route path="/s/:id" element={<SharedPage />} />
           <Route path="/peripheral" element={<Peripheral />} />
+          <Route path="/suggest" element={<Suggest />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
