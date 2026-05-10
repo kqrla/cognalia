@@ -16,6 +16,10 @@ export type AnalogyPreset = {
   // what kind of thinking it captures. used verbatim in the prompt.
   description: string;
   createdAt: number;
+  // when the user publishes this preset to a shareable /preset/:slug
+  // link, we remember the slug locally so the share button can keep
+  // returning the same url instead of re-publishing.
+  publishedSlug?: string;
 };
 
 type Listener = () => void;
