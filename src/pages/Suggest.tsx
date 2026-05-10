@@ -32,6 +32,7 @@ const Suggest = () => {
   const presets = usePresets();
   const [label, setLabel] = useState("");
   const [description, setDescription] = useState("");
+  const [publishingId, setPublishingId] = useState<string | null>(null);
 
   const onAdd = () => {
     const created = addPreset(label, description);
@@ -46,6 +47,56 @@ const Suggest = () => {
     setLabel("");
     setDescription("");
     toast.success(`saved "${created.label}" as a preset`);
+  };
+
+  const shareUrlFor = (slug: string) => `${window.location.origin}/preset/${slug}`;
+
+  const onCopyLink = async (slug: string) => {
+    try {
+      await navigator.clipboard.writeText(shareUrlFor(slug));
+      toast.success("link copied");
+    } catch {
+      toast.error("could not copy. select the link manually.");
+    }
+  };
+
+  const onPublish = async (p: AnalogyPreset) => {
+    if (p.publishedSlug) {
+      onCopyLink(p.publishedSlug);
+      return;
+    }
+    setPublishingId(p.id);
+    const base = slugify(p.label);
+    const candidates = [base, `${base}-${randomSuffix()}`, `${base}-${randomSuffix()}`];
+    let savedSlug: string | null = null;
+    for (const slug of candidates) {
+      const { error } = await supabase.from("published_presets").insert({
+        slug,
+        label: p.label,
+        description: p.description,
+      });
+      if (!error) {
+        savedSlug = slug;
+        break;
+      }
+      if (!String(error.message).toLowerCase().includes("duplicate")) {
+        toast.error("could not publish preset");
+        setPublishingId(null);
+        return;
+      }
+    }
+    setPublishingId(null);
+    if (!savedSlug) {
+      toast.error("could not find a free slug. try renaming the preset.");
+      return;
+    }
+    setPresetPublishedSlug(p.id, savedSlug);
+    try {
+      await navigator.clipboard.writeText(shareUrlFor(savedSlug));
+      toast.success("published. link copied to clipboard.");
+    } catch {
+      toast.success("published");
+    }
   };
 
   return (
