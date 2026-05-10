@@ -2,6 +2,7 @@
 // errors in one place so the ui can show a single, clear toast.
 
 import { supabase } from "@/integrations/supabase/client";
+import { getPresets } from "./presets";
 import type { AnalogySystemId } from "./systems";
 import type { Explanation } from "./types";
 
@@ -32,6 +33,13 @@ export const requestExplanation = async ({
   reframe,
   domain,
 }: ExplainArgs): Promise<Explanation> => {
+  // include any user-authored presets so the model can lean on them
+  // when (and only when) they land naturally for this concept.
+  const userPresets = getPresets().map((p) => ({
+    label: p.label,
+    description: p.description,
+  }));
+
   const { data, error } = await supabase.functions.invoke("explain", {
     body: {
       concept,
@@ -40,6 +48,7 @@ export const requestExplanation = async ({
       avoidSystems,
       reframe,
       domain,
+      userPresets,
     },
   });
 

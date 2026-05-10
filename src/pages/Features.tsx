@@ -17,6 +17,7 @@ import {
   MessageCircleQuestion,
   Filter,
   Orbit,
+  Lightbulb,
 } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 
@@ -35,6 +36,7 @@ const capabilities = [
   { icon: Filter, label: "domain disambiguation", body: "as you type, tiny pills appear when a term spans fields. pin the one you mean so the analogy lands in the right subdomain." },
   { icon: MessageCircleQuestion, label: "domain-aware follow-ups", body: "ask one quick clarifying question without leaving the explanation. the answer stays inside the same analogy and the same domain you pinned." },
   { icon: Orbit, label: "peripheral analogies", body: "ask about a related concept and we'll place it inside the same world as the original explanation, on its own screen. if it doesn't land naturally, we say so instead of forcing a bad metaphor." },
+  { icon: Lightbulb, label: "suggest your own references", body: "teach analogize a hobby or mental model that isn't built in. it's saved as a preset on this device and used in future explanations only when it lands naturally." },
   { icon: Tag, label: "custom tags on history", body: "add your own semantic tags to past translations and filter by them on the /history page. tags live on this device." },
   { icon: Clock, label: "version history per concept", body: "every reframe of the same concept is kept as its own version, so you can revisit how you understood it through different lenses." },
   { icon: BookOpen, label: "curated library", body: "hand-crafted examples ship with the app so you can see the format at its best before generating your own." },

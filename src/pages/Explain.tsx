@@ -9,7 +9,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowLeft, RefreshCcw, Sparkles, Loader2, Network } from "lucide-react";
+import { ArrowLeft, RefreshCcw, Sparkles, Loader2, Network, Lightbulb } from "lucide-react";
 import { toast } from "sonner";
 import { ExplanationView } from "@/features/analogy/components/ExplanationView";
 import { FollowUpCard } from "@/features/analogy/components/FollowUpCard";
@@ -236,6 +236,14 @@ const Explain = () => {
                 )}
               </>
             )}
+            <button
+              type="button"
+              onClick={() => navigate("/suggest")}
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <Lightbulb className="h-3.5 w-3.5" />
+              suggest a reference
+            </button>
             <button
               type="button"
               onClick={() => navigate("/graph")}
