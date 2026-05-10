@@ -181,25 +181,62 @@ const Suggest = () => {
               {presets.map((p) => (
                 <li
                   key={p.id}
-                  className="surface-card flex items-start justify-between gap-3 p-4"
+                  className="surface-card flex flex-col gap-3 p-4 sm:flex-row sm:items-start sm:justify-between"
                 >
                   <div className="min-w-0">
                     <p className="text-sm font-medium">{p.label}</p>
                     <p className="mt-1 text-sm text-muted-foreground">
                       {p.description}
                     </p>
+                    {p.publishedSlug && (
+                      <p className="mt-2 truncate text-[11px] text-muted-foreground">
+                        published at{" "}
+                        <Link
+                          to={`/preset/${p.publishedSlug}`}
+                          className="underline underline-offset-2 hover:text-foreground"
+                        >
+                          /preset/{p.publishedSlug}
+                        </Link>
+                      </p>
+                    )}
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      removePreset(p.id);
-                      toast(`removed "${p.label}"`);
-                    }}
-                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-muted-foreground transition-colors hover:text-foreground"
-                    aria-label="remove preset"
-                  >
-                    <Trash2 className="h-3.5 w-3.5" />
-                  </button>
+                  <div className="flex shrink-0 items-center gap-1">
+                    {p.publishedSlug ? (
+                      <button
+                        type="button"
+                        onClick={() => onCopyLink(p.publishedSlug!)}
+                        className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        <Copy className="h-3.5 w-3.5" />
+                        copy link
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => onPublish(p)}
+                        disabled={publishingId === p.id}
+                        className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground disabled:opacity-50"
+                      >
+                        {publishingId === p.id ? (
+                          <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                        ) : (
+                          <Share2 className="h-3.5 w-3.5" />
+                        )}
+                        publish
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        removePreset(p.id);
+                        toast(`removed "${p.label}"`);
+                      }}
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-full border text-muted-foreground transition-colors hover:text-foreground"
+                      aria-label="remove preset"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>
