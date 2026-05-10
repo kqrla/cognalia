@@ -1,0 +1,149 @@
+// /suggest — let the user teach analogize references they already think in.
+// presets are saved per-browser and passed as soft guidance to the
+// explain function. the model only uses them when they land naturally;
+// otherwise it falls back to the built-in systems.
+
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowLeft, Plus, Trash2, Sparkles } from "lucide-react";
+import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  addPreset,
+  removePreset,
+  usePresets,
+} from "@/features/analogy/presets";
+
+const Suggest = () => {
+  const presets = usePresets();
+  const [label, setLabel] = useState("");
+  const [description, setDescription] = useState("");
+
+  const onAdd = () => {
+    const created = addPreset(label, description);
+    if (!created) {
+      toast.error(
+        label.trim()
+          ? "preset already exists or description is empty"
+          : "give your preset a name and a short description",
+      );
+      return;
+    }
+    setLabel("");
+    setDescription("");
+    toast.success(`saved "${created.label}" as a preset`);
+  };
+
+  return (
+    <div className="min-h-screen">
+      <header className="sticky top-0 z-30 border-b border-border/60 bg-background/70 backdrop-blur">
+        <div className="container flex h-14 max-w-3xl items-center justify-between">
+          <Link
+            to="/app"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4" /> back
+          </Link>
+          <span className="font-serif-display text-lg">suggest</span>
+        </div>
+      </header>
+
+      <section className="container max-w-3xl py-10">
+        <p className="mb-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+          your references
+        </p>
+        <h1 className="font-serif-display text-4xl leading-[1.05] tracking-tight sm:text-5xl">
+          teach analogize how you already think.
+        </h1>
+        <p className="mt-5 max-w-2xl text-foreground/75">
+          add a reference, hobby, or mental model that isn't already in the
+          app. next time you ask for an explanation in this browser,
+          analogize will reach for it when (and only when) it lands
+          naturally — never forced.
+        </p>
+
+        <div className="surface-card mt-8 space-y-3 p-5">
+          <div>
+            <label className="text-xs uppercase tracking-wider text-muted-foreground">
+              name
+            </label>
+            <Input
+              value={label}
+              onChange={(e) => setLabel(e.target.value)}
+              maxLength={60}
+              placeholder='e.g. "competitive chess", "kpop choreography", "f1 race strategy"'
+              className="mt-1"
+            />
+          </div>
+          <div>
+            <label className="text-xs uppercase tracking-wider text-muted-foreground">
+              what is it / how do you think about it
+            </label>
+            <Textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              maxLength={280}
+              rows={3}
+              placeholder="one or two lines describing the world: roles, parts, dynamics. the more concrete, the better the analogies."
+              className="mt-1"
+            />
+            <p className="mt-1 text-right text-[11px] text-muted-foreground">
+              {description.length}/280
+            </p>
+          </div>
+          <div className="flex justify-end">
+            <button
+              type="button"
+              onClick={onAdd}
+              className="inline-flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background transition-opacity hover:opacity-90"
+            >
+              <Plus className="h-3.5 w-3.5" /> save preset
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-10">
+          <p className="mb-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+            saved presets ({presets.length})
+          </p>
+          {presets.length === 0 ? (
+            <div className="surface-card flex items-center gap-3 p-5 text-sm text-muted-foreground">
+              <Sparkles className="h-4 w-4" />
+              nothing yet. add a reference above and it'll show up here.
+            </div>
+          ) : (
+            <ul className="space-y-2">
+              {presets.map((p) => (
+                <li
+                  key={p.id}
+                  className="surface-card flex items-start justify-between gap-3 p-4"
+                >
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium">{p.label}</p>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {p.description}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      removePreset(p.id);
+                      toast(`removed "${p.label}"`);
+                    }}
+                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-muted-foreground transition-colors hover:text-foreground"
+                    aria-label="remove preset"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Suggest;
