@@ -5,20 +5,34 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Plus, Trash2, Sparkles } from "lucide-react";
+import { ArrowLeft, Plus, Trash2, Sparkles, Share2, Copy, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { supabase } from "@/integrations/supabase/client";
 import {
   addPreset,
   removePreset,
+  setPresetPublishedSlug,
   usePresets,
+  type AnalogyPreset,
 } from "@/features/analogy/presets";
+
+const slugify = (label: string) =>
+  label
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 32) || "preset";
+
+const randomSuffix = () => Math.random().toString(36).slice(2, 8);
 
 const Suggest = () => {
   const presets = usePresets();
   const [label, setLabel] = useState("");
   const [description, setDescription] = useState("");
+  const [publishingId, setPublishingId] = useState<string | null>(null);
 
   const onAdd = () => {
     const created = addPreset(label, description);
@@ -33,6 +47,56 @@ const Suggest = () => {
     setLabel("");
     setDescription("");
     toast.success(`saved "${created.label}" as a preset`);
+  };
+
+  const shareUrlFor = (slug: string) => `${window.location.origin}/preset/${slug}`;
+
+  const onCopyLink = async (slug: string) => {
+    try {
+      await navigator.clipboard.writeText(shareUrlFor(slug));
+      toast.success("link copied");
+    } catch {
+      toast.error("could not copy. select the link manually.");
+    }
+  };
+
+  const onPublish = async (p: AnalogyPreset) => {
+    if (p.publishedSlug) {
+      onCopyLink(p.publishedSlug);
+      return;
+    }
+    setPublishingId(p.id);
+    const base = slugify(p.label);
+    const candidates = [base, `${base}-${randomSuffix()}`, `${base}-${randomSuffix()}`];
+    let savedSlug: string | null = null;
+    for (const slug of candidates) {
+      const { error } = await supabase.from("published_presets").insert({
+        slug,
+        label: p.label,
+        description: p.description,
+      });
+      if (!error) {
+        savedSlug = slug;
+        break;
+      }
+      if (!String(error.message).toLowerCase().includes("duplicate")) {
+        toast.error("could not publish preset");
+        setPublishingId(null);
+        return;
+      }
+    }
+    setPublishingId(null);
+    if (!savedSlug) {
+      toast.error("could not find a free slug. try renaming the preset.");
+      return;
+    }
+    setPresetPublishedSlug(p.id, savedSlug);
+    try {
+      await navigator.clipboard.writeText(shareUrlFor(savedSlug));
+      toast.success("published. link copied to clipboard.");
+    } catch {
+      toast.success("published");
+    }
   };
 
   return (
@@ -117,25 +181,62 @@ const Suggest = () => {
               {presets.map((p) => (
                 <li
                   key={p.id}
-                  className="surface-card flex items-start justify-between gap-3 p-4"
+                  className="surface-card flex flex-col gap-3 p-4 sm:flex-row sm:items-start sm:justify-between"
                 >
                   <div className="min-w-0">
                     <p className="text-sm font-medium">{p.label}</p>
                     <p className="mt-1 text-sm text-muted-foreground">
                       {p.description}
                     </p>
+                    {p.publishedSlug && (
+                      <p className="mt-2 truncate text-[11px] text-muted-foreground">
+                        published at{" "}
+                        <Link
+                          to={`/preset/${p.publishedSlug}`}
+                          className="underline underline-offset-2 hover:text-foreground"
+                        >
+                          /preset/{p.publishedSlug}
+                        </Link>
+                      </p>
+                    )}
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      removePreset(p.id);
-                      toast(`removed "${p.label}"`);
-                    }}
-                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-muted-foreground transition-colors hover:text-foreground"
-                    aria-label="remove preset"
-                  >
-                    <Trash2 className="h-3.5 w-3.5" />
-                  </button>
+                  <div className="flex shrink-0 items-center gap-1">
+                    {p.publishedSlug ? (
+                      <button
+                        type="button"
+                        onClick={() => onCopyLink(p.publishedSlug!)}
+                        className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        <Copy className="h-3.5 w-3.5" />
+                        copy link
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => onPublish(p)}
+                        disabled={publishingId === p.id}
+                        className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground disabled:opacity-50"
+                      >
+                        {publishingId === p.id ? (
+                          <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                        ) : (
+                          <Share2 className="h-3.5 w-3.5" />
+                        )}
+                        publish
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        removePreset(p.id);
+                        toast(`removed "${p.label}"`);
+                      }}
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-full border text-muted-foreground transition-colors hover:text-foreground"
+                      aria-label="remove preset"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>
