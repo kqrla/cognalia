@@ -95,7 +95,7 @@ serve(async (req) => {
   }
 
   try {
-    const { concept, system, thinkingStyle, avoidSystems, reframe, domain } =
+    const { concept, system, thinkingStyle, avoidSystems, reframe, domain, userPresets } =
       await req.json();
 
     if (!concept || typeof concept !== "string") {
@@ -141,10 +141,37 @@ you MUST:
 the goal is a genuinely different way to think about the concept, not a paraphrase.`
       : "";
 
+    const presetsList: Array<{ label: string; description: string }> =
+      Array.isArray(userPresets)
+        ? userPresets
+            .filter(
+              (p: unknown): p is { label: string; description: string } =>
+                !!p &&
+                typeof p === "object" &&
+                typeof (p as { label?: unknown }).label === "string" &&
+                typeof (p as { description?: unknown }).description === "string",
+            )
+            .slice(0, 12)
+        : [];
+
+    const presetsBlock =
+      presetsList.length > 0
+        ? `
+
+USER-TAUGHT REFERENCES (soft guidance)
+the user has taught analogize the following references they already think in:
+${presetsList.map((p) => `- ${p.label}: ${p.description}`).join("\n")}
+rules for using these references:
+- ONLY reach for one of these if it lands naturally and clearly improves the analogy for the requested system "${system.replace(/_/g, " ")}".
+- never force one in. if none fit cleanly, ignore them and use the requested system as-is.
+- when you do use one, weave its specifics into the analogy and mapping; do not just name-drop it.
+- never invent a reference the user did not list.`
+        : "";
+
     const userPrompt = `concept to translate: ${concept}${domain ? ` (interpreted in the field of: ${domain})` : ""}
 
 analogy system to use: ${system.replace(/_/g, " ")}
-${thinkingStyle ? `user thinks in: ${thinkingStyle}` : ""}${reframeBlock}
+${thinkingStyle ? `user thinks in: ${thinkingStyle}` : ""}${reframeBlock}${presetsBlock}
 
 produce a complete analogize explanation. follow the structure exactly, including the bridge sentence.`;
 
