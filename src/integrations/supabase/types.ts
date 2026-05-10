@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      published_presets: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          label: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: string
+          label: string
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          label?: string
+          slug?: string
+        }
+        Relationships: []
+      }
       shared_explanations: {
         Row: {
           concept: string
