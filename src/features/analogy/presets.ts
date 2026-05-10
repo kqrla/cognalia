@@ -66,6 +66,12 @@ export const removePreset = (id: string) => {
   write(read().filter((p) => p.id !== id));
 };
 
+export const setPresetPublishedSlug = (id: string, slug: string) => {
+  write(
+    read().map((p) => (p.id === id ? { ...p, publishedSlug: slug } : p)),
+  );
+};
+
 export const usePresets = () => {
   const [presets, setPresets] = useState<AnalogyPreset[]>(read);
   useEffect(() => {
