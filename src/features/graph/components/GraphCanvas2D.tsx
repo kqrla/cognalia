@@ -466,7 +466,7 @@ export const GraphCanvas2D = ({
 
       {nodes.length > 0 && activeEdges.length === 0 && (
         <div className="pointer-events-none absolute inset-x-0 bottom-6 text-center text-xs text-foreground/55">
-          no connections yet — clusters will form as you accept relationships
+          no connections yet - clusters will form as you accept relationships
         </div>
       )}
       {focusCluster && (

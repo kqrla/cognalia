@@ -17,7 +17,7 @@ type Hint = {
   reason: string;
 };
 
-// a small, hand-curated relation library. expand carefully — every entry
+// a small, hand-curated relation library. expand carefully - every entry
 // is an editorial decision about how concepts relate.
 const curatedRelations: Hint[] = [
   // structural

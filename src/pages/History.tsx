@@ -1,4 +1,4 @@
-// /history — full list of past translations with user-authored semantic tags.
+// /history - full list of past translations with user-authored semantic tags.
 // tags are local-only, freeform, and live alongside each recent in localStorage.
 // users can add/remove tags inline; clicking a tag filters the list.
 
@@ -227,7 +227,7 @@ const History = () => {
                     />
                     <span
                       className="inline-flex items-center gap-1 text-[10px] text-muted-foreground"
-                      title="private — stays on this device"
+                      title="private - stays on this device"
                     >
                       <Eye className="h-3 w-3" />
                       private

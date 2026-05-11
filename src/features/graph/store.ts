@@ -166,7 +166,7 @@ export const recordRegen = (concept: string, system: AnalogySystemId) => {
   });
 };
 
-// systems where regen/shown ratio is high — used as `avoidSystems` hints
+// systems where regen/shown ratio is high - used as `avoidSystems` hints
 // when reframing so we stop pushing analogies that don't land for the user.
 export const lowClickSystems = (
   concept: string,

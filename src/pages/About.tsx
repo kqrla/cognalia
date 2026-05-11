@@ -20,7 +20,7 @@ const About = () => {
 
         <div className="space-y-6 text-foreground/85 leading-relaxed">
           <p>
-            the feynman technique says: if you cannot explain something simply, you do not really understand it. it is a brilliant test, but it skips a step. before you can explain something simply, your brain needs a foothold — a place inside what you already know to put the new idea down.
+            the feynman technique says: if you cannot explain something simply, you do not really understand it. it is a brilliant test, but it skips a step. before you can explain something simply, your brain needs a foothold - a place inside what you already know to put the new idea down.
           </p>
           <p>
             analogize is built around that foothold. instead of starting with definitions, every explanation starts inside a mental model you already use: relationships, gaming, cooking, building, story and fandom, companies, traffic, plants, brains, or storage and organization. the new concept is translated into that world first, then carefully mapped, layer by layer, to its real meaning.
@@ -31,12 +31,12 @@ const About = () => {
             every explanation has the same six layers, in the same order. that order is not decoration. it is the path your understanding actually takes.
           </p>
           <ol className="ml-5 list-decimal space-y-2">
-            <li><strong className="font-serif-display not-italic">analogy</strong> — a vivid, one-line hook in a world you already know.</li>
-            <li><strong className="font-serif-display not-italic">mapping</strong> — clean pairs that show what stands for what.</li>
-            <li><strong className="font-serif-display not-italic">visual</strong> — a small diagram with analogy-specific labels, not generic ones.</li>
-            <li><strong className="font-serif-display not-italic">bridge</strong> — a single line that starts with "in other words", connecting the analogy to reality.</li>
-            <li><strong className="font-serif-display not-italic">real explanation</strong> — the actual concept, in proper terms, no longer abstract because the ground is already laid.</li>
-            <li><strong className="font-serif-display not-italic">where it breaks</strong> — exactly where the analogy stops mapping, so you never end up with a confident wrong model.</li>
+            <li><strong className="font-serif-display not-italic">analogy</strong> - a vivid, one-line hook in a world you already know.</li>
+            <li><strong className="font-serif-display not-italic">mapping</strong> - clean pairs that show what stands for what.</li>
+            <li><strong className="font-serif-display not-italic">visual</strong> - a small diagram with analogy-specific labels, not generic ones.</li>
+            <li><strong className="font-serif-display not-italic">bridge</strong> - a single line that starts with "in other words", connecting the analogy to reality.</li>
+            <li><strong className="font-serif-display not-italic">real explanation</strong> - the actual concept, in proper terms, no longer abstract because the ground is already laid.</li>
+            <li><strong className="font-serif-display not-italic">where it breaks</strong> - exactly where the analogy stops mapping, so you never end up with a confident wrong model.</li>
           </ol>
 
           <h2 className="pt-6 font-serif-display text-3xl tracking-tight">why this matters</h2>
@@ -49,7 +49,7 @@ const About = () => {
 
           <h2 className="pt-6 font-serif-display text-3xl tracking-tight">accounts are optional</h2>
           <p>
-            analogize is local-browser-first. your history, your tags, your private notes, your custom presets — all of it lives on your device by default, with no account required. nothing in the app is locked behind sign-in.
+            analogize is local-browser-first. your history, your tags, your private notes, your custom presets - all of it lives on your device by default, with no account required. nothing in the app is locked behind sign-in.
           </p>
           <p>
             if you want to carry your work across devices, you can create a free account on <Link to="/account" className="underline underline-offset-4">/account</Link>. signing in adds two things and only two things: cloud sync of your history and presets, and a one-click json export of everything you've saved. that's it. no plans, no walls, no nudges.

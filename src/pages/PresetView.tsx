@@ -1,4 +1,4 @@
-// /preset/:slug — view a published analogy preset and import it into
+// /preset/:slug - view a published analogy preset and import it into
 // this browser. importing just calls addPreset locally so the imported
 // reference behaves exactly like one the user added by hand.
 

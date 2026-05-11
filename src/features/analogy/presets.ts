@@ -1,4 +1,4 @@
-// localStorage-backed store for user-added analogy "presets" — references
+// localStorage-backed store for user-added analogy "presets" - references
 // or mental models the user thinks in that aren't part of the built-in
 // systems library. these are passed as soft guidance to the explain edge
 // function so the model can reach for them when (and only when) they

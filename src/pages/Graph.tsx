@@ -143,7 +143,7 @@ const Graph = () => {
                       strokeWidth="1.5"
                     />
                   </svg>
-                  structural — part of, depends on
+                  structural - part of, depends on
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <svg width="28" height="6">
@@ -157,7 +157,7 @@ const Graph = () => {
                       strokeDasharray="6 6"
                     />
                   </svg>
-                  analogy — similar pattern, behaves like
+                  analogy - similar pattern, behaves like
                 </span>
               </div>
             </div>

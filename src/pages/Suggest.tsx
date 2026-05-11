@@ -1,4 +1,4 @@
-// /suggest — let the user teach analogize references they already think in.
+// /suggest - let the user teach analogize references they already think in.
 // presets are saved per-browser and passed as soft guidance to the
 // explain function. the model only uses them when they land naturally;
 // otherwise it falls back to the built-in systems.
@@ -124,7 +124,7 @@ const Suggest = () => {
           add a reference, hobby, or mental model that isn't already in the
           app. next time you ask for an explanation in this browser,
           analogize will reach for it when (and only when) it lands
-          naturally — never forced.
+          naturally - never forced.
         </p>
 
         <div className="surface-card mt-8 space-y-3 p-5">
