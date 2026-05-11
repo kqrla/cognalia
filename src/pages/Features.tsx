@@ -18,6 +18,8 @@ import {
   Filter,
   Orbit,
   Lightbulb,
+  Cloud,
+  Download,
 } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 
@@ -40,6 +42,8 @@ const capabilities = [
   { icon: Tag, label: "custom tags on history", body: "add your own semantic tags to past translations and filter by them on the /history page. tags live on this device." },
   { icon: Clock, label: "version history per concept", body: "every reframe of the same concept is kept as its own version, so you can revisit how you understood it through different lenses." },
   { icon: BookOpen, label: "curated library", body: "hand-crafted examples ship with the app so you can see the format at its best before generating your own." },
+  { icon: Cloud, label: "optional cloud sync", body: "the app is local-browser-first and nothing requires an account. create one on /account if you want your history, presets and preferences to follow you across devices." },
+  { icon: Download, label: "json export", body: "with an account, export everything you've saved — history, presets, preferences — as a single json file you fully own." },
 ];
 
 const Features = () => {
