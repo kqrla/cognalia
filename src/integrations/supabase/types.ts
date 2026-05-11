@@ -74,6 +74,30 @@ export type Database = {
         }
         Relationships: []
       }
+      user_cloud_data: {
+        Row: {
+          preferences: Json
+          presets: Json
+          recents: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          preferences?: Json
+          presets?: Json
+          recents?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          preferences?: Json
+          presets?: Json
+          recents?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
