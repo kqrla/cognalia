@@ -49,7 +49,13 @@ const readRecents = (): RecentConcept[] => {
 // stay in sync without pulling in a state library for two slices.
 type Listener = () => void;
 const listeners = new Set<Listener>();
-const notify = () => listeners.forEach((l) => l());
+const notify = () => {
+  listeners.forEach((l) => l());
+  // ping cloud sync (and any other tab listeners)
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new StorageEvent("storage", { key: RECENTS_KEY }));
+  }
+};
 
 export const usePreferences = () => {
   const [prefs, setPrefs] = useState<Preferences>(readPreferences);

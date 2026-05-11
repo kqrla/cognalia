@@ -24,7 +24,12 @@ export type AnalogyPreset = {
 
 type Listener = () => void;
 const listeners = new Set<Listener>();
-const notify = () => listeners.forEach((l) => l());
+const notify = () => {
+  listeners.forEach((l) => l());
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new StorageEvent("storage", { key: KEY }));
+  }
+};
 
 const read = (): AnalogyPreset[] => {
   if (typeof window === "undefined") return [];
