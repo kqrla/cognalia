@@ -20,6 +20,7 @@ import PresetView from "./pages/PresetView";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Account from "./pages/Account";
+import Roadmap from "./pages/Roadmap";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -54,6 +55,7 @@ const App = () => (
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/roadmap" element={<Roadmap />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
