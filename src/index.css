@@ -19,7 +19,7 @@
 
 @layer base {
   :root {
-    /* surfaces — soft beige paper */
+    /* surfaces - soft beige paper */
     --background: 38 34% 94%;
     --foreground: 25 18% 14%;
     --card: 38 40% 98%;

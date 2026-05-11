@@ -1,4 +1,4 @@
-// /account — shows the current account, sync status, and the json export
+// /account - shows the current account, sync status, and the json export
 // button. signed-out users see a quick pitch + links to /login or /register.
 
 import { Link, useNavigate } from "react-router-dom";
@@ -54,7 +54,7 @@ const Account = () => {
                 <span className="font-medium">{user.email ?? user.id}</span>
               </div>
               <p className="mt-3 text-xs text-muted-foreground">
-                your history, presets, and preferences sync to this account in the background. you can sign out anytime — local data on this device stays put.
+                your history, presets, and preferences sync to this account in the background. you can sign out anytime - local data on this device stays put.
               </p>
             </div>
 

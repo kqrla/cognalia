@@ -1,4 +1,4 @@
-// /login — optional sign-in. mirrors /register.
+// /login - optional sign-in. mirrors /register.
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";

@@ -117,7 +117,7 @@ export const ShareButton = (props: Props) => {
       }
     } catch (e) {
       setState("idle");
-      toast.error("could not publish — try again");
+      toast.error("could not publish - try again");
       console.error(e);
     }
   };

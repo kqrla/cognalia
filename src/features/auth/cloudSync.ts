@@ -42,7 +42,7 @@ export const exportLocalAsJson = () => {
 };
 
 const notifyStores = () => {
-  // nudge other tabs / hook listeners — they listen on `storage` and on
+  // nudge other tabs / hook listeners - they listen on `storage` and on
   // an internal listener set via writes. easiest portable signal:
   window.dispatchEvent(new StorageEvent("storage", { key: RECENTS_KEY }));
 };

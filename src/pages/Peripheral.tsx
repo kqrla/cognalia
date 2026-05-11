@@ -2,7 +2,7 @@
 // but is scoped to a peripheral concept living inside an existing
 // analogy ecosystem. we deliberately reuse the same section grammar
 // (analogy / mapping / bridge / limits) so the experience feels
-// familiar — only the framing chrome changes to make clear this is a
+// familiar - only the framing chrome changes to make clear this is a
 // satellite of a root explanation, not a fresh translation.
 
 import { useEffect, useState } from "react";

@@ -1,6 +1,6 @@
 // understanding graph types. this is a living map of how the user
 // understands concepts, not a notes store. nodes and edges are
-// minimal on purpose — depth comes from the relationships, not
+// minimal on purpose - depth comes from the relationships, not
 // from text crammed inside boxes.
 
 import type { AnalogySystemId } from "@/features/analogy/systems";

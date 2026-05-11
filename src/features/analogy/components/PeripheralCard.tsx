@@ -2,7 +2,7 @@
 // the model whether it fits inside the existing analogy ecosystem,
 // and then route them to a dedicated peripheral screen that mirrors
 // the regular explanation layout. the card itself stays a launcher,
-// not a results panel — the results live on /peripheral.
+// not a results panel - the results live on /peripheral.
 
 import { useState } from "react";
 import { Loader2, Orbit, Send } from "lucide-react";

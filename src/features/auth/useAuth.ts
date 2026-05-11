@@ -1,5 +1,5 @@
 // thin auth hook over supabase. accounts are entirely optional in
-// analogize — the whole app works signed-out. signing in just unlocks
+// analogize - the whole app works signed-out. signing in just unlocks
 // cross-device sync and json export.
 
 import { useEffect, useState } from "react";
@@ -12,7 +12,7 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // subscribe first, then load — order matters per supabase guidance.
+    // subscribe first, then load - order matters per supabase guidance.
     const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => {
       setSession(s);
       setUser(s?.user ?? null);

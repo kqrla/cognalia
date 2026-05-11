@@ -1,4 +1,4 @@
-// /s/:id — read-only public view of a shared snapshot. handles three kinds:
+// /s/:id - read-only public view of a shared snapshot. handles three kinds:
 //   - single explanation (the original behaviour)
 //   - a single peripheral concept (anchored to a root)
 //   - an entire ecosystem: a root explanation followed by every peripheral

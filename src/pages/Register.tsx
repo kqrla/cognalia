@@ -1,4 +1,4 @@
-// /register — optional account creation. accounts in analogize only
+// /register - optional account creation. accounts in analogize only
 // exist for cloud sync + json export convenience. nothing in the app
 // requires being signed in.
 
@@ -54,7 +54,7 @@ const Register = () => {
         <p className="mb-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">register</p>
         <h1 className="font-serif-display text-4xl tracking-tight">create an account.</h1>
         <p className="mt-3 text-sm text-foreground/70">
-          totally optional. analogize works fully without an account — this just syncs your history and presets across devices and unlocks json export.
+          totally optional. analogize works fully without an account - this just syncs your history and presets across devices and unlocks json export.
         </p>
 
         <form onSubmit={onSubmit} className="mt-8 space-y-3">

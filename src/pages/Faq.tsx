@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: "is anything saved to a server?",
-    a: "by default, no. analogize is local-browser-first. your preferences, recent translations, tags, private notes, and custom presets all live on your device. when you ask for a fresh explanation, the concept is sent to the ai gateway to be translated, and the result is cached locally. if you choose to create an optional account on /account, your history and presets sync to the cloud so they follow you across devices — but signing in is never required to use any feature.",
+    a: "by default, no. analogize is local-browser-first. your preferences, recent translations, tags, private notes, and custom presets all live on your device. when you ask for a fresh explanation, the concept is sent to the ai gateway to be translated, and the result is cached locally. if you choose to create an optional account on /account, your history and presets sync to the cloud so they follow you across devices - but signing in is never required to use any feature.",
   },
   {
     q: "do i need an account?",
@@ -50,11 +50,11 @@ const faqs = [
   },
   {
     q: "can i ask a follow-up if the analogy didn't fully click?",
-    a: "yes. at the bottom of every explanation there's a single follow-up box. ask one clarifying question and you get a short answer that stays inside the same analogy world and the same domain you pinned. it's deliberately not a chat — each question is single-shot, so the explanation stays the source of truth.",
+    a: "yes. at the bottom of every explanation there's a single follow-up box. ask one clarifying question and you get a short answer that stays inside the same analogy world and the same domain you pinned. it's deliberately not a chat - each question is single-shot, so the explanation stays the source of truth.",
   },
   {
     q: "how do tags and the /history page work?",
-    a: "every translation you generate is saved locally and listed on /history. you can add your own semantic tags to any past translation (think 'work', 'thesis', 'quantum stuff') and filter the page by tag. tags are freeform, plural, and never sent anywhere — they live in your browser.",
+    a: "every translation you generate is saved locally and listed on /history. you can add your own semantic tags to any past translation (think 'work', 'thesis', 'quantum stuff') and filter the page by tag. tags are freeform, plural, and never sent anywhere - they live in your browser.",
   },
   {
     q: "why is there a hint asking me to be more specific?",

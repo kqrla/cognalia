@@ -1,6 +1,6 @@
 // suggested connections panel. when a new concept is added we may
 // detect meaningful relationships to existing nodes. the user has
-// to accept them — we never silently link.
+// to accept them - we never silently link.
 
 import { ArrowRight, Check, X } from "lucide-react";
 import { acceptEdge, dismissEdge, useGraph } from "../store";
