@@ -46,6 +46,14 @@ const About = () => {
           <p>
             the goal is not knowing something. the goal is the moment when an idea stops feeling abstract and starts feeling obvious, because it suddenly belongs to a mental model you already trust.
           </p>
+
+          <h2 className="pt-6 font-serif-display text-3xl tracking-tight">accounts are optional</h2>
+          <p>
+            analogize is local-browser-first. your history, your tags, your private notes, your custom presets — all of it lives on your device by default, with no account required. nothing in the app is locked behind sign-in.
+          </p>
+          <p>
+            if you want to carry your work across devices, you can create a free account on <Link to="/account" className="underline underline-offset-4">/account</Link>. signing in adds two things and only two things: cloud sync of your history and presets, and a one-click json export of everything you've saved. that's it. no plans, no walls, no nudges.
+          </p>
         </div>
 
         <Link

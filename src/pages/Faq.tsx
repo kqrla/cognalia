@@ -26,7 +26,11 @@ const faqs = [
   },
   {
     q: "is anything saved to a server?",
-    a: "your preferences and recent translations live on your device, in this browser. nothing is uploaded for storage. when you ask for a fresh explanation, the concept is sent to the ai gateway to be translated, and the result is cached locally so revisiting it is instant.",
+    a: "by default, no. analogize is local-browser-first. your preferences, recent translations, tags, private notes, and custom presets all live on your device. when you ask for a fresh explanation, the concept is sent to the ai gateway to be translated, and the result is cached locally. if you choose to create an optional account on /account, your history and presets sync to the cloud so they follow you across devices — but signing in is never required to use any feature.",
+  },
+  {
+    q: "do i need an account?",
+    a: "no. nothing in analogize is locked behind sign-in. an account is purely a convenience toggle: it gives you cross-device sync of your history and presets, and lets you export everything you've saved as a json file. you can sign up at /register or sign in at /login from the /account page, or just keep using the app exactly as you are.",
   },
   {
     q: "what kinds of concepts work best?",
