@@ -3,7 +3,6 @@
 
 import { Link } from "react-router-dom";
 import { ArrowRight, Brain, FolderTree, Lightbulb } from "lucide-react";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 
 const Goals = () => {
@@ -88,73 +87,22 @@ const Goals = () => {
           </p>
         </div>
 
-        <Collapsible className="mt-12">
-          <CollapsibleTrigger className="group w-full rounded-lg border border-border/60 bg-card px-5 py-4 text-left transition-colors hover:bg-accent">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-foreground/90">
+        <Link
+          to="/mechanisms"
+          className="group mt-12 block rounded-lg border border-border/60 bg-card px-5 py-4 transition-colors hover:bg-accent"
+        >
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <p className="text-sm font-medium text-foreground/90">
                 if you are the technobabble type
-              </span>
-              <span className="text-xs text-muted-foreground transition-colors group-hover:text-foreground">
-                click to expand
-              </span>
-            </div>
-          </CollapsibleTrigger>
-          <CollapsibleContent>
-            <div className="rounded-b-lg border-x border-b border-border/60 bg-card/50 px-5 py-5 text-sm leading-relaxed text-foreground/80">
-              <p className="mb-3">
-                here is how each piece of the app maps to a specific cognitive mechanism, rather than a generic appeal to "learning science".
               </p>
-
-              <p className="mb-2">
-                <strong className="font-serif-display not-italic">picking a thinking system (cooking, traffic, gaming, etc.)</strong> is a deliberate <em>base domain selection</em> step under structure-mapping theory (gentner, 1983). instead of letting the model pick any analogy, the user pins a base domain whose relational structure they already navigate fluently. this maximises the chance of preserved higher-order relations and reduces surface-feature interference during transfer.
-              </p>
-
-              <p className="mb-2">
-                <strong className="font-serif-display not-italic">the analogy layer</strong> is the encoding side of dual coding (paivio, 1986). it gives the learner a verbal-plus-imagistic anchor in a familiar schema before any technical content is introduced, which is the reverse of the usual "definition first, intuition later" pattern that produces brittle encodings.
-              </p>
-
-              <p className="mb-2">
-                <strong className="font-serif-display not-italic">the explicit mapping list</strong> is structure-mapping made visible. by forcing one-to-one element pairs between base and target, it prevents the partial, opportunistic mappings that cause analogical errors (gick and holyoak, 1983). the user can audit the mapping rather than trust an opaque metaphor.
-              </p>
-
-              <p className="mb-2">
-                <strong className="font-serif-display not-italic">the mermaid visual</strong> closes the dual-coding loop by giving the same relational structure a non-verbal, spatial form. crucially, the diagram uses analogy-domain labels rather than target-domain jargon, so the visual reinforces the base schema instead of smuggling the target's vocabulary back in.
-              </p>
-
-              <p className="mb-2">
-                <strong className="font-serif-display not-italic">the bridge line ("in other words...")</strong> functions as an explicit transfer prompt. transfer research (barnett and ceci, 2002) shows that analogical transfer rarely happens spontaneously; it requires a cued moment where the learner is told "now apply this over there". the bridge is that cue, embedded in the format.
-              </p>
-
-              <p className="mb-2">
-                <strong className="font-serif-display not-italic">the real explanation</strong> is where elaborative encoding (craik and lockhart, 1972) happens. by the time the learner reads the technical version, they already have a schema to attach it to, so the new terms become retrieval cues into an existing network rather than isolated vocabulary items.
-              </p>
-
-              <p className="mb-2">
-                <strong className="font-serif-display not-italic">the "where it breaks" layer</strong> is a discriminative boundary marker against illusory explanatory depth (rozenblit and keil, 2002). analogies that feel complete tend to be over-trusted; explicitly naming the failure mode keeps the analogy as a tool rather than a belief.
-              </p>
-
-              <p className="mb-2">
-                <strong className="font-serif-display not-italic">"explain again differently" with a new system</strong> is multi-context encoding (smith, glenberg and bjork, 1978). the same target concept gets re-encoded against several base domains, increasing the number of independent retrieval paths into it - the operational definition of content-addressable memory.
-              </p>
-
-              <p className="mb-2">
-                <strong className="font-serif-display not-italic">peripheral analogies</strong> extend the same base schema to a related target, which is exactly the lateral transfer condition gentner studied: re-using a mapped relational structure on a neighbouring problem. when it does not land, we say so, because forced transfer produces the same illusory-depth failure mode as a too-tidy original analogy.
-              </p>
-
-              <p className="mb-2">
-                <strong className="font-serif-display not-italic">domain disambiguation pills and the clarifying follow-up</strong> are metacognitive monitors in the flavell (1979) sense. they ask the learner to commit to which sense of a term they mean before encoding starts, which prevents the mapping from being built on the wrong target schema and then having to be unlearned.
-              </p>
-
-              <p className="mb-2">
-                <strong className="font-serif-display not-italic">user-suggested presets</strong> let the learner register their own high-fluency base domains. in schema-theoretic terms, the user is telling the system which of their long-term schemas are dense enough to support reliable mapping - something the system cannot infer on its own.
-              </p>
-
-              <p>
-                <strong className="font-serif-display not-italic">history, tags and version-per-reframe</strong> are spaced retrieval scaffolding (roediger and karpicke, 2006). each revisit is a retrieval practice event against a slightly different cue (a tag, a different system, an older version), which is the condition under which associative retrieval pathways consolidate rather than decay.
+              <p className="mt-1 text-xs text-muted-foreground">
+                a feature-by-feature map of the cognitive mechanisms behind each part of the app, with citations.
               </p>
             </div>
-          </CollapsibleContent>
-        </Collapsible>
+            <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+          </div>
+        </Link>
 
         <Link
           to="/app"
