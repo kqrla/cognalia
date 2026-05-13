@@ -56,6 +56,26 @@ const About = () => {
           </p>
         </div>
 
+        <aside className="mt-14 rounded-2xl border border-border/60 bg-secondary/30 p-7 sm:p-9">
+          <p className="mb-2 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+            author's note
+          </p>
+          <h2 className="mb-5 font-serif-display text-3xl tracking-tight">
+            why this exists.
+          </h2>
+          <div className="space-y-4 text-foreground/85 leading-relaxed">
+            <p>
+              i built analogize because of how my own brain works. i'm neurodivergent, with adhd, and the way i actually retain anything is associative. i narrativize, gamify, systemize and emotionally charge a concept until curiosity drags me towards it. once it has a story, a shape and a stake, it sticks.
+            </p>
+            <p>
+              the way i think about my own memory is less like a filing cabinet and more like a complex, infinitely nested, clustered, color coded and weighted knowledge graph with semantic tagging. concepts are indexed by their structure, not their labels. retrieval feels like running a query against that graph: a cue lights up a cluster, the cluster lights up the answer. analogies are the most reliable way i know to insert something new into that graph in a way that can be queried later.
+            </p>
+            <p>
+              every time i've explained something to a friend this way, i've been told the same thing: it suddenly clicked. people who had bounced off a concept for years would get it in a single conversation, because the analogy gave their own knowledge graph somewhere to attach the new node. analogize is an attempt to share that, without me having to be in the room.
+            </p>
+          </div>
+        </aside>
+
         <Link
           to="/app"
           className="mt-12 inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
