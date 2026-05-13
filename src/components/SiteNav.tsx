@@ -2,20 +2,32 @@
 // features, faq. compact, serif wordmark, link to the live app.
 
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-const navItems = [
+const directNavItems = [
   { to: "/about", label: "about" },
   { to: "/features", label: "features" },
-  { to: "/goals", label: "goals" },
-  { to: "/mechanisms", label: "mechanisms" },
-  { to: "/roadmap", label: "roadmap" },
   { to: "/faq", label: "faq" },
   { to: "/account", label: "account" },
 ];
 
+const otherNavItems = [
+  { to: "/goals", label: "goals" },
+  { to: "/mechanisms", label: "mechanisms" },
+  { to: "/roadmap", label: "roadmap" },
+];
+
 export const SiteNav = () => {
   const { pathname } = useLocation();
+  const isOtherActive = otherNavItems.some((i) => pathname === i.to);
+
   return (
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/70 backdrop-blur">
       <div className="container flex h-14 max-w-5xl items-center justify-between">
@@ -23,7 +35,7 @@ export const SiteNav = () => {
           analogize
         </Link>
         <nav className="flex items-center gap-1 text-sm">
-          {navItems.map((item) => (
+          {directNavItems.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
@@ -37,6 +49,36 @@ export const SiteNav = () => {
               {item.label}
             </NavLink>
           ))}
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className={cn(
+                  "inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground",
+                  isOtherActive && "text-foreground",
+                )}
+              >
+                other
+                <ChevronDown className="h-3 w-3" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="min-w-[10rem]">
+              {otherNavItems.map((item) => (
+                <DropdownMenuItem key={item.to} asChild>
+                  <Link
+                    to={item.to}
+                    className={cn(
+                      "w-full cursor-pointer",
+                      pathname === item.to && "text-foreground font-medium",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <Link
             to="/app"
             className={cn(
