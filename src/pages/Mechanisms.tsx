@@ -181,10 +181,10 @@ const Mechanisms = () => {
             return (
               <li
                 key={r.feature}
-                className="group surface-paper relative grid grid-cols-1 gap-0 overflow-hidden rounded-xl border border-border/50 p-0 md:grid-cols-[1fr_auto_1fr]"
+                className="group surface-paper relative grid grid-cols-1 overflow-hidden rounded-xl border border-border/50 md:grid-cols-[1fr_56px_1fr]"
               >
                 {/* subtle left accent stripe */}
-                <div className="absolute left-0 top-0 h-full w-1 bg-border/40 group-hover:bg-primary/30 transition-colors" />
+                <div className="absolute left-0 top-0 h-full w-1 bg-border/40 transition-colors group-hover:bg-primary/30" />
 
                 {/* feature side */}
                 <div className="p-6">
@@ -205,18 +205,14 @@ const Mechanisms = () => {
                 </div>
 
                 {/* connector */}
-                <div className="relative flex items-center justify-center px-4 py-2 md:py-0">
-                  <div className="hidden md:block h-full w-px bg-border/60" />
-                  <span className="md:absolute md:flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-background shadow-sm">
-                    <ArrowRight className="h-3.5 w-3.5 text-foreground/50" />
-                  </span>
-                  <span className="md:hidden flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-background shadow-sm">
-                    <ArrowRight className="h-3.5 w-3.5 rotate-90 text-foreground/50" />
+                <div className="relative flex items-center justify-center border-border/50 py-2 md:border-x md:py-0">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-background shadow-sm">
+                    <ArrowRight className="h-3.5 w-3.5 rotate-90 text-foreground/50 md:rotate-0" />
                   </span>
                 </div>
 
                 {/* mechanism side */}
-                <div className="border-t border-border/50 bg-secondary/20 p-6 md:border-l md:border-t-0">
+                <div className="border-t border-border/50 bg-secondary/20 p-6 md:border-t-0">
                   <span className="mb-2 inline-block rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-primary/80">
                     mechanism
                   </span>
