@@ -34,7 +34,7 @@ const rows: Row[] = [
     icon: Layers,
     feature: "picking a thinking system",
     featureBody:
-      "you choose a base domain you already navigate fluently - cooking, traffic, gaming, story.",
+      "you choose a base domain you already navigate fluently: cooking, traffic, gaming, story.",
     mechanism: "deliberate base-domain selection",
     mechanismBody:
       "instead of letting the model invent any analogy, you pin a schema with rich relational structure. that maximises preserved higher-order relations during transfer and reduces interference from surface features.",
@@ -174,23 +174,27 @@ const Mechanisms = () => {
       </section>
 
       <section className="container max-w-5xl pb-24">
-        <ol className="space-y-4">
+        <ol className="space-y-3">
           {rows.map((r, idx) => {
             const Icon = r.icon;
+            const num = String(idx + 1).padStart(2, "0");
             return (
               <li
                 key={r.feature}
-                className="surface-paper grid grid-cols-1 gap-0 overflow-hidden p-0 md:grid-cols-[1fr_auto_1fr]"
+                className="group surface-paper relative grid grid-cols-1 gap-0 overflow-hidden rounded-xl border border-border/50 p-0 md:grid-cols-[1fr_auto_1fr]"
               >
+                {/* subtle left accent stripe */}
+                <div className="absolute left-0 top-0 h-full w-1 bg-border/40 group-hover:bg-primary/30 transition-colors" />
+
                 {/* feature side */}
                 <div className="p-6">
-                  <div className="mb-3 flex items-center gap-2">
+                  <div className="mb-3 flex items-center gap-3">
                     <span className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary">
                       <Icon className="h-3.5 w-3.5 text-foreground/70" />
                     </span>
-                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      feature {String(idx + 1).padStart(2, "0")}
-                    </p>
+                    <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                      feature {num}
+                    </span>
                   </div>
                   <p className="font-serif-display text-xl leading-snug tracking-tight">
                     {r.feature}
@@ -201,25 +205,29 @@ const Mechanisms = () => {
                 </div>
 
                 {/* connector */}
-                <div className="relative flex items-center justify-center px-2 md:px-0">
-                  <div className="hidden md:block h-full w-px bg-border/70" />
-                  <span className="absolute flex h-8 w-8 items-center justify-center rounded-full border border-border/70 bg-background">
-                    <ArrowRight className="h-3.5 w-3.5 text-foreground/60" />
+                <div className="relative flex items-center justify-center px-4 py-2 md:py-0">
+                  <div className="hidden md:block h-full w-px bg-border/60" />
+                  <span className="md:absolute md:flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-background shadow-sm">
+                    <ArrowRight className="h-3.5 w-3.5 text-foreground/50" />
+                  </span>
+                  <span className="md:hidden flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-background shadow-sm">
+                    <ArrowRight className="h-3.5 w-3.5 rotate-90 text-foreground/50" />
                   </span>
                 </div>
 
                 {/* mechanism side */}
-                <div className="border-t border-border/60 bg-background/40 p-6 md:border-l md:border-t-0">
-                  <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                <div className="border-t border-border/50 bg-secondary/20 p-6 md:border-l md:border-t-0">
+                  <span className="mb-2 inline-block rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-primary/80">
                     mechanism
-                  </p>
+                  </span>
                   <p className="font-serif-display text-xl leading-snug tracking-tight">
                     {r.mechanism}
                   </p>
                   <p className="mt-2 text-sm leading-relaxed text-foreground/85">
                     {r.mechanismBody}
                   </p>
-                  <p className="mt-3 text-xs italic text-muted-foreground">
+                  <p className="mt-3 inline-flex items-center gap-1 text-xs italic text-muted-foreground">
+                    <span className="h-1 w-1 rounded-full bg-muted-foreground/50" />
                     {r.citation}
                   </p>
                 </div>
