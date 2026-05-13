@@ -15,6 +15,9 @@ const directNavItems = [
   { to: "/about", label: "about" },
   { to: "/features", label: "features" },
   { to: "/faq", label: "faq" },
+];
+
+const trailingNavItems = [
   { to: "/account", label: "account" },
 ];
 
