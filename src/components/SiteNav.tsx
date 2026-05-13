@@ -15,6 +15,9 @@ const directNavItems = [
   { to: "/about", label: "about" },
   { to: "/features", label: "features" },
   { to: "/faq", label: "faq" },
+];
+
+const trailingNavItems = [
   { to: "/account", label: "account" },
 ];
 
@@ -78,6 +81,21 @@ export const SiteNav = () => {
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
+
+          {trailingNavItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) =>
+                cn(
+                  "rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground",
+                  isActive && "text-foreground",
+                )
+              }
+            >
+              {item.label}
+            </NavLink>
+          ))}
 
           <Link
             to="/app"
