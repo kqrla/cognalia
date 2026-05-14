@@ -165,8 +165,8 @@ const Philosophy = () => {
             <p>
               i didn't create analogize to be yet another openai wrapper claiming to be the best ai tutor out there that
               will revolutionize your education, or an edtech service that will launch your productivity levels onto the
-              stratosphere. it isn't claiming to be "the best ai tutor" because it is not an ai tutor at all, it never
-              was and nor was it ever supposed to be.
+              stratosphere. it isn't claiming to be "the best ai tutor" because it's not an ai tutor at all, it never
+              was; nor was it ever supposed to be.
             </p>
             <p>
               i started out wanting to recreate a very specific kind of friend. the one you run to near the end of the
