@@ -62,7 +62,10 @@ const About = () => {
           </ol>
 
           <h2 className="pt-6 font-serif-display text-3xl tracking-tight">why this matters</h2>
-          <p>analogize is a thinking tool built around:</p>
+          <p>
+            analogize is a thinking tool translating abstract reasoning into emotionally simulatable mental models that
+            is built around:
+          </p>
           <ul className="ml-5 list-disc space-y-1.5">
             <li>metaphor translation</li>
             <li>narrativization</li>
@@ -72,7 +75,10 @@ const About = () => {
             instead of treating understanding as information retrieval, it treats understanding as cognitive mapping:
             attaching unfamiliar ideas to emotionally tangible, already-familiar mental models.
           </p>
-          <p>the platform focuses on:</p>
+          <p>
+            the platform does not provide study material, flashcards, or quizzes nor unearth secret facts about the
+            topic. instead, it purely focuses on:
+          </p>
           <ul className="ml-5 list-disc space-y-1.5">
             <li>conceptual compression</li>
             <li>experiential simulation</li>
