@@ -23,6 +23,7 @@ import Account from "./pages/Account";
 import Roadmap from "./pages/Roadmap";
 import Goals from "./pages/Goals";
 import Mechanisms from "./pages/Mechanisms";
+import Philosophy from "./pages/Philosophy";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -60,6 +61,7 @@ const App = () => (
           <Route path="/roadmap" element={<Roadmap />} />
           <Route path="/goals" element={<Goals />} />
           <Route path="/mechanisms" element={<Mechanisms />} />
+          <Route path="/philosophy" element={<Philosophy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

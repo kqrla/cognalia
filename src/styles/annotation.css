@@ -1,0 +1,72 @@
+/*
+  annotation.css
+  ----------------------------------------------------------------------------
+  reusable annotation styles for the marketing / non-app pages.
+  meant to feel like marker strokes and editorial marks on cream paper.
+
+  load globally (already imported from src/main.tsx). use the classes inline
+  on any element you want to annotate. classes are composable - apply
+  highlight + underline + bold + italic together if needed.
+
+  see /annotate.md for usage examples.
+*/
+
+@layer components {
+  /* ----- highlights (soft marker strokes) ----- */
+  .a-hl {
+    /* base: padding + soft rounding so the highlight breathes */
+    padding: 0 0.18em;
+    border-radius: 0.18em;
+    background-color: hsl(var(--a-hl-color, 48 90% 80%) / 0.55);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .a-hl-yellow { --a-hl-color: 48 90% 70%; }
+  .a-hl-sage   { --a-hl-color: 110 25% 65%; }
+  .a-hl-blue   { --a-hl-color: 210 55% 75%; }
+  .a-hl-pink   { --a-hl-color: 340 60% 82%; }
+  .a-hl-orange { --a-hl-color: 25 85% 70%; }
+  .a-hl-gray   { --a-hl-color: 30 8% 65%; }
+
+  /* ----- underlines ----- */
+  .a-u {
+    text-decoration-line: underline;
+    text-decoration-color: hsl(var(--foreground) / 0.7);
+    text-decoration-thickness: var(--a-u-weight, 1.5px);
+    text-underline-offset: 3px;
+  }
+  .a-u-solid  { text-decoration-style: solid; }
+  .a-u-dotted { text-decoration-style: dotted; }
+  .a-u-dashed { text-decoration-style: dashed; }
+  .a-u-wavy   { text-decoration-style: wavy; }
+
+  /* underline weight modifiers */
+  .a-u-w1 { --a-u-weight: 1px; }
+  .a-u-w2 { --a-u-weight: 1.5px; }
+  .a-u-w3 { --a-u-weight: 2.5px; }
+  .a-u-w4 { --a-u-weight: 3.5px; }
+
+  /* ----- text styles ----- */
+  .a-b      { font-weight: 600; }       /* bold (weight 1) */
+  .a-bb     { font-weight: 800; }       /* bold (weight 2, heavier) */
+  .a-i      { font-style: italic; }
+
+  /* ----- external link ----- */
+  .a-ext {
+    font-weight: 600;
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: hsl(var(--foreground) / 0.5);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+  }
+  .a-ext::after {
+    content: "↗";
+    display: inline-block;
+    margin-left: 0.15em;
+    font-size: 0.7em;
+    vertical-align: super;
+    line-height: 1;
+    opacity: 0.7;
+  }
+}
