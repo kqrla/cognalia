@@ -117,12 +117,20 @@ const capabilities = [
   },
 ];
 
-const encompass: { label: string; modal?: { title: string; body: string[] } }[] = [
-  { label: "narrativization" },
-  { label: "metaphor translation" },
-  { label: "emotional anchoring" },
+// each chip has an optional modal. set `starred: true` to show the gold star.
+// to temporarily disable a chip's popup without losing its content, comment
+// out the `body` line - clicking the chip becomes a no-op until you re-enable.
+const encompass: {
+  label: string;
+  starred?: boolean;
+  modal?: { title: string; body?: string[] };
+}[] = [
+  { label: "narrativization", modal: { title: "narrativization", /* body: ["edit me"] */ } },
+  { label: "metaphor translation", modal: { title: "metaphor translation", /* body: ["edit me"] */ } },
+  { label: "emotional anchoring", modal: { title: "emotional anchoring", /* body: ["edit me"] */ } },
   {
     label: "analogical scaffolding",
+    starred: true,
     modal: {
       title: "analogical scaffolding",
       body: [
@@ -135,6 +143,7 @@ const encompass: { label: string; modal?: { title: string; body: string[] } }[] 
   },
   {
     label: "cognitive compression",
+    starred: true,
     modal: {
       title: "cognitive compression",
       body: [
@@ -146,13 +155,13 @@ const encompass: { label: string; modal?: { title: string; body: string[] } }[] 
       ],
     },
   },
-  { label: "conceptual mapping" },
-  { label: "experiential simulation" },
-  { label: "relational understanding" },
-  { label: "abstraction translation" },
-  { label: "contextual embodied understanding" },
-  { label: "low-load conceptual packets" },
-  { label: "cognitive bridges" },
+  { label: "conceptual mapping", modal: { title: "conceptual mapping", /* body: ["edit me"] */ } },
+  { label: "experiential simulation", modal: { title: "experiential simulation", /* body: ["edit me"] */ } },
+  { label: "relational understanding", modal: { title: "relational understanding", /* body: ["edit me"] */ } },
+  { label: "abstraction translation", modal: { title: "abstraction translation", /* body: ["edit me"] */ } },
+  { label: "contextual embodied understanding", modal: { title: "contextual embodied understanding", /* body: ["edit me"] */ } },
+  { label: "low-load conceptual packets", modal: { title: "low-load conceptual packets", /* body: ["edit me"] */ } },
+  { label: "cognitive bridges", modal: { title: "cognitive bridges", /* body: ["edit me"] */ } },
 ];
 
 const Features = () => {
@@ -221,24 +230,29 @@ const Features = () => {
             around the following understanding mechanisms:
           </p>
           <div className="flex flex-wrap gap-2">
-            {encompass.map((p) => (
-              <span
-                key={p.label}
-                className="relative inline-flex items-center whitespace-nowrap rounded-full border border-border/60 bg-secondary/60 px-4 py-1.5 text-sm text-foreground/85"
-              >
-                {p.label}
-                {p.modal && (
-                  <button
-                    type="button"
-                    onClick={() => setOpenModal(p.label)}
-                    aria-label={`learn more about ${p.label}`}
-                    className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full border border-border/60 bg-background text-foreground/70 shadow-sm transition-colors hover:text-foreground"
-                  >
-                    <Star className="h-2.5 w-2.5" fill="currentColor" />
-                  </button>
-                )}
-              </span>
-            ))}
+            {encompass.map((p) => {
+              const hasBody = !!p.modal?.body && p.modal.body.length > 0;
+              return (
+                <button
+                  key={p.label}
+                  type="button"
+                  onClick={() => hasBody && setOpenModal(p.label)}
+                  aria-label={hasBody ? `learn more about ${p.label}` : p.label}
+                  className="surface-paper relative inline-flex max-w-[50vw] items-center rounded-full px-4 py-1.5 text-sm text-foreground/85 transition-colors hover:bg-accent/30 disabled:cursor-default disabled:opacity-90"
+                  disabled={!hasBody}
+                >
+                  <span className="break-words text-left">{p.label}</span>
+                  {p.starred && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full border border-border/60 bg-background text-amber-500 shadow-sm"
+                    >
+                      <Star className="h-2.5 w-2.5" fill="currentColor" />
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -255,13 +269,17 @@ const Features = () => {
         <DialogContent>
           <DialogHeader>
             <DialogTitle className="font-serif-display text-2xl tracking-tight">{activeModal?.title}</DialogTitle>
-            <DialogDescription className="text-foreground/80">{activeModal?.body[0]}</DialogDescription>
+            {activeModal?.body && activeModal.body.length > 0 && (
+              <DialogDescription className="text-foreground/80">{activeModal.body[0]}</DialogDescription>
+            )}
           </DialogHeader>
-          <ul className="ml-5 list-disc space-y-1.5 text-sm text-foreground/85">
-            {activeModal?.body.slice(1).map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
+          {activeModal?.body && activeModal.body.length > 1 && (
+            <ul className="ml-5 list-disc space-y-1.5 text-sm text-foreground/85">
+              {activeModal.body.slice(1).map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+          )}
         </DialogContent>
       </Dialog>
 
