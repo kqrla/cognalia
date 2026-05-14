@@ -115,11 +115,9 @@ const Goals = () => {
             the feynman technique is a test: explain something simply, and if you cannot, you do not understand it. analogize agrees with that test, but it adds the preparation step the feynman technique leaves out.
           </p>
 
-          <div className="my-8 rounded-lg border border-border/40 bg-card p-6">
-            <p className="text-center font-serif-display text-lg tracking-tight text-foreground/90">
-              "before you can explain something simply, you need a simple place to stand."
-            </p>
-          </div>
+          <blockquote className="my-8 border-l-2 border-foreground/40 pl-5 font-serif-display text-xl italic text-foreground/90">
+            "before you can explain something simply, you need a simple place to stand."
+          </blockquote>
 
           <p>
             before you can explain something simply, you need a simple place to stand. analogize gives you that place by translating the concept into a system you already navigate fluently. once you have the analogy, the simple explanation writes itself. you are no longer simplifying from above; you are translating across.

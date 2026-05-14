@@ -24,6 +24,7 @@ const trailingNavItems = [
 const otherNavItems = [
   { to: "/goals", label: "goals" },
   { to: "/mechanisms", label: "mechanisms" },
+  { to: "/philosophy", label: "philosophy" },
   { to: "/roadmap", label: "roadmap" },
 ];
 
