@@ -182,7 +182,7 @@ const Philosophy = () => {
                 let’s look at it differently. let's start with something else entirely, something unrelated that we know
                 for sure that you already understand...”
               </i>
-              and from there, rebuilds the concept around the things your brain already knows how to connect with.
+              and from there, rebuilds the concept around things your brain already knows how to connect with.
             </p>
             <p>
               every time i've explained something to a friend this way, i've been told the same thing: it suddenly
