@@ -167,7 +167,7 @@ const Features = () => {
         <h1 className="font-serif-display text-5xl leading-[1.05] tracking-tight sm:text-6xl">
           a strict format that quietly does the work.
         </h1>
-        <p className="mt-6 max-w-2xl text-foreground/75">
+        <p className="mt-6 max-w-[92%] text-lg text-foreground/75 leading-relaxed">
           analogize is opinionated on purpose. every explanation follows the same six layers, in the same order. the
           structure is the product.
         </p>
