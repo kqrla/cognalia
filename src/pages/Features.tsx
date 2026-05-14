@@ -1,7 +1,15 @@
 // features page. lists what the product actually does, grouped by intent.
 
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Star } from "lucide-react";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
   ArrowRight,
   Sparkles,
   ArrowLeftRight,
