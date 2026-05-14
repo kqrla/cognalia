@@ -33,8 +33,7 @@ const rows: Row[] = [
   {
     icon: Layers,
     feature: "picking a thinking system",
-    featureBody:
-      "you choose a base domain you already navigate fluently: cooking, traffic, gaming, story.",
+    featureBody: "you choose a base domain you already navigate fluently: cooking, traffic, gaming, story.",
     mechanism: "deliberate base-domain selection",
     mechanismBody:
       "instead of letting the model invent any analogy, you pin a schema with rich relational structure. that maximises preserved higher-order relations during transfer and reduces interference from surface features.",
@@ -43,8 +42,7 @@ const rows: Row[] = [
   {
     icon: Sparkles,
     feature: "the analogy layer",
-    featureBody:
-      "a short, vivid pass in your chosen system, before any technical content shows up.",
+    featureBody: "a short, vivid pass in your chosen system, before any technical content shows up.",
     mechanism: "encoding via dual coding",
     mechanismBody:
       "anchors the new idea in a verbal-plus-imagistic representation tied to a familiar schema. this reverses the usual definition-first flow that produces brittle, easily-forgotten encodings.",
@@ -53,8 +51,7 @@ const rows: Row[] = [
   {
     icon: ArrowLeftRight,
     feature: "the explicit mapping list",
-    featureBody:
-      "one-to-one pairs that say 'this part of the analogy = that part of the real concept'.",
+    featureBody: "one-to-one pairs that say 'this part of the analogy = that part of the real concept'.",
     mechanism: "structure-mapping made auditable",
     mechanismBody:
       "forces a complete, inspectable mapping rather than a partial, opportunistic one. partial mappings are the main source of analogical errors, so making the alignment visible lets you catch them.",
@@ -63,8 +60,7 @@ const rows: Row[] = [
   {
     icon: Workflow,
     feature: "the mermaid visual",
-    featureBody:
-      "a small diagram of the same relational structure, labelled in analogy terms not target jargon.",
+    featureBody: "a small diagram of the same relational structure, labelled in analogy terms not target jargon.",
     mechanism: "non-verbal channel of dual coding",
     mechanismBody:
       "gives the relational structure a spatial form so it is encoded twice, verbally and visually. keeping the labels in the base domain prevents the visual from smuggling target vocabulary back in too early.",
@@ -73,8 +69,7 @@ const rows: Row[] = [
   {
     icon: CornerDownRight,
     feature: "the bridge line ('in other words...')",
-    featureBody:
-      "a single sentence that walks you from the analogy into the actual concept.",
+    featureBody: "a single sentence that walks you from the analogy into the actual concept.",
     mechanism: "explicit transfer cue",
     mechanismBody:
       "transfer almost never happens spontaneously. learners need a concrete prompt that says 'now apply this over there'. the bridge is that cue, baked into the format so you cannot skip it.",
@@ -83,8 +78,7 @@ const rows: Row[] = [
   {
     icon: FileText,
     feature: "the real explanation",
-    featureBody:
-      "the concept in its proper terms, only after the analogy has done its work.",
+    featureBody: "the concept in its proper terms, only after the analogy has done its work.",
     mechanism: "elaborative encoding",
     mechanismBody:
       "by the time the technical version arrives, you already have a schema to attach it to. the new vocabulary becomes a set of retrieval cues into an existing network, not isolated terms to memorise.",
@@ -93,8 +87,7 @@ const rows: Row[] = [
   {
     icon: AlertTriangle,
     feature: "the 'where it breaks' layer",
-    featureBody:
-      "an honest note on the points where the analogy stops being accurate.",
+    featureBody: "an honest note on the points where the analogy stops being accurate.",
     mechanism: "boundary marker against illusory depth",
     mechanismBody:
       "analogies that feel complete tend to be over-trusted. naming the failure mode keeps the analogy as a tool you use rather than a belief you hold, and prevents the source and target from collapsing into one model.",
@@ -103,8 +96,7 @@ const rows: Row[] = [
   {
     icon: RefreshCcw,
     feature: "explain again, different system",
-    featureBody:
-      "regenerate the same concept through a second or third base domain.",
+    featureBody: "regenerate the same concept through a second or third base domain.",
     mechanism: "multi-context encoding",
     mechanismBody:
       "the same target gets encoded against several independent schemas, increasing the number of distinct retrieval paths into it. that is the operational definition of the kind of associative memory we are aiming for.",
@@ -113,8 +105,7 @@ const rows: Row[] = [
   {
     icon: Orbit,
     feature: "peripheral analogies",
-    featureBody:
-      "ask about a related concept and it lands inside the same world as the first one.",
+    featureBody: "ask about a related concept and it lands inside the same world as the first one.",
     mechanism: "lateral transfer of a mapped structure",
     mechanismBody:
       "re-uses an already-aligned base schema on a neighbouring problem. when the new concept does not fit the schema cleanly we say so, because forced transfer reproduces the same illusory-depth failure as a too-tidy original.",
@@ -123,8 +114,7 @@ const rows: Row[] = [
   {
     icon: Filter,
     feature: "domain pills and follow-ups",
-    featureBody:
-      "small prompts that ask which sense of an ambiguous term you mean.",
+    featureBody: "small prompts that ask which sense of an ambiguous term you mean.",
     mechanism: "metacognitive monitoring",
     mechanismBody:
       "asks you to commit to a target schema before encoding starts, so the mapping is not built on the wrong sense of the word and then quietly relearned later.",
@@ -133,8 +123,7 @@ const rows: Row[] = [
   {
     icon: Lightbulb,
     feature: "user-suggested presets",
-    featureBody:
-      "teach the app a hobby or model that is not built in, and reuse it later.",
+    featureBody: "teach the app a hobby or model that is not built in, and reuse it later.",
     mechanism: "user-declared schema density",
     mechanismBody:
       "you tell the system which of your long-term schemas are rich enough to support reliable mapping. that is information the system cannot infer on its own from a short prompt.",
@@ -143,8 +132,7 @@ const rows: Row[] = [
   {
     icon: Clock,
     feature: "history, tags and version-per-reframe",
-    featureBody:
-      "every reframe is kept; you can revisit a concept through different lenses over time.",
+    featureBody: "every reframe is kept; you can revisit a concept through different lenses over time.",
     mechanism: "spaced retrieval scaffolding",
     mechanismBody:
       "each revisit is a retrieval-practice event under a slightly different cue. that is the condition under which associative pathways consolidate rather than decay.",
@@ -158,9 +146,7 @@ const Mechanisms = () => {
       <SiteNav />
 
       <section className="container max-w-5xl py-16 sm:py-20">
-        <p className="mb-4 text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          mechanisms
-        </p>
+        <p className="mb-4 text-xs uppercase tracking-[0.22em] text-muted-foreground">mechanisms</p>
         <h1 className="font-serif-display text-5xl leading-[1.05] tracking-tight sm:text-6xl">
           every feature, the cognitive thing it does.
         </h1>
@@ -169,7 +155,10 @@ const Mechanisms = () => {
           <Link to="/goals" className="underline underline-offset-4 hover:text-foreground">
             /goals
           </Link>
-          . each piece of the app is mapped to the specific cognitive process it implements, with the research it draws from. nothing here is decorative.
+          for the cogsci nerds (affectionate) who enjoy the technical jargon and psychobabble. i've mapped each piece of
+          the app to the specific cognitive process it implements, with the research it draws from. while the app is
+          intentionally designed around things that may make the experience feel intimidating to use, nothing here is
+          purely decorative.
         </p>
       </section>
 
@@ -196,12 +185,8 @@ const Mechanisms = () => {
                       feature {num}
                     </span>
                   </div>
-                  <p className="font-serif-display text-xl leading-snug tracking-tight">
-                    {r.feature}
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-foreground/75">
-                    {r.featureBody}
-                  </p>
+                  <p className="font-serif-display text-xl leading-snug tracking-tight">{r.feature}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-foreground/75">{r.featureBody}</p>
                 </div>
 
                 {/* connector */}
@@ -216,12 +201,8 @@ const Mechanisms = () => {
                   <span className="mb-2 inline-block rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-primary/80">
                     mechanism
                   </span>
-                  <p className="font-serif-display text-xl leading-snug tracking-tight">
-                    {r.mechanism}
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-foreground/85">
-                    {r.mechanismBody}
-                  </p>
+                  <p className="font-serif-display text-xl leading-snug tracking-tight">{r.mechanism}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-foreground/85">{r.mechanismBody}</p>
                   <p className="mt-3 inline-flex items-center gap-1 text-xs italic text-muted-foreground">
                     <span className="h-1 w-1 rounded-full bg-muted-foreground/50" />
                     {r.citation}
