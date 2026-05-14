@@ -164,8 +164,9 @@ const Philosophy = () => {
           <div className="space-y-4 text-foreground/85 leading-relaxed">
             <p>
               i didn't create analogize to be yet another openai wrapper claiming to be the best ai tutor out there that
-              will revolutionize your education, or an edtech tool that will boost your productivity levels onto the
-              stratosphere,a i did not start out or even want to create "the best tutor one could ever want"
+              will revolutionize your education, or an edtech service that will launch your productivity levels onto the
+              stratosphere. it isn't claiming to be "the best ai tutor" because it is not an ai tutor at all, it never
+              was and nor was it ever supposed to be.
             </p>
             <p>
               the way i think about my own memory is less like a filing cabinet and more like a complex, infinitely
