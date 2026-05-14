@@ -184,12 +184,6 @@ const Philosophy = () => {
               </i>
               and from there, rebuilds the concept around things your brain already knows how to connect with.
             </p>
-            <p>
-              every time i've explained something to a friend this way, i've been told the same thing: it suddenly
-              clicked. people who had bounced off a concept for years would get it in a single conversation, because the
-              analogy gave their own knowledge graph somewhere to attach the new node. analogize is an attempt to share
-              that, without me having to be in the room.
-            </p>
           </div>
         </aside>
 
