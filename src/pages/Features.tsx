@@ -55,7 +55,47 @@ const capabilities = [
   { icon: Download, label: "json export", body: "with an account, export everything you've saved - history, presets, preferences - as a single json file you fully own." },
 ];
 
+const encompass: { label: string; modal?: { title: string; body: string[] } }[] = [
+  { label: "narrativization" },
+  { label: "metaphor translation" },
+  { label: "emotional anchoring" },
+  {
+    label: "analogical scaffolding",
+    modal: {
+      title: "analogical scaffolding",
+      body: [
+        "analogize makes sure the explanations aren't random metaphors and trains our models to make sure they're:",
+        "structurally aligned mappings",
+        "scaffolded conceptual transfers",
+        "familiar-schema borrowing",
+      ],
+    },
+  },
+  {
+    label: "cognitive compression",
+    modal: {
+      title: "cognitive compression",
+      body: [
+        "this is exactly what the analogize system is doing:",
+        "compressing large conceptual systems",
+        "into emotionally legible packets",
+        "with low cognitive load",
+        "while preserving relational structure",
+      ],
+    },
+  },
+  { label: "conceptual mapping" },
+  { label: "experiential simulation" },
+  { label: "relational understanding" },
+  { label: "abstraction → concrete simulation" },
+  { label: "semantic → episodic understanding" },
+  { label: "low-load conceptual packets" },
+  { label: "cognitive bridges" },
+];
+
 const Features = () => {
+  const [openModal, setOpenModal] = useState<string | null>(null);
+  const activeModal = encompass.find((p) => p.label === openModal)?.modal;
   return (
     <div className="min-h-screen">
       <SiteNav />
