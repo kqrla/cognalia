@@ -11,9 +11,7 @@ const Philosophy = () => {
       <SiteNav />
 
       <article className="container max-w-3xl py-16 sm:py-24">
-        <p className="mb-4 text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          philosophy
-        </p>
+        <p className="mb-4 text-xs uppercase tracking-[0.22em] text-muted-foreground">philosophy</p>
         <h1 className="mb-6 font-serif-display text-5xl leading-[1.05] tracking-tight sm:text-6xl">
           sculpting analogize into creation: bts
         </h1>
@@ -23,9 +21,7 @@ const Philosophy = () => {
         </p>
 
         <div className="mt-14 space-y-6 text-foreground/85 leading-relaxed">
-          <h2 className="font-serif-display text-3xl tracking-tight">
-            concepts we combined and borrowed from
-          </h2>
+          <h2 className="font-serif-display text-3xl tracking-tight">concepts we combined and borrowed from</h2>
           <p>
             analogize is not a brand new theory. it is a stitch job. we leaned on a handful of existing ideologies and
             theories that already understood pieces of how humans think, and weaved them together instead of trying to
@@ -167,9 +163,9 @@ const Philosophy = () => {
           <h2 className="mb-5 font-serif-display text-3xl tracking-tight">why this exists.</h2>
           <div className="space-y-4 text-foreground/85 leading-relaxed">
             <p>
-              i built analogize because of how my own brain works. i'm neurodivergent, with adhd, and the way i actually
-              retain anything is associative. i narrativize, gamify, systemize and emotionally charge a concept until
-              curiosity drags me towards it. once it has a story, a shape and a stake, it sticks.
+              i didn't create analogize to be yet another openai wrapper claiming to be the best ai tutor out there that
+              will revolutionize your education, or an edtech tool that will boost your productivity levels onto the
+              stratosphere,a i did not start out or even want to create "the best tutor one could ever want"
             </p>
             <p>
               the way i think about my own memory is less like a filing cabinet and more like a complex, infinitely
