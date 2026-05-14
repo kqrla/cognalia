@@ -175,16 +175,15 @@ const Philosophy = () => {
               trying.
             </p>
             <p>
-              analogize is not there to be your ai tutor. it is there to be the friend who sits with you through the
-              panic, holds your hand and tells you you’re not too dumb for this and that it is not too late, sits you
-              down, and then quietly goes:{" "}
+              analogize is there to be THAT friend who sits with you through the panic, holds your hand and tells you
+              you’re not too dumb for this and that it is not too late, sits you down, and then quietly goes:{" "}
               <i>
                 “okay. fresh slate. forget everything. forget that we're even here. forget about studying this subject.
                 let’s look at it differently. let's start with something else entirely, something we know for sure that
                 you already understand....”
               </i>
+              and from there, rebuilds the concept around the things your brain already knows how to connect with.
             </p>
-            <p>and from there, rebuilds the concept around the things your brain already knows how to connect with.</p>
             <p>
               every time i've explained something to a friend this way, i've been told the same thing: it suddenly
               clicked. people who had bounced off a concept for years would get it in a single conversation, because the
