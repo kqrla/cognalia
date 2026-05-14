@@ -180,7 +180,7 @@ const Philosophy = () => {
               <i>
                 “okay. fresh slate. forget everything. forget that we're even here. forget about studying this subject.
                 let’s look at it differently. let's start with something else entirely, something we know for sure that
-                you already understand....”
+                you already understand...”
               </i>
               and from there, rebuilds the concept around the things your brain already knows how to connect with.
             </p>
