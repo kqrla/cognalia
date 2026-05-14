@@ -179,8 +179,8 @@ const Philosophy = () => {
               you’re not too dumb for this and that it is not too late, sits you down, and then quietly goes:{" "}
               <i>
                 “okay. fresh slate. forget everything. forget that we're even here. forget about studying this subject.
-                let’s look at it differently. let's start with something else entirely, something we know for sure that
-                you already understand...”
+                let’s look at it differently. let's start with something else entirely, something unrelated that we know
+                for sure that you already understand...”
               </i>
               and from there, rebuilds the concept around the things your brain already knows how to connect with.
             </p>
