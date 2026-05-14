@@ -41,6 +41,23 @@ const About = () => {
 
           <h2 className="pt-6 font-serif-display text-3xl tracking-tight">why this matters</h2>
           <p>
+            analogize is a thinking tool built around metaphor translation, narrativization, and analogical scaffolding. instead of treating understanding as information retrieval, it treats understanding as cognitive mapping: attaching unfamiliar ideas to emotionally tangible, already-familiar mental models.
+          </p>
+          <p>the platform focuses on:</p>
+          <ul className="ml-5 list-disc space-y-1.5">
+            <li>conceptual compression</li>
+            <li>experiential simulation</li>
+            <li>emotional anchoring</li>
+            <li>relational reasoning</li>
+            <li>abstraction to concrete translation</li>
+            <li>semantic to episodic understanding</li>
+          </ul>
+          <p>
+            because people rarely think in isolated definitions. they think in stories, visuals, memories, situations, and metaphor structures.
+          </p>
+
+          <h2 className="pt-6 font-serif-display text-3xl tracking-tight">what makes this different</h2>
+          <p>
             most explanation tools do one of two things. they either dumb a concept down until it is no longer the concept, or they pile on definitions until the reader pretends to follow. analogize does neither. it keeps the full concept intact and gives you a path into it through the way your brain already organizes the world.
           </p>
           <p>
