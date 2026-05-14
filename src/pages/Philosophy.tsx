@@ -169,11 +169,15 @@ const Philosophy = () => {
               was and nor was it ever supposed to be.
             </p>
             <p>
-              the way i think about my own memory is less like a filing cabinet and more like a complex, infinitely
-              nested, clustered, color coded and weighted knowledge graph with semantic tagging. concepts are indexed by
-              their structure, not their labels. retrieval feels like running a query against that graph: a cue lights
-              up a cluster, the cluster lights up the answer. analogies are the most reliable way i know to insert
-              something new into that graph in a way that can be queried later.
+              i started out wanting to recreate a very specific kind of friend. the one you run to near the end of the
+              semester after months of pretending you understood what was happening, only to finally admit to yourself,
+              a week before finals and fully panicking, that you really did not get it at all. and not for a lack of
+              trying. analogize is not there to be your ai tutor. it is there to be the friend who sits with you through
+              the panic, holds your hand and tells you you’re not too dumb for this and that it is not too late, sits
+              you down, and then quietly goes: “okay. fresh slate. forget the way they explained it before. forget we're
+              even studying this subject. let’s think about it differently. what's something we know for sure that you
+              already understand?” and from there, rebuilds the concept around the things your brain already knows how
+              to connect with.
             </p>
             <p>
               every time i've explained something to a friend this way, i've been told the same thing: it suddenly
