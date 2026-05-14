@@ -82,19 +82,21 @@ const About = () => {
             <li>semantic to episodic understanding</li>
           </ul>
           <p>
-            because people rarely think in isolated definitions or academic abstraction. they think in stories, visuals,
+            because people rarely think in isolated definitions or textbook jargon. they think in stories, visuals,
             memories, situations, and metaphor structures.
           </p>
 
           <h2 className="pt-6 font-serif-display text-3xl tracking-tight">what makes this different</h2>
           <p>
             most explanation tools do one of two things. they either dumb a concept down until it is no longer the
-            concept, or they pile on definitions until the reader pretends to follow. analogize does neither. it keeps
-            the full concept intact and gives you a path into it through the way your brain already organizes the world.
+            concept, or they pile on definitions worded slightly differently until the reader pretends to follow.
+            analogize does neither. it keeps the full concept intact and gives you a path into it through the way your
+            brain already organizes the world.
           </p>
           <p>
-            the goal is not knowing something. the goal is the moment when an idea stops feeling abstract and starts
-            feeling obvious, because it suddenly belongs to a mental model you already trust.
+            the goal is not "knowing" something. the goal is remapping complexity into a cognitively native format, in a
+            way to invoke that moment when an idea stops feeling abstract and starts feeling obvious, because it
+            suddenly belongs to a mental model you already trust.
           </p>
 
           <h2 className="pt-6 font-serif-display text-3xl tracking-tight">accounts are optional</h2>
