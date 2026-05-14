@@ -62,13 +62,13 @@ const About = () => {
           </ol>
 
           <h2 className="pt-6 font-serif-display text-3xl tracking-tight">why this matters</h2>
+          <p>analogize is a thinking tool built around:</p>
+          <ul className="ml-5 list-disc space-y-1.5">
+            <li>metaphor translation</li>
+            <li>narrativization</li>
+            <li>analogical scaffolding</li>
+          </ul>
           <p>
-            analogize is a thinking tool built around
-            <ul className="ml-5 list-disc space-y-1.5">
-              <li>metaphor translation</li>
-              <li>narrativization</li>
-              <li>analogical scaffolding</li>
-            </ul>
             instead of treating understanding as information retrieval, it treats understanding as cognitive mapping:
             attaching unfamiliar ideas to emotionally tangible, already-familiar mental models.
           </p>
@@ -82,8 +82,8 @@ const About = () => {
             <li>semantic to episodic understanding</li>
           </ul>
           <p>
-            because people rarely think in isolated definitions. they think in stories, visuals, memories, situations,
-            and metaphor structures.
+            because people rarely think in isolated definitions or academic abstraction. they think in stories, visuals,
+            memories, situations, and metaphor structures.
           </p>
 
           <h2 className="pt-6 font-serif-display text-3xl tracking-tight">what makes this different</h2>
