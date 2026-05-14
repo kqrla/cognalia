@@ -172,12 +172,16 @@ const Philosophy = () => {
               i started out wanting to recreate a very specific kind of friend. the one you run to near the end of the
               semester after months of pretending you understood what was happening, only to finally admit to yourself,
               a week before finals and fully panicking, that you really did not get it at all. and not for a lack of
-              trying. analogize is not there to be your ai tutor. it is there to be the friend who sits with you through
-              the panic, holds your hand and tells you you’re not too dumb for this and that it is not too late, sits
-              you down, and then quietly goes:{" "}
+              trying.
+            </p>
+            <p>
+              analogize is not there to be your ai tutor. it is there to be the friend who sits with you through the
+              panic, holds your hand and tells you you’re not too dumb for this and that it is not too late, sits you
+              down, and then quietly goes:{" "}
               <i>
-                “okay. fresh slate. forget the way they explained it before. forget we're even studying this subject.
-                let’s think about it differently. here's something we know for sure that you already understand....”
+                “okay. fresh slate. forget everything. forget that we're even here. forget about studying this subject.
+                let’s look at it differently. let's start with something else entirely, something we know for sure that
+                you already understand....”
               </i>
             </p>
             <p>and from there, rebuilds the concept around the things your brain already knows how to connect with.</p>
