@@ -151,6 +151,31 @@ const Features = () => {
           })}
         </div>
 
+        <div className="mt-16">
+          <h2 className="mb-2 font-serif-display text-3xl tracking-tight">what does this encompass</h2>
+          <p className="mb-6 text-foreground/75">designed around how humans internally process meaning</p>
+          <div className="flex flex-wrap gap-2">
+            {encompass.map((p) => (
+              <span
+                key={p.label}
+                className="relative inline-flex items-center whitespace-nowrap rounded-full border border-border/60 bg-secondary/60 px-4 py-1.5 text-sm text-foreground/85"
+              >
+                {p.label}
+                {p.modal && (
+                  <button
+                    type="button"
+                    onClick={() => setOpenModal(p.label)}
+                    aria-label={`learn more about ${p.label}`}
+                    className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full border border-border/60 bg-background text-foreground/70 shadow-sm transition-colors hover:text-foreground"
+                  >
+                    <Star className="h-2.5 w-2.5" fill="currentColor" />
+                  </button>
+                )}
+              </span>
+            ))}
+          </div>
+        </div>
+
         <Link
           to="/app"
           className="mt-12 inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
@@ -159,6 +184,24 @@ const Features = () => {
           <ArrowRight className="h-4 w-4" />
         </Link>
       </section>
+
+      <Dialog open={!!openModal} onOpenChange={(o) => !o && setOpenModal(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="font-serif-display text-2xl tracking-tight">
+              {activeModal?.title}
+            </DialogTitle>
+            <DialogDescription className="text-foreground/80">
+              {activeModal?.body[0]}
+            </DialogDescription>
+          </DialogHeader>
+          <ul className="ml-5 list-disc space-y-1.5 text-sm text-foreground/85">
+            {activeModal?.body.slice(1).map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+        </DialogContent>
+      </Dialog>
 
       <SiteFooter />
     </div>
