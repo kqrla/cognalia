@@ -11,7 +11,7 @@
   see /annotate.md for usage examples.
 */
 
-@layer components {
+/* plain css - no @layer needed because this file is imported separately */
   /* ----- highlights (soft marker strokes) ----- */
   .a-hl {
     /* base: padding + soft rounding so the highlight breathes */
