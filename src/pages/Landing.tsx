@@ -2,7 +2,21 @@
 // a tight pitch, the five-part structure shown as a sample, and clear CTAs.
 
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles, ArrowLeftRight, Workflow, CornerDownRight, FileText, AlertTriangle } from "lucide-react";
+import {
+  ArrowRight,
+  Sparkles,
+  ArrowLeftRight,
+  Workflow,
+  CornerDownRight,
+  FileText,
+  AlertTriangle,
+  Network,
+  Orbit,
+  RefreshCcw,
+  Lightbulb,
+  Layers,
+  Filter,
+} from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 
 const sample = [
