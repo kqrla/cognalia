@@ -62,10 +62,16 @@ const Landing = () => {
           a cognitive translation tool
         </p>
         <h1 className="font-serif-display text-5xl leading-[1.05] tracking-tight sm:text-7xl">
-          translate ideas into how you already think.
+          translate ideas into <span className="a-hl a-hl-yellow">how you already think</span>.
         </h1>
         <p className="mt-6 max-w-2xl text-lg text-foreground/75">
-          analogize takes the feynman technique a step further. instead of just simplifying ideas, it translates them into the mental models you already use. you start in familiar territory, see exactly how each part maps to the real concept, and only then move into the actual explanation.
+          analogize takes the feynman technique a step further. instead of just simplifying ideas,
+          it translates them into the{" "}
+          <span className="a-u a-u-solid a-u-w3">mental models you already use</span>. you start in
+          familiar territory, see exactly how each part maps to the real concept, and only then
+          move into the actual explanation — with{" "}
+          <span className="a-u a-u-wavy">where it breaks</span> spelled out so you never end up
+          with a confident wrong model.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
