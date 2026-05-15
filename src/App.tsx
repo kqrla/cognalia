@@ -24,6 +24,8 @@ import Roadmap from "./pages/Roadmap";
 import Goals from "./pages/Goals";
 import Mechanisms from "./pages/Mechanisms";
 import Philosophy from "./pages/Philosophy";
+import Graphical from "./pages/Graphical";
+import Pricing from "./pages/Pricing";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
