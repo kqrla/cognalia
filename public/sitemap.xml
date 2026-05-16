@@ -14,6 +14,8 @@
   <url><loc>https://analogize.lovable.app/philosophy</loc><priority>0.7</priority></url>
   <url><loc>https://analogize.lovable.app/graphical</loc><priority>0.7</priority></url>
   <url><loc>https://analogize.lovable.app/pricing</loc><priority>0.6</priority></url>
+  <url><loc>https://analogize.lovable.app/substrate</loc><priority>0.8</priority></url>
+  <url><loc>https://analogize.lovable.app/substrate/app</loc><priority>0.7</priority></url>
   <url><loc>https://analogize.lovable.app/graph</loc><priority>0.6</priority></url>
   <url><loc>https://analogize.lovable.app/history</loc><priority>0.6</priority></url>
   <url><loc>https://analogize.lovable.app/suggest</loc><priority>0.6</priority></url>
