@@ -62,15 +62,13 @@ const Landing = () => {
           a cognitive translation tool
         </p>
         <h1 className="font-serif-display text-5xl leading-[1.05] tracking-tight sm:text-7xl">
-          translate ideas into <span className="a-hl a-hl-yellow">how you already think</span>.
+          translate ideas into how you already think.
         </h1>
         <p className="mt-6 max-w-2xl text-lg text-foreground/75">
           analogize takes the feynman technique a step further. instead of just simplifying ideas,
-          it translates them into the{" "}
-          <span className="a-u a-u-solid a-u-w3">mental models you already use</span>. you start in
+          it translates them into the mental models you already use. you start in
           familiar territory, see exactly how each part maps to the real concept, and only then
-          move into the actual explanation — with{" "}
-          <span className="a-u a-u-wavy">where it breaks</span> spelled out so you never end up
+          move into the actual explanation — with where it breaks spelled out so you never end up
           with a confident wrong model.
         </p>
 
@@ -126,7 +124,7 @@ const Landing = () => {
       {/* what else the tool does, beyond the six layers */}
       <section className="container max-w-4xl pb-24">
         <h2 className="font-serif-display text-3xl tracking-tight sm:text-4xl">
-          and then it keeps <span className="a-hl a-hl-sage">working</span> for you.
+          and then it keeps working for you.
         </h2>
         <p className="mt-4 mb-10 max-w-2xl text-foreground/70">
           the six layers are the format. these are the things that quietly compound around them,
@@ -164,14 +162,11 @@ const Landing = () => {
             what we actually believe
           </p>
           <h2 className="font-serif-display text-3xl tracking-tight sm:text-4xl">
-            understanding is <span className="a-hl a-hl-blue">cognitive mapping</span>, not information retrieval.
+            understanding is cognitive mapping, not information retrieval.
           </h2>
           <p className="mt-4 max-w-2xl text-foreground/80 leading-relaxed">
-            the brain is in essence a{" "}
-            <span className="a-bb">complex, weighted, semantically tagged knowledge graph</span>.
-            new ideas don't appear, they <span className="a-i">attach</span>. analogize is built around that — every feature is either a way to{" "}
-            <span className="a-u a-u-solid">attach</span> a new concept to something you already know, or a way to{" "}
-            <span className="a-u a-u-dashed">see the shape</span> of what you've attached so far.
+            the brain is in essence a complex, weighted, semantically tagged knowledge graph.
+            new ideas don't appear, they attach. analogize is built around that — every feature is either a way to attach a new concept to something you already know, or a way to see the shape of what you've attached so far.
           </p>
           <div className="mt-8 flex flex-wrap gap-2">
             {["narrativization","metaphor translation","emotional anchoring","analogical scaffolding","cognitive compression","experiential simulation","relational understanding"].map((p) => (
