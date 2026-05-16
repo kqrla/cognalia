@@ -26,6 +26,8 @@ import Mechanisms from "./pages/Mechanisms";
 import Philosophy from "./pages/Philosophy";
 import Graphical from "./pages/Graphical";
 import Pricing from "./pages/Pricing";
+import Substrate from "./pages/Substrate";
+import SubstrateApp from "./pages/SubstrateApp";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -66,6 +68,8 @@ const App = () => (
           <Route path="/philosophy" element={<Philosophy />} />
           <Route path="/graphical" element={<Graphical />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/substrate" element={<Substrate />} />
+          <Route path="/substrate/app" element={<SubstrateApp />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
