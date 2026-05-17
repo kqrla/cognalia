@@ -26,8 +26,6 @@ const otherNavItems = [
   { to: "/mechanisms", label: "mechanisms" },
   { to: "/graphical", label: "graphical" },
   { to: "/philosophy", label: "philosophy" },
-  { to: "/substrate", label: "substrate" },
-  { to: "/pricing", label: "pricing" },
   { to: "/roadmap", label: "roadmap" },
 ];
 
