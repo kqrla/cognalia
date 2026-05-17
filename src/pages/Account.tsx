@@ -2,16 +2,18 @@
 // button. signed-out users see a quick pitch + links to /login or /register.
 
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Cloud, Download, LogOut, UserPlus } from "lucide-react";
+import { ArrowLeft, BarChart3, Cloud, Download, LayoutDashboard, LogOut, UserPlus } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/features/auth/useAuth";
 import { exportLocalAsJson, useCloudSync } from "@/features/auth/cloudSync";
+import { usePreferences } from "@/features/analogy/store";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 
 const Account = () => {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
+  const { preferences, updatePreferences } = usePreferences();
   useCloudSync();
 
   const onSignOut = async () => {
