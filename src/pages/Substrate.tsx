@@ -38,13 +38,13 @@ const Substrate = () => {
           internally.
         </p>
         <div className="mt-10 flex flex-wrap items-center gap-3">
-          <Link
-            to="/substrate/app"
-            className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
+          <span
+            aria-disabled="true"
+            className="inline-flex cursor-not-allowed items-center gap-2 rounded-full bg-foreground/70 px-5 py-3 text-sm font-medium text-background opacity-70"
           >
-            open substrate
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+            coming soon
+            <Sparkles className="h-4 w-4" />
+          </span>
           <a
             href="#core"
             className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm text-foreground/80 hover:text-foreground"
