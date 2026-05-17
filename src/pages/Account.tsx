@@ -84,6 +84,40 @@ const Account = () => {
                 </div>
               </button>
             </div>
+
+            <Link
+              to="/dashboard"
+              className="surface-paper flex items-center gap-3 p-4 text-left hover:bg-secondary/40"
+            >
+              <LayoutDashboard className="h-4 w-4" />
+              <div>
+                <p className="text-sm font-medium">open your dashboard</p>
+                <p className="text-xs text-muted-foreground">recents, topics, and opt-in insights</p>
+              </div>
+            </Link>
+
+            <div className="surface-paper p-5">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-start gap-3">
+                  <BarChart3 className="mt-0.5 h-4 w-4 text-muted-foreground" />
+                  <div>
+                    <p className="text-sm font-medium">insights into your searches</p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      opt in to derive patterns from your history (most-used systems, recurring topics, activity). computed locally — nothing is sent anywhere.
+                    </p>
+                  </div>
+                </div>
+                <label className="inline-flex shrink-0 cursor-pointer items-center gap-2 text-xs">
+                  <span className="text-muted-foreground">{preferences.analyticsOptIn ? "on" : "off"}</span>
+                  <input
+                    type="checkbox"
+                    checked={!!preferences.analyticsOptIn}
+                    onChange={(e) => updatePreferences({ analyticsOptIn: e.target.checked })}
+                    className="h-4 w-4"
+                  />
+                </label>
+              </div>
+            </div>
           </div>
         ) : (
           <div className="mt-8 space-y-6">
