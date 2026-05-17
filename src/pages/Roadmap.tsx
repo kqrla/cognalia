@@ -134,14 +134,66 @@ const Roadmap = () => {
         <p className="mt-2 text-sm text-foreground/70">
           a short list, kept honest so the product stays a thinking tool.
         </p>
-        <ul className="mt-4 space-y-2 text-sm text-foreground/85">
+        <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
           {explicitlyOut.map((x) => (
-            <li key={x} className="flex items-start gap-2">
-              <span className="mt-2 h-1 w-1 rounded-full bg-muted-foreground" />
+            <li
+              key={x}
+              className="surface-paper p-4 text-xs leading-relaxed text-foreground/80"
+            >
               {x}
             </li>
           ))}
         </ul>
+
+        <div className="mt-16">
+          <h2 className="font-serif-display text-2xl tracking-tight">
+            sister apps of analogize
+          </h2>
+          <p className="mt-2 text-sm text-foreground/70">
+            other independent engines from our universe.
+          </p>
+          <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <Link
+              to="/substrate"
+              className="surface-paper group p-5 transition-colors hover:bg-secondary/40"
+            >
+              <div className="mb-2 flex items-center justify-between">
+                <p className="font-serif-display text-xl tracking-tight">substrate</p>
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  in development
+                </span>
+              </div>
+              <p className="text-sm leading-relaxed text-foreground/80">
+                a visual cognition and pattern-mapping system that surfaces the
+                load-bearing structures connecting your interests, skills and ways
+                of thinking.
+              </p>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs text-foreground/70 group-hover:text-foreground">
+                explore <ArrowRight className="h-3 w-3" />
+              </span>
+            </Link>
+
+            <article
+              aria-disabled="true"
+              className="surface-paper p-5 opacity-80"
+            >
+              <div className="mb-2 flex items-center justify-between">
+                <p className="font-serif-display text-xl tracking-tight">narrativize</p>
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  in development
+                </span>
+              </div>
+              <p className="text-sm leading-relaxed text-foreground/80">
+                turns the peripheral concepts and subcontents that live in the same
+                ecosystem into a single immersive narrative — mapping a broader
+                concept end-to-end instead of entering one focused analogy per term.
+              </p>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs text-muted-foreground">
+                soon
+              </span>
+            </article>
+          </div>
+        </div>
 
         <Link
           to="/app"
