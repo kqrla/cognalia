@@ -15,12 +15,17 @@ export type Preferences = {
   thinkingStyleId: string | null;
   defaultSystem: AnalogySystemId | null;
   onboarded: boolean;
+  // opt-in: when true, /dashboard renders an analytics panel computed
+  // locally from the user's recents. off by default - we never show
+  // search-derived insights without explicit consent.
+  analyticsOptIn?: boolean;
 };
 
 const defaultPreferences: Preferences = {
   thinkingStyleId: null,
   defaultSystem: null,
   onboarded: false,
+  analyticsOptIn: false,
 };
 
 const readPreferences = (): Preferences => {
