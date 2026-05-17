@@ -28,6 +28,8 @@ import Graphical from "./pages/Graphical";
 import Pricing from "./pages/Pricing";
 import Substrate from "./pages/Substrate";
 import SubstrateApp from "./pages/SubstrateApp";
+import Dashboard from "./pages/Dashboard";
+import Topics from "./pages/Topics";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -70,6 +72,8 @@ const App = () => (
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/substrate" element={<Substrate />} />
           <Route path="/substrate/app" element={<SubstrateApp />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/topics" element={<Topics />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

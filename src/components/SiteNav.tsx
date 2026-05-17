@@ -4,6 +4,7 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/features/auth/useAuth";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,6 +16,11 @@ const directNavItems = [
   { to: "/about", label: "about" },
   { to: "/features", label: "features" },
   { to: "/faq", label: "faq" },
+];
+
+const signedInItems = [
+  { to: "/dashboard", label: "dashboard" },
+  { to: "/topics", label: "topics" },
 ];
 
 const trailingNavItems = [
@@ -31,6 +37,7 @@ const otherNavItems = [
 
 export const SiteNav = () => {
   const { pathname } = useLocation();
+  const { user } = useAuth();
   const isOtherActive = otherNavItems.some((i) => pathname === i.to);
 
   return (
