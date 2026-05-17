@@ -91,6 +91,21 @@ export const SiteNav = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
+          {user && signedInItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) =>
+                cn(
+                  "rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground",
+                  isActive && "text-foreground",
+                )
+              }
+            >
+              {item.label}
+            </NavLink>
+          ))}
+
           {trailingNavItems.map((item) => (
             <NavLink
               key={item.to}
