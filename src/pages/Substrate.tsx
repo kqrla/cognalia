@@ -367,13 +367,13 @@ const Substrate = () => {
               patterns."
             </span>
           </p>
-          <Link
-            to="/substrate/app"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
+          <span
+            aria-disabled="true"
+            className="mt-8 inline-flex cursor-not-allowed items-center gap-2 rounded-full bg-foreground/70 px-5 py-3 text-sm font-medium text-background opacity-70"
           >
-            start mapping
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+            coming soon
+            <Sparkles className="h-4 w-4" />
+          </span>
         </div>
       </section>
 
