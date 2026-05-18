@@ -101,10 +101,12 @@ const Account = () => {
         ) : (
           <div className="mt-8 space-y-6">
             <p className="text-sm text-foreground/75">
-              analogize works fully without an account. an account just unlocks two conveniences:
+              analogize works fully without an account. an account just unlocks a few conveniences:
             </p>
             <ul className="ml-5 list-disc space-y-1 text-sm text-foreground/80">
               <li>cloud sync for your history, presets, and preferences across devices</li>
+              <li>a personal dashboard with opt-in insights into your searches</li>
+              <li>topic management — rename or merge your tags across all translations</li>
               <li>one-click json export of everything you've saved</li>
             </ul>
             <div className="flex flex-wrap gap-3 pt-2">
@@ -128,7 +130,34 @@ const Account = () => {
                 <Download className="h-4 w-4" /> export local data
               </button>
             </div>
+
+            <div className="surface-paper mt-2 p-5">
+              <div className="flex items-start gap-3">
+                <Sparkles className="mt-0.5 h-4 w-4 text-muted-foreground" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium">not sure yet?</p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    see exactly what changes when you sign in, or try the signed-in side as a sandbox — no account required.
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                    <Link
+                      to="/whyregister"
+                      className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 hover:bg-secondary"
+                    >
+                      compare signed-in vs not <ArrowRight className="h-3 w-3" />
+                    </Link>
+                    <Link
+                      to="/demo/dashboard"
+                      className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 hover:bg-secondary"
+                    >
+                      try the demo dashboard
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
         )}
       </section>
       <SiteFooter />
