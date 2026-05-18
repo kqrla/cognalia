@@ -33,6 +33,8 @@ const otherNavItems = [
   { to: "/graphical", label: "graphical" },
   { to: "/philosophy", label: "philosophy" },
   { to: "/roadmap", label: "roadmap" },
+  { to: "/whyregister", label: "why register" },
+  { to: "/demo", label: "demo" },
 ];
 
 export const SiteNav = () => {
