@@ -22,4 +22,7 @@
   <url><loc>https://analogize.lovable.app/account</loc><priority>0.5</priority></url>
   <url><loc>https://analogize.lovable.app/register</loc><priority>0.5</priority></url>
   <url><loc>https://analogize.lovable.app/login</loc><priority>0.5</priority></url>
+  <url><loc>https://analogize.lovable.app/whyregister</loc><priority>0.6</priority></url>
+  <url><loc>https://analogize.lovable.app/demo</loc><priority>0.6</priority></url>
+  <url><loc>https://analogize.lovable.app/demo/dashboard</loc><priority>0.5</priority></url>
 </urlset>
