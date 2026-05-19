@@ -122,16 +122,36 @@ const Account = () => {
             <p className="text-sm text-foreground/75">
               analogize works fully without an account. an account just unlocks a few conveniences:
             </p>
-            <ul className="ml-5 list-disc space-y-1 text-sm text-foreground/80">
-              <li>cloud sync for your history, presets, and preferences across devices</li>
-              <li>a personal dashboard with opt-in insights into your searches</li>
-              <li>topic management — rename or merge your tags across all translations</li>
-              <li>one-click json export of everything you've saved</li>
+            <ul className="space-y-3 text-sm text-foreground/80">
+              <li className="flex items-start gap-3">
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-system-storage">
+                  <Cloud className="h-3 w-3 text-foreground/80" />
+                </span>
+                <span>cloud sync for your history, presets, and preferences across devices</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/15">
+                  <BarChart3 className="h-3 w-3 text-primary" />
+                </span>
+                <span>a personal dashboard with opt-in insights into your searches</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-system-traffic">
+                  <Sparkles className="h-3 w-3 text-foreground/80" />
+                </span>
+                <span>topic management — rename or merge your tags across all translations</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-system-building">
+                  <Download className="h-3 w-3 text-foreground/80" />
+                </span>
+                <span>one-click json export of everything you've saved</span>
+              </li>
             </ul>
             <div className="flex flex-wrap gap-3 pt-2">
               <Link
                 to="/register"
-                className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground"
               >
                 <UserPlus className="h-4 w-4" /> create an account
               </Link>
@@ -150,9 +170,11 @@ const Account = () => {
               </button>
             </div>
 
-            <div className="surface-paper mt-2 p-5">
+            <div className="surface-paper mt-2 border-l-2 border-system-cooking p-5">
               <div className="flex items-start gap-3">
-                <Sparkles className="mt-0.5 h-4 w-4 text-muted-foreground" />
+                <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-system-cooking">
+                  <ShieldCheck className="h-3.5 w-3.5 text-foreground/80" />
+                </span>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-medium">not sure yet?</p>
                   <p className="mt-1 text-xs text-muted-foreground">
@@ -167,7 +189,7 @@ const Account = () => {
                     </Link>
                     <Link
                       to="/demo/dashboard"
-                      className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 hover:bg-secondary"
+                      className="inline-flex items-center gap-1 rounded-full bg-foreground px-3 py-1.5 text-background hover:bg-foreground/90"
                     >
                       try the demo dashboard
                     </Link>
