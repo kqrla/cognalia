@@ -69,7 +69,10 @@ const Demo = () => (
           {items.map((it) => (
             <li key={it.title} className="surface-paper p-5">
               <div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                {it.icon} {it.title}
+                <span className={`inline-flex h-6 w-6 items-center justify-center rounded-full ${it.iconBg}`}>
+                  {it.icon}
+                </span>
+                {it.title}
               </div>
               <p className="mt-2 text-sm text-foreground/80">{it.body}</p>
             </li>
