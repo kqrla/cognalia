@@ -59,14 +59,16 @@ const Account = () => {
           <p className="mt-6 text-sm text-muted-foreground">checking…</p>
         ) : user ? (
           <div className="mt-8 space-y-6">
-            <div className="surface-paper p-5">
+            <div className="surface-paper p-5 border-l-2 border-primary/40">
               <div className="flex items-center gap-2 text-sm">
-                <Cloud className="h-4 w-4 text-muted-foreground" />
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-system-storage">
+                  <Cloud className="h-3.5 w-3.5 text-foreground/80" />
+                </span>
                 <span className="text-muted-foreground">signed in as</span>
                 <span className="font-medium">{user.email ?? user.id}</span>
               </div>
               <p className="mt-3 text-xs text-muted-foreground">
-                your history, presets, and preferences sync to this account in the background. you can sign out anytime - local data on this device stays put.
+                your history, presets, and preferences sync to this account in the background. you can sign out anytime — local data on this device stays put.
               </p>
             </div>
 
@@ -76,7 +78,9 @@ const Account = () => {
                 onClick={onExport}
                 className="surface-paper flex items-center gap-3 p-4 text-left hover:bg-secondary/40"
               >
-                <Download className="h-4 w-4" />
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-system-building">
+                  <Download className="h-3.5 w-3.5 text-foreground/80" />
+                </span>
                 <div>
                   <p className="text-sm font-medium">export everything as json</p>
                   <p className="text-xs text-muted-foreground">history, presets, preferences</p>
@@ -87,7 +91,9 @@ const Account = () => {
                 onClick={onSignOut}
                 className="surface-paper flex items-center gap-3 p-4 text-left hover:bg-secondary/40"
               >
-                <LogOut className="h-4 w-4" />
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-system-relationship">
+                  <LogOut className="h-3.5 w-3.5 text-foreground/80" />
+                </span>
                 <div>
                   <p className="text-sm font-medium">sign out</p>
                   <p className="text-xs text-muted-foreground">local data stays on this device</p>
@@ -97,9 +103,11 @@ const Account = () => {
 
             <Link
               to="/dashboard"
-              className="surface-paper flex items-center gap-3 p-4 text-left hover:bg-secondary/40"
+              className="surface-paper flex items-center gap-3 p-4 text-left hover:bg-secondary/40 border-l-2 border-primary/30"
             >
-              <LayoutDashboard className="h-4 w-4" />
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/15">
+                <LayoutDashboard className="h-3.5 w-3.5 text-primary" />
+              </span>
               <div>
                 <p className="text-sm font-medium">open your dashboard</p>
                 <p className="text-xs text-muted-foreground">recents, topics, and opt-in insights</p>
