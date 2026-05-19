@@ -2,7 +2,18 @@
 // button. signed-out users see a quick pitch + links to /login or /register.
 
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Cloud, Download, LayoutDashboard, LogOut, Sparkles, UserPlus } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  BarChart3,
+  Cloud,
+  Download,
+  LayoutDashboard,
+  LogOut,
+  ShieldCheck,
+  Sparkles,
+  UserPlus,
+} from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/features/auth/useAuth";
