@@ -48,16 +48,16 @@ const DemoDashboard = () => {
           recentHref: () => "/demo",
         }}
         banner={
-          <div className="mb-8 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-dashed border-border bg-secondary/30 px-4 py-3 text-xs">
+          <div className="mb-8 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-dashed border-primary/30 bg-primary/5 px-4 py-3 text-xs">
             <div className="flex items-center gap-2">
-              <span className="rounded-full bg-foreground px-2 py-0.5 text-[10px] font-medium text-background">demo</span>
+              <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] font-medium text-primary-foreground">demo</span>
               <span className="text-muted-foreground">a sandbox tour. no account needed, nothing is saved.</span>
             </div>
             <div className="flex items-center gap-3">
               <Link to="/demo" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground">
                 <ArrowLeft className="h-3 w-3" /> demo home
               </Link>
-              <Link to="/register" className="rounded-full bg-foreground px-3 py-1 text-background">
+              <Link to="/register" className="rounded-full bg-primary px-3 py-1 text-sm font-medium text-primary-foreground hover:bg-primary/90">
                 create the real thing
               </Link>
             </div>

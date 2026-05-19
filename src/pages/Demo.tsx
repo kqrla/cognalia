@@ -7,27 +7,32 @@ import { SiteFooter, SiteNav } from "@/components/SiteNav";
 
 const items = [
   {
-    icon: <LayoutDashboard className="h-4 w-4" />,
+    icon: <LayoutDashboard className="h-3.5 w-3.5 text-primary" />,
+    iconBg: "bg-primary/15",
     title: "a personal dashboard",
     body: "a quiet home base showing your recent translations, saved references, and a quick way back into the app.",
   },
   {
-    icon: <Tag className="h-4 w-4" />,
+    icon: <Tag className="h-3.5 w-3.5 text-foreground/80" />,
+    iconBg: "bg-system-traffic",
     title: "topics management",
     body: "the freeform tags you attach to translations cluster into topics. rename one and it propagates everywhere.",
   },
   {
-    icon: <BarChart3 className="h-4 w-4" />,
+    icon: <BarChart3 className="h-3.5 w-3.5 text-foreground/80" />,
+    iconBg: "bg-system-building",
     title: "opt-in insights",
     body: "off by default. when enabled, a small panel computes your most-used systems, recurring topics, and recent activity — entirely in your browser.",
   },
   {
-    icon: <Cloud className="h-4 w-4" />,
+    icon: <Cloud className="h-3.5 w-3.5 text-foreground/80" />,
+    iconBg: "bg-system-storage",
     title: "cross-device sync",
     body: "history, presets, and preferences quietly mirror to your account so you can pick up on another device.",
   },
   {
-    icon: <Download className="h-4 w-4" />,
+    icon: <Download className="h-3.5 w-3.5 text-foreground/80" />,
+    iconBg: "bg-system-relationship",
     title: "one-click export",
     body: "everything you've saved as a single json file, whenever you want it.",
   },
@@ -64,7 +69,10 @@ const Demo = () => (
           {items.map((it) => (
             <li key={it.title} className="surface-paper p-5">
               <div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                {it.icon} {it.title}
+                <span className={`inline-flex h-6 w-6 items-center justify-center rounded-full ${it.iconBg}`}>
+                  {it.icon}
+                </span>
+                {it.title}
               </div>
               <p className="mt-2 text-sm text-foreground/80">{it.body}</p>
             </li>

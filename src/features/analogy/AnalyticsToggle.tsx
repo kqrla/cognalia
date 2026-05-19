@@ -69,10 +69,12 @@ export const AnalyticsToggle = ({ variant = "card" }: { variant?: "card" | "inli
   return (
     <>
       {variant === "card" ? (
-        <div className="surface-paper p-5">
+        <div className="surface-paper border-l-2 border-system-building p-5">
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-start gap-3">
-              <BarChart3 className="mt-0.5 h-4 w-4 text-muted-foreground" />
+              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-system-building">
+                <BarChart3 className="h-3.5 w-3.5 text-foreground/80" />
+              </span>
               <div>
                 <p className="text-sm font-medium">insights into your searches</p>
                 <p className="mt-1 text-xs text-muted-foreground">
