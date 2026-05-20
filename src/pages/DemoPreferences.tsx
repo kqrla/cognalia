@@ -44,7 +44,6 @@ const DemoPreferences = () => {
                   )}
                 >
                   <p className="text-sm font-medium">{s.label}</p>
-                  {s.description && <p className="mt-0.5 text-xs text-muted-foreground">{s.description}</p>}
                 </button>
               ))}
             </div>
