@@ -32,6 +32,10 @@ import Dashboard from "./pages/Dashboard";
 import Topics from "./pages/Topics";
 import Demo from "./pages/Demo";
 import DemoDashboard from "./pages/DemoDashboard";
+import DemoAccount from "./pages/DemoAccount";
+import DemoHistory from "./pages/DemoHistory";
+import DemoGraph from "./pages/DemoGraph";
+import DemoPersonalize from "./pages/DemoPersonalize";
 import WhyRegister from "./pages/WhyRegister";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -79,6 +83,10 @@ const App = () => (
           <Route path="/topics" element={<Topics />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/demo/dashboard" element={<DemoDashboard />} />
+          <Route path="/demo/account" element={<DemoAccount />} />
+          <Route path="/demo/history" element={<DemoHistory />} />
+          <Route path="/demo/graph" element={<DemoGraph />} />
+          <Route path="/demo/personalize" element={<DemoPersonalize />} />
           <Route path="/whyregister" element={<WhyRegister />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
