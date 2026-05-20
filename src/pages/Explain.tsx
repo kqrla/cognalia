@@ -254,6 +254,15 @@ const Explain = () => {
                     peripherals={peripherals}
                   />
                 )}
+                <button
+                  type="button"
+                  onClick={onDownloadPdf}
+                  disabled={pdfBusy}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground disabled:opacity-50"
+                >
+                  {pdfBusy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
+                  download as pdf
+                </button>
               </>
             )}
             <button
@@ -329,12 +338,14 @@ const Explain = () => {
                 rethinking
               </div>
             )}
-            <ExplanationView
-              concept={concept}
-              system={system}
-              explanation={explanation}
-              diagramKey={`${system}-${renderKey}`}
-            />
+            <div ref={printableRef}>
+              <ExplanationView
+                concept={concept}
+                system={system}
+                explanation={explanation}
+                diagramKey={`${system}-${renderKey}`}
+              />
+            </div>
           </div>
         )}
 
