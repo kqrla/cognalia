@@ -7,9 +7,9 @@
 // "explain again differently" simply re-fires the request with the current
 // system to get a new variation.
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowLeft, RefreshCcw, Sparkles, Loader2, Network, Lightbulb } from "lucide-react";
+import { ArrowLeft, Download, RefreshCcw, Sparkles, Loader2, Network, Lightbulb } from "lucide-react";
 import { toast } from "sonner";
 import { ExplanationView } from "@/features/analogy/components/ExplanationView";
 import { FollowUpCard } from "@/features/analogy/components/FollowUpCard";
@@ -29,6 +29,8 @@ import {
 } from "@/features/analogy/systems";
 import type { Explanation } from "@/features/analogy/types";
 import { cn } from "@/lib/utils";
+import { downloadExplanationAsPdf } from "@/lib/pdfExport";
+import { getSystem } from "@/features/analogy/systems";
 
 const Explain = () => {
   const navigate = useNavigate();
