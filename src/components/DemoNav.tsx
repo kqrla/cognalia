@@ -12,7 +12,8 @@ const demoItems = [
   { to: "/demo/dashboard", label: "dashboard" },
   { to: "/demo/history", label: "history" },
   { to: "/demo/graph", label: "graph" },
-  { to: "/demo/personalize", label: "personalize" },
+  { to: "/demo/preferences", label: "preferences" },
+  { to: "/demo/personalize", label: "topics" },
   { to: "/demo/account", label: "account" },
 ];
 

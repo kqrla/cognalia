@@ -7,9 +7,9 @@
 // "explain again differently" simply re-fires the request with the current
 // system to get a new variation.
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowLeft, RefreshCcw, Sparkles, Loader2, Network, Lightbulb } from "lucide-react";
+import { ArrowLeft, Download, RefreshCcw, Sparkles, Loader2, Network, Lightbulb } from "lucide-react";
 import { toast } from "sonner";
 import { ExplanationView } from "@/features/analogy/components/ExplanationView";
 import { FollowUpCard } from "@/features/analogy/components/FollowUpCard";
@@ -29,6 +29,8 @@ import {
 } from "@/features/analogy/systems";
 import type { Explanation } from "@/features/analogy/types";
 import { cn } from "@/lib/utils";
+import { downloadExplanationAsPdf } from "@/lib/pdfExport";
+import { getSystem } from "@/features/analogy/systems";
 
 const Explain = () => {
   const navigate = useNavigate();
@@ -89,6 +91,24 @@ const Explain = () => {
     initial?.system ? [initial.system] : system ? [system] : [],
   );
   const peripherals = usePeripheralsFor(concept, system);
+  const printableRef = useRef<HTMLDivElement | null>(null);
+  const [pdfBusy, setPdfBusy] = useState(false);
+
+  const onDownloadPdf = async () => {
+    if (!printableRef.current || !explanation) return;
+    setPdfBusy(true);
+    try {
+      await downloadExplanationAsPdf(printableRef.current, {
+        concept,
+        system: getSystem(system)?.label ?? system,
+      });
+      toast.success("downloaded as pdf");
+    } catch {
+      toast.error("could not generate pdf. try again?");
+    } finally {
+      setPdfBusy(false);
+    }
+  };
 
   const thinkingStyleLabel = useMemo(() => {
     const style = thinkingStyles.find(
@@ -234,6 +254,15 @@ const Explain = () => {
                     peripherals={peripherals}
                   />
                 )}
+                <button
+                  type="button"
+                  onClick={onDownloadPdf}
+                  disabled={pdfBusy}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground disabled:opacity-50"
+                >
+                  {pdfBusy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
+                  download as pdf
+                </button>
               </>
             )}
             <button
@@ -309,12 +338,14 @@ const Explain = () => {
                 rethinking
               </div>
             )}
-            <ExplanationView
-              concept={concept}
-              system={system}
-              explanation={explanation}
-              diagramKey={`${system}-${renderKey}`}
-            />
+            <div ref={printableRef}>
+              <ExplanationView
+                concept={concept}
+                system={system}
+                explanation={explanation}
+                diagramKey={`${system}-${renderKey}`}
+              />
+            </div>
           </div>
         )}
 

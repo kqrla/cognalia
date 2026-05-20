@@ -63,6 +63,24 @@ const Demo = () => (
         </Link>
       </div>
 
+      <section className="mt-10">
+        <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">jump straight into a surface</p>
+        <div className="mt-3 flex flex-wrap gap-2 text-sm">
+          {[
+            { to: "/demo/dashboard", label: "dashboard" },
+            { to: "/demo/history", label: "history" },
+            { to: "/demo/graph", label: "graph" },
+            { to: "/demo/preferences", label: "preferences" },
+            { to: "/demo/personalize", label: "topics" },
+            { to: "/demo/account", label: "account" },
+          ].map((l) => (
+            <Link key={l.to} to={l.to} className="rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground hover:bg-secondary">
+              {l.label}
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="mt-14">
         <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">what an account adds</p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
