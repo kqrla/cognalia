@@ -91,6 +91,24 @@ const Explain = () => {
     initial?.system ? [initial.system] : system ? [system] : [],
   );
   const peripherals = usePeripheralsFor(concept, system);
+  const printableRef = useRef<HTMLDivElement | null>(null);
+  const [pdfBusy, setPdfBusy] = useState(false);
+
+  const onDownloadPdf = async () => {
+    if (!printableRef.current || !explanation) return;
+    setPdfBusy(true);
+    try {
+      await downloadExplanationAsPdf(printableRef.current, {
+        concept,
+        system: getSystem(system)?.label ?? system,
+      });
+      toast.success("downloaded as pdf");
+    } catch {
+      toast.error("could not generate pdf. try again?");
+    } finally {
+      setPdfBusy(false);
+    }
+  };
 
   const thinkingStyleLabel = useMemo(() => {
     const style = thinkingStyles.find(
