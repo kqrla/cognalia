@@ -9,12 +9,14 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
+import { SignupRetentionModal } from "@/features/auth/SignupRetentionModal";
 
 const Register = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
+  const [retainOpen, setRetainOpen] = useState(false);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,7 +32,7 @@ const Register = () => {
       return;
     }
     toast.success("account created. you're synced.");
-    navigate("/account");
+    setRetainOpen(true);
   };
 
   const onGoogle = async () => {
@@ -105,6 +107,14 @@ const Register = () => {
         </p>
       </section>
       <SiteFooter />
+      <SignupRetentionModal
+        open={retainOpen}
+        onClose={() => setRetainOpen(false)}
+        onContinue={() => {
+          setRetainOpen(false);
+          navigate("/account");
+        }}
+      />
     </div>
   );
 };
