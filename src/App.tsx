@@ -36,6 +36,7 @@ import DemoAccount from "./pages/DemoAccount";
 import DemoHistory from "./pages/DemoHistory";
 import DemoGraph from "./pages/DemoGraph";
 import DemoPersonalize from "./pages/DemoPersonalize";
+import DemoPreferences from "./pages/DemoPreferences";
 import WhyRegister from "./pages/WhyRegister";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -87,6 +88,7 @@ const App = () => (
           <Route path="/demo/history" element={<DemoHistory />} />
           <Route path="/demo/graph" element={<DemoGraph />} />
           <Route path="/demo/personalize" element={<DemoPersonalize />} />
+          <Route path="/demo/preferences" element={<DemoPreferences />} />
           <Route path="/whyregister" element={<WhyRegister />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
