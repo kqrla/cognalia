@@ -19,6 +19,12 @@ export type Preferences = {
   // locally from the user's recents. off by default - we never show
   // search-derived insights without explicit consent.
   analyticsOptIn?: boolean;
+  // skippable welcome tour - lightweight q&a that personalizes feature
+  // surfacing (depth of explanations, which features to highlight).
+  tourCompleted?: boolean;
+  tourGoal?: "learn" | "teach" | "explore" | "remember" | null;
+  tourPace?: "skim" | "balanced" | "deep" | null;
+  tourFamiliarity?: "new" | "some" | "fluent" | null;
 };
 
 const defaultPreferences: Preferences = {
@@ -26,6 +32,10 @@ const defaultPreferences: Preferences = {
   defaultSystem: null,
   onboarded: false,
   analyticsOptIn: false,
+  tourCompleted: false,
+  tourGoal: null,
+  tourPace: null,
+  tourFamiliarity: null,
 };
 
 const readPreferences = (): Preferences => {
