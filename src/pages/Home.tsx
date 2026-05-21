@@ -89,6 +89,7 @@ const Home = () => {
 
   return (
     <main className="min-h-screen">
+      <WelcomeTour />
       <div className="container max-w-3xl py-10 sm:py-16">
         <header className="mb-10 flex items-center justify-between">
           <div>
