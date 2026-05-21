@@ -64,20 +64,35 @@ const Register = () => {
           <input
             type="email"
             required
+            autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="email"
             className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
           />
-          <input
-            type="password"
-            required
-            minLength={6}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="password (min 6 chars)"
-            className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-          />
+          <div className="relative">
+            <input
+              type={show ? "text" : "password"}
+              required
+              minLength={6}
+              autoComplete="new-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="password (min 6 chars)"
+              className="w-full rounded-md border border-input bg-background px-3 py-2 pr-10 text-sm"
+            />
+            <button
+              type="button"
+              onClick={() => setShow((s) => !s)}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              aria-label={show ? "hide password" : "show password"}
+            >
+              {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+            <p className="mt-1 text-[11px] text-muted-foreground">
+              use at least 6 characters. you can change it anytime in /account.
+            </p>
+          </div>
           <button
             type="submit"
             disabled={busy}
