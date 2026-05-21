@@ -19,6 +19,8 @@ import Suggest from "./pages/Suggest";
 import PresetView from "./pages/PresetView";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import Account from "./pages/Account";
 import Roadmap from "./pages/Roadmap";
 import Goals from "./pages/Goals";
@@ -71,6 +73,8 @@ const App = () => (
           <Route path="/preset/:slug" element={<PresetView />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/account" element={<Account />} />
           <Route path="/roadmap" element={<Roadmap />} />
           <Route path="/goals" element={<Goals />} />

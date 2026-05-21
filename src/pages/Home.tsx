@@ -12,6 +12,7 @@ import { usePreferences, useRecents } from "@/features/analogy/store";
 import { useGraph } from "@/features/graph/store";
 import { curatedConcepts } from "@/features/analogy/curated";
 import { supabase } from "@/integrations/supabase/client";
+import { WelcomeTour } from "@/features/auth/WelcomeTour";
 import { cn } from "@/lib/utils";
 
 type Domain = { field: string; sense: string };
@@ -88,6 +89,7 @@ const Home = () => {
 
   return (
     <main className="min-h-screen">
+      <WelcomeTour />
       <div className="container max-w-3xl py-10 sm:py-16">
         <header className="mb-10 flex items-center justify-between">
           <div>
