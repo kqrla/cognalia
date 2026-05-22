@@ -169,9 +169,20 @@ const Landing = () => {
             new ideas don't appear, they attach. analogize is built around that — every feature is either a way to attach a new concept to something you already know, or a way to see the shape of what you've attached so far.
           </p>
           <div className="mt-8 flex flex-wrap gap-2">
-            {["narrativization","metaphor translation","emotional anchoring","analogical scaffolding","cognitive compression","experiential simulation","relational understanding"].map((p) => (
-              <span key={p} className="surface-paper inline-flex items-center rounded-full px-4 py-1.5 text-xs text-foreground/85">
-                {p}
+            {[
+              { label: "narrativization", tint: "bg-system-story" },
+              { label: "metaphor translation", tint: "bg-system-building" },
+              { label: "emotional anchoring", tint: "bg-system-relationship" },
+              { label: "analogical scaffolding", tint: "bg-system-company" },
+              { label: "cognitive compression", tint: "bg-system-storage" },
+              { label: "experiential simulation", tint: "bg-system-gaming" },
+              { label: "relational understanding", tint: "bg-system-social" },
+            ].map((p) => (
+              <span
+                key={p.label}
+                className={`inline-flex items-center rounded-full px-4 py-1.5 text-xs text-foreground/85 ${p.tint}`}
+              >
+                {p.label}
               </span>
             ))}
           </div>
