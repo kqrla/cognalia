@@ -43,6 +43,7 @@ import WhyRegister from "./pages/WhyRegister";
 import NotFound from "./pages/NotFound.tsx";
 import Examples from "./pages/Examples";
 import ExampleTopic from "./pages/ExampleTopic";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -98,6 +99,7 @@ const App = () => (
           <Route path="/whyregister" element={<WhyRegister />} />
           <Route path="/examples" element={<Examples />} />
           <Route path="/examples/:topic" element={<ExampleTopic />} />
+          <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
