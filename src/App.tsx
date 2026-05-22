@@ -41,6 +41,8 @@ import DemoPersonalize from "./pages/DemoPersonalize";
 import DemoPreferences from "./pages/DemoPreferences";
 import WhyRegister from "./pages/WhyRegister";
 import NotFound from "./pages/NotFound.tsx";
+import Examples from "./pages/Examples";
+import ExampleTopic from "./pages/ExampleTopic";
 
 const queryClient = new QueryClient();
 
@@ -94,6 +96,8 @@ const App = () => (
           <Route path="/demo/personalize" element={<DemoPersonalize />} />
           <Route path="/demo/preferences" element={<DemoPreferences />} />
           <Route path="/whyregister" element={<WhyRegister />} />
+          <Route path="/examples" element={<Examples />} />
+          <Route path="/examples/:topic" element={<ExampleTopic />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
