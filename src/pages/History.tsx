@@ -24,9 +24,21 @@ const History = () => {
   }, [recents]);
 
   const filtered = useMemo(() => {
-    if (!activeTag) return recents;
-    return recents.filter((r) => r.tags?.includes(activeTag));
-  }, [recents, activeTag]);
+    const q = query.trim().toLowerCase();
+    return recents.filter((r) => {
+      if (activeTag && !r.tags?.includes(activeTag)) return false;
+      if (!q) return true;
+      const sys = getSystem(r.system)?.label ?? r.system;
+      return (
+        r.concept.toLowerCase().includes(q) ||
+        sys.toLowerCase().includes(q) ||
+        (r.domain ?? "").toLowerCase().includes(q) ||
+        (r.note ?? "").toLowerCase().includes(q) ||
+        (r.tags ?? []).some((t) => t.toLowerCase().includes(q)) ||
+        (r.explanation?.analogy ?? "").toLowerCase().includes(q)
+      );
+    });
+  }, [recents, activeTag, query]);
 
   const addTag = (id: string) => {
     const value = (draft[id] ?? "").trim();
