@@ -2,7 +2,7 @@
 // recents. tag inputs and clear buttons are inert: this is a tour.
 
 import { useMemo, useState } from "react";
-import { Clock, Tag, X, Plus } from "lucide-react";
+import { Clock, Tag, X, Plus, Search } from "lucide-react";
 import { toast } from "sonner";
 import { demoRecents } from "@/features/analogy/demoData";
 import { getSystem } from "@/features/analogy/systems";
@@ -12,6 +12,7 @@ import { DemoBanner, DemoNav } from "@/components/DemoNav";
 
 const DemoHistory = () => {
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
 
   const allTags = useMemo(() => {
     const set = new Set<string>();
