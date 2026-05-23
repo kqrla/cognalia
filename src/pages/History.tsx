@@ -4,7 +4,7 @@
 
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Plus, Tag, X, Clock, StickyNote, Eye } from "lucide-react";
+import { ArrowLeft, ArrowRight, Plus, Tag, X, Clock, StickyNote, Eye, Search } from "lucide-react";
 import { useRecents } from "@/features/analogy/store";
 import { getSystem } from "@/features/analogy/systems";
 import { cn } from "@/lib/utils";
@@ -13,6 +13,7 @@ const History = () => {
   const navigate = useNavigate();
   const { recents, updateRecentTags, updateRecentNote, clearRecents } = useRecents();
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
   const [draft, setDraft] = useState<Record<string, string>>({});
   const [noteDraft, setNoteDraft] = useState<Record<string, string>>({});
 
@@ -23,9 +24,21 @@ const History = () => {
   }, [recents]);
 
   const filtered = useMemo(() => {
-    if (!activeTag) return recents;
-    return recents.filter((r) => r.tags?.includes(activeTag));
-  }, [recents, activeTag]);
+    const q = query.trim().toLowerCase();
+    return recents.filter((r) => {
+      if (activeTag && !r.tags?.includes(activeTag)) return false;
+      if (!q) return true;
+      const sys = getSystem(r.system)?.label ?? r.system;
+      return (
+        r.concept.toLowerCase().includes(q) ||
+        sys.toLowerCase().includes(q) ||
+        (r.domain ?? "").toLowerCase().includes(q) ||
+        (r.note ?? "").toLowerCase().includes(q) ||
+        (r.tags ?? []).some((t) => t.toLowerCase().includes(q)) ||
+        (r.explanation?.analogy ?? "").toLowerCase().includes(q)
+      );
+    });
+  }, [recents, activeTag, query]);
 
   const addTag = (id: string) => {
     const value = (draft[id] ?? "").trim();
@@ -77,6 +90,28 @@ const History = () => {
             tag concepts to organize them however makes sense to you. tags stay on this device.
           </p>
         </header>
+
+        {recents.length > 0 && (
+          <div className="mb-4 relative">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="search concepts, systems, tags, notes…"
+              className="w-full rounded-full border border-border bg-background py-2 pl-9 pr-9 text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary/40"
+            />
+            {query && (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                aria-label="clear search"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            )}
+          </div>
+        )}
 
         {allTags.length > 0 && (
           <div className="mb-6 flex flex-wrap items-center gap-1.5">

@@ -2,7 +2,7 @@
 // recents. tag inputs and clear buttons are inert: this is a tour.
 
 import { useMemo, useState } from "react";
-import { Clock, Tag, X, Plus } from "lucide-react";
+import { Clock, Tag, X, Plus, Search } from "lucide-react";
 import { toast } from "sonner";
 import { demoRecents } from "@/features/analogy/demoData";
 import { getSystem } from "@/features/analogy/systems";
@@ -12,6 +12,7 @@ import { DemoBanner, DemoNav } from "@/components/DemoNav";
 
 const DemoHistory = () => {
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
 
   const allTags = useMemo(() => {
     const set = new Set<string>();
@@ -19,10 +20,20 @@ const DemoHistory = () => {
     return Array.from(set).sort();
   }, []);
 
-  const filtered = useMemo(
-    () => (activeTag ? demoRecents.filter((r) => r.tags?.includes(activeTag)) : demoRecents),
-    [activeTag],
-  );
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return demoRecents.filter((r) => {
+      if (activeTag && !r.tags?.includes(activeTag)) return false;
+      if (!q) return true;
+      const sys = getSystem(r.system)?.label ?? r.system;
+      return (
+        r.concept.toLowerCase().includes(q) ||
+        sys.toLowerCase().includes(q) ||
+        (r.tags ?? []).some((t) => t.toLowerCase().includes(q)) ||
+        (r.explanation?.analogy ?? "").toLowerCase().includes(q)
+      );
+    });
+  }, [activeTag, query]);
 
   const inert = () => toast("demo only — sign up to actually save changes.");
 
@@ -38,6 +49,26 @@ const DemoHistory = () => {
             tag concepts to organize them however makes sense to you. in the real app, tags stay on your device.
           </p>
         </header>
+
+        <div className="mb-4 relative">
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="search concepts, systems, tags…"
+            className="w-full rounded-full border border-border bg-background py-2 pl-9 pr-9 text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary/40"
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={() => setQuery("")}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              aria-label="clear search"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+          )}
+        </div>
 
         {allTags.length > 0 && (
           <div className="mb-6 flex flex-wrap items-center gap-1.5">

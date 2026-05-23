@@ -15,14 +15,24 @@ export const downloadExplanationAsPdf = async (
   element: HTMLElement,
   meta: { concept: string; system: string },
 ) => {
-  // force a clean light-mode background so contrast is always readable
-  // in the exported pdf, regardless of the user's site theme.
+  // capture exactly what's on screen — keep the live background and
+  // computed colors so the pdf is as vibrant as the rendered ui.
+  // bumped scale to 3 for crisp text + saturated swatches.
   const canvas = await html2canvas(element, {
-    backgroundColor: "#ffffff",
-    scale: 2,
+    backgroundColor: null,
+    scale: 3,
     useCORS: true,
     logging: false,
     windowWidth: element.scrollWidth,
+    foreignObjectRendering: false,
+    onclone: (doc, node) => {
+      // make sure the cloned subtree picks up the same body background
+      // (otherwise the cloned root paints over our card colors).
+      const bg = getComputedStyle(document.body).backgroundColor;
+      (node as HTMLElement).style.background = bg;
+      (node as HTMLElement).style.padding = "24px";
+      (node as HTMLElement).style.borderRadius = "0";
+    },
   });
 
   const pdf = new jsPDF({ unit: "pt", format: "a4", orientation: "portrait" });
