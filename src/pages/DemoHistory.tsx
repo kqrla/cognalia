@@ -20,10 +20,20 @@ const DemoHistory = () => {
     return Array.from(set).sort();
   }, []);
 
-  const filtered = useMemo(
-    () => (activeTag ? demoRecents.filter((r) => r.tags?.includes(activeTag)) : demoRecents),
-    [activeTag],
-  );
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return demoRecents.filter((r) => {
+      if (activeTag && !r.tags?.includes(activeTag)) return false;
+      if (!q) return true;
+      const sys = getSystem(r.system)?.label ?? r.system;
+      return (
+        r.concept.toLowerCase().includes(q) ||
+        sys.toLowerCase().includes(q) ||
+        (r.tags ?? []).some((t) => t.toLowerCase().includes(q)) ||
+        (r.explanation?.analogy ?? "").toLowerCase().includes(q)
+      );
+    });
+  }, [activeTag, query]);
 
   const inert = () => toast("demo only — sign up to actually save changes.");
 
