@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      build_suggestions: {
+        Row: {
+          created_at: string
+          description: string
+          email: string | null
+          id: string
+          reviewed: boolean
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          email?: string | null
+          id?: string
+          reviewed?: boolean
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          email?: string | null
+          id?: string
+          reviewed?: boolean
+          title?: string
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string
@@ -21,7 +48,9 @@ export type Database = {
           id: string
           message: string
           name: string
+          purposes: string[]
           reviewed: boolean
+          subject: string | null
         }
         Insert: {
           created_at?: string
@@ -29,7 +58,9 @@ export type Database = {
           id?: string
           message: string
           name: string
+          purposes?: string[]
           reviewed?: boolean
+          subject?: string | null
         }
         Update: {
           created_at?: string
@@ -37,7 +68,9 @@ export type Database = {
           id?: string
           message?: string
           name?: string
+          purposes?: string[]
           reviewed?: boolean
+          subject?: string | null
         }
         Relationships: []
       }
