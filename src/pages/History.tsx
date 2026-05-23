@@ -4,7 +4,7 @@
 
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Plus, Tag, X, Clock, StickyNote, Eye } from "lucide-react";
+import { ArrowLeft, ArrowRight, Plus, Tag, X, Clock, StickyNote, Eye, Search } from "lucide-react";
 import { useRecents } from "@/features/analogy/store";
 import { getSystem } from "@/features/analogy/systems";
 import { cn } from "@/lib/utils";
@@ -13,6 +13,7 @@ const History = () => {
   const navigate = useNavigate();
   const { recents, updateRecentTags, updateRecentNote, clearRecents } = useRecents();
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
   const [draft, setDraft] = useState<Record<string, string>>({});
   const [noteDraft, setNoteDraft] = useState<Record<string, string>>({});
 
