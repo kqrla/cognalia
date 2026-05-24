@@ -214,6 +214,7 @@ const Suggest = () => {
                           /preset/{p.publishedSlug}
                         </Link>
                       </p>
+                    )}
                     {p.publishedSlug && (
                       <label className="mt-2 inline-flex cursor-pointer items-center gap-2 text-[11px] text-muted-foreground">
                         <input
