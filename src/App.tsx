@@ -44,6 +44,7 @@ import NotFound from "./pages/NotFound.tsx";
 import Examples from "./pages/Examples";
 import ExampleTopic from "./pages/ExampleTopic";
 import Contact from "./pages/Contact";
+import BrowseAll from "./pages/BrowseAll";
 
 const queryClient = new QueryClient();
 
