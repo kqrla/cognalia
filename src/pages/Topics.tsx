@@ -8,12 +8,14 @@ import { Link, Navigate } from "react-router-dom";
 import { Pencil, Tag, Trash2, X } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "@/features/auth/useAuth";
-import { useRecents } from "@/features/analogy/store";
+import { useRecents, usePreferences } from "@/features/analogy/store";
+import { SubjectsManager } from "@/features/analogy/SubjectsManager";
 import { SiteFooter, SiteNav } from "@/components/SiteNav";
 
 const Topics = () => {
   const { user, loading } = useAuth();
   const { recents, updateRecentTags } = useRecents();
+  const { preferences, updatePreferences } = usePreferences();
   const [renaming, setRenaming] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
 
