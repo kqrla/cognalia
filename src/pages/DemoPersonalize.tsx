@@ -2,14 +2,16 @@
 // surface. shows the tag clusters derived from demo recents. rename/
 // remove buttons are inert.
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Pencil, Tag, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { demoRecents } from "@/features/analogy/demoData";
+import { SubjectsManager } from "@/features/analogy/SubjectsManager";
 import { SiteFooter } from "@/components/SiteNav";
 import { DemoBanner, DemoNav } from "@/components/DemoNav";
 
 const DemoPersonalize = () => {
+  const [subjects, setSubjects] = useState<string[]>(["machine learning", "design", "biology"]);
   const topics = useMemo(() => {
     const map = new Map<string, { count: number; concepts: string[] }>();
     demoRecents.forEach((r) => {
