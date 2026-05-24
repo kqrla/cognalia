@@ -112,6 +112,8 @@ const Suggest = () => {
     }
     setPresetPubliclyListed(p.id, next);
     toast.success(next ? "listed in /browseall" : "removed from /browseall");
+  };
+
 
   return (
     <div className="min-h-screen">
