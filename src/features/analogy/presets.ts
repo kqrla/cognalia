@@ -20,6 +20,8 @@ export type AnalogyPreset = {
   // link, we remember the slug locally so the share button can keep
   // returning the same url instead of re-publishing.
   publishedSlug?: string;
+  // when true, this preset is opted into the public /browseall gallery.
+  publiclyListed?: boolean;
 };
 
 type Listener = () => void;
