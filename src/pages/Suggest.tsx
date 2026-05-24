@@ -214,6 +214,18 @@ const Suggest = () => {
                           /preset/{p.publishedSlug}
                         </Link>
                       </p>
+                    {p.publishedSlug && (
+                      <label className="mt-2 inline-flex cursor-pointer items-center gap-2 text-[11px] text-muted-foreground">
+                        <input
+                          type="checkbox"
+                          checked={!!p.publiclyListed}
+                          onChange={(e) => onToggleListed(p, e.target.checked)}
+                          className="h-3.5 w-3.5"
+                        />
+                        <Globe className="h-3 w-3" />
+                        list in <Link to="/browseall" className="underline underline-offset-2 hover:text-foreground">/browseall</Link> for anyone to discover
+                      </label>
+                    )}
                     )}
                   </div>
                   <div className="flex shrink-0 items-center gap-1">
