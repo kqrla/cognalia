@@ -82,7 +82,8 @@ const Topics = () => {
         />
 
         <p className="mt-12 mb-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">topics</p>
-          <p className="surface-paper mt-10 p-6 text-sm text-muted-foreground">
+        {topics.length === 0 ? (
+          <p className="surface-paper mt-4 p-6 text-sm text-muted-foreground">
             no topics yet. open <Link to="/history" className="underline underline-offset-4">history</Link> and tag a translation to start.
           </p>
         ) : (
