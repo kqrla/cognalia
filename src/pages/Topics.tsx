@@ -76,7 +76,12 @@ const Topics = () => {
           topics are the freeform tags you've attached to translations in /history. rename one and it propagates everywhere. merge two by renaming one into the other.
         </p>
 
-        {topics.length === 0 ? (
+        <SubjectsManager
+          subjects={preferences.subjects ?? []}
+          onChange={(next) => updatePreferences({ subjects: next })}
+        />
+
+        <p className="mt-12 mb-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">topics</p>
           <p className="surface-paper mt-10 p-6 text-sm text-muted-foreground">
             no topics yet. open <Link to="/history" className="underline underline-offset-4">history</Link> and tag a translation to start.
           </p>
