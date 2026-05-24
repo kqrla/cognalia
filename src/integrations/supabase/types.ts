@@ -80,6 +80,7 @@ export type Database = {
           description: string
           id: string
           label: string
+          listed: boolean
           slug: string
         }
         Insert: {
@@ -87,6 +88,7 @@ export type Database = {
           description: string
           id?: string
           label: string
+          listed?: boolean
           slug: string
         }
         Update: {
@@ -94,6 +96,7 @@ export type Database = {
           description?: string
           id?: string
           label?: string
+          listed?: boolean
           slug?: string
         }
         Relationships: []
