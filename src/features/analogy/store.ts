@@ -15,16 +15,17 @@ export type Preferences = {
   thinkingStyleId: string | null;
   defaultSystem: AnalogySystemId | null;
   onboarded: boolean;
-  // opt-in: when true, /dashboard renders an analytics panel computed
-  // locally from the user's recents. off by default - we never show
-  // search-derived insights without explicit consent.
   analyticsOptIn?: boolean;
-  // skippable welcome tour - lightweight q&a that personalizes feature
-  // surfacing (depth of explanations, which features to highlight).
   tourCompleted?: boolean;
   tourGoal?: "learn" | "teach" | "explore" | "remember" | null;
   tourPace?: "skim" | "balanced" | "deep" | null;
   tourFamiliarity?: "new" | "some" | "fluent" | null;
+  // "subjects" are higher-level domains of curiosity (e.g. "biology",
+  // "design", "macroeconomics"). distinct from per-translation topic
+  // tags. these describe the user's primary regions of interest but
+  // intentionally DO NOT influence analogies - the model never sees
+  // them. they're a navigation/identity surface only.
+  subjects?: string[];
 };
 
 const defaultPreferences: Preferences = {
@@ -36,6 +37,7 @@ const defaultPreferences: Preferences = {
   tourGoal: null,
   tourPace: null,
   tourFamiliarity: null,
+  subjects: [],
 };
 
 const readPreferences = (): Preferences => {

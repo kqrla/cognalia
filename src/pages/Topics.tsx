@@ -8,12 +8,14 @@ import { Link, Navigate } from "react-router-dom";
 import { Pencil, Tag, Trash2, X } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "@/features/auth/useAuth";
-import { useRecents } from "@/features/analogy/store";
+import { useRecents, usePreferences } from "@/features/analogy/store";
+import { SubjectsManager } from "@/features/analogy/SubjectsManager";
 import { SiteFooter, SiteNav } from "@/components/SiteNav";
 
 const Topics = () => {
   const { user, loading } = useAuth();
   const { recents, updateRecentTags } = useRecents();
+  const { preferences, updatePreferences } = usePreferences();
   const [renaming, setRenaming] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
 
@@ -74,8 +76,14 @@ const Topics = () => {
           topics are the freeform tags you've attached to translations in /history. rename one and it propagates everywhere. merge two by renaming one into the other.
         </p>
 
+        <SubjectsManager
+          subjects={preferences.subjects ?? []}
+          onChange={(next) => updatePreferences({ subjects: next })}
+        />
+
+        <p className="mt-12 mb-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">topics</p>
         {topics.length === 0 ? (
-          <p className="surface-paper mt-10 p-6 text-sm text-muted-foreground">
+          <p className="surface-paper mt-4 p-6 text-sm text-muted-foreground">
             no topics yet. open <Link to="/history" className="underline underline-offset-4">history</Link> and tag a translation to start.
           </p>
         ) : (

@@ -5,7 +5,7 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Plus, Trash2, Sparkles, Share2, Copy, Loader2 } from "lucide-react";
+import { ArrowLeft, Plus, Trash2, Sparkles, Share2, Copy, Loader2, Globe } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,6 +14,7 @@ import {
   addPreset,
   removePreset,
   setPresetPublishedSlug,
+  setPresetPubliclyListed,
   usePresets,
   type AnalogyPreset,
 } from "@/features/analogy/presets";
@@ -98,6 +99,21 @@ const Suggest = () => {
       toast.success("published");
     }
   };
+
+  const onToggleListed = async (p: AnalogyPreset, next: boolean) => {
+    if (!p.publishedSlug) return;
+    const { error } = await supabase
+      .from("published_presets")
+      .update({ listed: next })
+      .eq("slug", p.publishedSlug);
+    if (error) {
+      toast.error("could not update listing");
+      return;
+    }
+    setPresetPubliclyListed(p.id, next);
+    toast.success(next ? "listed in /browseall" : "removed from /browseall");
+  };
+
 
   return (
     <div className="min-h-screen">
@@ -198,6 +214,18 @@ const Suggest = () => {
                           /preset/{p.publishedSlug}
                         </Link>
                       </p>
+                    )}
+                    {p.publishedSlug && (
+                      <label className="mt-2 inline-flex cursor-pointer items-center gap-2 text-[11px] text-muted-foreground">
+                        <input
+                          type="checkbox"
+                          checked={!!p.publiclyListed}
+                          onChange={(e) => onToggleListed(p, e.target.checked)}
+                          className="h-3.5 w-3.5"
+                        />
+                        <Globe className="h-3 w-3" />
+                        list in <Link to="/browseall" className="underline underline-offset-2 hover:text-foreground">/browseall</Link> for anyone to discover
+                      </label>
                     )}
                   </div>
                   <div className="flex shrink-0 items-center gap-1">

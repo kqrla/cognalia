@@ -2,14 +2,16 @@
 // surface. shows the tag clusters derived from demo recents. rename/
 // remove buttons are inert.
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Pencil, Tag, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { demoRecents } from "@/features/analogy/demoData";
+import { SubjectsManager } from "@/features/analogy/SubjectsManager";
 import { SiteFooter } from "@/components/SiteNav";
 import { DemoBanner, DemoNav } from "@/components/DemoNav";
 
 const DemoPersonalize = () => {
+  const [subjects, setSubjects] = useState<string[]>(["machine learning", "design", "biology"]);
   const topics = useMemo(() => {
     const map = new Map<string, { count: number; concepts: string[] }>();
     demoRecents.forEach((r) => {
@@ -38,7 +40,10 @@ const DemoPersonalize = () => {
           topics are the freeform tags you've attached to translations. rename one and it propagates everywhere. merge two by renaming one into the other.
         </p>
 
-        <ul className="mt-10 divide-y divide-border/60 surface-paper">
+        <SubjectsManager subjects={subjects} onChange={setSubjects} />
+
+        <p className="mt-12 mb-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">topics</p>
+        <ul className="divide-y divide-border/60 surface-paper">
           {topics.map((t) => (
             <li key={t.name} className="p-4">
               <div className="flex items-center justify-between gap-3">
