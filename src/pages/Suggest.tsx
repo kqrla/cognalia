@@ -100,6 +100,19 @@ const Suggest = () => {
     }
   };
 
+  const onToggleListed = async (p: AnalogyPreset, next: boolean) => {
+    if (!p.publishedSlug) return;
+    const { error } = await supabase
+      .from("published_presets")
+      .update({ listed: next })
+      .eq("slug", p.publishedSlug);
+    if (error) {
+      toast.error("could not update listing");
+      return;
+    }
+    setPresetPubliclyListed(p.id, next);
+    toast.success(next ? "listed in /browseall" : "removed from /browseall");
+
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-30 border-b border-border/60 bg-background/70 backdrop-blur">
