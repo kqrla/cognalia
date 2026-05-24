@@ -79,6 +79,12 @@ export const setPresetPublishedSlug = (id: string, slug: string) => {
   );
 };
 
+export const setPresetPubliclyListed = (id: string, listed: boolean) => {
+  write(
+    read().map((p) => (p.id === id ? { ...p, publiclyListed: listed } : p)),
+  );
+};
+
 export const usePresets = () => {
   const [presets, setPresets] = useState<AnalogyPreset[]>(read);
   useEffect(() => {
