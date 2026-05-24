@@ -226,7 +226,6 @@ const Suggest = () => {
                         list in <Link to="/browseall" className="underline underline-offset-2 hover:text-foreground">/browseall</Link> for anyone to discover
                       </label>
                     )}
-                    )}
                   </div>
                   <div className="flex shrink-0 items-center gap-1">
                     {p.publishedSlug ? (
