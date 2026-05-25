@@ -68,7 +68,7 @@ const Landing = () => {
           analogize takes the feynman technique a step further. instead of just simplifying ideas,
           it translates them into the mental models you already use. you start in
           familiar territory, see exactly how each part maps to the real concept, and only then
-          move into the actual explanation — with where it breaks spelled out so you never end up
+          move into the actual explanation, with where it breaks spelled out so you never end up
           with a confident wrong model.
         </p>
 
@@ -132,10 +132,10 @@ const Landing = () => {
         </p>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {[
-            { icon: Layers, t: "ten thinking systems", b: "pick the lens you already navigate fluently — gaming, cooking, story, traffic, brains. the same concept reads differently through each." },
+            { icon: Layers, t: "ten thinking systems", b: "pick the lens you already navigate fluently, gaming, cooking, story, traffic, brains. the same concept reads differently through each." },
             { icon: RefreshCcw, t: "explain again, differently", b: "regenerate through a different system to see the same concept from another angle. no two explanations repeat." },
             { icon: Filter, t: "domain disambiguation", b: "type a fuzzy term and pin the field you mean, so the analogy lands in the right subdomain instead of the most popular one." },
-            { icon: Orbit, t: "peripheral analogies", b: "ask about a related idea and we place it inside the same world as the original — or admit, honestly, when it doesn't fit." },
+            { icon: Orbit, t: "peripheral analogies", b: "ask about a related idea and we place it inside the same world as the original, or admit, honestly, when it doesn't fit." },
             { icon: Lightbulb, t: "your own references", b: "teach analogize a hobby or mental model it didn't ship with. it's reused later only when it lands naturally." },
             { icon: Network, t: "an understanding graph", b: "every translation becomes a node. every analogy becomes an edge. your understanding draws itself, sideways and upward." },
           ].map((c) => {
@@ -166,7 +166,7 @@ const Landing = () => {
           </h2>
           <p className="mt-4 max-w-2xl text-foreground/80 leading-relaxed">
             the brain is in essence a complex, weighted, semantically tagged knowledge graph.
-            new ideas don't appear, they attach. analogize is built around that — every feature is either a way to attach a new concept to something you already know, or a way to see the shape of what you've attached so far.
+            new ideas don't appear, they attach. analogize is built around that, every feature is either a way to attach a new concept to something you already know, or a way to see the shape of what you've attached so far.
           </p>
           <div className="mt-8 flex flex-wrap gap-2">
             {[
