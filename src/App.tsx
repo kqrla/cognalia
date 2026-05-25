@@ -45,6 +45,7 @@ import Examples from "./pages/Examples";
 import ExampleTopic from "./pages/ExampleTopic";
 import Contact from "./pages/Contact";
 import BrowseAll from "./pages/BrowseAll";
+import Compare from "./pages/Compare";
 
 const queryClient = new QueryClient();
 
@@ -102,6 +103,7 @@ const App = () => (
           <Route path="/examples/:topic" element={<ExampleTopic />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/browseall" element={<BrowseAll />} />
+          <Route path="/compare" element={<Compare />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
