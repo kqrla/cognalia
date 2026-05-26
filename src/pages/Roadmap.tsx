@@ -15,6 +15,7 @@ import {
   Workflow,
   Filter,
   Cloud,
+  PenTool,
 } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 
