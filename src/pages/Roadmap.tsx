@@ -257,6 +257,24 @@ const Roadmap = () => {
 
             <article className="surface-paper p-5 opacity-80">
               <div className="mb-2 flex items-center justify-between">
+                <p className="font-serif-display text-xl tracking-tight">talk back & correct</p>
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  planned
+                </span>
+              </div>
+              <p className="text-sm leading-relaxed text-foreground/80">
+                an audio back-and-forth while the sketch evolves live. ask
+                "wait, so basically what you're saying is..." and the system
+                re-draws, corrects, or zooms in on exactly the part you are stuck
+                on — a conversation, not a lecture.
+              </p>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs text-muted-foreground">
+                long term
+              </span>
+            </article>
+
+            <article className="surface-paper p-5 opacity-80">
+              <div className="mb-2 flex items-center justify-between">
                 <p className="font-serif-display text-xl tracking-tight">not a whiteboard</p>
                 <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
                   principle
