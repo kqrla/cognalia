@@ -273,7 +273,6 @@ const Roadmap = () => {
             </article>
           </div>
         </div>
-        </div>
 
         <Link
           to="/app"
