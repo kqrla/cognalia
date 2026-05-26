@@ -193,7 +193,85 @@ const Roadmap = () => {
                 soon
               </span>
             </article>
+        </div>
+
+        <div className="mt-16">
+          <h2 className="font-serif-display text-2xl tracking-tight">
+            visual sketchnote mode
+          </h2>
+          <p className="mt-2 text-sm text-foreground/70">
+            long-term plans for making analogize explanations visually replayable.
+          </p>
+          <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <article className="surface-paper p-5 opacity-80">
+              <div className="mb-2 flex items-center justify-between">
+                <p className="font-serif-display text-xl tracking-tight">visual sketches</p>
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  planned
+                </span>
+              </div>
+              <p className="text-sm leading-relaxed text-foreground/80">
+                auto-generated sketchnotes that walk through an explanation step by step,
+                pairing each analogy beat with a simple hand-drawn-style illustration so the
+                concept lands through both language and line.
+              </p>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs text-muted-foreground">
+                long term
+              </span>
+            </article>
+
+            <article className="surface-paper p-5 opacity-80">
+              <div className="mb-2 flex items-center justify-between">
+                <p className="font-serif-display text-xl tracking-tight">visual anchoring</p>
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  planned
+                </span>
+              </div>
+              <p className="text-sm leading-relaxed text-foreground/80">
+                persistent visual landmarks tied to concepts you have already learned,
+                so revisiting an idea surfaces the same sketch, color, and shape you
+                first absorbed it through — reinforcing memory through familiar imagery.
+              </p>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs text-muted-foreground">
+                long term
+              </span>
+            </article>
+
+            <article className="surface-paper p-5 opacity-80">
+              <div className="mb-2 flex items-center justify-between">
+                <p className="font-serif-display text-xl tracking-tight">replayable explanations</p>
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  planned
+                </span>
+              </div>
+              <p className="text-sm leading-relaxed text-foreground/80">
+                an animated playback mode that replays the analogy beat-by-beat,
+                letting you pause, rewind, and rewatch how a concept maps onto its
+                mental model instead of reading it all at once.
+              </p>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs text-muted-foreground">
+                long term
+              </span>
+            </article>
+
+            <article className="surface-paper p-5 opacity-80">
+              <div className="mb-2 flex items-center justify-between">
+                <p className="font-serif-display text-xl tracking-tight">not a whiteboard</p>
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  principle
+                </span>
+              </div>
+              <p className="text-sm leading-relaxed text-foreground/80">
+                this is not a free-form drawing app. every visual is generated from the
+                analogy itself, constrained and purposeful, so the sketch always serves
+                the explanation and never becomes a blank canvas exercise.
+              </p>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs text-muted-foreground">
+                guiding principle
+              </span>
+            </article>
           </div>
+        </div>
         </div>
 
         <Link
