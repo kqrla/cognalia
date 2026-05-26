@@ -193,6 +193,7 @@ const Roadmap = () => {
                 soon
               </span>
             </article>
+          </div>
         </div>
 
         <div className="mt-16">
