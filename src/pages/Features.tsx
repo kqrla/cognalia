@@ -162,6 +162,7 @@ const encompass: {
   { label: "contextual embodied understanding", modal: { title: "contextual embodied understanding", /* body: ["edit me"] */ } },
   { label: "low-load conceptual packets", modal: { title: "low-load conceptual packets", /* body: ["edit me"] */ } },
   { label: "cognitive bridges", modal: { title: "cognitive bridges", /* body: ["edit me"] */ } },
+  { label: "graphical representation", href: "/graphical" },
 ];
 
 const Features = () => {
