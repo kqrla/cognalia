@@ -123,6 +123,7 @@ const capabilities = [
 const encompass: {
   label: string;
   starred?: boolean;
+  href?: string;
   modal?: { title: string; body?: string[] };
 }[] = [
   { label: "narrativization", modal: { title: "narrativization", /* body: ["edit me"] */ } },
