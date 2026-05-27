@@ -28,13 +28,10 @@ const trailingNavItems = [
 ];
 
 const otherNavItems = [
+  { to: "/philosophy", label: "philosophy" },
   { to: "/goals", label: "goals" },
   { to: "/mechanisms", label: "mechanisms" },
-  { to: "/graphical", label: "graphical" },
-  { to: "/philosophy", label: "philosophy" },
   { to: "/roadmap", label: "roadmap" },
-  { to: "/whyregister", label: "why register" },
-  { to: "/demo", label: "demo" },
 ];
 
 export const SiteNav = () => {

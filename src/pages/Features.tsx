@@ -123,6 +123,7 @@ const capabilities = [
 const encompass: {
   label: string;
   starred?: boolean;
+  href?: string;
   modal?: { title: string; body?: string[] };
 }[] = [
   { label: "narrativization", modal: { title: "narrativization", /* body: ["edit me"] */ } },
@@ -162,6 +163,7 @@ const encompass: {
   { label: "contextual embodied understanding", modal: { title: "contextual embodied understanding", /* body: ["edit me"] */ } },
   { label: "low-load conceptual packets", modal: { title: "low-load conceptual packets", /* body: ["edit me"] */ } },
   { label: "cognitive bridges", modal: { title: "cognitive bridges", /* body: ["edit me"] */ } },
+  { label: "graphical representation", href: "/graphical" },
 ];
 
 const Features = () => {
@@ -232,13 +234,30 @@ const Features = () => {
           <div className="flex flex-wrap gap-2">
             {encompass.map((p) => {
               const hasBody = !!p.modal?.body && p.modal.body.length > 0;
+              const chipClass =
+                "surface-paper relative inline-flex max-w-[50vw] items-center rounded-full px-4 py-1.5 text-sm text-foreground/85 transition-colors hover:bg-accent/30 disabled:cursor-default disabled:opacity-90";
+              if (p.href) {
+                return (
+                  <Link key={p.label} to={p.href} className={chipClass}>
+                    <span className="break-words text-left">{p.label}</span>
+                    {p.starred && (
+                      <span
+                        aria-hidden="true"
+                        className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full border border-border/60 bg-background text-amber-500 shadow-sm"
+                      >
+                        <Star className="h-2.5 w-2.5" fill="currentColor" />
+                      </span>
+                    )}
+                  </Link>
+                );
+              }
               return (
                 <button
                   key={p.label}
                   type="button"
                   onClick={() => hasBody && setOpenModal(p.label)}
                   aria-label={hasBody ? `learn more about ${p.label}` : p.label}
-                  className="surface-paper relative inline-flex max-w-[50vw] items-center rounded-full px-4 py-1.5 text-sm text-foreground/85 transition-colors hover:bg-accent/30 disabled:cursor-default disabled:opacity-90"
+                  className={chipClass}
                   disabled={!hasBody}
                 >
                   <span className="break-words text-left">{p.label}</span>

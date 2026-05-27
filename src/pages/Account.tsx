@@ -116,6 +116,21 @@ const Account = () => {
 
             <AnalyticsToggle />
 
+            <div className="flex flex-wrap gap-2 text-xs">
+              <Link
+                to="/whyregister"
+                className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 hover:bg-secondary"
+              >
+                why register <ArrowRight className="h-3 w-3" />
+              </Link>
+              <Link
+                to="/demo"
+                className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 hover:bg-secondary"
+              >
+                explore the demo
+              </Link>
+            </div>
+
           </div>
         ) : (
           <div className="mt-8 space-y-6">
