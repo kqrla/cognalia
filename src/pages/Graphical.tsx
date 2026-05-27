@@ -11,6 +11,12 @@ import {
   Tag,
   Filter,
   Eye,
+  Search,
+  Pin,
+  Palette,
+  GitBranch,
+  Compass,
+  ScanLine,
 } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 
@@ -211,6 +217,101 @@ const Graphical = () => {
             );
           })}
         </ol>
+      </section>
+
+      {/* anatomy of a node */}
+      <section className="container max-w-4xl pb-16">
+        <h2 className="mb-3 font-serif-display text-3xl tracking-tight">anatomy of a node</h2>
+        <p className="max-w-[92%] text-foreground/80 leading-relaxed">
+          a node is not just a label. it carries{" "}
+          <span className="a-u a-u-solid">everything we knew about the concept the moment you understood it</span> —
+          the analogy that worked, the system you chose, the parts you flagged as load-bearing, the
+          parts you marked as decorative. you can open any node years later and replay the exact
+          translation that made it click.
+        </p>
+
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {[
+            { icon: Palette, t: "color", b: "inherited from the analogy system. story-system nodes share a hue; cooking-system nodes share another." },
+            { icon: ScanLine, t: "size", b: "grows with how often you revisit, share, or extend it. dormant ideas shrink quietly." },
+            { icon: GitBranch, t: "edges", b: "weighted by how strongly the analogy linked them — strong analogy = thick line, peripheral fit = thin dashed line." },
+          ].map((c) => {
+            const Icon = c.icon;
+            return (
+              <article key={c.t} className="surface-paper p-5">
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary">
+                    <Icon className="h-3.5 w-3.5 text-foreground/70" />
+                  </span>
+                  <p className="text-sm font-semibold tracking-tight">{c.t}</p>
+                </div>
+                <p className="text-sm leading-relaxed text-foreground/80">{c.b}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* what you can do with it */}
+      <section className="container max-w-4xl pb-16">
+        <h2 className="mb-3 font-serif-display text-3xl tracking-tight">what you can do with it</h2>
+        <p className="max-w-[92%] text-foreground/80 leading-relaxed">
+          the graph is not a museum. it is a working surface — every node is a doorway back into
+          a translation, and every gap is an invitation to learn the next thing.
+        </p>
+
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {[
+            { icon: Search, t: "search by feel, not filename", b: "type 'the one i learned through cooking' and we surface the cluster, not a folder path." },
+            { icon: Filter, t: "filter by analogy system", b: "isolate everything you understood through one lens. see which systems your brain leans on most." },
+            { icon: Pin, t: "pin focus nodes", b: "lock a node at the center and let the rest of the graph re-lay itself around it for study." },
+            { icon: Compass, t: "wander the gaps", b: "we surface isolated nodes and lonely edges so you can see what is begging to be connected." },
+          ].map((c) => {
+            const Icon = c.icon;
+            return (
+              <article key={c.t} className="surface-paper p-5">
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary">
+                    <Icon className="h-3.5 w-3.5 text-foreground/70" />
+                  </span>
+                  <p className="text-sm font-semibold tracking-tight">{c.t}</p>
+                </div>
+                <p className="text-sm leading-relaxed text-foreground/80">{c.b}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* not a notes app */}
+      <section className="container max-w-4xl pb-16">
+        <div className="surface-paper p-6 sm:p-8">
+          <p className="mb-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+            what it isn't
+          </p>
+          <h2 className="font-serif-display text-3xl tracking-tight">
+            not a notes app. not a second brain.
+          </h2>
+          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div>
+              <p className="mb-2 text-sm font-semibold tracking-tight text-foreground/85">notes apps store sentences.</p>
+              <p className="text-sm leading-relaxed text-foreground/75">
+                they assume the work of understanding already happened. you wrote it down because
+                you got it. the file is a{" "}
+                <span className="a-u a-u-dashed">souvenir</span>.
+              </p>
+            </div>
+            <div>
+              <p className="mb-2 text-sm font-semibold tracking-tight text-foreground/85">analogize stores the act.</p>
+              <p className="text-sm leading-relaxed text-foreground/75">
+                the graph holds the{" "}
+                <span className="a-hl a-hl-yellow">moment of attachment</span> — which analogy made
+                it click, where it broke, what other concepts it leaned on. it is the receipt of
+                comprehension, not the artifact.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* reasoning */}
