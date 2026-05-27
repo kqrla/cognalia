@@ -46,6 +46,7 @@ import ExampleTopic from "./pages/ExampleTopic";
 import Contact from "./pages/Contact";
 import BrowseAll from "./pages/BrowseAll";
 import Compare from "./pages/Compare";
+import Studio from "./pages/Studio";
 
 const queryClient = new QueryClient();
 
