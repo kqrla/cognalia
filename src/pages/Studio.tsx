@@ -136,10 +136,30 @@ const principles = [
   },
 ];
 
+const deptChipClasses = [
+  "bg-amber-100 text-amber-900 border-amber-200",
+  "bg-sky-100 text-sky-900 border-sky-200",
+  "bg-emerald-100 text-emerald-900 border-emerald-200",
+  "bg-rose-100 text-rose-900 border-rose-200",
+  "bg-violet-100 text-violet-900 border-violet-200",
+  "bg-orange-100 text-orange-900 border-orange-200",
+  "bg-teal-100 text-teal-900 border-teal-200",
+];
+
+const chipForDept = (dept: string) => {
+  let h = 0;
+  for (let i = 0; i < dept.length; i++) h = (h * 31 + dept.charCodeAt(i)) >>> 0;
+  return deptChipClasses[h % deptChipClasses.length];
+};
+
 const Studio = () => {
+  const [teamOpen, setTeamOpen] = useState(false);
+  const [activeMember, setActiveMember] = useState<Member | null>(null);
+
   return (
     <div className="min-h-screen">
       <SiteNav />
+
 
       <section className="container max-w-3xl py-16 sm:py-24">
         <p className="mb-4 text-xs uppercase tracking-[0.22em] text-muted-foreground">the studio</p>
