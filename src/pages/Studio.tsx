@@ -293,8 +293,53 @@ const Studio = () => {
         </p>
       </section>
 
+      <Dialog open={!!activeMember} onOpenChange={(o) => !o && setActiveMember(null)}>
+        <DialogContent className="max-w-md">
+          {activeMember && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-4">
+                  <Avatar className="h-16 w-16 border border-border">
+                    <AvatarImage src={teamPlaceholder} alt={activeMember.name} className="object-cover" />
+                    <AvatarFallback>{activeMember.name.slice(0, 2)}</AvatarFallback>
+                  </Avatar>
+                  <div className="text-left">
+                    <DialogTitle className="font-serif-display text-2xl tracking-tight">
+                      {activeMember.name}
+                    </DialogTitle>
+                    <DialogDescription className="text-xs uppercase tracking-wider">
+                      {activeMember.title}
+                    </DialogDescription>
+                  </div>
+                </div>
+              </DialogHeader>
+
+              <div className="flex flex-wrap gap-1.5">
+                {activeMember.departments.map((d) => (
+                  <span
+                    key={d}
+                    className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-medium ${chipForDept(d)}`}
+                  >
+                    {d}
+                  </span>
+                ))}
+              </div>
+
+              <p className="text-sm leading-relaxed text-foreground/85">{activeMember.bio}</p>
+
+              <div className="flex items-center gap-2 border-t border-border pt-4">
+                {activeMember.contacts.map((c) => (
+                  <ContactIcon key={c.kind} kind={c.kind} href={c.href} />
+                ))}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
       <SiteFooter />
     </div>
+
   );
 };
 
