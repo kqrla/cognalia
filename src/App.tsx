@@ -47,6 +47,7 @@ import Contact from "./pages/Contact";
 import BrowseAll from "./pages/BrowseAll";
 import Compare from "./pages/Compare";
 import Studio from "./pages/Studio";
+import Team from "./pages/Team";
 import LandingClone from "./pages/LandingClone";
 
 const queryClient = new QueryClient();
@@ -107,7 +108,10 @@ const App = () => (
           <Route path="/browseall" element={<BrowseAll />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/studio" element={<Studio />} />
+          <Route path="/studio/team" element={<Team />} />
+          <Route path="/team" element={<Team />} />
           <Route path="/landingclone" element={<LandingClone />} />
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
