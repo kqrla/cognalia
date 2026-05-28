@@ -47,6 +47,7 @@ import Contact from "./pages/Contact";
 import BrowseAll from "./pages/BrowseAll";
 import Compare from "./pages/Compare";
 import Studio from "./pages/Studio";
+import Team from "./pages/Team";
 import LandingClone from "./pages/LandingClone";
 
 const queryClient = new QueryClient();
