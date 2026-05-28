@@ -267,6 +267,11 @@ const Studio = () => {
                   </div>
                 ))}
               </div>
+              <div className="mt-3 text-right">
+                <Link to="/team" className="text-xs text-muted-foreground underline-offset-2 hover:text-foreground hover:underline">
+                  see the full team page →
+                </Link>
+              </div>
             </TooltipProvider>
           )}
         </div>
