@@ -1,9 +1,117 @@
 // /studio - hidden page about the studio/creators behind analogize.
 // not linked from anywhere; only reachable by typing the URL directly.
 
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Compass, Feather, Hammer, Sparkles } from "lucide-react";
+import { ArrowRight, ChevronDown, Compass, Feather, Hammer, Sparkles, Mail, Github, Linkedin } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import teamPlaceholder from "@/assets/team-placeholder.png";
+
+type Member = {
+  name: string;
+  title: string;
+  departments: string[];
+  bio: string;
+  contacts: { kind: "email" | "github" | "linkedin"; href: string }[];
+};
+
+const team: Member[] = [
+  {
+    name: "ren ito",
+    title: "founder / format",
+    departments: ["product", "format design"],
+    bio: "obsessed with the six-layer template. keeps the format strict so the meaning can breathe. used to teach physics to non-physicists.",
+    contacts: [
+      { kind: "email", href: "mailto:ren@analogize.studio" },
+      { kind: "github", href: "https://github.com" },
+      { kind: "linkedin", href: "https://linkedin.com" },
+    ],
+  },
+  {
+    name: "mira okafor",
+    title: "design lead",
+    departments: ["design", "typography"],
+    bio: "draws the line between editorial and software. picks the fonts, sets the spacing, fights for whitespace.",
+    contacts: [
+      { kind: "email", href: "mailto:mira@analogize.studio" },
+      { kind: "github", href: "https://github.com" },
+      { kind: "linkedin", href: "https://linkedin.com" },
+    ],
+  },
+  {
+    name: "leo vasquez",
+    title: "backend / infra",
+    departments: ["backend", "devops"],
+    bio: "managed the backend and devops. believes local-first should be the default and the cloud should be a polite optional guest.",
+    contacts: [
+      { kind: "email", href: "mailto:leo@analogize.studio" },
+      { kind: "github", href: "https://github.com" },
+      { kind: "linkedin", href: "https://linkedin.com" },
+    ],
+  },
+  {
+    name: "ada chen",
+    title: "ai / models",
+    departments: ["ai", "evaluation"],
+    bio: "wrangles the model layer. writes the eval harness that decides whether an analogy actually lands or just sounds clever.",
+    contacts: [
+      { kind: "email", href: "mailto:ada@analogize.studio" },
+      { kind: "github", href: "https://github.com" },
+      { kind: "linkedin", href: "https://linkedin.com" },
+    ],
+  },
+  {
+    name: "noor patel",
+    title: "frontend engineer",
+    departments: ["frontend", "interaction"],
+    bio: "builds the surfaces you actually touch. cares about a button feeling exactly right before it ships.",
+    contacts: [
+      { kind: "email", href: "mailto:noor@analogize.studio" },
+      { kind: "github", href: "https://github.com" },
+      { kind: "linkedin", href: "https://linkedin.com" },
+    ],
+  },
+  {
+    name: "sam holloway",
+    title: "research / curation",
+    departments: ["research", "library"],
+    bio: "reads everything. curates the built-in systems and writes the bridge lines that connect metaphor to formal explanation.",
+    contacts: [
+      { kind: "email", href: "mailto:sam@analogize.studio" },
+      { kind: "github", href: "https://github.com" },
+      { kind: "linkedin", href: "https://linkedin.com" },
+    ],
+  },
+  {
+    name: "jules moreau",
+    title: "community / writing",
+    departments: ["writing", "community"],
+    bio: "talks to the people using analogize in the wild. turns their notes into the changelog and the philosophy pages.",
+    contacts: [
+      { kind: "email", href: "mailto:jules@analogize.studio" },
+      { kind: "github", href: "https://github.com" },
+      { kind: "linkedin", href: "https://linkedin.com" },
+    ],
+  },
+];
+
+const ContactIcon = ({ kind, href }: { kind: Member["contacts"][number]["kind"]; href: string }) => {
+  const Icon = kind === "email" ? Mail : kind === "github" ? Github : Linkedin;
+  return (
+    <a
+      href={href}
+      target={kind === "email" ? undefined : "_blank"}
+      rel="noreferrer"
+      className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:bg-secondary hover:text-foreground"
+      aria-label={kind}
+    >
+      <Icon className="h-4 w-4" />
+    </a>
+  );
+};
 
 const principles = [
   {
