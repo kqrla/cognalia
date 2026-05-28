@@ -1,9 +1,117 @@
 // /studio - hidden page about the studio/creators behind analogize.
 // not linked from anywhere; only reachable by typing the URL directly.
 
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Compass, Feather, Hammer, Sparkles } from "lucide-react";
+import { ArrowRight, ChevronDown, Compass, Feather, Hammer, Sparkles, Mail, Github, Linkedin } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import teamPlaceholder from "@/assets/team-placeholder.png";
+
+type Member = {
+  name: string;
+  title: string;
+  departments: string[];
+  bio: string;
+  contacts: { kind: "email" | "github" | "linkedin"; href: string }[];
+};
+
+const team: Member[] = [
+  {
+    name: "ren ito",
+    title: "founder / format",
+    departments: ["product", "format design"],
+    bio: "obsessed with the six-layer template. keeps the format strict so the meaning can breathe. used to teach physics to non-physicists.",
+    contacts: [
+      { kind: "email", href: "mailto:ren@analogize.studio" },
+      { kind: "github", href: "https://github.com" },
+      { kind: "linkedin", href: "https://linkedin.com" },
+    ],
+  },
+  {
+    name: "mira okafor",
+    title: "design lead",
+    departments: ["design", "typography"],
+    bio: "draws the line between editorial and software. picks the fonts, sets the spacing, fights for whitespace.",
+    contacts: [
+      { kind: "email", href: "mailto:mira@analogize.studio" },
+      { kind: "github", href: "https://github.com" },
+      { kind: "linkedin", href: "https://linkedin.com" },
+    ],
+  },
+  {
+    name: "leo vasquez",
+    title: "backend / infra",
+    departments: ["backend", "devops"],
+    bio: "managed the backend and devops. believes local-first should be the default and the cloud should be a polite optional guest.",
+    contacts: [
+      { kind: "email", href: "mailto:leo@analogize.studio" },
+      { kind: "github", href: "https://github.com" },
+      { kind: "linkedin", href: "https://linkedin.com" },
+    ],
+  },
+  {
+    name: "ada chen",
+    title: "ai / models",
+    departments: ["ai", "evaluation"],
+    bio: "wrangles the model layer. writes the eval harness that decides whether an analogy actually lands or just sounds clever.",
+    contacts: [
+      { kind: "email", href: "mailto:ada@analogize.studio" },
+      { kind: "github", href: "https://github.com" },
+      { kind: "linkedin", href: "https://linkedin.com" },
+    ],
+  },
+  {
+    name: "noor patel",
+    title: "frontend engineer",
+    departments: ["frontend", "interaction"],
+    bio: "builds the surfaces you actually touch. cares about a button feeling exactly right before it ships.",
+    contacts: [
+      { kind: "email", href: "mailto:noor@analogize.studio" },
+      { kind: "github", href: "https://github.com" },
+      { kind: "linkedin", href: "https://linkedin.com" },
+    ],
+  },
+  {
+    name: "sam holloway",
+    title: "research / curation",
+    departments: ["research", "library"],
+    bio: "reads everything. curates the built-in systems and writes the bridge lines that connect metaphor to formal explanation.",
+    contacts: [
+      { kind: "email", href: "mailto:sam@analogize.studio" },
+      { kind: "github", href: "https://github.com" },
+      { kind: "linkedin", href: "https://linkedin.com" },
+    ],
+  },
+  {
+    name: "jules moreau",
+    title: "community / writing",
+    departments: ["writing", "community"],
+    bio: "talks to the people using analogize in the wild. turns their notes into the changelog and the philosophy pages.",
+    contacts: [
+      { kind: "email", href: "mailto:jules@analogize.studio" },
+      { kind: "github", href: "https://github.com" },
+      { kind: "linkedin", href: "https://linkedin.com" },
+    ],
+  },
+];
+
+const ContactIcon = ({ kind, href }: { kind: Member["contacts"][number]["kind"]; href: string }) => {
+  const Icon = kind === "email" ? Mail : kind === "github" ? Github : Linkedin;
+  return (
+    <a
+      href={href}
+      target={kind === "email" ? undefined : "_blank"}
+      rel="noreferrer"
+      className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:bg-secondary hover:text-foreground"
+      aria-label={kind}
+    >
+      <Icon className="h-4 w-4" />
+    </a>
+  );
+};
 
 const principles = [
   {
@@ -28,10 +136,30 @@ const principles = [
   },
 ];
 
+const deptChipClasses = [
+  "bg-amber-100 text-amber-900 border-amber-200",
+  "bg-sky-100 text-sky-900 border-sky-200",
+  "bg-emerald-100 text-emerald-900 border-emerald-200",
+  "bg-rose-100 text-rose-900 border-rose-200",
+  "bg-violet-100 text-violet-900 border-violet-200",
+  "bg-orange-100 text-orange-900 border-orange-200",
+  "bg-teal-100 text-teal-900 border-teal-200",
+];
+
+const chipForDept = (dept: string) => {
+  let h = 0;
+  for (let i = 0; i < dept.length; i++) h = (h * 31 + dept.charCodeAt(i)) >>> 0;
+  return deptChipClasses[h % deptChipClasses.length];
+};
+
 const Studio = () => {
+  const [teamOpen, setTeamOpen] = useState(false);
+  const [activeMember, setActiveMember] = useState<Member | null>(null);
+
   return (
     <div className="min-h-screen">
       <SiteNav />
+
 
       <section className="container max-w-3xl py-16 sm:py-24">
         <p className="mb-4 text-xs uppercase tracking-[0.22em] text-muted-foreground">the studio</p>
@@ -95,6 +223,56 @@ const Studio = () => {
           </p>
         </div>
 
+        <div className="mt-4">
+          <button
+            type="button"
+            onClick={() => setTeamOpen((v) => !v)}
+            aria-expanded={teamOpen}
+            className="flex w-full items-center justify-between rounded-md border border-border bg-background px-5 py-4 text-left text-sm font-medium transition-colors hover:bg-secondary"
+          >
+            <span className="flex items-center gap-2">
+              <span className="text-foreground">meet the team</span>
+              <span className="text-xs text-muted-foreground">({team.length})</span>
+            </span>
+            <ChevronDown
+              className={`h-4 w-4 text-muted-foreground transition-transform ${teamOpen ? "rotate-180" : ""}`}
+            />
+          </button>
+
+          {teamOpen && (
+            <TooltipProvider delayDuration={150}>
+              <div className="mt-4 grid grid-cols-3 gap-4 rounded-md border border-border bg-background/50 p-5 sm:grid-cols-4 lg:grid-cols-7">
+                {team.map((m) => (
+                  <div key={m.name} className="flex flex-col items-center text-center">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          onClick={() => setActiveMember(m)}
+                          className="rounded-full ring-offset-background transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                          aria-label={`open ${m.name} profile`}
+                        >
+                          <Avatar className="h-14 w-14 border border-border">
+                            <AvatarImage src={teamPlaceholder} alt={m.name} className="object-cover" />
+                            <AvatarFallback>{m.name.slice(0, 2)}</AvatarFallback>
+                          </Avatar>
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent side="top" className="max-w-[200px] text-center">
+                        <p className="text-xs leading-snug">{m.departments.join(" · ")}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    <p className="mt-2 text-xs font-medium text-foreground">{m.name}</p>
+                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{m.title}</p>
+                  </div>
+                ))}
+              </div>
+            </TooltipProvider>
+          )}
+        </div>
+
+
+
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             to="/contact"
@@ -115,8 +293,53 @@ const Studio = () => {
         </p>
       </section>
 
+      <Dialog open={!!activeMember} onOpenChange={(o) => !o && setActiveMember(null)}>
+        <DialogContent className="max-w-md">
+          {activeMember && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-4">
+                  <Avatar className="h-16 w-16 border border-border">
+                    <AvatarImage src={teamPlaceholder} alt={activeMember.name} className="object-cover" />
+                    <AvatarFallback>{activeMember.name.slice(0, 2)}</AvatarFallback>
+                  </Avatar>
+                  <div className="text-left">
+                    <DialogTitle className="font-serif-display text-2xl tracking-tight">
+                      {activeMember.name}
+                    </DialogTitle>
+                    <DialogDescription className="text-xs uppercase tracking-wider">
+                      {activeMember.title}
+                    </DialogDescription>
+                  </div>
+                </div>
+              </DialogHeader>
+
+              <div className="flex flex-wrap gap-1.5">
+                {activeMember.departments.map((d) => (
+                  <span
+                    key={d}
+                    className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-medium ${chipForDept(d)}`}
+                  >
+                    {d}
+                  </span>
+                ))}
+              </div>
+
+              <p className="text-sm leading-relaxed text-foreground/85">{activeMember.bio}</p>
+
+              <div className="flex items-center gap-2 border-t border-border pt-4">
+                {activeMember.contacts.map((c) => (
+                  <ContactIcon key={c.kind} kind={c.kind} href={c.href} />
+                ))}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
       <SiteFooter />
     </div>
+
   );
 };
 
