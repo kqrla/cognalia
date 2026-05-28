@@ -203,54 +203,7 @@ const Studio = () => {
                     <Icon className="h-3.5 w-3.5 text-foreground/70" />
                   </span>
                   <p className="text-sm font-semibold tracking-tight">{p.label}</p>
-        </div>
-
-        <div className="mt-4">
-          <button
-            type="button"
-            onClick={() => setTeamOpen((v) => !v)}
-            aria-expanded={teamOpen}
-            className="flex w-full items-center justify-between rounded-md border border-border bg-background px-5 py-4 text-left text-sm font-medium transition-colors hover:bg-secondary"
-          >
-            <span className="flex items-center gap-2">
-              <span className="text-foreground">meet the team</span>
-              <span className="text-xs text-muted-foreground">({team.length})</span>
-            </span>
-            <ChevronDown
-              className={`h-4 w-4 text-muted-foreground transition-transform ${teamOpen ? "rotate-180" : ""}`}
-            />
-          </button>
-
-          {teamOpen && (
-            <TooltipProvider delayDuration={150}>
-              <div className="mt-4 grid grid-cols-3 gap-4 rounded-md border border-border bg-background/50 p-5 sm:grid-cols-4 lg:grid-cols-7">
-                {team.map((m) => (
-                  <div key={m.name} className="flex flex-col items-center text-center">
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <button
-                          type="button"
-                          onClick={() => setActiveMember(m)}
-                          className="group rounded-full ring-offset-background transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                          aria-label={`open ${m.name} profile`}
-                        >
-                          <Avatar className="h-14 w-14 border border-border">
-                            <AvatarImage src={teamPlaceholder} alt={m.name} className="object-cover" />
-                            <AvatarFallback>{m.name.slice(0, 2)}</AvatarFallback>
-                          </Avatar>
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent side="top" className="max-w-[200px] text-center">
-                        <p className="text-xs leading-snug">{m.departments.join(" · ")}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                    <p className="mt-2 text-xs font-medium text-foreground">{m.name}</p>
-                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{m.title}</p>
-                  </div>
-                ))}
-              </div>
-            </TooltipProvider>
-          )}
+                </div>
                 <p className="text-sm leading-relaxed text-foreground/80">{p.body}</p>
               </article>
             );
