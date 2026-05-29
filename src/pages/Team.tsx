@@ -529,7 +529,57 @@ const Team = () => {
         </DialogContent>
       </Dialog>
 
+      <Dialog open={!!activeInspo} onOpenChange={(o) => !o && setActiveInspo(null)}>
+        <DialogContent className="max-w-md">
+          {activeInspo && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-3">
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-full border ${inspoCategoryClasses[activeInspo.category] ?? "bg-secondary border-border"}`}>
+                    <Palette className="h-5 w-5" />
+                  </div>
+                  <div className="text-left">
+                    <DialogTitle className="font-serif-display text-2xl tracking-tight">{activeInspo.name}</DialogTitle>
+                    <DialogDescription className="text-xs uppercase tracking-wider">{activeInspo.category}</DialogDescription>
+                  </div>
+                </div>
+              </DialogHeader>
+
+              <div>
+                <p className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">where it's used</p>
+                <p className="text-sm leading-relaxed text-foreground/85">{activeInspo.usedFor}</p>
+              </div>
+
+              <div>
+                <p className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">about it</p>
+                <p className="text-sm leading-relaxed text-foreground/75">{activeInspo.description}</p>
+              </div>
+
+              <div className="flex items-center gap-2 border-t border-border pt-4">
+                {activeInspo.links.map((l) => {
+                  const Icon = l.kind === "instagram" ? Instagram : l.kind === "email" ? Mail : LinkIcon;
+                  return (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      target={l.kind === "email" ? undefined : "_blank"}
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
+                    >
+                      <Icon className="h-3.5 w-3.5" />
+                      {l.label}
+                      <ExternalLink className="h-3 w-3 opacity-50" />
+                    </a>
+                  );
+                })}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
       <SiteFooter />
+
     </div>
   );
 };
