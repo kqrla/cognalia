@@ -3,7 +3,7 @@
 
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Mail, Github, Linkedin, ArrowLeft, Heart, Sparkles, BookOpen, Users } from "lucide-react";
+import { Mail, Github, Linkedin, ArrowLeft, Heart, Sparkles, BookOpen, Users, Palette, Link as LinkIcon, ExternalLink, Instagram } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -132,6 +132,115 @@ const emotionalSupport = [
   { name: "every friend who said 'wait, explain that again'", note: "you were the first user." },
 ];
 
+type InspoLink = { label: string; href: string; kind?: "site" | "instagram" | "email" };
+type Inspo = {
+  name: string;
+  category: string;
+  usedFor: string;
+  description: string;
+  links: InspoLink[];
+};
+
+const designInspo: Inspo[] = [
+  {
+    name: "goodnotes beige aesthetic",
+    category: "surfaces",
+    usedFor: "the paper-cream background tone and the soft card surfaces across the marketing pages.",
+    description: "warm off-white with a faint texture. it's what makes the site feel like a notebook instead of a dashboard.",
+    links: [{ label: "goodnotes", href: "https://www.goodnotes.com", kind: "site" }],
+  },
+  {
+    name: "swiss editorial grids",
+    category: "layout",
+    usedFor: "the strict max-width, the generous gutters, and the column rhythm on /philosophy and /goals.",
+    description: "müller-brockmann via every design school ever. restraint as a feature.",
+    links: [{ label: "the designer's reference", href: "https://en.wikipedia.org/wiki/Josef_M%C3%BCller-Brockmann", kind: "site" }],
+  },
+  {
+    name: "linear.app micro-motion",
+    category: "motion",
+    usedFor: "the easing curves on hover states and the subtle slide-in on dialogs.",
+    description: "fast, short, never bouncy. motion that gets out of the way.",
+    links: [{ label: "linear.app", href: "https://linear.app", kind: "site" }],
+  },
+  {
+    name: "are.na collections",
+    category: "information",
+    usedFor: "how the graph view organizes nodes by 'kinship' instead of folders.",
+    description: "the original chill knowledge graph. taught us that adjacency is its own kind of meaning.",
+    links: [{ label: "are.na", href: "https://www.are.na", kind: "site" }],
+  },
+  {
+    name: "rauno's blog transitions",
+    category: "motion",
+    usedFor: "page transitions and the easing on the explanation reveal.",
+    description: "rauno freiberg's writing on transitions made us redo our easing curves three times. worth it.",
+    links: [{ label: "rauno.me", href: "https://rauno.me", kind: "site" }],
+  },
+  {
+    name: "tufte's small multiples",
+    category: "data",
+    usedFor: "the graph legend and the system-comparison view on /compare.",
+    description: "tiny, repeatable, comparable units beat one big chart every time.",
+    links: [{ label: "edward tufte", href: "https://www.edwardtufte.com", kind: "site" }],
+  },
+  {
+    name: "field notes covers",
+    category: "typography",
+    usedFor: "the all-lowercase eyebrows, the wide letter-spacing on uppercase labels.",
+    description: "americana stationery. quiet confidence in the small type.",
+    links: [{ label: "field notes", href: "https://fieldnotesbrand.com", kind: "site" }],
+  },
+  {
+    name: "studio ghibli colour palettes",
+    category: "color",
+    usedFor: "the accent rosé, sage, and dusty amber in the chip system.",
+    description: "yes really. the chip palette started as a screen-grab from totoro and never left.",
+    links: [{ label: "ghibli", href: "https://www.ghibli.jp", kind: "site" }],
+  },
+  {
+    name: "obsidian graph view",
+    category: "graph",
+    usedFor: "the force-directed layout on /graphical and the node-sizing rules.",
+    description: "we owe them the visual grammar of 'concept nodes pulled together by analogy strength'.",
+    links: [{ label: "obsidian", href: "https://obsidian.md", kind: "site" }],
+  },
+  {
+    name: "instagram saved folders",
+    category: "casual",
+    usedFor: "honestly just the way 'collections' feel personal and slightly chaotic.",
+    description: "silly but true. the 'feels-like-yours' vibe of saved posts shaped the personalize page.",
+    links: [{ label: "instagram", href: "https://www.instagram.com", kind: "instagram" }],
+  },
+  {
+    name: "pinterest moodboards (the chaotic kind)",
+    category: "casual",
+    usedFor: "the loose grid on the inspirations section itself. yes, recursive.",
+    description: "the unstructured pile of references that somehow forms a taste. mood: secondary school art folder.",
+    links: [{ label: "pinterest", href: "https://www.pinterest.com", kind: "site" }],
+  },
+  {
+    name: "framer motion easing",
+    category: "motion",
+    usedFor: "every spring on the dialog, popover, and chip-hover lifts.",
+    description: "the default spring is too bouncy. we tuned ours down to 'polite'.",
+    links: [{ label: "motion.dev", href: "https://motion.dev", kind: "site" }],
+  },
+];
+
+const inspoCategoryClasses: Record<string, string> = {
+  surfaces: "bg-amber-100 text-amber-900 border-amber-200",
+  layout: "bg-sky-100 text-sky-900 border-sky-200",
+  motion: "bg-violet-100 text-violet-900 border-violet-200",
+  information: "bg-emerald-100 text-emerald-900 border-emerald-200",
+  data: "bg-teal-100 text-teal-900 border-teal-200",
+  typography: "bg-rose-100 text-rose-900 border-rose-200",
+  color: "bg-fuchsia-100 text-fuchsia-900 border-fuchsia-200",
+  graph: "bg-orange-100 text-orange-900 border-orange-200",
+  casual: "bg-lime-100 text-lime-900 border-lime-200",
+};
+
+
 const deptChipClasses = [
   "bg-amber-100 text-amber-900 border-amber-200",
   "bg-sky-100 text-sky-900 border-sky-200",
@@ -167,6 +276,7 @@ const ContactIcon = ({ kind, href }: { kind: Member["contacts"][number]["kind"];
 
 const Team = () => {
   const [active, setActive] = useState<Member | null>(null);
+  const [activeInspo, setActiveInspo] = useState<Inspo | null>(null);
   const [selectedDepts, setSelectedDepts] = useState<string[]>([]);
 
   const allDepts = useMemo(() => {
@@ -324,6 +434,38 @@ const Team = () => {
         </div>
       </section>
 
+      <section className="container max-w-4xl pb-16">
+        <div className="mb-4 flex items-center gap-2">
+          <Palette className="h-4 w-4 text-foreground/60" />
+          <h2 className="font-serif-display text-2xl tracking-tight">design inspo</h2>
+        </div>
+        <div className="surface-paper p-5">
+          <p className="mb-4 text-sm text-foreground/80">
+            the references — sophisticated, silly, and everything in between — that shaped how this thing looks and moves.
+            click any chip to see where it lives in the product.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {designInspo.map((i) => {
+              const cls = inspoCategoryClasses[i.category] ?? "bg-secondary text-foreground border-border";
+              return (
+                <button
+                  key={i.name}
+                  type="button"
+                  onClick={() => setActiveInspo(i)}
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-transform hover:-translate-y-0.5 ${cls}`}
+                >
+                  <span className="opacity-70">{i.category}</span>
+                  <span className="opacity-40">·</span>
+                  <span>{i.name}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+
+
       <section className="container max-w-4xl pb-24">
         <div className="mb-4 flex items-center gap-2">
           <Heart className="h-4 w-4 text-rose-500" />
@@ -387,7 +529,57 @@ const Team = () => {
         </DialogContent>
       </Dialog>
 
+      <Dialog open={!!activeInspo} onOpenChange={(o) => !o && setActiveInspo(null)}>
+        <DialogContent className="max-w-md">
+          {activeInspo && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-3">
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-full border ${inspoCategoryClasses[activeInspo.category] ?? "bg-secondary border-border"}`}>
+                    <Palette className="h-5 w-5" />
+                  </div>
+                  <div className="text-left">
+                    <DialogTitle className="font-serif-display text-2xl tracking-tight">{activeInspo.name}</DialogTitle>
+                    <DialogDescription className="text-xs uppercase tracking-wider">{activeInspo.category}</DialogDescription>
+                  </div>
+                </div>
+              </DialogHeader>
+
+              <div>
+                <p className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">where it's used</p>
+                <p className="text-sm leading-relaxed text-foreground/85">{activeInspo.usedFor}</p>
+              </div>
+
+              <div>
+                <p className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">about it</p>
+                <p className="text-sm leading-relaxed text-foreground/75">{activeInspo.description}</p>
+              </div>
+
+              <div className="flex items-center gap-2 border-t border-border pt-4">
+                {activeInspo.links.map((l) => {
+                  const Icon = l.kind === "instagram" ? Instagram : l.kind === "email" ? Mail : LinkIcon;
+                  return (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      target={l.kind === "email" ? undefined : "_blank"}
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
+                    >
+                      <Icon className="h-3.5 w-3.5" />
+                      {l.label}
+                      <ExternalLink className="h-3 w-3 opacity-50" />
+                    </a>
+                  );
+                })}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
       <SiteFooter />
+
     </div>
   );
 };
