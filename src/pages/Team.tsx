@@ -445,22 +445,18 @@ const Team = () => {
             click any chip to see where it lives in the product.
           </p>
           <div className="flex flex-wrap gap-2">
-            {designInspo.map((i) => {
-              const cls = inspoCategoryClasses[i.category] ?? "bg-secondary text-foreground border-border";
-              return (
-                <button
-                  key={i.name}
-                  type="button"
-                  onClick={() => setActiveInspo(i)}
-                  className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-transform hover:-translate-y-0.5 ${cls}`}
-                >
-                  <span className="opacity-70">{i.category}</span>
-                  <span className="opacity-40">·</span>
-                  <span>{i.name}</span>
-                </button>
-              );
-            })}
+            {designInspo.map((i) => (
+              <button
+                key={i.name}
+                type="button"
+                onClick={() => setActiveInspo(i)}
+                className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground/85 transition-all hover:-translate-y-0.5 hover:bg-secondary"
+              >
+                {i.name}
+              </button>
+            ))}
           </div>
+
         </div>
       </section>
 
