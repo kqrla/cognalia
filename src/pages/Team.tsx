@@ -445,22 +445,18 @@ const Team = () => {
             click any chip to see where it lives in the product.
           </p>
           <div className="flex flex-wrap gap-2">
-            {designInspo.map((i) => {
-              const cls = inspoCategoryClasses[i.category] ?? "bg-secondary text-foreground border-border";
-              return (
-                <button
-                  key={i.name}
-                  type="button"
-                  onClick={() => setActiveInspo(i)}
-                  className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-transform hover:-translate-y-0.5 ${cls}`}
-                >
-                  <span className="opacity-70">{i.category}</span>
-                  <span className="opacity-40">·</span>
-                  <span>{i.name}</span>
-                </button>
-              );
-            })}
+            {designInspo.map((i) => (
+              <button
+                key={i.name}
+                type="button"
+                onClick={() => setActiveInspo(i)}
+                className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground/85 transition-all hover:-translate-y-0.5 hover:bg-secondary"
+              >
+                {i.name}
+              </button>
+            ))}
           </div>
+
         </div>
       </section>
 
@@ -535,15 +531,26 @@ const Team = () => {
             <>
               <DialogHeader>
                 <div className="flex items-center gap-3">
-                  <div className={`flex h-12 w-12 items-center justify-center rounded-full border ${inspoCategoryClasses[activeInspo.category] ?? "bg-secondary border-border"}`}>
-                    <Palette className="h-5 w-5" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-secondary">
+                    <Palette className="h-5 w-5 text-foreground/70" />
                   </div>
                   <div className="text-left">
                     <DialogTitle className="font-serif-display text-2xl tracking-tight">{activeInspo.name}</DialogTitle>
-                    <DialogDescription className="text-xs uppercase tracking-wider">{activeInspo.category}</DialogDescription>
+                    <DialogDescription className="sr-only">design inspiration: {activeInspo.name}</DialogDescription>
                   </div>
                 </div>
               </DialogHeader>
+
+              <div className="flex flex-wrap gap-1.5">
+                <span
+                  className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-medium ${
+                    inspoCategoryClasses[activeInspo.category] ?? "bg-secondary text-foreground border-border"
+                  }`}
+                >
+                  {activeInspo.category}
+                </span>
+              </div>
+
 
               <div>
                 <p className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">where it's used</p>
