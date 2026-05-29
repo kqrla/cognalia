@@ -434,6 +434,38 @@ const Team = () => {
         </div>
       </section>
 
+      <section className="container max-w-4xl pb-16">
+        <div className="mb-4 flex items-center gap-2">
+          <Palette className="h-4 w-4 text-foreground/60" />
+          <h2 className="font-serif-display text-2xl tracking-tight">design inspo</h2>
+        </div>
+        <div className="surface-paper p-5">
+          <p className="mb-4 text-sm text-foreground/80">
+            the references — sophisticated, silly, and everything in between — that shaped how this thing looks and moves.
+            click any chip to see where it lives in the product.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {designInspo.map((i) => {
+              const cls = inspoCategoryClasses[i.category] ?? "bg-secondary text-foreground border-border";
+              return (
+                <button
+                  key={i.name}
+                  type="button"
+                  onClick={() => setActiveInspo(i)}
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-transform hover:-translate-y-0.5 ${cls}`}
+                >
+                  <span className="opacity-70">{i.category}</span>
+                  <span className="opacity-40">·</span>
+                  <span>{i.name}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+
+
       <section className="container max-w-4xl pb-24">
         <div className="mb-4 flex items-center gap-2">
           <Heart className="h-4 w-4 text-rose-500" />
