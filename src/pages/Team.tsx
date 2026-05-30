@@ -211,7 +211,7 @@ const emotionalSupport: EmotionalItem[] = [
   },
 ];
 
-type InspoLink = { label: string; href: string; kind?: "site" | "instagram" | "email" };
+type InspoLink = { label: string; href: string; kind?: "site" | "instagram" | "email" | "library" | "folder" };
 type Inspo = {
   name: string;
   category: string;
