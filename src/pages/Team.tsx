@@ -566,15 +566,37 @@ const Team = () => {
             not on the org chart. arguably more important than the org chart.
           </p>
           <ul className="space-y-3">
-            {emotionalSupport.map((e) => (
-              <li key={e.name} className="flex items-start gap-3 border-t border-border pt-3 first:border-t-0 first:pt-0">
-                <Heart className="mt-0.5 h-3.5 w-3.5 shrink-0 text-rose-400" />
-                <div>
-                  <p className="text-sm font-medium text-foreground">{e.name}</p>
-                  <p className="text-sm text-foreground/70">{e.note}</p>
-                </div>
-              </li>
-            ))}
+            {emotionalSupport.map((e) => {
+              const Icon = e.name === "adhd diagnosis" ? Brain : Heart;
+              const iconColor = e.name === "adhd diagnosis" ? "text-violet-500" : "text-rose-400";
+              const content = (
+                <>
+                  <Icon className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${iconColor}`} />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-foreground">
+                      {e.name}
+                      {e.popup && <span className="ml-1.5 text-[10px] text-muted-foreground">(click)</span>}
+                    </p>
+                    <p className="text-sm text-foreground/70">{e.note}</p>
+                  </div>
+                </>
+              );
+              return (
+                <li key={e.name} className="border-t border-border pt-3 first:border-t-0 first:pt-0">
+                  {e.popup ? (
+                    <button
+                      type="button"
+                      onClick={() => setActivePopup(e.popup!)}
+                      className="-mx-2 flex w-[calc(100%+1rem)] items-start gap-3 rounded-md px-2 py-1 text-left transition-colors hover:bg-secondary/60"
+                    >
+                      {content}
+                    </button>
+                  ) : (
+                    <div className="flex items-start gap-3">{content}</div>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>
