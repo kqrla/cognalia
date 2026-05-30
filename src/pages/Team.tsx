@@ -164,13 +164,14 @@ const inspirations: Inspiration[] = [
     popup: {
       title: "ted nelson",
       eyebrow: "intertwingled forever",
-      tags: ["hypertext", "xanadu", "intertwingularity"],
+      tags: ["hypertext", "xanadu", "intertwingularity", "purple prose", "the original mad lad", "everything-is-connected.gif"],
       body: [
         "ted nelson coined 'hypertext' before most of the web existed and then spent decades insisting we got it wrong.",
         "'everything is deeply intertwingled' is the line we put on the wall when we started drawing the graph view. concepts don't sit in folders; they tangle.",
       ],
       links: [
-        { label: "project xanadu", href: "https://www.xanadu.net", kind: "site" },
+        { label: "xanadu reading list", href: "https://www.xanadu.net", kind: "library" },
+        { label: "intertwingled clippings", href: "#", kind: "folder" },
         { label: "wikipedia", href: "https://en.wikipedia.org/wiki/Ted_Nelson", kind: "site" },
       ],
     },
