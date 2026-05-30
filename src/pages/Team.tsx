@@ -731,6 +731,68 @@ const Team = () => {
         </DialogContent>
       </Dialog>
 
+      <Dialog open={!!activePopup} onOpenChange={(o) => !o && setActivePopup(null)}>
+        <DialogContent className="max-w-md">
+          {activePopup && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-amber-200 bg-amber-50 text-amber-500">
+                    <Star className="h-5 w-5 fill-current" />
+                  </div>
+                  <div className="text-left">
+                    <DialogTitle className="font-serif-display text-2xl tracking-tight">{activePopup.title}</DialogTitle>
+                    {activePopup.eyebrow && (
+                      <DialogDescription className="text-xs uppercase tracking-wider">{activePopup.eyebrow}</DialogDescription>
+                    )}
+                  </div>
+                </div>
+              </DialogHeader>
+
+              {activePopup.tags && activePopup.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1.5">
+                  {activePopup.tags.map((t) => (
+                    <span
+                      key={t}
+                      className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-medium ${chipForDept(t)}`}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              <div className="space-y-3">
+                {activePopup.body.map((p, idx) => (
+                  <p key={idx} className="text-sm leading-relaxed text-foreground/85">{p}</p>
+                ))}
+              </div>
+
+              {activePopup.links && activePopup.links.length > 0 && (
+                <div className="flex flex-wrap items-center gap-2 border-t border-border pt-4">
+                  {activePopup.links.map((l) => {
+                    const Icon = l.kind === "instagram" ? Instagram : l.kind === "email" ? Mail : LinkIcon;
+                    return (
+                      <a
+                        key={l.href}
+                        href={l.href}
+                        target={l.kind === "email" ? undefined : "_blank"}
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
+                      >
+                        <Icon className="h-3.5 w-3.5" />
+                        {l.label}
+                        {l.kind !== "email" && <ExternalLink className="h-3 w-3 opacity-50" />}
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
       <SiteFooter />
 
 
