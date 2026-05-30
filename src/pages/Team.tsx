@@ -411,14 +411,17 @@ const Team = () => {
           </p>
           <div className="flex flex-wrap gap-2">
             {contributors.map((c) => (
-              <span
-                key={c}
-                className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/85"
+              <button
+                key={c.name}
+                type="button"
+                onClick={() => setActiveContrib(c)}
+                className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/85 transition-all hover:-translate-y-0.5 hover:bg-secondary"
               >
-                {c}
-              </span>
+                {c.name}
+              </button>
             ))}
           </div>
+
         </div>
       </section>
 
