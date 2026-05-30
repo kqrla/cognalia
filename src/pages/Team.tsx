@@ -357,6 +357,7 @@ const Team = () => {
   const [active, setActive] = useState<Member | null>(null);
   const [activeInspo, setActiveInspo] = useState<Inspo | null>(null);
   const [activeContrib, setActiveContrib] = useState<Contributor | null>(null);
+  const [activePopup, setActivePopup] = useState<Popup | null>(null);
   const [selectedDepts, setSelectedDepts] = useState<string[]>([]);
 
   const allDepts = useMemo(() => {
