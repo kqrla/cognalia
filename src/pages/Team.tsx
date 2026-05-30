@@ -606,7 +606,38 @@ const Team = () => {
         </DialogContent>
       </Dialog>
 
+      <Dialog open={!!activeContrib} onOpenChange={(o) => !o && setActiveContrib(null)}>
+        <DialogContent className="max-w-md">
+          {activeContrib && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-secondary">
+                    <Users className="h-5 w-5 text-foreground/70" />
+                  </div>
+                  <div className="text-left">
+                    <DialogTitle className="font-serif-display text-2xl tracking-tight">{activeContrib.name}</DialogTitle>
+                    <DialogDescription className="text-xs uppercase tracking-wider">{activeContrib.role}</DialogDescription>
+                  </div>
+                </div>
+              </DialogHeader>
+
+              <p className="text-sm leading-relaxed text-foreground/85">{activeContrib.note}</p>
+
+              {activeContrib.contacts.length > 0 && (
+                <div className="flex items-center gap-2 border-t border-border pt-4">
+                  {activeContrib.contacts.map((c) => (
+                    <ContactIcon key={c.kind} kind={c.kind} href={c.href} />
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
       <SiteFooter />
+
 
     </div>
   );
