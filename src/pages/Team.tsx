@@ -495,8 +495,18 @@ const Team = () => {
         </div>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {inspirations.map((i) => (
-            <article key={i.name} className="surface-paper p-4">
-              <p className="text-sm font-semibold text-foreground">{i.name}</p>
+            <article key={i.name} className="surface-paper relative p-4">
+              {i.popup && (
+                <button
+                  type="button"
+                  onClick={() => setActivePopup(i.popup!)}
+                  aria-label={`more about ${i.name}`}
+                  className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-full text-amber-500 transition-all hover:-translate-y-0.5 hover:bg-amber-50 hover:text-amber-600"
+                >
+                  <Star className="h-4 w-4 fill-current" />
+                </button>
+              )}
+              <p className="pr-8 text-sm font-semibold text-foreground">{i.name}</p>
               <p className="mt-1 text-sm leading-relaxed text-foreground/75">{i.note}</p>
             </article>
           ))}
