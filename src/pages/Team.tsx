@@ -126,12 +126,54 @@ const contributors: Contributor[] = [
 ];
 
 
-const inspirations = [
+type Popup = {
+  title: string;
+  eyebrow?: string;
+  tags?: string[];
+  body: string[];
+  links?: InspoLink[];
+};
+
+type Inspiration = { name: string; note: string; popup?: Popup };
+
+const inspirations: Inspiration[] = [
+  {
+    name: "richard feynman",
+    note: "for the discipline of explaining it to a freshman.",
+    popup: {
+      title: "richard feynman",
+      eyebrow: "patron saint of explanation",
+      tags: ["pedagogy", "first principles", "curiosity"],
+      body: [
+        "the feynman technique is basically the whole product brief in one sentence: if you can't explain it to a freshman, you don't understand it yet.",
+        "every time we argued about whether an analogy was 'too simple', someone quoted the lectures and the argument was over.",
+      ],
+      links: [
+        { label: "the lectures", href: "https://www.feynmanlectures.caltech.edu", kind: "site" },
+        { label: "wikipedia", href: "https://en.wikipedia.org/wiki/Richard_Feynman", kind: "site" },
+      ],
+    },
+  },
   { name: "douglas hofstadter", note: "for insisting analogy is the core of cognition." },
   { name: "edward tufte", note: "for showing that small multiples and restraint outperform decoration." },
   { name: "bret victor", note: "for the conviction that medium shapes thought." },
-  { name: "ted nelson", note: "for 'everything is deeply intertwingled'." },
-  { name: "richard feynman", note: "for the discipline of explaining it to a freshman." },
+  {
+    name: "ted nelson",
+    note: "for 'everything is deeply intertwingled'.",
+    popup: {
+      title: "ted nelson",
+      eyebrow: "intertwingled forever",
+      tags: ["hypertext", "xanadu", "intertwingularity"],
+      body: [
+        "ted nelson coined 'hypertext' before most of the web existed and then spent decades insisting we got it wrong.",
+        "'everything is deeply intertwingled' is the line we put on the wall when we started drawing the graph view. concepts don't sit in folders; they tangle.",
+      ],
+      links: [
+        { label: "project xanadu", href: "https://www.xanadu.net", kind: "site" },
+        { label: "wikipedia", href: "https://en.wikipedia.org/wiki/Ted_Nelson", kind: "site" },
+      ],
+    },
+  },
   { name: "iain mcgilchrist", note: "for the right-hemisphere argument: meaning before mechanism." },
 ];
 
@@ -142,11 +184,31 @@ const specialMentions = [
   { name: "every librarian who explained dewey decimals patiently", note: "you taught us what a system feels like from the inside." },
 ];
 
-const emotionalSupport = [
+type EmotionalItem = { name: string; note: string; popup?: Popup };
+
+const emotionalSupport: EmotionalItem[] = [
   { name: "miso", note: "studio cat. attended every standup. contributed zero code." },
   { name: "the espresso machine in the corner", note: "non-negotiable infrastructure." },
   { name: "long walks at 3pm", note: "where most of the format decisions actually happened." },
   { name: "every friend who said 'wait, explain that again'", note: "you were the first user." },
+  {
+    name: "adhd diagnosis",
+    note: "explained the last fifteen years and also why the codebase has seven half-finished feature flags.",
+    popup: {
+      title: "adhd diagnosis",
+      eyebrow: "plot twist of the decade",
+      tags: ["hyperfocus", "object permanence (lack of)", "novelty engine"],
+      body: [
+        "turns out 'wait, why is everyone else fine doing one thing at a time?' was, in fact, a clue.",
+        "the diagnosis didn't fix anything but it did rename a lot of it. 'lazy' became 'task-initiation latency'. 'chaotic' became 'parallel exploration'. 'forgot to eat again' became, well, still that.",
+        "honestly a lot of the format obsession on this site is just an adhd brain trying to build the scaffolding it never had. you're welcome to use it.",
+      ],
+      links: [
+        { label: "how to adhd", href: "https://howtoadhd.com", kind: "site" },
+        { label: "additude mag", href: "https://www.additudemag.com", kind: "site" },
+      ],
+    },
+  },
 ];
 
 type InspoLink = { label: string; href: string; kind?: "site" | "instagram" | "email" };
