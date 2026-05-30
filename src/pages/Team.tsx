@@ -143,13 +143,14 @@ const inspirations: Inspiration[] = [
     popup: {
       title: "richard feynman",
       eyebrow: "patron saint of explanation",
-      tags: ["pedagogy", "first principles", "curiosity"],
+      tags: ["pedagogy", "first principles", "curiosity", "bongo enthusiast", "safe-cracker", "explain-it-to-a-duck"],
       body: [
         "the feynman technique is basically the whole product brief in one sentence: if you can't explain it to a freshman, you don't understand it yet.",
         "every time we argued about whether an analogy was 'too simple', someone quoted the lectures and the argument was over.",
       ],
       links: [
-        { label: "the lectures", href: "https://www.feynmanlectures.caltech.edu", kind: "site" },
+        { label: "the lectures (resource library)", href: "https://www.feynmanlectures.caltech.edu", kind: "library" },
+        { label: "feynman notes & clippings", href: "#", kind: "folder" },
         { label: "wikipedia", href: "https://en.wikipedia.org/wiki/Richard_Feynman", kind: "site" },
       ],
     },
