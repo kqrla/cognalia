@@ -3,7 +3,7 @@
 
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Mail, Github, Linkedin, ArrowLeft, Heart, Sparkles, BookOpen, Users, Palette, Link as LinkIcon, ExternalLink, Instagram } from "lucide-react";
+import { Mail, Github, Linkedin, ArrowLeft, Heart, Sparkles, BookOpen, Users, Palette, Link as LinkIcon, ExternalLink, Instagram, Star, Brain, Coffee } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
