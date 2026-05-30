@@ -294,6 +294,7 @@ const ContactIcon = ({ kind, href }: { kind: Member["contacts"][number]["kind"];
 const Team = () => {
   const [active, setActive] = useState<Member | null>(null);
   const [activeInspo, setActiveInspo] = useState<Inspo | null>(null);
+  const [activeContrib, setActiveContrib] = useState<Contributor | null>(null);
   const [selectedDepts, setSelectedDepts] = useState<string[]>([]);
 
   const allDepts = useMemo(() => {
