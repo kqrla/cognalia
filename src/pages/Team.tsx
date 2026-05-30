@@ -3,7 +3,7 @@
 
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Mail, Github, Linkedin, ArrowLeft, Heart, Sparkles, BookOpen, Users, Palette, Link as LinkIcon, ExternalLink, Instagram } from "lucide-react";
+import { Mail, Github, Linkedin, ArrowLeft, Heart, Sparkles, BookOpen, Users, Palette, Link as LinkIcon, ExternalLink, Instagram, Star, Brain } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -126,12 +126,54 @@ const contributors: Contributor[] = [
 ];
 
 
-const inspirations = [
+type Popup = {
+  title: string;
+  eyebrow?: string;
+  tags?: string[];
+  body: string[];
+  links?: InspoLink[];
+};
+
+type Inspiration = { name: string; note: string; popup?: Popup };
+
+const inspirations: Inspiration[] = [
+  {
+    name: "richard feynman",
+    note: "for the discipline of explaining it to a freshman.",
+    popup: {
+      title: "richard feynman",
+      eyebrow: "patron saint of explanation",
+      tags: ["pedagogy", "first principles", "curiosity"],
+      body: [
+        "the feynman technique is basically the whole product brief in one sentence: if you can't explain it to a freshman, you don't understand it yet.",
+        "every time we argued about whether an analogy was 'too simple', someone quoted the lectures and the argument was over.",
+      ],
+      links: [
+        { label: "the lectures", href: "https://www.feynmanlectures.caltech.edu", kind: "site" },
+        { label: "wikipedia", href: "https://en.wikipedia.org/wiki/Richard_Feynman", kind: "site" },
+      ],
+    },
+  },
   { name: "douglas hofstadter", note: "for insisting analogy is the core of cognition." },
   { name: "edward tufte", note: "for showing that small multiples and restraint outperform decoration." },
   { name: "bret victor", note: "for the conviction that medium shapes thought." },
-  { name: "ted nelson", note: "for 'everything is deeply intertwingled'." },
-  { name: "richard feynman", note: "for the discipline of explaining it to a freshman." },
+  {
+    name: "ted nelson",
+    note: "for 'everything is deeply intertwingled'.",
+    popup: {
+      title: "ted nelson",
+      eyebrow: "intertwingled forever",
+      tags: ["hypertext", "xanadu", "intertwingularity"],
+      body: [
+        "ted nelson coined 'hypertext' before most of the web existed and then spent decades insisting we got it wrong.",
+        "'everything is deeply intertwingled' is the line we put on the wall when we started drawing the graph view. concepts don't sit in folders; they tangle.",
+      ],
+      links: [
+        { label: "project xanadu", href: "https://www.xanadu.net", kind: "site" },
+        { label: "wikipedia", href: "https://en.wikipedia.org/wiki/Ted_Nelson", kind: "site" },
+      ],
+    },
+  },
   { name: "iain mcgilchrist", note: "for the right-hemisphere argument: meaning before mechanism." },
 ];
 
@@ -142,11 +184,31 @@ const specialMentions = [
   { name: "every librarian who explained dewey decimals patiently", note: "you taught us what a system feels like from the inside." },
 ];
 
-const emotionalSupport = [
+type EmotionalItem = { name: string; note: string; popup?: Popup };
+
+const emotionalSupport: EmotionalItem[] = [
   { name: "miso", note: "studio cat. attended every standup. contributed zero code." },
   { name: "the espresso machine in the corner", note: "non-negotiable infrastructure." },
   { name: "long walks at 3pm", note: "where most of the format decisions actually happened." },
   { name: "every friend who said 'wait, explain that again'", note: "you were the first user." },
+  {
+    name: "adhd diagnosis",
+    note: "explained the last fifteen years and also why the codebase has seven half-finished feature flags.",
+    popup: {
+      title: "adhd diagnosis",
+      eyebrow: "plot twist of the decade",
+      tags: ["hyperfocus", "object permanence (lack of)", "novelty engine"],
+      body: [
+        "turns out 'wait, why is everyone else fine doing one thing at a time?' was, in fact, a clue.",
+        "the diagnosis didn't fix anything but it did rename a lot of it. 'lazy' became 'task-initiation latency'. 'chaotic' became 'parallel exploration'. 'forgot to eat again' became, well, still that.",
+        "honestly a lot of the format obsession on this site is just an adhd brain trying to build the scaffolding it never had. you're welcome to use it.",
+      ],
+      links: [
+        { label: "how to adhd", href: "https://howtoadhd.com", kind: "site" },
+        { label: "additude mag", href: "https://www.additudemag.com", kind: "site" },
+      ],
+    },
+  },
 ];
 
 type InspoLink = { label: string; href: string; kind?: "site" | "instagram" | "email" };
@@ -295,6 +357,7 @@ const Team = () => {
   const [active, setActive] = useState<Member | null>(null);
   const [activeInspo, setActiveInspo] = useState<Inspo | null>(null);
   const [activeContrib, setActiveContrib] = useState<Contributor | null>(null);
+  const [activePopup, setActivePopup] = useState<Popup | null>(null);
   const [selectedDepts, setSelectedDepts] = useState<string[]>([]);
 
   const allDepts = useMemo(() => {
@@ -432,8 +495,18 @@ const Team = () => {
         </div>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {inspirations.map((i) => (
-            <article key={i.name} className="surface-paper p-4">
-              <p className="text-sm font-semibold text-foreground">{i.name}</p>
+            <article key={i.name} className="surface-paper relative p-4">
+              {i.popup && (
+                <button
+                  type="button"
+                  onClick={() => setActivePopup(i.popup!)}
+                  aria-label={`more about ${i.name}`}
+                  className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-full text-amber-500 transition-all hover:-translate-y-0.5 hover:bg-amber-50 hover:text-amber-600"
+                >
+                  <Star className="h-4 w-4 fill-current" />
+                </button>
+              )}
+              <p className="pr-8 text-sm font-semibold text-foreground">{i.name}</p>
               <p className="mt-1 text-sm leading-relaxed text-foreground/75">{i.note}</p>
             </article>
           ))}
@@ -493,15 +566,37 @@ const Team = () => {
             not on the org chart. arguably more important than the org chart.
           </p>
           <ul className="space-y-3">
-            {emotionalSupport.map((e) => (
-              <li key={e.name} className="flex items-start gap-3 border-t border-border pt-3 first:border-t-0 first:pt-0">
-                <Heart className="mt-0.5 h-3.5 w-3.5 shrink-0 text-rose-400" />
-                <div>
-                  <p className="text-sm font-medium text-foreground">{e.name}</p>
-                  <p className="text-sm text-foreground/70">{e.note}</p>
-                </div>
-              </li>
-            ))}
+            {emotionalSupport.map((e) => {
+              const Icon = e.name === "adhd diagnosis" ? Brain : Heart;
+              const iconColor = e.name === "adhd diagnosis" ? "text-violet-500" : "text-rose-400";
+              const content = (
+                <>
+                  <Icon className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${iconColor}`} />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-foreground">
+                      {e.name}
+                      {e.popup && <span className="ml-1.5 text-[10px] text-muted-foreground">(click)</span>}
+                    </p>
+                    <p className="text-sm text-foreground/70">{e.note}</p>
+                  </div>
+                </>
+              );
+              return (
+                <li key={e.name} className="border-t border-border pt-3 first:border-t-0 first:pt-0">
+                  {e.popup ? (
+                    <button
+                      type="button"
+                      onClick={() => setActivePopup(e.popup!)}
+                      className="-mx-2 flex w-[calc(100%+1rem)] items-start gap-3 rounded-md px-2 py-1 text-left transition-colors hover:bg-secondary/60"
+                    >
+                      {content}
+                    </button>
+                  ) : (
+                    <div className="flex items-start gap-3">{content}</div>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>
@@ -629,6 +724,68 @@ const Team = () => {
                   {activeContrib.contacts.map((c) => (
                     <ContactIcon key={c.kind} kind={c.kind} href={c.href} />
                   ))}
+                </div>
+              )}
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={!!activePopup} onOpenChange={(o) => !o && setActivePopup(null)}>
+        <DialogContent className="max-w-md">
+          {activePopup && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-amber-200 bg-amber-50 text-amber-500">
+                    <Star className="h-5 w-5 fill-current" />
+                  </div>
+                  <div className="text-left">
+                    <DialogTitle className="font-serif-display text-2xl tracking-tight">{activePopup.title}</DialogTitle>
+                    {activePopup.eyebrow && (
+                      <DialogDescription className="text-xs uppercase tracking-wider">{activePopup.eyebrow}</DialogDescription>
+                    )}
+                  </div>
+                </div>
+              </DialogHeader>
+
+              {activePopup.tags && activePopup.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1.5">
+                  {activePopup.tags.map((t) => (
+                    <span
+                      key={t}
+                      className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-medium ${chipForDept(t)}`}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              <div className="space-y-3">
+                {activePopup.body.map((p, idx) => (
+                  <p key={idx} className="text-sm leading-relaxed text-foreground/85">{p}</p>
+                ))}
+              </div>
+
+              {activePopup.links && activePopup.links.length > 0 && (
+                <div className="flex flex-wrap items-center gap-2 border-t border-border pt-4">
+                  {activePopup.links.map((l) => {
+                    const Icon = l.kind === "instagram" ? Instagram : l.kind === "email" ? Mail : LinkIcon;
+                    return (
+                      <a
+                        key={l.href}
+                        href={l.href}
+                        target={l.kind === "email" ? undefined : "_blank"}
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
+                      >
+                        <Icon className="h-3.5 w-3.5" />
+                        {l.label}
+                        {l.kind !== "email" && <ExternalLink className="h-3 w-3 opacity-50" />}
+                      </a>
+                    );
+                  })}
                 </div>
               )}
             </>
