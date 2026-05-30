@@ -103,11 +103,28 @@ const team: Member[] = [
   },
 ];
 
-const contributors = [
-  "kira lindqvist", "tomas alvarado", "yuki tanabe", "priya raman",
-  "marcus dell'aria", "elena rossi", "kofi mensah", "hana svoboda",
-  "dmitri volkov", "fatima zahra", "owen blackwood", "lina park",
+type Contributor = {
+  name: string;
+  role: string;
+  note: string;
+  contacts: { kind: "email" | "github" | "linkedin"; href: string }[];
+};
+
+const contributors: Contributor[] = [
+  { name: "kira lindqvist", role: "icon set", note: "designed the first pass of the system-chip icons. left the studio with better taste than she found it.", contacts: [{ kind: "email", href: "mailto:kira@analogize.studio" }, { kind: "github", href: "https://github.com" }] },
+  { name: "tomas alvarado", role: "perf pass", note: "shaved 400ms off the graph render and didn't tell anyone for a week.", contacts: [{ kind: "github", href: "https://github.com" }, { kind: "linkedin", href: "https://linkedin.com" }] },
+  { name: "yuki tanabe", role: "i18n scaffolding", note: "set up the translation pipeline so the six-layer template survives japanese, arabic, and turkish.", contacts: [{ kind: "email", href: "mailto:yuki@analogize.studio" }, { kind: "github", href: "https://github.com" }] },
+  { name: "priya raman", role: "accessibility audit", note: "ran the whole site through a screen reader and filed the bugs we should've caught ourselves.", contacts: [{ kind: "email", href: "mailto:priya@analogize.studio" }, { kind: "linkedin", href: "https://linkedin.com" }] },
+  { name: "marcus dell'aria", role: "copy editor", note: "made the philosophy pages 30% shorter and 100% sharper.", contacts: [{ kind: "email", href: "mailto:marcus@analogize.studio" }] },
+  { name: "elena rossi", role: "illustration", note: "drew the little sketchnote diagrams that show up on /roadmap.", contacts: [{ kind: "email", href: "mailto:elena@analogize.studio" }, { kind: "linkedin", href: "https://linkedin.com" }] },
+  { name: "kofi mensah", role: "data viz", note: "rewrote the legend on the graph view so non-physicists could read it.", contacts: [{ kind: "github", href: "https://github.com" }, { kind: "linkedin", href: "https://linkedin.com" }] },
+  { name: "hana svoboda", role: "qa / test harness", note: "wrote the regression suite that catches us every time we touch the explanation pipeline.", contacts: [{ kind: "email", href: "mailto:hana@analogize.studio" }, { kind: "github", href: "https://github.com" }] },
+  { name: "dmitri volkov", role: "edge functions", note: "ported the explain endpoint to the edge and made it cheaper than the coffee budget.", contacts: [{ kind: "github", href: "https://github.com" }] },
+  { name: "fatima zahra", role: "user research", note: "ran twelve interviews and produced one slide that changed the onboarding entirely.", contacts: [{ kind: "email", href: "mailto:fatima@analogize.studio" }, { kind: "linkedin", href: "https://linkedin.com" }] },
+  { name: "owen blackwood", role: "docs", note: "wrote the first version of /faq when nobody else wanted to.", contacts: [{ kind: "email", href: "mailto:owen@analogize.studio" }, { kind: "github", href: "https://github.com" }] },
+  { name: "lina park", role: "motion design", note: "tuned the easing curves on every dialog and dropdown until they felt 'right'.", contacts: [{ kind: "email", href: "mailto:lina@analogize.studio" }, { kind: "linkedin", href: "https://linkedin.com" }] },
 ];
+
 
 const inspirations = [
   { name: "douglas hofstadter", note: "for insisting analogy is the core of cognition." },
@@ -277,6 +294,7 @@ const ContactIcon = ({ kind, href }: { kind: Member["contacts"][number]["kind"];
 const Team = () => {
   const [active, setActive] = useState<Member | null>(null);
   const [activeInspo, setActiveInspo] = useState<Inspo | null>(null);
+  const [activeContrib, setActiveContrib] = useState<Contributor | null>(null);
   const [selectedDepts, setSelectedDepts] = useState<string[]>([]);
 
   const allDepts = useMemo(() => {
@@ -393,14 +411,17 @@ const Team = () => {
           </p>
           <div className="flex flex-wrap gap-2">
             {contributors.map((c) => (
-              <span
-                key={c}
-                className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/85"
+              <button
+                key={c.name}
+                type="button"
+                onClick={() => setActiveContrib(c)}
+                className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/85 transition-all hover:-translate-y-0.5 hover:bg-secondary"
               >
-                {c}
-              </span>
+                {c.name}
+              </button>
             ))}
           </div>
+
         </div>
       </section>
 
@@ -585,7 +606,38 @@ const Team = () => {
         </DialogContent>
       </Dialog>
 
+      <Dialog open={!!activeContrib} onOpenChange={(o) => !o && setActiveContrib(null)}>
+        <DialogContent className="max-w-md">
+          {activeContrib && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-secondary">
+                    <Users className="h-5 w-5 text-foreground/70" />
+                  </div>
+                  <div className="text-left">
+                    <DialogTitle className="font-serif-display text-2xl tracking-tight">{activeContrib.name}</DialogTitle>
+                    <DialogDescription className="text-xs uppercase tracking-wider">{activeContrib.role}</DialogDescription>
+                  </div>
+                </div>
+              </DialogHeader>
+
+              <p className="text-sm leading-relaxed text-foreground/85">{activeContrib.note}</p>
+
+              {activeContrib.contacts.length > 0 && (
+                <div className="flex items-center gap-2 border-t border-border pt-4">
+                  {activeContrib.contacts.map((c) => (
+                    <ContactIcon key={c.kind} kind={c.kind} href={c.href} />
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
       <SiteFooter />
+
 
     </div>
   );
