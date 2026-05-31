@@ -214,7 +214,10 @@ const emotionalSupport: EmotionalItem[] = [
       links: [
         { label: "reading shelf", href: "https://howtoadhd.com", kind: "library" },
         { label: "saved coping strategies", href: "#", kind: "folder" },
+        { label: "playlists that get me through tuesdays", href: "#", kind: "folder" },
         { label: "additude mag", href: "https://www.additudemag.com", kind: "site" },
+        { label: "@howtoadhd", href: "https://instagram.com", kind: "instagram" },
+        { label: "swap tips with us", href: "mailto:hello@analogize.app", kind: "email" },
       ],
     },
   },
