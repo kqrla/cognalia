@@ -740,7 +740,7 @@ const Team = () => {
             <>
               <DialogHeader>
                 <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-amber-200 bg-amber-50 text-amber-500">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-secondary text-muted-foreground">
                     <Star className="h-5 w-5 fill-current" />
                   </div>
                   <div className="text-left">
