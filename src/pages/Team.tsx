@@ -504,7 +504,7 @@ const Team = () => {
                   type="button"
                   onClick={() => setActivePopup(i.popup!)}
                   aria-label={`more about ${i.name}`}
-                  className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-full text-amber-500 transition-all hover:-translate-y-0.5 hover:bg-amber-50 hover:text-amber-600"
+                  className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-full text-muted-foreground/60 transition-all hover:-translate-y-0.5 hover:bg-secondary hover:text-foreground"
                 >
                   <Star className="h-4 w-4 fill-current" />
                 </button>
