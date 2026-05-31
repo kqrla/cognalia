@@ -3,7 +3,7 @@
 
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Mail, Github, Linkedin, ArrowLeft, Heart, Sparkles, BookOpen, Users, Palette, Link as LinkIcon, ExternalLink, Instagram, Star, Brain } from "lucide-react";
+import { Mail, Github, Linkedin, ArrowLeft, Heart, Sparkles, BookOpen, Users, Palette, Link as LinkIcon, ExternalLink, Instagram, Star, Brain, Folder } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -143,13 +143,14 @@ const inspirations: Inspiration[] = [
     popup: {
       title: "richard feynman",
       eyebrow: "patron saint of explanation",
-      tags: ["pedagogy", "first principles", "curiosity"],
+      tags: ["pedagogy", "first principles", "curiosity", "bongo enthusiast", "safe-cracker", "explain-it-to-a-duck"],
       body: [
         "the feynman technique is basically the whole product brief in one sentence: if you can't explain it to a freshman, you don't understand it yet.",
         "every time we argued about whether an analogy was 'too simple', someone quoted the lectures and the argument was over.",
       ],
       links: [
-        { label: "the lectures", href: "https://www.feynmanlectures.caltech.edu", kind: "site" },
+        { label: "the lectures (resource library)", href: "https://www.feynmanlectures.caltech.edu", kind: "library" },
+        { label: "feynman notes & clippings", href: "#", kind: "folder" },
         { label: "wikipedia", href: "https://en.wikipedia.org/wiki/Richard_Feynman", kind: "site" },
       ],
     },
@@ -163,13 +164,14 @@ const inspirations: Inspiration[] = [
     popup: {
       title: "ted nelson",
       eyebrow: "intertwingled forever",
-      tags: ["hypertext", "xanadu", "intertwingularity"],
+      tags: ["hypertext", "xanadu", "intertwingularity", "purple prose", "the original mad lad", "everything-is-connected.gif"],
       body: [
         "ted nelson coined 'hypertext' before most of the web existed and then spent decades insisting we got it wrong.",
         "'everything is deeply intertwingled' is the line we put on the wall when we started drawing the graph view. concepts don't sit in folders; they tangle.",
       ],
       links: [
-        { label: "project xanadu", href: "https://www.xanadu.net", kind: "site" },
+        { label: "xanadu reading list", href: "https://www.xanadu.net", kind: "library" },
+        { label: "intertwingled clippings", href: "#", kind: "folder" },
         { label: "wikipedia", href: "https://en.wikipedia.org/wiki/Ted_Nelson", kind: "site" },
       ],
     },
@@ -197,21 +199,22 @@ const emotionalSupport: EmotionalItem[] = [
     popup: {
       title: "adhd diagnosis",
       eyebrow: "plot twist of the decade",
-      tags: ["hyperfocus", "object permanence (lack of)", "novelty engine"],
+      tags: ["hyperfocus", "object permanence (lack of)", "novelty engine", "37 open tabs", "snack-driven development", "where are my keys"],
       body: [
         "turns out 'wait, why is everyone else fine doing one thing at a time?' was, in fact, a clue.",
         "the diagnosis didn't fix anything but it did rename a lot of it. 'lazy' became 'task-initiation latency'. 'chaotic' became 'parallel exploration'. 'forgot to eat again' became, well, still that.",
         "honestly a lot of the format obsession on this site is just an adhd brain trying to build the scaffolding it never had. you're welcome to use it.",
       ],
       links: [
-        { label: "how to adhd", href: "https://howtoadhd.com", kind: "site" },
+        { label: "reading shelf", href: "https://howtoadhd.com", kind: "library" },
+        { label: "saved coping strategies", href: "#", kind: "folder" },
         { label: "additude mag", href: "https://www.additudemag.com", kind: "site" },
       ],
     },
   },
 ];
 
-type InspoLink = { label: string; href: string; kind?: "site" | "instagram" | "email" };
+type InspoLink = { label: string; href: string; kind?: "site" | "instagram" | "email" | "library" | "folder" };
 type Inspo = {
   name: string;
   category: string;
@@ -501,7 +504,7 @@ const Team = () => {
                   type="button"
                   onClick={() => setActivePopup(i.popup!)}
                   aria-label={`more about ${i.name}`}
-                  className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-full text-amber-500 transition-all hover:-translate-y-0.5 hover:bg-amber-50 hover:text-amber-600"
+                  className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-full text-muted-foreground/60 transition-all hover:-translate-y-0.5 hover:bg-secondary hover:text-foreground"
                 >
                   <Star className="h-4 w-4 fill-current" />
                 </button>
@@ -737,7 +740,7 @@ const Team = () => {
             <>
               <DialogHeader>
                 <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-amber-200 bg-amber-50 text-amber-500">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-secondary text-muted-foreground">
                     <Star className="h-5 w-5 fill-current" />
                   </div>
                   <div className="text-left">
@@ -771,7 +774,7 @@ const Team = () => {
               {activePopup.links && activePopup.links.length > 0 && (
                 <div className="flex flex-wrap items-center gap-2 border-t border-border pt-4">
                   {activePopup.links.map((l) => {
-                    const Icon = l.kind === "instagram" ? Instagram : l.kind === "email" ? Mail : LinkIcon;
+                    const Icon = l.kind === "instagram" ? Instagram : l.kind === "email" ? Mail : l.kind === "library" ? BookOpen : l.kind === "folder" ? Folder : LinkIcon;
                     return (
                       <a
                         key={l.href}
