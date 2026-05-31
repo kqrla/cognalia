@@ -774,7 +774,7 @@ const Team = () => {
               {activePopup.links && activePopup.links.length > 0 && (
                 <div className="flex flex-wrap items-center gap-2 border-t border-border pt-4">
                   {activePopup.links.map((l) => {
-                    const Icon = l.kind === "instagram" ? Instagram : l.kind === "email" ? Mail : LinkIcon;
+                    const Icon = l.kind === "instagram" ? Instagram : l.kind === "email" ? Mail : l.kind === "library" ? BookOpen : l.kind === "folder" ? Folder : LinkIcon;
                     return (
                       <a
                         key={l.href}
