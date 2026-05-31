@@ -175,7 +175,10 @@ const inspirations: Inspiration[] = [
       links: [
         { label: "xanadu reading list", href: "https://www.xanadu.net", kind: "library" },
         { label: "intertwingled clippings", href: "#", kind: "folder" },
-        { label: "wikipedia", href: "https://en.wikipedia.org/wiki/Ted_Nelson", kind: "site" },
+        { label: "hypertext history folder", href: "#", kind: "folder" },
+        { label: "project xanadu", href: "https://www.xanadu.net", kind: "site" },
+        { label: "@hypertext.history", href: "https://instagram.com", kind: "instagram" },
+        { label: "tell us your intertwingle", href: "mailto:hello@analogize.app", kind: "email" },
       ],
     },
   },
