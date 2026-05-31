@@ -151,7 +151,10 @@ const inspirations: Inspiration[] = [
       links: [
         { label: "the lectures (resource library)", href: "https://www.feynmanlectures.caltech.edu", kind: "library" },
         { label: "feynman notes & clippings", href: "#", kind: "folder" },
-        { label: "wikipedia", href: "https://en.wikipedia.org/wiki/Richard_Feynman", kind: "site" },
+        { label: "annotated bongo recordings", href: "#", kind: "folder" },
+        { label: "caltech archive", href: "https://www.feynmanlectures.caltech.edu", kind: "site" },
+        { label: "@feynmanquotes (fan acct)", href: "https://instagram.com", kind: "instagram" },
+        { label: "send us a feynman story", href: "mailto:hello@analogize.app", kind: "email" },
       ],
     },
   },
