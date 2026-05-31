@@ -199,14 +199,15 @@ const emotionalSupport: EmotionalItem[] = [
     popup: {
       title: "adhd diagnosis",
       eyebrow: "plot twist of the decade",
-      tags: ["hyperfocus", "object permanence (lack of)", "novelty engine"],
+      tags: ["hyperfocus", "object permanence (lack of)", "novelty engine", "37 open tabs", "snack-driven development", "where are my keys"],
       body: [
         "turns out 'wait, why is everyone else fine doing one thing at a time?' was, in fact, a clue.",
         "the diagnosis didn't fix anything but it did rename a lot of it. 'lazy' became 'task-initiation latency'. 'chaotic' became 'parallel exploration'. 'forgot to eat again' became, well, still that.",
         "honestly a lot of the format obsession on this site is just an adhd brain trying to build the scaffolding it never had. you're welcome to use it.",
       ],
       links: [
-        { label: "how to adhd", href: "https://howtoadhd.com", kind: "site" },
+        { label: "reading shelf", href: "https://howtoadhd.com", kind: "library" },
+        { label: "saved coping strategies", href: "#", kind: "folder" },
         { label: "additude mag", href: "https://www.additudemag.com", kind: "site" },
       ],
     },
