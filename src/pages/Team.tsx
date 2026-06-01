@@ -573,21 +573,32 @@ const Team = () => {
           <Heart className="h-4 w-4 text-rose-500" />
           <h2 className="font-serif-display text-2xl tracking-tight">emotional support</h2>
         </div>
+        <p className="mb-4 text-sm text-foreground/80">
+          not on the org chart. arguably more important than the org chart.
+        </p>
         <div className="surface-paper p-5">
-          <p className="mb-4 text-sm text-foreground/80">
-            not on the org chart. arguably more important than the org chart.
-          </p>
           <ul className="space-y-3">
             {emotionalSupport.map((e) => {
-              const Icon = e.name === "adhd diagnosis" ? Brain : Heart;
-              const iconColor = e.name === "adhd diagnosis" ? "text-violet-500" : "text-rose-400";
               const content = (
                 <>
-                  <Icon className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${iconColor}`} />
+                  <Heart className="mt-0.5 h-3.5 w-3.5 shrink-0 text-rose-400" />
                   <div className="flex-1">
                     <p className="text-sm font-medium text-foreground">
                       {e.name}
-                      {e.popup && <span className="ml-1.5 text-[10px] text-muted-foreground">(click)</span>}
+                      {e.popup && (
+                        <TooltipProvider delayDuration={200}>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="ml-1.5 inline-flex h-4 w-4 cursor-help items-center justify-center rounded-full border border-dashed border-muted-foreground/40 text-[9px] text-muted-foreground hover:border-muted-foreground/60 hover:text-foreground">
+                                ?
+                              </span>
+                            </TooltipTrigger>
+                            <TooltipContent side="top">
+                              <p className="text-xs">click to read more</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
                     </p>
                     <p className="text-sm text-foreground/70">{e.note}</p>
                   </div>
