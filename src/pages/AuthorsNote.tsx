@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
+import { MermaidDiagram } from "@/features/analogy/components/MermaidDiagram";
 import { cn } from "@/lib/utils";
 
 type Fold = {
@@ -438,6 +439,143 @@ const anecdotes: Fold[] = [
   },
 ];
 
+const diagrams: Fold[] = [
+  {
+    id: "d-1",
+    tag: "diagram",
+    title: "how a definition-first explanation fails",
+    body: (
+      <>
+        <p>
+          you arrive at a new concept with no foothold. the definition hands you more abstract words. each unknown
+          word becomes a new unknown concept. the loop never grounds.
+        </p>
+        <MermaidDiagram
+          cacheKey="d-1"
+          source={`flowchart TD
+  A[new concept] --> B[formal definition]
+  B --> C[unfamiliar term 1]
+  B --> D[unfamiliar term 2]
+  B --> E[unfamiliar term 3]
+  C --> F[look up]
+  D --> F
+  E --> F
+  F --> B
+  F --> G[give up / fake it]`}
+        />
+      </>
+    ),
+  },
+  {
+    id: "d-2",
+    tag: "diagram",
+    title: "how an analogy-first explanation lands",
+    body: (
+      <>
+        <p>
+          the analogy gives your brain something to stand on. the mapping makes the parts explicit. the bridge sentence
+          flips you across into the real concept. the "where it breaks" line stops you from over-trusting the analogy.
+        </p>
+        <MermaidDiagram
+          cacheKey="d-2"
+          source={`flowchart LR
+  A[familiar system] --> B[analogy]
+  B --> C[mapping table]
+  C --> D[visual]
+  D --> E[bridge: 'in other words']
+  E --> F[real concept]
+  F --> G[where it breaks]
+  G --> H[honest understanding]`}
+        />
+      </>
+    ),
+  },
+  {
+    id: "d-3",
+    tag: "diagram",
+    title: "the knowledge graph in my head",
+    body: (
+      <>
+        <p>
+          this is how i actually retrieve. concepts aren't stored by name; they hang off clusters of feeling, story,
+          and structure. a good analogy attaches a new node to the right cluster, and from then on it's just there.
+        </p>
+        <MermaidDiagram
+          cacheKey="d-3"
+          source={`graph TD
+  ROOT(("self")) --> games[games]
+  ROOT --> cooking[cooking]
+  ROOT --> stories[stories]
+  ROOT --> systems[systems]
+  games --> rpg[rpg mechanics]
+  games --> speedrun[speedrunning]
+  cooking --> mise[mise en place]
+  stories --> arc[character arcs]
+  systems --> feedback[feedback loops]
+  rpg -.->|new node| concept1((recursion))
+  mise -.->|new node| concept2((dependency injection))
+  feedback -.->|new node| concept3((monetary policy))`}
+        />
+      </>
+    ),
+  },
+  {
+    id: "d-4",
+    tag: "diagram",
+    title: "the five-part explanation, as a pipeline",
+    body: (
+      <>
+        <p>
+          the format isn't a template. it's a sequence of operations. each step does a different cognitive job, and
+          skipping any one of them noticeably weakens the click.
+        </p>
+        <MermaidDiagram
+          cacheKey="d-4"
+          source={`sequenceDiagram
+  participant U as you
+  participant A as analogize
+  U->>A: a concept i don't get
+  A->>U: 1. analogy (hook)
+  A->>U: 2. mapping (pairs)
+  A->>U: 3. visual (parallel channel)
+  A->>U: 4. bridge ('in other words')
+  A->>U: 5. real explanation
+  A->>U: 6. where it breaks
+  U-->>A: click.`}
+        />
+      </>
+    ),
+  },
+  {
+    id: "d-5",
+    tag: "diagram",
+    title: "interest, attention, retention (adhd version)",
+    body: (
+      <>
+        <p>
+          the loop most curricula assume: discipline → attention → retention. the loop my brain actually runs:
+          interest → attention → retention. analogies sit at the start of the second loop on purpose.
+        </p>
+        <MermaidDiagram
+          cacheKey="d-5"
+          source={`flowchart LR
+  subgraph assumed[what school assumes]
+    direction LR
+    D[discipline] --> AT1[attention] --> R1[retention]
+  end
+  subgraph actual[what actually happens]
+    direction LR
+    I[interest] --> AT2[attention] --> R2[retention] --> I
+  end
+  AN[analogy] --> I`}
+        />
+      </>
+    ),
+  },
+];
+
+
+
 const AuthorsNote = () => {
   return (
     <div className="min-h-screen">
@@ -513,6 +651,20 @@ const AuthorsNote = () => {
           }
           folds={anecdotes}
         />
+
+        <Section
+          eyebrow="part six"
+          title="the same idea, drawn"
+          intro={
+            <p>
+              some of this is easier to see than to read. each card unfolds into a small diagram. nothing fancy —
+              just the same arguments above, in shapes.
+            </p>
+          }
+          folds={diagrams}
+        />
+
+
 
         <aside className="mt-20 rounded-2xl border border-border/60 bg-secondary/30 p-7 sm:p-9">
           <p className="mb-2 text-xs uppercase tracking-[0.22em] text-muted-foreground">closing</p>

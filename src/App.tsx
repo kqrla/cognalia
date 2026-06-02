@@ -50,6 +50,7 @@ import Studio from "./pages/Studio";
 import Team from "./pages/Team";
 import LandingClone from "./pages/LandingClone";
 import AuthorsNote from "./pages/AuthorsNote";
+import AnnotationsGuide from "./pages/AnnotationsGuide";
 
 const queryClient = new QueryClient();
 
@@ -113,6 +114,7 @@ const App = () => (
           <Route path="/team" element={<Team />} />
           <Route path="/landingclone" element={<LandingClone />} />
           <Route path="/authorsnote" element={<AuthorsNote />} />
+          <Route path="/annotations-guide" element={<AnnotationsGuide />} />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
