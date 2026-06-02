@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
+import { MermaidDiagram } from "@/features/analogy/components/MermaidDiagram";
 import { cn } from "@/lib/utils";
 
 type Fold = {
