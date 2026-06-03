@@ -23,6 +23,7 @@ import {
   Compass,
 } from "lucide-react";
 import { SiteNav } from "@/components/SiteNav";
+import { ThoughtBubbleNav } from "@/components/ThoughtBubbleNav";
 
 const sample = [
   {
