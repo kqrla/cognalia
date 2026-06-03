@@ -121,6 +121,8 @@ export const SiteNav = () => {
             </NavLink>
           ))}
 
+          <ThemeToggle className="ml-1" />
+
           <Link
             to="/app"
             className={cn(
