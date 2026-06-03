@@ -286,6 +286,8 @@ const LandingClone = () => {
           </div>
         </div>
       </footer>
+
+      <ThoughtBubbleNav />
     </div>
   );
 };
