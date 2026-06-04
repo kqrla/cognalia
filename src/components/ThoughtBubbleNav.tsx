@@ -8,6 +8,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { Send } from "lucide-react";
 import stickAsset from "@/assets/stick.png.asset.json";
 
+const idleThoughts = [
+  "ask me anything!",
+  "need help?",
+  "where to?",
+  "what's up?",
+];
+
 type Msg = {
   from: "bot" | "user";
   text: string;
@@ -57,9 +64,17 @@ export const ThoughtBubbleNav = () => {
   const [msgs, setMsgs] = useState<Msg[]>([
     { from: "bot", text: "hi! ask me anything — i'll point you to the right page." },
   ]);
+  const [thoughtIdx, setThoughtIdx] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+
+  // rotate idle thought when closed
+  useEffect(() => {
+    if (open) return;
+    const id = setInterval(() => setThoughtIdx((i) => (i + 1) % idleThoughts.length), 3200);
+    return () => clearInterval(id);
+  }, [open]);
 
   // click outside to close
   useEffect(() => {
@@ -134,8 +149,8 @@ export const ThoughtBubbleNav = () => {
                 <div
                   className={`max-w-[85%] rounded-2xl px-3 py-1.5 text-sm leading-snug ${
                     m.from === "user"
-                      ? "bg-foreground text-background"
-                      : "bg-secondary text-foreground/90"
+                      ? "bg-secondary text-foreground/90"
+                      : "bg-primary text-primary-foreground"
                   }`}
                 >
                   <p>{m.text}</p>
@@ -188,28 +203,37 @@ export const ThoughtBubbleNav = () => {
         </div>
       </div>
 
-      {/* the jumpy face */}
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-label={open ? "close chat" : "open chat"}
-        className={`relative h-16 w-16 shrink-0 transition-transform hover:scale-110 active:scale-95 ${
-          open ? "" : "animate-bounce-soft"
-        }`}
-      >
-        <img
-          src={stickAsset.url}
-          alt=""
-          className="h-full w-full select-none object-contain drop-shadow"
-          draggable={false}
-        />
+      {/* thought bubble + jumpy face */}
+      <div className="relative flex items-end">
+        {/* thought bubble when closed */}
         {!open && (
-          <span className="absolute -right-0.5 -top-0.5 flex h-3 w-3">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-foreground/40" />
-            <span className="relative inline-flex h-3 w-3 rounded-full bg-foreground" />
-          </span>
+          <div className="thought-bubble absolute bottom-[70px] right-1/2 translate-x-1/2 whitespace-nowrap rounded-xl border border-border bg-background px-3 py-1.5 text-xs text-foreground/80 shadow-soft">
+            {idleThoughts[thoughtIdx]}
+            <span className="thought-tail absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-b border-r border-border bg-background" />
+          </div>
         )}
-      </button>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "close chat" : "open chat"}
+          className={`relative h-16 w-16 shrink-0 transition-transform hover:scale-110 active:scale-95 ${
+            open ? "" : "animate-bounce-soft"
+          }`}
+        >
+          <img
+            src={stickAsset.url}
+            alt=""
+            className="h-full w-full select-none object-contain drop-shadow"
+            draggable={false}
+          />
+          {!open && (
+            <span className="absolute -right-0.5 -top-0.5 flex h-3 w-3">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-foreground/40" />
+              <span className="relative inline-flex h-3 w-3 rounded-full bg-foreground" />
+            </span>
+          )}
+        </button>
+      </div>
 
       {/* keyframes for the soft jumpy idle */}
       <style>{`
