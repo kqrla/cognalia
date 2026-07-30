@@ -54,6 +54,7 @@ import AnnotationsGuide from "./pages/AnnotationsGuide";
 import Subjects from "./pages/Subjects";
 import Subject from "./pages/Subject";
 import SubSubject from "./pages/SubSubject";
+import Anthropomorphize from "./pages/Anthropomorphize";
 
 const queryClient = new QueryClient();
 
