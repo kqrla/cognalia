@@ -54,6 +54,7 @@ import AnnotationsGuide from "./pages/AnnotationsGuide";
 import Subjects from "./pages/Subjects";
 import Subject from "./pages/Subject";
 import SubSubject from "./pages/SubSubject";
+import Anthropomorphize from "./pages/Anthropomorphize";
 
 const queryClient = new QueryClient();
 
@@ -121,6 +122,7 @@ const App = () => (
           <Route path="/subjects" element={<Subjects />} />
           <Route path="/subject/:subject" element={<Subject />} />
           <Route path="/subject/:subject/:sub" element={<SubSubject />} />
+          <Route path="/anthropomorphize" element={<Anthropomorphize />} />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
