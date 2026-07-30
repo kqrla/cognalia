@@ -121,6 +121,7 @@ const App = () => (
           <Route path="/annotations-guide" element={<AnnotationsGuide />} />
           <Route path="/subjects" element={<Subjects />} />
           <Route path="/subject/:subject" element={<Subject />} />
+          <Route path="/subject/:subject/:sub" element={<SubSubject />} />
           <Route path="/anthropomorphize" element={<Anthropomorphize />} />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
