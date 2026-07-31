@@ -55,6 +55,10 @@ import Subjects from "./pages/Subjects";
 import Subject from "./pages/Subject";
 import SubSubject from "./pages/SubSubject";
 import Anthropomorphize from "./pages/Anthropomorphize";
+import AnthroAbout from "./pages/anthropomorphize/AnthroAbout";
+import AnthroFeatures from "./pages/anthropomorphize/AnthroFeatures";
+import AnthroFaq from "./pages/anthropomorphize/AnthroFaq";
+
 
 const queryClient = new QueryClient();
 
@@ -123,6 +127,10 @@ const App = () => (
           <Route path="/subject/:subject" element={<Subject />} />
           <Route path="/subject/:subject/:sub" element={<SubSubject />} />
           <Route path="/anthropomorphize" element={<Anthropomorphize />} />
+          <Route path="/anthropomorphize/about" element={<AnthroAbout />} />
+          <Route path="/anthropomorphize/features" element={<AnthroFeatures />} />
+          <Route path="/anthropomorphize/faq" element={<AnthroFaq />} />
+
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
