@@ -107,12 +107,74 @@ const risks = [
   },
 ];
 
+const walkthrough = [
+  {
+    step: "cast",
+    body:
+      "osmosis. water is a crowd trying to get into the less busy room. the membrane is a bouncer who only lets water through and turns solutes away at the door.",
+  },
+  {
+    step: "play it out",
+    body:
+      "one room is packed with solutes, the other is not. water keeps shuffling toward the packed room because that is where there is space for it, until both rooms feel equally crowded and the shuffling evens out.",
+  },
+  {
+    step: "decompress",
+    body:
+      "water moves across a selectively permeable membrane from a region of higher water potential to lower water potential, until water potential equalises. no intent, no crowd, same shape.",
+  },
+  {
+    step: "check",
+    body:
+      "if you can only write the bouncer version, you are not finished. if you can write both and say which parts of the story do not exist in the real system, you are.",
+  },
+];
+
+const castingRules = [
+  {
+    title: "give it one want, not three",
+    body:
+      "a character with a single clear motive maps cleanly onto a single mechanism. give it three and you have written a personality, not a model.",
+  },
+  {
+    title: "conflict before description",
+    body:
+      "who is pushing against whom matters more than what anyone looks like. the tension is the mechanism; the costume is decoration.",
+  },
+  {
+    title: "keep the cast small",
+    body:
+      "four or five agents maximum. if you need twelve, you are trying to compress a whole chapter instead of one concept.",
+  },
+  {
+    title: "label the fiction as you go",
+    body:
+      "every time you say something wants something, note what the real driver is. one line. that note is your decompression draft.",
+  },
+];
+
+const antiExamples = [
+  {
+    concept: "standard deviation",
+    why: "there is no cast. it is a single number describing spread, and inventing agents adds fiction without adding structure.",
+  },
+  {
+    concept: "the definition of a limit",
+    why: "the whole point is precision about quantifiers. a character blurs exactly the thing you are meant to sharpen.",
+  },
+  {
+    concept: "natural selection",
+    why: "usable, but dangerous. motive language quietly smuggles in purpose, which is the single most common misconception in the topic.",
+  },
+];
+
 const Anthropomorphize = () => {
   return (
     <div className="min-h-screen">
       <SiteNav />
 
       <article className="container max-w-3xl py-16 sm:py-24">
+        <AnthroNav />
         <div className="mb-4 flex items-center gap-3">
           <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">upcoming feature</p>
           <span className="rounded-full border border-border bg-secondary px-2.5 py-0.5 text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -127,6 +189,7 @@ const Anthropomorphize = () => {
           would be. give it a personality, motives and a social life, and the structure falls out for free. then, and
           this is the part everyone skips, you translate it back into canon.
         </p>
+
 
         <div className="mt-14 space-y-16 text-foreground/85 leading-relaxed">
           {/* the pitch */}
