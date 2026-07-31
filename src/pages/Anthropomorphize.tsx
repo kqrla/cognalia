@@ -231,6 +231,42 @@ const Anthropomorphize = () => {
             </div>
           </section>
 
+          {/* full walkthrough */}
+          <section>
+            <h2 className="font-serif-display text-3xl tracking-tight">one concept, all the way through</h2>
+            <p className="mt-3">
+              casting is only half of it. here is the full loop on a single idea, including the part where the story
+              gets taken apart again.
+            </p>
+            <div className="mt-6 space-y-3">
+              {walkthrough.map((w, i) => (
+                <div key={w.step} className="flex gap-4 rounded-2xl border border-border/70 bg-card p-5">
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary text-xs text-muted-foreground">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{w.step}</p>
+                    <p className="mt-1.5 text-sm text-foreground/80">{w.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* casting rules */}
+          <section>
+            <h2 className="font-serif-display text-3xl tracking-tight">rules for good casting</h2>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {castingRules.map((c) => (
+                <div key={c.title} className="rounded-2xl border border-border/70 bg-card p-5">
+                  <p className="font-medium">{c.title}</p>
+                  <p className="mt-2 text-sm text-foreground/75">{c.body}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+
           {/* why it works */}
           <section>
             <h2 className="font-serif-display text-3xl tracking-tight">why this actually works</h2>
@@ -341,6 +377,24 @@ const Anthropomorphize = () => {
               ))}
             </div>
           </section>
+
+          {/* where not to use it */}
+          <section>
+            <h2 className="font-serif-display text-3xl tracking-tight">concepts we would not cast</h2>
+            <p className="mt-3">
+              a mode that claims to work everywhere is lying. these are the shapes where a character actively costs you
+              accuracy.
+            </p>
+            <div className="mt-6 space-y-3">
+              {antiExamples.map((a) => (
+                <div key={a.concept} className="rounded-2xl border border-border/70 bg-card p-5">
+                  <p className="font-medium">{a.concept}</p>
+                  <p className="mt-1.5 text-sm text-foreground/75">{a.why}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
 
           {/* what we'd build */}
           <section>
