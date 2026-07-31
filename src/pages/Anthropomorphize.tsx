@@ -9,6 +9,8 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import AnthroNav from "./anthropomorphize/AnthroNav";
+
 
 const subjects = [
   {
