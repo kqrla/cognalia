@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "2174954d-a7d5-4637-8d41-c5dc3d5f69eb",
-  "project_id": "ae521051-4554-4bd0-a542-59f8a4993b3d",
-  "url": "/__l5e/assets-v1/2174954d-a7d5-4637-8d41-c5dc3d5f69eb/stick.png",
-  "r2_key": "a/v1/ae521051-4554-4bd0-a542-59f8a4993b3d/2174954d-a7d5-4637-8d41-c5dc3d5f69eb/stick.png",
-  "original_filename": "stick.png",
-  "size": 10094,
   "content_type": "image/png",
-  "created_at": "2026-06-03T23:58:15Z"
+  "created_at": "2026-06-03T23:58:15Z",
+  "original_filename": "stick.png",
+  "project_id": "97ca4fec-388d-4a6e-9b00-ad8a7a098d36",
+  "r2_key": "a/v1/97ca4fec-388d-4a6e-9b00-ad8a7a098d36/2174954d-a7d5-4637-8d41-c5dc3d5f69eb/stick.png",
+  "size": 10094,
+  "url": "/__l5e/assets-v1/2174954d-a7d5-4637-8d41-c5dc3d5f69eb/stick.png",
+  "version": 1
 }
