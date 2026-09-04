@@ -179,6 +179,7 @@ const Explain = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
   const onSwitchSystem = (next: AnalogySystemId) => {
     if (next === system) return;
     setSystem(next);
@@ -216,6 +217,46 @@ const Explain = () => {
       avoid,
     });
   };
+
+  // keyboard shortcuts: r = reframe, 1-9 = switch system, esc = home.
+  // ignored when focus is inside an input/textarea/select or contenteditable.
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      const typing =
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        target.tagName === "SELECT" ||
+        target.isContentEditable;
+      if (typing || loading) return;
+
+      if (e.key === "r" || e.key === "R") {
+        e.preventDefault();
+        onRegenerate();
+        return;
+      }
+
+      if (e.key === "Escape") {
+        e.preventDefault();
+        navigate("/app");
+        return;
+      }
+
+      const digit = parseInt(e.key, 10);
+      if (!Number.isNaN(digit) && digit >= 1 && digit <= analogySystems.length) {
+        e.preventDefault();
+        const next = analogySystems[digit - 1].id;
+        if (next !== system) {
+          onSwitchSystem(next);
+          toast(`switched to ${analogySystems[digit - 1].label}`);
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [loading, navigate, onRegenerate, onSwitchSystem, system]);
 
   if (!concept.trim()) {
     // someone landed here without a concept. send them to the app.
@@ -315,6 +356,11 @@ const Explain = () => {
               </button>
             </div>
             <SystemSelector value={system} onChange={onSwitchSystem} compact />
+            <p className="mt-3 text-[10px] text-muted-foreground/70">
+              shortcuts: <kbd className="rounded border border-border px-1 py-0.5 font-mono text-[10px]">1-9</kbd> switch system,{" "}
+              <kbd className="rounded border border-border px-1 py-0.5 font-mono text-[10px]">r</kbd> reframe,{" "}
+              <kbd className="rounded border border-border px-1 py-0.5 font-mono text-[10px]">esc</kbd> home
+            </p>
           </div>
         </header>
 
