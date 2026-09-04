@@ -355,6 +355,11 @@ const Explain = () => {
               </button>
             </div>
             <SystemSelector value={system} onChange={onSwitchSystem} compact />
+            <p className="mt-3 text-[10px] text-muted-foreground/70">
+              shortcuts: <kbd className="rounded border border-border px-1 py-0.5 font-mono text-[10px]">1-9</kbd> switch system,{" "}
+              <kbd className="rounded border border-border px-1 py-0.5 font-mono text-[10px]">r</kbd> reframe,{" "}
+              <kbd className="rounded border border-border px-1 py-0.5 font-mono text-[10px]">esc</kbd> home
+            </p>
           </div>
         </header>
 
