@@ -179,45 +179,6 @@ const Explain = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // keyboard shortcuts: r = reframe, 1-9 = switch system, esc = home.
-  // ignored when focus is inside an input/textarea/select or contenteditable.
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      const target = e.target as HTMLElement | null;
-      if (!target) return;
-      const typing =
-        target.tagName === "INPUT" ||
-        target.tagName === "TEXTAREA" ||
-        target.tagName === "SELECT" ||
-        target.isContentEditable;
-      if (typing || loading) return;
-
-      if (e.key === "r" || e.key === "R") {
-        e.preventDefault();
-        onRegenerate();
-        return;
-      }
-
-      if (e.key === "Escape") {
-        e.preventDefault();
-        navigate("/app");
-        return;
-      }
-
-      const digit = parseInt(e.key, 10);
-      if (!Number.isNaN(digit) && digit >= 1 && digit <= analogySystems.length) {
-        e.preventDefault();
-        const next = analogySystems[digit - 1].id;
-        if (next !== system) {
-          onSwitchSystem(next);
-          toast(`switched to ${analogySystems[digit - 1].label}`);
-        }
-      }
-    };
-
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [loading, navigate, onRegenerate, onSwitchSystem, system]);
 
   const onSwitchSystem = (next: AnalogySystemId) => {
     if (next === system) return;
