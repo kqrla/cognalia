@@ -12,7 +12,7 @@ future improvements grouped by horizon. this list is intentionally short. anneal
 
 ## mid term
 
-- accounts and cross-device sync, executed exactly as described in `portsb.md`. preferences and recents migrate from localStorage to lovable cloud tables, with a one-time merge on first login.
+- accounts and cross-device sync, executed exactly as described in `portsb.md`. preferences and recents migrate from localStorage to supabase tables, with a one-time merge on first login.
 - streaming the explanation section by section so the user sees the analogy first while the rest is still being generated.
 - a small thumbs up / thumbs down per section that feeds back into the prompt for the next regenerate, without sending feedback to a server.
 - export an explanation as a single self-contained html file (analogy, mapping, mermaid svg inlined, the works).

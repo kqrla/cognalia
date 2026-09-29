@@ -1,6 +1,6 @@
 # portsb
 
-a concrete migration guide for moving annealogy onto lovable cloud (or any standalone supabase project) for cross-device sync, accounts, and shared explanations. v1 ships with localStorage-only persistence; this document is the path off of that.
+a concrete migration guide for moving annealogy onto a supabase project for cross-device sync, accounts, and shared explanations. v1 ships with localStorage-only persistence; this document is the path off of that.
 
 this guide is actionable. follow it top to bottom and you will end up with a multi-device version of the app.
 
@@ -10,7 +10,7 @@ annealogy v1 uses two backend pieces:
 
 | dependency | purpose | current implementation |
 |---|---|---|
-| explain edge function | structured ai explanations | already on lovable cloud, deployed at `/functions/v1/explain` |
+| explain edge function | structured ai explanations | deployed as a supabase edge function at `/functions/v1/explain` |
 | client-side persistence | thinking style + recent explanations | `localStorage` keys `annealogy.preferences.v1` and `annealogy.recents.v1` |
 
 migration only touches the second row. the edge function is already cloud-native.
@@ -27,9 +27,9 @@ migration only touches the second row. the edge function is already cloud-native
 
 ## step 1: enable authentication
 
-in lovable cloud, turn on email plus password sign-in. optionally enable google. annealogy is a low-friction product; do not enable email confirmation in development.
+in the supabase dashboard, turn on email plus password sign-in. optionally enable google. annealogy is a low-friction product; do not enable email confirmation in development.
 
-acceptance: a user can sign up and sign in via the lovable cloud auth ui or via `supabase.auth.signInWithPassword`.
+acceptance: a user can sign up and sign in via the supabase auth ui or via `supabase.auth.signInWithPassword`.
 
 ## step 2: define the schema
 

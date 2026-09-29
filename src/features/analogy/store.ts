@@ -1,6 +1,6 @@
 // localStorage-backed store for thinking style and recent concepts.
 // we deliberately keep this simple and synchronous. portsb.md describes
-// how to migrate this to lovable cloud tables when the user is ready
+// how to migrate this to supabase tables when the user is ready
 // for cross-device sync.
 
 import { useEffect, useState } from "react";

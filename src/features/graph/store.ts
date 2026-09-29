@@ -1,6 +1,6 @@
 // localStorage-backed graph store. simple, synchronous, and shared
 // across components via a tiny subscription. the graph is meant to
-// feel personal and offline-first; sync to lovable cloud is a
+// feel personal and offline-first; sync to supabase is a
 // separate, optional layer documented in portsb.md.
 
 import { useEffect, useState } from "react";

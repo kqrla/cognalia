@@ -40,23 +40,23 @@ available for any prose surface that needs markdown later. currently most copy i
 
 ## backend
 
-### lovable cloud
+### supabase
 
-provides the database, authentication primitives, and edge function runtime without an external account. we use it almost entirely for the edge function host.
+provides the database, authentication primitives, and edge function runtime. we use it almost entirely for the edge function host.
 
 ### the explain edge function
 
 a single deno serverless function that:
 - validates the requested analogy system against the allowlist.
-- calls the lovable ai gateway with a function-calling tool whose parameters are the explanation contract.
+- calls the gemini api with a function-calling tool whose parameters are the explanation contract.
 - parses the structured response and returns it.
 - maps gateway 429 and 402 statuses to user-readable error messages.
 
 it has `verify_jwt = false` because the app does not require login. the function does not store anything; persistence is the client's job for now.
 
-### lovable ai gateway
+### gemini api
 
-we use the gateway instead of calling a model provider directly so the api key stays on the server, the model can be swapped without redeploying the client, and rate-limit and credit errors come back in a uniform shape.
+we call google's openai-compatible endpoint directly from the edge function. the api key stays on the server, the model can be swapped without redeploying the client, and the free tier is generous enough for a single-shot structured response.
 
 default model is `google/gemini-3-flash-preview`. it is fast enough for a single-shot structured response and reliable at function calling.
 

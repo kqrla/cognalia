@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 import { SignupRetentionModal } from "@/features/auth/SignupRetentionModal";
 
@@ -38,10 +37,11 @@ const Register = () => {
 
   const onGoogle = async () => {
     setBusy(true);
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: `${window.location.origin}/account`,
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `${window.location.origin}/account` },
     });
-    if (result.error) {
+    if (error) {
       toast.error("could not start google sign-in");
       setBusy(false);
     }

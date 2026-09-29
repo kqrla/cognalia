@@ -6,7 +6,7 @@ how to run annealogy locally and how to deploy it elsewhere. the project is inte
 
 - node 18 or newer, or bun 1.0 or newer.
 - the deno cli, only if you want to run the edge function locally.
-- a lovable ai gateway api key, exposed as `LOVABLE_API_KEY`. in lovable cloud this is provided automatically.
+- a google gemini api key (free from google ai studio), exposed as `GEMINI_API_KEY`. get one at aistudio.google.com.
 
 ## installation
 
@@ -22,7 +22,7 @@ npm install
 
 ## environment
 
-the project reads three variables from `.env`. lovable cloud writes this file for you. if you are running outside lovable, create `.env` with:
+the project reads three variables from `.env`. create `.env` with:
 
 ```
 VITE_SUPABASE_URL=https://<your-project>.supabase.co
@@ -30,7 +30,7 @@ VITE_SUPABASE_PUBLISHABLE_KEY=<your-anon-key>
 VITE_SUPABASE_PROJECT_ID=<your-project-ref>
 ```
 
-the edge function additionally needs `LOVABLE_API_KEY` set in its runtime environment. inside lovable cloud this is automatic.
+the edge function additionally needs `GEMINI_API_KEY` set in its runtime environment. on supabase, set it as a function secret.
 
 ## development server
 
@@ -48,7 +48,7 @@ if you have the supabase cli installed:
 supabase functions serve explain --no-verify-jwt
 ```
 
-set `LOVABLE_API_KEY` in your shell before running. point the client at the local function by overriding `VITE_SUPABASE_URL` to your local supabase instance.
+set `GEMINI_API_KEY` in your shell before running. point the client at the local function by overriding `VITE_SUPABASE_URL` to your local supabase instance.
 
 ## build
 
@@ -74,13 +74,13 @@ make sure the host serves `index.html` for unknown paths so client-side routing 
 
 ### the edge function
 
-option a, on lovable cloud or supabase: `supabase functions deploy explain` from the project root. set `LOVABLE_API_KEY` as a function secret.
+option a, on supabase: `supabase functions deploy explain` from the project root. set `GEMINI_API_KEY` as a function secret.
 
 option b, anywhere else: the function is a single `serve()` handler with no supabase-specific imports. it can be ported to:
 
-- deno deploy: copy `supabase/functions/explain/index.ts`, expose `LOVABLE_API_KEY` as an env var.
+- deno deploy: copy `supabase/functions/explain/index.ts`, expose `GEMINI_API_KEY` as an env var.
 - a node server: rewrite the `serve(...)` wrapper as an express or hono handler. the rest of the file is plain fetch calls.
-- a cloudflare worker: drop in the `fetch` handler shape, set the env binding, replace `Deno.env.get` with `env.LOVABLE_API_KEY`.
+- a cloudflare worker: drop in the `fetch` handler shape, set the env binding, replace `Deno.env.get` with `env.GEMINI_API_KEY`.
 
 the client only cares that the function lives at `<VITE_SUPABASE_URL>/functions/v1/explain` and accepts a json body with `concept`, `system`, and optional `thinkingStyle`.
 
@@ -91,4 +91,4 @@ the client only cares that the function lives at `<VITE_SUPABASE_URL>/functions/
 3. type "binary search" and submit. an explanation should arrive in a few seconds with all five sections present and a mermaid diagram in the visual section.
 4. switch the analogy system using a chip. a fresh explanation should regenerate.
 
-if the explanation never arrives, check the function logs. the most common issues are a missing `LOVABLE_API_KEY` and a misconfigured cors header on a custom host.
+if the explanation never arrives, check the function logs. the most common issues are a missing `GEMINI_API_KEY` and a misconfigured cors header on a custom host.

@@ -44,7 +44,7 @@ a request for a fresh explanation:
 2. the home screen navigates to `/explain?q=...&system=...`.
 3. the explain page mounts, sees no cached payload, calls `requestExplanation`.
 4. `requestExplanation` invokes the `explain` edge function via the supabase client.
-5. the edge function validates the system against the allowlist, then calls the lovable ai gateway with a function-calling tool whose schema is the explanation contract.
+5. the edge function validates the system against the allowlist, then calls the gemini api with a function-calling tool whose schema is the explanation contract.
 6. the gateway returns structured arguments, the function parses them, and responds with `{ explanation }`.
 7. the explain page renders the five sections, then writes the explanation into `recents` so the next visit is instant.
 

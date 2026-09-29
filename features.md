@@ -7,7 +7,7 @@ a list of what annealogy does today, and how each piece works at a high level.
 every concept is rendered in the same five-part structure: analogy, mapping, visual, real explanation, limits. the structure is enforced by the backend tool-calling schema, not by prompt instructions alone, so the model cannot return a free-form paragraph even if it tries.
 
 how it works:
-- the explain edge function calls the lovable ai gateway with a function-calling tool whose parameters define every required field.
+- the explain edge function calls the gemini api with a function-calling tool whose parameters define every required field.
 - the response is parsed as structured json before reaching the client.
 - the ui renders each section into its own collapsible card.
 

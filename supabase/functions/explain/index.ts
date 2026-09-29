@@ -1,4 +1,4 @@
-// edge function that asks the lovable ai gateway to produce an explanation
+// edge function that asks the gemini api (openai-compatible endpoint) to produce an explanation
 // strictly shaped by the analogize format. we use tool calling to guarantee
 // the response matches the [analogy / mapping / visual / bridge / real_explanation / limits]
 // structure instead of relying on the model to format text correctly.
@@ -127,8 +127,8 @@ serve(async (req) => {
       );
     }
 
-    const apiKey = Deno.env.get("LOVABLE_API_KEY");
-    if (!apiKey) throw new Error("LOVABLE_API_KEY missing");
+    const apiKey = Deno.env.get("GEMINI_API_KEY");
+    if (!apiKey) throw new Error("GEMINI_API_KEY missing");
 
     const avoidList = Array.isArray(avoidSystems)
       ? avoidSystems
@@ -185,7 +185,7 @@ ${thinkingStyle ? `user thinks in: ${thinkingStyle}` : ""}${reframeBlock}${prese
 produce a complete analogize explanation. follow the structure exactly, including the bridge sentence.`;
 
     const response = await fetch(
-      "https://ai.gateway.lovable.dev/v1/chat/completions",
+      "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
       {
         method: "POST",
         headers: {

@@ -33,8 +33,8 @@ serve(async (req) => {
       });
     }
 
-    const apiKey = Deno.env.get("LOVABLE_API_KEY");
-    if (!apiKey) throw new Error("LOVABLE_API_KEY missing");
+    const apiKey = Deno.env.get("GEMINI_API_KEY");
+    if (!apiKey) throw new Error("GEMINI_API_KEY missing");
 
     const worldName = String(system).replace(/_/g, " ");
     const mappingText = Array.isArray(rootMapping)
@@ -85,7 +85,7 @@ ${mappingText ? `root mapping:\n${mappingText}\n` : ""}peripheral concept the us
 
 decide if it fits inside this same world. if yes, produce the peripheral analogy. if no, refuse cleanly.`;
 
-    const r = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+    const r = await fetch("https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,

@@ -1,310 +1,57 @@
 # analogize
 
-you are building a product called “annealogy" (temporary name) — a cognitive translation tool that explains complex concepts using the user’s existing mental models.
+a cognitive translation tool. you give it a concept you do not understand, and it explains that concept using the mental models you already use to make sense of the world.
 
-this is NOT a generic ai tutor. do not default to flashcards, quizzes, or textbook explanations.
+it is not a tutor. it is not a flashcard app. it does not hand you a definition. it translates.
 
-core principle
-the app must translate ideas into the way the user already thinks, using structured analogy systems + visual understanding.
+## what it is
 
----
+ask it about any concept and it renders the idea in a strict structure:
 
-PRODUCT BEHAVIOR
+1. **analogy** — a vivid pass entirely inside a world you already navigate fluently. no jargon allowed.
+2. **mapping** — explicit pairs: this piece of the analogy world is this real technical term.
+3. **visual** — a systems diagram of how the thing actually works, drawn with analogy-specific labels.
+4. **bridge** — one sentence that walks you across: "in other words, ...".
+5. **real explanation** — the actual concept in proper terms, now that you have a place to stand.
+6. **limits** — the honest part: exactly where the analogy breaks. every model of a thing fails somewhere; knowing where is the skill.
 
-when a user asks to explain a concept, the system must ALWAYS follow this exact structure:
+the structure is enforced by the backend tool-calling schema, not by prompt instructions alone. the model cannot return a free-form paragraph even if it tries.
 
-1. analogy first (no jargon)
-2. explicit mapping (analogy → real components)
-3. visual structure (mindmap / tree / flow)
-4. real explanation (technical but grounded)
-5. where the analogy breaks
+## the core idea
 
-never skip steps. never reorder.
+the feynman technique says: if you cannot explain something simply, you do not really understand it. analogize adds the preparation step the feynman technique leaves out.
 
----
+> before you can explain something simply, you need a simple place to stand.
 
-ANALOGY SYSTEM LIBRARY (STRICT)
+you are not simplifying from above. you are translating across. a concept you can only access through jargon is a concept you do not own.
 
-you may ONLY use these systems:
+## analogy systems
 
-1. relationship dynamics
-2. gaming / progression
-3. cooking / recipe
-4. building / lego
-5. story / fandom
-6. company / startup
-7. traffic / flow
-8. plant / growth
-9. brain / habit loops
-10. storage / organization
+twelve allowed systems, defined once and validated server-side against an allowlist. the model cannot invent new ones:
 
-do NOT invent new analogy systems.
+building lego, cooking recipes, storage organization, traffic flow, relationship dynamics, gaming progression, story narrative, company startup, sports team strategy, film production, social media, music playlists.
 
-each explanation must choose ONE system unless user requests multiple.
+on first visit you pick how your brain naturally understands things, and that maps to your default system. you can switch per explanation, and you can reframe the same concept through a fresh lens that is forbidden from paraphrasing the previous one.
 
----
+you can also teach it your own references: personal presets are offered to the model as soft guidance, used only when they genuinely improve the analogy.
 
-USER PERSONALIZATION
+## what else is in here
 
-on onboarding, ask:
+- **subjects catalog** — domains and the analogy angles we like to take in each
+- **understanding graph** — concepts tangle instead of sitting in folders; explore your knowledge structure
+- **curated examples** — a demo library so the product shows its shape before you type anything
+- **cloud sync (optional)** — accounts are opt-in; the app works fully offline-first from localStorage
 
-“how does your brain naturally understand things?”
+## running it
 
-present selectable options:
+the project is intentionally portable: a vite single-page app on the front, deno edge functions on the back. see `port.md` for local setup and deployment, `portsb.md` for the cloud-sync migration path.
 
-* i think in stories
-* i think in systems
-* i think in real-life examples
-* i think in visuals
-* i think in internet culture
-* i think in step-by-step processes
+you need a gemini api key (free from [google ai studio](https://aistudio.google.com)) as `GEMINI_API_KEY` for the edge functions. models used: `gemini-3.1-pro-preview` for explanations, `gemini-2.5-flash` for clarifications and periphery, `gemini-2.5-flash-lite` for disambiguation.
 
-store this preference and use it to select analogy systems.
+## branch map
 
-allow user to switch system per explanation.
+this repository hosts two projects on separate branches:
 
----
-
-OUTPUT FORMAT (MANDATORY)
-
-every explanation must follow this structured format:
-
-[analogy]
-short, intuitive explanation in chosen system (2–4 sentences max)
-
-[mapping]
-bullet mapping between analogy elements and real concept components
-
-[visual]
-render a simple structured diagram using text (mindmap / tree / flow)
-must be clean, minimal, and readable
-
-[real explanation]
-clear explanation of the actual concept using proper terminology
-
-[limits]
-explicit explanation of where the analogy stops working
-
----
-
-VISUAL RULES
-
-visuals must feel like sketchnotes:
-
-* simple nodes and arrows
-* no clutter
-* readable hierarchy
-* use indentation or arrows
-* no ascii overload
-
-choose visual type based on concept:
-
-* mindmap → relationships between parts
-* tree → decisions / branching
-* flow → processes
-* stack → layers
-
----
-
-UI REQUIREMENTS
-
-HOME SCREEN
-
-* input field: “explain anything…”
-* system selector (chips or dropdown)
-* recent concepts
-
-EXPLANATION SCREEN
-
-* collapsible sections:
-  analogy / mapping / visual / explanation / limits
-* toggle between analogy systems
-* “explain again differently” button
-
-ONBOARDING
-
-* select thinking style
-* optional: pick favorite domains (gaming, fandom, etc.)
-
----
-
-INTERACTION RULES
-
-* never start with definitions
-* never overload with paragraphs
-* always anchor to familiar concepts first
-* always include mapping
-* always include limits
-* explanations must feel human, not textbook
-
----
-
-ANTI-PATTERNS (STRICTLY AVOID)
-
-* generic ai tutor tone
-* long unstructured paragraphs
-* vague analogies
-* skipping mapping
-* skipping limitations
-* inventing random metaphors
-
----
-
-GOAL
-
-the user should feel:
-“this finally makes sense in my head”
-
-not:
-“this is a simplified explanation”
-
----
-
-OPTIONAL ADVANCED FEATURE (IF IMPLEMENTED)
-
-multi-system mode:
-allow user to view the same concept in 2 different analogy systems side-by-side
-
----
-
-DESIGN STYLE
-
-* soft, minimal, slightly playful
-* rounded elements
-* pastel or adaptive color system
-* clean typography (inter / poppins style)
-
----
-
-FINAL NOTE
-
-this is a thinking tool, not a learning platform.
-
-prioritize clarity, structure, and cognitive resonance over completeness.
-
-you are building this project under a consistent personal system. follow all instructions strictly. this is not optional styling, it is part of the product.
-
-core philosophy
-this project must feel human-made, readable, and intentionally structured. avoid generic ai patterns, vague naming, and unexplained decisions.
-
-every part of the codebase and documentation should feel like it was written by someone who understands why things are built a certain way.
-
-code quality and structure
-refactor all code to use clear, descriptive, human-readable names
-
-avoid abbreviations unless standard (id, url, api)
-avoid single-letter variable names except for simple loops
-prefer multi-word names that describe purpose
-organize the project into consistent, logical folders
-
-group by feature or domain, not by file type alone
-keep related logic, components, and utilities close together
-add comments that explain why decisions were made, not just what the code does
-
-highlight tradeoffs, assumptions, and constraints where relevant
-remove unnecessary complexity and avoid over-engineering
-
-backend portability requirement
-the project must not be locked into a single platform.
-
-create the following files:
-
-port.md
-a clear, step-by-step guide to running the project locally
-
-installation steps
-environment setup
-how to start development server
-how to build and deploy
-portsb.md
-a concrete migration guide to supabase
-
-identify all backend dependencies currently used
-map each dependency to a supabase equivalent (auth, database, storage, functions)
-define required database schema in detail
-explain how to migrate authentication
-explain how to migrate any server logic to edge functions
-include any limitations or differences
-do not be vague. make this actionable.
-
-ui and visual rules
-do not use emojis anywhere
-use lucide icons for all iconography
-maintain a clean, minimal, readable interface
-writing and tone rules
-apply these rules to:
-
-all user-facing text
-all markdown and documentation files
-all internal non-code written content
-rules:
-
-everything must be written in lowercase, including proper nouns
-do not use emojis
-do not use em dashes
-keep language clear, direct, and human
-required documentation files
-create and maintain the following files in the root of the project:
-
-underthehood.md
-explain how the system is structured internally
-
-architecture decisions
-data flow
-key abstractions
-why things are organized the way they are
-features.md
-list and explain all features
-
-what each feature does
-how it works at a high level
-techstack.md
-explain the technologies used and why
-
-focus on reasoning and tradeoffs
-do not mention any ai tools
-describe the underlying structure and choices
-roadmap.md
-outline future improvements and expansions
-
-short term
-mid term
-long term
-overview.md
-a clear, human-readable overview of the project
-
-what it is
-who it is for
-what problem it solves
-how it feels to use
-this is not the same as a readme. it should read more like a product overview than setup instructions.
-
-consistency requirement
-all parts of the project must follow these rules. do not partially apply them.
-
-if a decision conflicts with these instructions, prioritize these instructions.
-
-this system defines the identity of the project.
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://analogize.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/ae521051-4554-4bd0-a542-59f8a4993b3d).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+- **`analogize`** (this branch) — the explanation engine described above.
+- **`main`** — cognalia, the live-call expansion: hop on a voice call, the agent explains by sketching on a shared whiteboard. analogize is the engine cognalia teaches with; cognalia is where the engine goes live.
+- **`canvas`** — the cognalia canvas spec: the persistent, take-home whiteboard system.
