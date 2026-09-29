@@ -14,7 +14,7 @@ analogize (the explanation engine) answers "what does this concept mean, in my w
 
 ## the canvas
 
-the canvas is a persistent, infinite, figma-like whiteboard organized into collapsible sections. it lives outside the call as a first-class artifact, and each call opens one. see the `canvas` branch for the full spec.
+the canvas is a persistent, infinite, figma-like whiteboard organized into collapsible sections. it lives outside the call as a first-class artifact, and each call opens one. it is built on this repository, decoupled from but synchronized with the call layer. full spec: [`docs/canvas.md`](./docs/canvas.md), also pinned on the `canvas` branch.
 
 ## how cognalia relates to analogize
 
@@ -41,4 +41,4 @@ the contract between them is deliberately thin: the call layer produces explanat
 
 ## status
 
-cognalia is in the architecture phase. this branch holds the project definition and specs; code lands here as the call layer is built. the canvas spec lives on the `canvas` branch.
+cognalia is in the architecture phase. this branch holds the project definition and specs; code lands here as the call layer is built. the canvas spec lives on the `canvas` branch (mirror of `docs/canvas.md` here).
