@@ -1,6 +1,16 @@
-# cognalia
+# cognalia canvas
 
-hop on a call. the agent explains anything you're stuck on, live, by sketching on a shared whiteboard in the mental models you already think in.
+the persistent, infinite, figma-like whiteboard that belongs to the user. this branch is the canvas spec and the canvas system as it gets built.
+
+**read the spec: [`docs/canvas.md`](./docs/canvas.md)**
+
+the canvas is not a feature of the call. the call is a feature of it. canvases exist out-of-call, organized into folders, revisitable anytime. each call opens one; when the call ends, the canvas is still yours.
+
+for the call layer itself, see the `main` branch. for the teaching engine, see the `analogize` branch.
+
+---
+
+below is the general cognalia readme, kept here for context.
 
 analogize (the explanation engine) answers "what does this concept mean, in my world?". cognalia is where the engine goes live: a voice call with a shared canvas, where the explanation unfolds in front of you, drawn, narrated, and editable while it happens.
 
