@@ -51,8 +51,8 @@ the atlas supplies source IDs and distinct evidence roles to that future engine.
 npm install
 npm test
 npm run typecheck
-npm run build:atlas
-npm run dev:atlas
+npm run build:demos
+npm run dev:demos
 ```
 
 open `/demos/atlas/` on the local vite server. the demo has working Crimea perspective controls, selectable geometry with evidence IDs, membership intersections, identity/legal lenses and expandable country prose. the historical datasets are portable but there is no precise historical geometry renderer or reconstructed global atlas in this demo.

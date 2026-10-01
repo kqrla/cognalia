@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>cognalia · chart items</title>
+<style>
+:root{color-scheme:light dark}body{margin:0;padding:24px;background:Canvas;color:CanvasText;font-family:system-ui,sans-serif;line-height:1.5}main{max-width:1040px;margin:auto}h1{font-weight:550}h2{font-size:1.1rem;margin-top:28px}button,select,input{font:inherit;color:inherit;background:Canvas;border:1px solid currentColor;border-radius:8px;padding:8px 12px;cursor:pointer}button[aria-pressed=true]{box-shadow:inset 0 0 0 2px currentColor}.panel{border:1px solid currentColor;border-radius:12px;padding:18px;margin-top:16px}.chart-box{position:relative;height:340px}small,.quiet{opacity:.75;font-size:.85rem}pre{white-space:pre-wrap;word-break:break-word;font-size:.8rem}label{display:block;margin:12px 0}
+</style></head><body><main>
+<p class="quiet">cognalia · chart item renderer foundation · isolated browser demo</p><h1>editable chart items, not screenshots</h1>
+<p class="quiet">chart.js renders quantitative charts; the community chartjs-chart-venn extension renders venn and euler diagrams derived from authoritative member lists. this demo has no collaborative shell, persistence, or live-call integration.</p>
+<section class="panel"><h2>quantitative chart</h2><div class="chart-box"><canvas id="quant"></canvas></div>
+<label>kind <select id="quant-kind"><option>bar</option><option>line</option><option>radar</option><option>polarArea</option></select></label></section>
+<section class="panel"><h2>set diagram from real membership lists</h2>
+<p class="quiet">sets are wandery's imported, undated membership snapshots (import provenance, not verified current facts). overlap regions are computed from the member identifiers, never guessed.</p>
+<nav><button id="mount" aria-pressed="false">mount</button><button id="unmount" disabled>unmount</button><button id="layout-venn" aria-pressed="true">venn</button><button id="layout-euler" aria-pressed="false">euler</button></nav>
+<div class="chart-box"><canvas id="sets"></canvas></div>
+<details><summary>derived regions (authoritative values)</summary><pre id="regions"></pre></details></section>
+</main><script type="module" src="./main.ts"></script></body></html>

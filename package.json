@@ -9,8 +9,8 @@
   "scripts": {
     "test": "tsx --test tests/*.test.ts",
     "typecheck": "tsc --noEmit",
-    "dev:atlas": "vite --host 0.0.0.0",
-    "build:atlas": "vite build --config vite.atlas.config.ts"
+    "build:demos": "vite build --config vite.atlas.config.ts",
+    "dev:demos": "vite --host 0.0.0.0"
   },
   "keywords": [],
   "author": "",

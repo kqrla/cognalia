@@ -52,9 +52,17 @@ the analogize branch has an understanding graph (concepts tangle; nothing sits i
 
 a tangled graph is for thinking across topics. sections are for working within one. both can exist; they are not the same data model, and forcing them together would ruin both.
 
+## chart items
+
+charts are editable canvas items, not flattened screenshots. the renderer foundation uses chart.js for standard statistical charts and the community `chartjs-chart-venn` extension for venn and euler set diagrams. see [chart rendering](./charts.md) for the module contract and examples.
+
+keep a chart's serializable data with its item. renderer instances belong to the browser and are created or destroyed as sections expand, collapse, or leave the viewport. chart edits use the same canvas operations as other items; network synchronization remains future work.
+
+venn diagrams describe membership intersections. euler diagrams approximate proportional set areas; see the fitting limitations in [chart rendering](./charts.md). neither is a generic causal graph. missing intersection counts are unknown, not zero, and the agent must not invent quantitative values to make a diagram fit.
+
 ## status
 
-spec phase. the canvas system is developed on this branch, decoupled from but in parallel with the call layer on `main`. the shared contract: the call layer may only touch the canvas through canvas operations, nothing more.
+renderer foundation phase. the chart module and its demo are implemented independently of the future whiteboard shell. the shared whiteboard, voice synchronization, and persistence are not yet implemented. the canvas system is developed on this branch, decoupled from but in parallel with the call layer on `main`. the shared contract: the call layer may only touch the canvas through canvas operations, nothing more.
 
 ## wandery visual aids
 
