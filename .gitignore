@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.vite/
+*.log
+*.tsbuildinfo
+
+dist-atlas/
+
+.env
+.env.*
+!.env.example

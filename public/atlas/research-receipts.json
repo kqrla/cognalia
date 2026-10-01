@@ -1,0 +1,71 @@
+{
+  "retrievedOn": "2026-10-01",
+  "methods": [
+    "Firecrawl v2 web search",
+    "Firecrawl Alexandria developer index",
+    "direct geoBoundaries metadata and pinned GeoJSON retrieval"
+  ],
+  "uploadedArchive": {
+    "path": "incoming_files/1beb0ab8e_soft-atlas-explorer-main1.zip",
+    "sha256": "03937d17d32b430fc0c8067bb4c6319f7ef500e36c8b59606be24d7674e11540"
+  },
+  "references": [
+    {
+      "title": "Ukraine - Subnational Administrative Boundaries | Humanitarian Dataset",
+      "url": "https://data.humdata.org/dataset/geoboundaries-admin-boundaries-for-ukraine",
+      "method": "Firecrawl v2 web search",
+      "role": "discovery"
+    },
+    {
+      "title": "geoBoundaries",
+      "url": "https://www.geoboundaries.org/",
+      "method": "Firecrawl v2 web search",
+      "role": "discovery"
+    },
+    {
+      "title": "Ukraine - Subnational Administrative Boundaries - geoBoundaries-UKR ...",
+      "url": "https://data.humdata.org/dataset/geoboundaries-admin-boundaries-for-ukraine/resource/5cc15ee8-404a-40a4-b926-a310b5821465",
+      "method": "Firecrawl v2 web search",
+      "role": "discovery"
+    },
+    {
+      "title": "Alexandria - a knowledge library for AI agents | Firecrawl",
+      "url": "https://www.firecrawl.dev/alexandria",
+      "method": "Firecrawl v2 web search",
+      "role": "discovery"
+    },
+    {
+      "title": "Developer Index: Code & Docs Search API for Coding Agents",
+      "url": "https://www.firecrawl.dev/developer-index",
+      "method": "Firecrawl v2 web search",
+      "role": "discovery"
+    },
+    {
+      "title": "Introducing the Life Sciences Category in Firecrawl Research Index",
+      "url": "https://www.firecrawl.dev/blog/research-index-life-sciences-launch",
+      "method": "Firecrawl v2 web search",
+      "role": "discovery"
+    },
+    {
+      "title": "mfogel/polygon-clipping",
+      "url": "https://github.com/mfogel/polygon-clipping",
+      "method": "Firecrawl Alexandria developer index",
+      "licenseReported": "MIT",
+      "role": "implementation reference"
+    },
+    {
+      "title": "w8r/martinez",
+      "url": "https://github.com/w8r/martinez",
+      "method": "Firecrawl Alexandria developer index",
+      "licenseReported": "MIT",
+      "role": "implementation reference"
+    },
+    {
+      "title": "Combine Geometries",
+      "url": "https://apidocs.geoapify.com/docs/mcp/combine-geometries/",
+      "method": "Firecrawl Alexandria developer index",
+      "licenseReported": null,
+      "role": "implementation reference"
+    }
+  ]
+}

@@ -55,3 +55,7 @@ a tangled graph is for thinking across topics. sections are for working within o
 ## status
 
 spec phase. the canvas system is developed on this branch, decoupled from but in parallel with the call layer on `main`. the shared contract: the call layer may only touch the canvas through canvas operations, nothing more.
+
+## wandery visual aids
+
+wandery’s portable atlas content and perspective-switchable visual items live under `src/atlas/`. see [wandery visual aids](./atlas.md) for the operation contract, sourced territorial geometry, original prose separation and current integration limits. these items can eventually belong to any section; they do not require the call layer to exist.

@@ -4,6 +4,8 @@ the persistent, infinite, figma-like whiteboard that belongs to the user. this b
 
 **read the spec: [`docs/canvas.md`](./docs/canvas.md)**
 
+wandery visual aids now include imported atlas content, attributed perspective lenses, and a source-backed crimea/sevastopol geometry comparison. see [wandery visual aids](./docs/atlas.md). this is a standalone module and demo, not yet wired into live calls.
+
 the canvas is not a feature of the call. the call is a feature of it. canvases exist out-of-call, organized into folders, revisitable anytime. each call opens one; when the call ends, the canvas is still yours.
 
 for the call layer itself, see the `main` branch. for the teaching engine, see the `analogize` branch.

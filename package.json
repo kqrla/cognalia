@@ -1,0 +1,36 @@
+{
+  "name": "cognalia",
+  "version": "1.0.0",
+  "description": "the persistent, infinite, figma-like whiteboard that belongs to the user. this branch is the canvas spec and the canvas system as it gets built.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "tsx --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "dev:atlas": "vite --host 0.0.0.0",
+    "build:atlas": "vite build --config vite.atlas.config.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^4.5.1",
+    "chartjs-chart-venn": "^4.3.7",
+    "polygon-clipping": "^0.15.7",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.16",
+    "@types/jsdom": "^30.0.0",
+    "@types/node": "^26.6.3",
+    "canvas": "^3.2.3",
+    "jsdom": "^29.1.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1",
+    "vitest": "^4.1.11"
+  },
+  "type": "module"
+}

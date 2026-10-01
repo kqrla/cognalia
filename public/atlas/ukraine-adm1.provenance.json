@@ -1,0 +1,20 @@
+{
+  "id": "gb-ukr-adm1-14850775",
+  "provider": "geoBoundaries gbOpen / OpenStreetMap / Wambacher",
+  "boundaryID": "UKR-ADM1-14850775",
+  "representedYear": "2017",
+  "buildDate": "Dec 12, 2023",
+  "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+  "upstreamCommit": "9469f09",
+  "downloadURL": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/UKR/ADM1/geoBoundaries-UKR-ADM1_simplified.geojson",
+  "sha256": "4a5947e7497574d51f93255dfa7e03dce0c7acf6ecee52d25773a5205854a399",
+  "bytes": 761290,
+  "featureCount": 27,
+  "license": "ODbL-1.0",
+  "licenseURL": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "attributionURL": "https://www.openstreetmap.org/copyright",
+  "purpose": "administrative boundary geometry, not live territorial control",
+  "derivedDataLicense": "ODbL-1.0",
+  "provenanceRole": "boundary-data",
+  "coordinateSystem": "WGS84 longitude, latitude"
+}
