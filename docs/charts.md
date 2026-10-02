@@ -33,3 +33,7 @@ the renderer and its isolated browser demo are a foundation for chart items. the
 ## try it
 
 the isolated browser demo lives at `demos/charts/` and mounts a quantitative chart plus venn/euler diagrams derived from wandery's imported membership lists. run the standard `npm install`, `npm test`, `npm run typecheck`, `npm run build:demos` and `npm run dev:demos`, then open `/demos/charts/` on the local vite server. it demonstrates mount/unmount lifecycle and venn/euler layout switching; the collaborative whiteboard shell is still future work.
+
+## canvas wiring
+
+chart items live in the canvas document model as plain serializable items (`src/canvas/model.ts`). the specification travels with the item; a chart's browser renderer instance is derived state. `chartLifecycle(prev, next)` computes which chart items need a renderer mounted, released, or remounted between two document states; collapse, expand, move and delete all flow through it. chart specifications are validated at item creation and on every update.

@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>cognalia · canvas document</title>
+<style>
+:root{color-scheme:light dark}body{margin:0;padding:24px;background:Canvas;color:CanvasText;font-family:system-ui,sans-serif;line-height:1.5}main{max-width:1040px;margin:auto}h1{font-weight:550}h2{font-size:1.05rem}.quiet{opacity:.75;font-size:.85rem}.panel{border:1px solid currentColor;border-radius:12px;padding:18px;margin-top:16px}section.tree,section.tree section.tree{margin:8px 0 8px 18px}.row{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}button{font:inherit;border:1px solid currentColor;background:Canvas;color:inherit;border-radius:8px;padding:5px 12px;cursor:pointer}button[aria-pressed=true]{box-shadow:inset 0 0 0 2px currentColor}.chart-box{position:relative;height:260px;margin-top:8px}.card{border:1px dashed currentColor;border-radius:10px;padding:10px;margin-top:8px}pre#log{font-size:.8rem;white-space:pre-wrap}code{opacity:.85}
+</style></head><body><main>
+<p class="quiet">cognalia · canvas document model · sections and items · isolated browser demo</p><h1>the canvas is the document, the call is a feature of it</h1>
+<p class="quiet">this demo applies pure canvas operations to a section/item document. collapsing a section is structural: its chart items release their renderer instances; expanding remounts them from the saved specification. no persistence or collaborative shell yet.</p>
+<nav><button id="collapse-all">collapse all</button><button id="expand-all">expand all</button><button id="regroup">group the two notes into a section</button><button id="euler">flip chart to euler</button></nav>
+<div class="panel"><h2 id="tree">document</h2><div id="board"></div></div>
+<div class="panel"><h2>renderer lifecycle log</h2><pre id="log">(mount/unmount events appear here)</pre></div>
+</main><script type="module" src="./main.ts"></script></body></html>

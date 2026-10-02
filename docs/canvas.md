@@ -60,6 +60,12 @@ keep a chart's serializable data with its item. renderer instances belong to the
 
 venn diagrams describe membership intersections. euler diagrams approximate proportional set areas; see the fitting limitations in [chart rendering](./charts.md). neither is a generic causal graph. missing intersection counts are unknown, not zero, and the agent must not invent quantitative values to make a diagram fit.
 
+## implemented document model
+
+`src/canvas/model.ts` implements the data model above as pure, serializable state: `CanvasDocument` (sections and items), immutable `CanvasOperation`s applied by `applyCanvasOperation`, structural collapse via `visibleItemIds`, and `chartLifecycle`, which bridges chart items to browser renderer instances. chart items carry a validated chart specification; updating one remounts it. session ids ride along on operations without the document gaining call coupling. a small demo at `demos/canvas/` exercises collapse/expand, grouping, and chart remounting.
+
+not yet implemented: persistence, folders, network synchronization, agent sketching, and the collaborative shell. the operations contract is the shared boundary future work must keep.
+
 ## status
 
 renderer foundation phase. the chart module and its demo are implemented independently of the future whiteboard shell. the shared whiteboard, voice synchronization, and persistence are not yet implemented. the canvas system is developed on this branch, decoupled from but in parallel with the call layer on `main`. the shared contract: the call layer may only touch the canvas through canvas operations, nothing more.
@@ -67,3 +73,5 @@ renderer foundation phase. the chart module and its demo are implemented indepen
 ## wandery visual aids
 
 wandery’s portable atlas content and perspective-switchable visual items live under `src/atlas/`. see [wandery visual aids](./atlas.md) for the operation contract, sourced territorial geometry, original prose separation and current integration limits. these items can eventually belong to any section; they do not require the call layer to exist.
+
+the implemented document model lives under `src/canvas/` with its demo at `demos/canvas/`.
